@@ -2,6 +2,7 @@
 
 - [ ] Faire un système de logs des opérations effectuées par les utilisateurs
 - [ ] Faire en sorte qu'un producteur puisse avoir les droits admin sans pouvoir supprimer d'admin
+- [ ] Utiliser CheckStyle pour les conventions de codage
 
 
 
