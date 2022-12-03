@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrendumaquette.LoginController">
+    <children>
+        <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/19" styleClass="pane"
+              xmlns:fx="http://javafx.com/fxml" fx:id="container">
+            <children>
+                <VBox alignment="CENTER" maxHeight="600.0" maxWidth="600.0" prefHeight="600.0" prefWidth="600.0" styleClass="vbox">
+                    <children>
+                        <Label text="Connexion" styleClass="login-title">
+                            <VBox.margin>
+                                <Insets bottom="50.0" />
+                            </VBox.margin>
+                        </Label>
+                        <TextField fx:id="textField" maxHeight="40.0" maxWidth="340.0" prefHeight="40.0" prefWidth="340.0" styleClass="login-input" promptText="Entrez votre identifiant">
+                            <VBox.margin>
+                                <Insets bottom="15.0" top="50.0" />
+                            </VBox.margin>
+                        </TextField>
+                        <PasswordField maxHeight="40.0" maxWidth="340.0" prefHeight="40.0" styleClass="password-input" promptText="Entrez votre mot de passe">
+                            <VBox.margin>
+                                <Insets bottom="30.0" top="15.0" />
+                            </VBox.margin>
+                        </PasswordField>
+                        <Button fx:id="button" mnemonicParsing="false" text="Se connecter !" styleClass="bouton" onAction="#switchScene" disable="true">
+                            <VBox.margin>
+                                <Insets bottom="50.0" top="10.0" />
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
+</StackPane>
