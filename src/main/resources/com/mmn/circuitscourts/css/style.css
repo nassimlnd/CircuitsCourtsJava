@@ -69,7 +69,24 @@
     -fx-border-style: solid;
     -fx-border-width: 1px;
     -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+}
 
+.login-input-error {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.login-input-error:hover {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.login-input-error:focused {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
 }
 
 /* PasswordField -> Password Input */
@@ -209,6 +226,10 @@
 .dashboard-feed-container {
     -fx-background-color: white;
     -fx-background-radius: 4px;
+}
+
+.dashboard-feed-list {
+    -fx-border-radius: 4px;
 }
 
 .dashboard-stats-box {

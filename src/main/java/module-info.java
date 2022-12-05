@@ -1,6 +1,8 @@
 module com.mmn.circuitscourts {
     requires javafx.controls;
+    requires javafx.base;
     requires javafx.fxml;
+    //requires java.sql;
 
 
     opens com.mmn.circuitscourts to javafx.fxml;

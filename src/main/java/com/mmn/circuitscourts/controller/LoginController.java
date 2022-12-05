@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -28,8 +29,9 @@ public class LoginController {
     @FXML
     TextField textField;
     @FXML
+    PasswordField passwordField;
+    @FXML
     private Button button;
-
     @FXML
     private VBox container;
 
@@ -38,8 +40,33 @@ public class LoginController {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (!t1.equals("")) {
-                    button.setDisable(false);
+                if (checkInput(t1)) {
+                    textField.getStyleClass().clear();
+                    textField.getStyleClass().add("login-input");
+                    if (checkInput(passwordField.getText())) {
+                        button.setDisable(false);
+                        System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
+                    }
+                } else {
+                    button.setDisable(true);
+                    textField.getStyleClass().add("login-input-error");
+                }
+            }
+        });
+
+        passwordField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                if (checkInput(t1)) {
+                    passwordField.getStyleClass().clear();
+                    passwordField.getStyleClass().add("login-input");
+                    if (checkInput(textField.getText())) {
+                        button.setDisable(false);
+                        System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
+                    }
+                } else {
+                    button.setDisable(true);
+                    passwordField.getStyleClass().add("login-input-error");
                 }
             }
         });
@@ -78,5 +105,11 @@ public class LoginController {
             parentContainer.getChildren().remove(container);
         });
         timeline.play();
+    }
+
+    public boolean checkInput(String value) {
+        if (value.length() > 5 && !value.equals("")) {
+            return true;
+        } else return false;
     }
 }
