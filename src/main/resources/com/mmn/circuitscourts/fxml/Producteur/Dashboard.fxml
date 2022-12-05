@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane fx:id="stackPane" minHeight="700.0" minWidth="1000.0" style="-fx-background-color: #EAECF0;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrendumaquette.ProducteurDashboardController">
+<StackPane fx:id="stackPane" minHeight="700.0" minWidth="1000.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.producteur.ProducteurController">
    <children>
       <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
          <left>
@@ -61,7 +61,7 @@
                                  <children>
                                     <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@img/DashboardIcon.png" />
+                                          <Image url="@../../images/DashboardIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>

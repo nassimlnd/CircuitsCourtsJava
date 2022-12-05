@@ -1,3 +1,13 @@
+@font-face {
+    -fx-font-family: 'Inter';
+    src: local('Inter'), url("../fonts/Inter-Regular.ttf");
+}
+
+@font-face {
+    -fx-font-family: 'InterBold';
+    src: url("../fonts/Inter-Bold.ttf");
+}
+
 .pane {
     -fx-background-color: #EAECF0;
 }
@@ -89,8 +99,7 @@
 
 /* Label -> LoginTitle */
 .login-title {
-    -fx-font: 24px 'Inter';
-    -fx-font-weight: bold;
+    -fx-font: 24px 'InterBold';
     -fx-margin-bottom: 100px;
 }
 
@@ -109,8 +118,7 @@
 }
 
 .sidebar-title {
-    -fx-font: 24px 'Inter';
-    -fx-font-weight: bold;
+    -fx-font: 24px 'InterBold';
 }
 
 .sidebar-profil-container {
@@ -239,7 +247,6 @@
 }
 
 .dashboard-stats-order-number {
-    -fx-font: 20px 'Inter';
-    -fx-font-weight: bold;
+    -fx-font: 20px 'InterBold';
     -fx-text-fill: #154FEF;
 }

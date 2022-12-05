@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.testrendumaquette.LoginController">
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.LoginController">
     <children>
         <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/19" styleClass="pane"
               xmlns:fx="http://javafx.com/fxml" fx:id="container">
@@ -29,7 +29,7 @@
                                 <Insets bottom="30.0" top="15.0" />
                             </VBox.margin>
                         </PasswordField>
-                        <Button fx:id="button" mnemonicParsing="false" text="Se connecter !" styleClass="bouton" onAction="#switchScene" disable="true">
+                        <Button fx:id="button" mnemonicParsing="false" text="Se connecter !" styleClass="bouton" onMouseClicked="#switchScene" disable="true">
                             <VBox.margin>
                                 <Insets bottom="50.0" top="10.0" />
                             </VBox.margin>
