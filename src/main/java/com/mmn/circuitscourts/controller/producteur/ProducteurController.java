@@ -67,7 +67,7 @@ public class ProducteurController {
         disconnectButton.setDisable(true);
         disconnectContainer.setDisable(true);
 
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Login.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Login/Login.fxml"));
         Parent root = loader.load();
         Scene scene = disconnectButton.getScene();
         root.translateXProperty().set(scene.getWidth());

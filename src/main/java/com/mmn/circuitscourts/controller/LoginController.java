@@ -59,14 +59,16 @@ public class LoginController {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 if (checkInput(t1)) {
                     passwordField.getStyleClass().clear();
-                    passwordField.getStyleClass().add("login-input");
+                    passwordField.getStyleClass().add("password-input");
                     if (checkInput(textField.getText())) {
                         button.setDisable(false);
                         System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
                     }
                 } else {
                     button.setDisable(true);
-                    passwordField.getStyleClass().add("login-input-error");
+                    passwordField.getStyleClass().clear();
+                    passwordField.getStyleClass().add("password-input");
+                    passwordField.getStyleClass().add("password-input-error");
                 }
             }
         });

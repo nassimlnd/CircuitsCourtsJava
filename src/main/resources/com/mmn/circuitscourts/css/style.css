@@ -48,6 +48,7 @@
 /* TextField -> Login Input */
 
 .login-input {
+    -fx-cursor: text;
     -fx-font: 14px 'Inter';
     -fx-prompt-text-fill: gray;
     -fx-background-color: white;
@@ -91,6 +92,7 @@
 
 /* PasswordField -> Password Input */
 .password-input {
+    -fx-cursor: text;
     -fx-font: 14px 'Inter';
     -fx-background-color: white;
     -fx-prompt-text-fill: gray;
@@ -112,6 +114,24 @@
     -fx-border-style: solid;
     -fx-border-width: 1px;
     -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+}
+
+.password-input-error {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.password-input-error:hover {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.password-input-error:focused {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
 }
 
 /* Label -> LoginTitle */
