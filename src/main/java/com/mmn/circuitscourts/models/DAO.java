@@ -1,10 +1,8 @@
 package com.mmn.circuitscourts.models;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
+
 
 /**
  * @author Martin
@@ -16,17 +14,16 @@ public interface DAO <T>{
 
         /**
          * Permet de récuperer tout le contenu d'une table.
-         * @param table, désigne la table en question
          * @return une ArrayList  qui est constituée de l'entierté de la table
          */
-        public ArrayList<T> getAll(String table) throws SQLException;
+        public ArrayList<T> getAll() throws SQLException;
 
         /**
          * Permet de trouver une client, producteur, tournée..., objet <T> dans la BD via à son id.
          * @param id
          * @return retourne l'objet <T> en queston.
          */
-        public T getById(String id, String table);
+        public T getById(String id);
 
         /**
          * Permet d'enregistrer dans la BD un objet t particulier.
