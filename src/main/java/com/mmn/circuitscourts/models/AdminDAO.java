@@ -33,7 +33,7 @@ public class AdminDAO implements DAO{
             ResultSet resultSet = st.executeQuery();
             ArrayList<Administrateur> result = new ArrayList<>();
             while(resultSet.next()){
-
+                int id =
             }
 
         }
@@ -70,6 +70,6 @@ public class AdminDAO implements DAO{
     }
 
     public void addClient(Client c){
-        
+
     }
 }
