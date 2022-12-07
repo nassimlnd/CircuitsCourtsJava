@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @author Martin
+ */
 public class SingleConnection {
    /**
     * Connection en static pour s'assurer qu'elle soit la unique.
@@ -30,7 +33,7 @@ public class SingleConnection {
     * @return
     * @throws SQLException
     */
-   public static Connection getInstane(String url, String login, String pwd) throws SQLException {
+   public static Connection getInstance(String url, String login, String pwd) throws SQLException {
       if(SingleConnection.con == null){
          SingleConnection singleConnection = new SingleConnection(url, login, pwd);
          return SingleConnection.con;
