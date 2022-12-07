@@ -2,6 +2,7 @@ module com.mmn.circuitscourts {
     requires javafx.controls;
     requires javafx.base;
     requires javafx.fxml;
+    requires java.sql;
     //requires java.sql;
 
 
