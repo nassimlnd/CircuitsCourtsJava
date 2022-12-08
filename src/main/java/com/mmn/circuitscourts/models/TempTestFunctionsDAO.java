@@ -54,10 +54,7 @@ public class TempTestFunctionsDAO {
                 throw new RuntimeException(e);
             }
 
-
             try{
-
-
             CommandeDAO testC = new CommandeDAO("jdbc:mysql://localhost/circuit_court?serverTimezone=Europe/Paris", "root", "");
             System.out.println("\n **** test getall commande ****");
             ArrayList<Commande> resultatC1= testC.getAll();
