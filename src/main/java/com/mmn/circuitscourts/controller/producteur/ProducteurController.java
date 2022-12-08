@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -60,6 +61,10 @@ public class ProducteurController {
 
         svg.setScaleX(scaleX);
         svg.setScaleY(scaleY);
+    }
+
+    public void onDisconnect() {
+        ViewFactory.getInstance().showLoginInterface();
     }
 
     @FXML

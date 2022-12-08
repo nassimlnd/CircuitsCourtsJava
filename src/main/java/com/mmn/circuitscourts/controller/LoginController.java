@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.controller;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -85,6 +86,10 @@ public class LoginController {
                 }
             }
         });
+    }
+
+    public void onLogin() {
+        ViewFactory.getInstance().showProducteurInterface();
     }
 
     @FXML

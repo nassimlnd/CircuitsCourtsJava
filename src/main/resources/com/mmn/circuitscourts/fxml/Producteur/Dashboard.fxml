@@ -32,8 +32,8 @@
                         </VBox>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <VBox fx:id="disconnectContainer" alignment="CENTER" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" onMouseClicked="#onDisconnectButtonClick" styleClass="sidebar-profil-disconnect-button-container">
-                                 <Button fx:id="disconnectButton" mnemonicParsing="false" onMouseClicked="#onDisconnectButtonClick" pickOnBounds="true" styleClass="sidebar-profil-disconnect" text="" />
+                              <VBox fx:id="disconnectContainer" alignment="CENTER" maxHeight="24.0" maxWidth="24.0" minHeight="24.0" minWidth="24.0" onMouseClicked="#onDisconnect" styleClass="sidebar-profil-disconnect-button-container">
+                                 <Button fx:id="disconnectButton" mnemonicParsing="false" onMouseClicked="#onDisconnect" pickOnBounds="true" styleClass="sidebar-profil-disconnect" text="" />
                               </VBox>
                            </children>
                         </VBox>
@@ -50,11 +50,6 @@
                            <graphic>
                               <Pane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="sidebar-tab-img">
                                  <children>
-                                    <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/DashboardIcon.png" />
-                                       </image>
-                                    </ImageView>
                                  </children>
                               </Pane>
                            </graphic>
