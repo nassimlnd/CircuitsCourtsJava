@@ -53,6 +53,43 @@ public class TempTestFunctionsDAO {
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+
+            try{
+
+
+            CommandeDAO testC = new CommandeDAO("jdbc:mysql://localhost/circuit_court?serverTimezone=Europe/Paris", "root", "");
+            System.out.println("\n **** test getall commande ****");
+            ArrayList<Commande> resultatC1= testC.getAll();
+            for (Commande c : resultatC1) {
+                System.out.println(c.toString());
+            }
+
+            Commande commande = testC.getById(1) ;
+            System.out.println(" **** test getByID ***");
+            System.out.println(commande.toString());
+
+            Commande c = new Commande("annanas", 150, "15", "16", 1, 1, 1 );
+            testC.add(c);
+            System.out.println("\n **** test add commande ****");
+            ArrayList<Commande> resultatC2= testC.getAll();
+            for (Commande c2 : resultatC2) {
+                System.out.println(c2.toString());
+            }
+
+                Commande c3 = new Commande("fraise", 50, "15", "16", 1, 1, 1 );
+                testC.update(4, c3);
+                System.out.println("**** test update ****");
+                System.out.println(testC.getById(2));
+
+                testC.remove(7);
+                ArrayList<Commande> resultatC4= testC.getAll();
+                for (Commande c4 : resultatC4) {
+                    System.out.println(c4.toString());
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
