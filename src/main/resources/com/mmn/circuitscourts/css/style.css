@@ -171,6 +171,7 @@
     -fx-border-width: 1px;
     -fx-border-color: white;
     -fx-border-radius: 4px;
+    -fx-background-color: white;
 }
 
 .sidebar-tab:hover {
@@ -200,7 +201,59 @@
 }
 
 .sidebar-tab-img {
-    -fx-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-fill: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+}
+
+.sidebar-tab-img-commande {
+    -icon-paint: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 12;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M253.3 35.1c6.1-11.8 1.5-26.3-10.2-32.4s-26.3-1.5-32.4 10.2L117.6 192H32c-17.7 0-32 14.3-32 32s14.3 32 32 32L83.9 463.5C91 492 116.6 512 146 512H430c29.4 0 55-20 62.1-48.5L544 256c17.7 0 32-14.3 32-32s-14.3-32-32-32H458.4L365.3 12.9C359.2 1.2 344.7-3.4 332.9 2.7s-16.3 20.6-10.2 32.4L404.3 192H171.7L253.3 35.1zM192 304v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16zm96-16c8.8 0 16 7.2 16 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16zm128 16v96c0 8.8-7.2 16-16 16s-16-7.2-16-16V304c0-8.8 7.2-16 16-16s16 7.2 16 16z";
+}
+
+.sidebar-tab-img-dashboard {
+    -icon-paint: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 12;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z";
+}
+
+.sidebar-tab-img-tournee {
+    -icon-paint: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 12;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M640 0V400c0 61.9-50.1 112-112 112c-61 0-110.5-48.7-112-109.3L48.4 502.9c-17.1 4.6-34.6-5.4-39.3-22.5s5.4-34.6 22.5-39.3L352 353.8V64c0-35.3 28.7-64 64-64H640zM576 400c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM23.1 207.7c-4.6-17.1 5.6-34.6 22.6-39.2l46.4-12.4 20.7 77.3c2.3 8.5 11.1 13.6 19.6 11.3l30.9-8.3c8.5-2.3 13.6-11.1 11.3-19.6l-20.7-77.3 46.4-12.4c17.1-4.6 34.6 5.6 39.2 22.6l41.4 154.5c4.6 17.1-5.6 34.6-22.6 39.2L103.7 384.9c-17.1 4.6-34.6-5.6-39.2-22.6L23.1 207.7z";
+}
+
+.sidebar-tab-img-vehicules {
+    -icon-paint: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 12;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M48 0C21.5 0 0 21.5 0 48V368c0 26.5 21.5 48 48 48H64c0 53 43 96 96 96s96-43 96-96H384c0 53 43 96 96 96s96-43 96-96h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V288 256 237.3c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7H416V48c0-26.5-21.5-48-48-48H48zM416 160h50.7L544 237.3V256H416V160zM208 416c0 26.5-21.5 48-48 48s-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48zm272 48c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z";
 }
 
 .sidebar-profil-name {

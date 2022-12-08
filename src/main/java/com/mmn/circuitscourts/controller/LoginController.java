@@ -89,7 +89,7 @@ public class LoginController {
     }
 
     public void onLogin() {
-        ViewFactory.getInstance().showProducteurInterface();
+        ViewFactory.getInstance().showProdDashboardInterface();
     }
 
     @FXML

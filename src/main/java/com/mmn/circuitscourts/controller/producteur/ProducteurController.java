@@ -24,8 +24,6 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class ProducteurController {
-    @FXML
-    Label activeTab;
 
     @FXML
     Button disconnectButton;
@@ -40,15 +38,6 @@ public class ProducteurController {
 
     @FXML
     public void initialize() {
-        activeTab.getStyleClass().add("sidebar-tab-active");
-
-        Region icon = new Region();
-        disconnectButton.getStyleClass().add("sidebar-profil-disconnect-button");
-        disconnectButton.setPickOnBounds(true);
-        icon.getStyleClass().add("icon");
-        disconnectButton.setGraphic(icon);
-
-        //resize(svgPath, 24, 24);
     }
 
     private void resize(SVGPath svg, double width, double height) {
@@ -61,10 +50,6 @@ public class ProducteurController {
 
         svg.setScaleX(scaleX);
         svg.setScaleY(scaleY);
-    }
-
-    public void onDisconnect() {
-        ViewFactory.getInstance().showLoginInterface();
     }
 
     @FXML
