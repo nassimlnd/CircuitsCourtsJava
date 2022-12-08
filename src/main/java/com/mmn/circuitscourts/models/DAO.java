@@ -23,17 +23,22 @@ public interface DAO <T>{
          * @param id
          * @return retourne l'objet <T> en queston.
          */
-        public T getById(String id);
+        public T getById(int id) throws SQLException;
 
         /**
-         * Permet d'enregistrer dans la BD un objet t particulier.
-         * @param t
+         * permet de  rajouter dans la BD un objet en particulier
+         * @param t, l'objet à ajouter en quesion.
          */
-        public void update(T t);
+        public void add(T t) throws SQLException;
+        /**
+         * Permet de modifier dans la BD un objet t particulier.
+         * @param id permet de retrouver l'objet à modifier
+         */
+        public void update(int id, T t) throws SQLException;
 
         /**
          * Permet de supprimer un objet t de la BD
-         * @param t
+         * @param id permet de retrouver l'objet à supprimer
          */
-        public void remove(T t);
+        public void remove(int id) throws SQLException;
     }

@@ -4,12 +4,18 @@ public class Administrateur {
     private int id;
     private String nom;
     private String prenom;
-    
 
-    public Administrateur(String nom, String prenom, int id) {
+
+    public Administrateur(int id, String nom, String prenom) {
+        this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.id = id;
+
+    }
+    public Administrateur( String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
+
     }
 
     public String getNom() {
@@ -39,9 +45,9 @@ public class Administrateur {
     @Override
     public String toString() {
         return "Administrateur{" +
-                "nom='" + nom + '\'' +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
-                ", id=" + id +
                 '}';
     }
 }
