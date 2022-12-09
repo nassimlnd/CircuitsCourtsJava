@@ -4,6 +4,7 @@ import com.mmn.circuitscourts.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.function.Function;
 
 public class AccountDAO implements DAO<User> {
 
@@ -54,11 +55,20 @@ public class AccountDAO implements DAO<User> {
 
     @Override
     public void update(int id, User user) throws SQLException {
-
+        String query = "UPDATE accounts SET identifiant=?, password=?, grade=? WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, user.getIdentifiant());
+        preparedStatement.setString(2, user.getPassword());
+        preparedStatement.setInt(3, user.getGrade());
+        preparedStatement.setInt(4, user.getId());
+        preparedStatement.executeUpdate();
     }
 
     @Override
     public void remove(int id) throws SQLException {
-
+        String query = "DELETE FROM accounts WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
     }
 }
