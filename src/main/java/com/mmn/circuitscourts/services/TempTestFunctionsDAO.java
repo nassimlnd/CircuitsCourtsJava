@@ -1,4 +1,7 @@
-package com.mmn.circuitscourts.models;
+package com.mmn.circuitscourts.services;
+
+import com.mmn.circuitscourts.models.Administrateur;
+import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class TempTestFunctionsDAO {
                 System.out.println("**** test getByID ***");
                 Administrateur a = test.getById(2);
                 System.out.println(a.toString());
-                test.add(new Administrateur("test2", "add2"));
+                test.add(new Administrateur("test2", "add2", "125"));
                 System.out.println("**** test add ****");
                 ArrayList<Administrateur> resultat2 = test.getAll();
                 for (Administrateur a2 : resultat2) {
@@ -31,7 +34,7 @@ public class TempTestFunctionsDAO {
 
             try{
                AdminDAO test2 = new AdminDAO("jdbc:mysql://localhost/circuit_court?serverTimezone=Europe/Paris", "root", "");
-               Administrateur martin1 = new Administrateur("martin", "martin");
+               Administrateur martin1 = new Administrateur("martin", "martin", "150");
                test2.update(7, martin1);
                 System.out.println("**** test update ****");
                 ArrayList<Administrateur> resultat2 = test.getAll();

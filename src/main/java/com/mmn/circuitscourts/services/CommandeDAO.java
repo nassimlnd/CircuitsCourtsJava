@@ -1,4 +1,6 @@
-package com.mmn.circuitscourts.models;
+package com.mmn.circuitscourts.services;
+
+import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -7,13 +9,11 @@ public class CommandeDAO implements DAO{
     /**
      * @param con, connection avec la BD;
      */
-
     private Connection con;
 
     public CommandeDAO(String url, String login, String pwd) throws SQLException {
-        this.con = SingleConnection.getInstance(url, login, pwd);
+        this.con = ConnectionMySQL.getInstance(url, login, pwd);
     }
-
 
     @Override
     public ArrayList getAll() throws SQLException {

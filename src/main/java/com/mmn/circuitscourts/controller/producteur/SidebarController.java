@@ -18,7 +18,6 @@ public class SidebarController {
     @FXML
     public void initialize() {
         String title = ViewFactory.getInstance().getMainStage().getTitle();
-        System.out.println(title);
 
         switch (title) {
             case "CircuitsCourts - Tableau de bord" :

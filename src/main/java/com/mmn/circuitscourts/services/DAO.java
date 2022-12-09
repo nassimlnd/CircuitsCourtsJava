@@ -1,4 +1,4 @@
-package com.mmn.circuitscourts.models;
+package com.mmn.circuitscourts.services;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
