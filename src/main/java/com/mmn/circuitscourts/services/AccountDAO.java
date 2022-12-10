@@ -39,7 +39,8 @@ public class AccountDAO implements DAO<User> {
     }
 
     @Override
-    public void add(User user) throws SQLException {
+    public boolean add(User user) throws SQLException {
+        boolean execute = false;
         String query = "INSERT INTO accounts(identifiant, password, grade) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, user.getIdentifiant());
@@ -51,10 +52,12 @@ public class AccountDAO implements DAO<User> {
         if (resultSet.next()) {
             user.setId(resultSet.getInt(1));
         }
+        return execute = true;
     }
 
     @Override
-    public void update(int id, User user) throws SQLException {
+    public boolean update(int id, User user) throws SQLException {
+        boolean execute = false;
         String query = "UPDATE accounts SET identifiant=?, password=?, grade=? WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, user.getIdentifiant());
@@ -62,14 +65,17 @@ public class AccountDAO implements DAO<User> {
         preparedStatement.setInt(3, user.getGrade());
         preparedStatement.setInt(4, user.getId());
         preparedStatement.executeUpdate();
+        return execute = true;
     }
 
     @Override
-    public void remove(int id) throws SQLException {
+    public boolean remove(int id) throws SQLException {
+        boolean execute = false;
         String query = "DELETE FROM accounts WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
+        return execute = true;
     }
 
     public String getPasswordByIdentifiant(String identifiant) throws Exception {

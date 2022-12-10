@@ -73,7 +73,8 @@ public class AdminDAO implements DAO {
     }
 
     @Override
-    public void add(Object o) throws SQLException {
+    public boolean add(Object o) throws SQLException {
+        boolean execute = false;
         if (o instanceof Administrateur) {
             String nom = ((Administrateur) o).getNom();
             String adresse = ((Administrateur) o).getAdresse();
@@ -82,9 +83,10 @@ public class AdminDAO implements DAO {
             pst.setString(1, nom);
             pst.setString(2, adresse);
             pst.executeUpdate();
+            return execute = true;
         }
         //TODO : créer exception pour spécifier que l'objet passé en parametre n'est pas un admin (exception 2)
-        else throw new SQLException();
+        else return execute;
     }
 
     /**
@@ -93,7 +95,8 @@ public class AdminDAO implements DAO {
      * @param id , adinistrateur à modifier
      * @param o  objet  qui va remplacer l'ancien.
      */
-    public void update(int id, Object o) throws SQLException {
+    public boolean update(int id, Object o) throws SQLException {
+        boolean execute = false;
         if (o instanceof Administrateur) {
             String nom = ((Administrateur) o).getNom();
             String adresse = ((Administrateur) o).getAdresse();
@@ -104,7 +107,9 @@ public class AdminDAO implements DAO {
             pst.setString(2, adresse);
             pst.setString(3, numTel);
             pst.executeUpdate();
+            return execute  = true;
         }//TODO : (exception 2)
+        return execute;
     }
 
     /**
@@ -112,11 +117,13 @@ public class AdminDAO implements DAO {
      *
      * @param id
      */
-    public void remove(int id) throws SQLException {
+    public boolean remove(int id) throws SQLException {
+        boolean execute = false;
         //TODO : (exception 1)
         String query = "DELETE  FROM Administrateur WHERE id=" + id;
         Statement st = con.createStatement();
         st.executeUpdate(query);
+        return execute = true;
     }
 
 

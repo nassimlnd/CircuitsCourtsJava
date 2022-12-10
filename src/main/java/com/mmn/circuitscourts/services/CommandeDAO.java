@@ -76,7 +76,8 @@ public class CommandeDAO implements DAO<Commande>{
     }
 
     @Override
-    public void add(Commande o) throws SQLException {
+    public boolean add(Commande o) throws SQLException {
+        boolean execute = false;
         if(o instanceof Commande){
             String query2 = "INSERT INTO Commande(libelle, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(query2);
@@ -88,13 +89,15 @@ public class CommandeDAO implements DAO<Commande>{
             pst.setInt(6, ((Commande) o).getIdTournee());
             pst.setInt(7, ((Commande) o).getNumSiret());
             pst.executeUpdate();
+            return execute = true;
         }
         //TODO : créer exception pour spécifier que l'objet passé en parametre n'est pas un admin (exception 2)
-        else throw new SQLException();
+        else return execute;
     }
 
     @Override
-    public void update(int numCommande, Commande o) throws SQLException {
+    public boolean update(int numCommande, Commande o) throws SQLException {
+        boolean execute = false;
         if(o instanceof Commande){
             String libelle = ((Commande) o).getLibelle();
             float poids = ((Commande) o).getPoids();
@@ -113,15 +116,19 @@ public class CommandeDAO implements DAO<Commande>{
             pst.setInt(6, ((Commande) o).getIdTournee());
             pst.setInt(7, ((Commande) o).getNumSiret());
             pst.executeUpdate();
+            return execute = false;
         }//TODO : (exception 2)
+        return execute;
     }
 
     @Override
-    public void remove(int numCommande) throws SQLException {
+    public boolean remove(int numCommande) throws SQLException {
         //TODO : (exception 1)
+        boolean execute = false;
         String query  ="DELETE  FROM Commande WHERE numCommande="+ numCommande;
         Statement st = con.createStatement();
         st.executeUpdate(query);
+        return execute = true;
     }
 
     public int countById() throws Exception {

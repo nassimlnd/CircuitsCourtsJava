@@ -29,16 +29,16 @@ public interface DAO<T>{
          * permet de  rajouter dans la BD un objet en particulier
          * @param t, l'objet à ajouter en quesion.
          */
-        public void add(T t) throws SQLException;
+        public boolean add(T t) throws SQLException;
         /**
          * Permet de modifier dans la BD un objet t particulier.
          * @param id permet de retrouver l'objet à modifier
          */
-        public void update(int id, T t) throws SQLException;
+        public boolean update(int id, T t) throws SQLException;
 
         /**
          * Permet de supprimer un objet t de la BD
          * @param id permet de retrouver l'objet à supprimer
          */
-        public void remove(int id) throws SQLException;
+        public boolean remove(int id) throws SQLException;
     }
