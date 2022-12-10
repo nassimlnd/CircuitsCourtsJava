@@ -90,6 +90,11 @@
     -fx-border-color: red;
 }
 
+.login-error {
+    -fx-text-fill: red;
+    -fx-font: 12px 'Inter';
+}
+
 /* PasswordField -> Password Input */
 .password-input {
     -fx-cursor: text;

@@ -20,8 +20,9 @@
                 <VBox prefHeight="64.0" prefWidth="248">
                     <children>
                         <Label maxHeight="19.0" maxWidth="160.0" prefHeight="19.0" prefWidth="160.0"
-                               styleClass="sidebar-profil-name" text="Producteur X"/>
-                        <Label styleClass="sidebar-profil-email" text="producteur@email.com"/>
+                               fx:id="userName"
+                               styleClass="sidebar-profil-name"/>
+                        <Label styleClass="sidebar-profil-email" fx:id="userGrade"/>
                     </children>
                     <padding>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>

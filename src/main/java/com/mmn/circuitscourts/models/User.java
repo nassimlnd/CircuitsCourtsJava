@@ -39,6 +39,19 @@ public class User {
         return grade;
     }
 
+    public String getGradeName() {
+        switch (this.grade) {
+            case 1:
+                return "Client";
+            case 2:
+                return "Producteur";
+            case 3:
+                return "Administrateur";
+            default:
+                return "";
+        }
+    }
+
     public void setId(int id) {
         this.id = id;
     }

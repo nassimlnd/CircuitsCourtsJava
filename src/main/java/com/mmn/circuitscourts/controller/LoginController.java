@@ -1,6 +1,8 @@
 package com.mmn.circuitscourts.controller;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.models.User;
+import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -15,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -35,6 +38,8 @@ public class LoginController {
     private Button button;
     @FXML
     private VBox container;
+    @FXML
+    private Label errorLabel;
 
     @FXML
     public void initialize() {
@@ -89,10 +94,17 @@ public class LoginController {
     }
 
     public void onLogin() {
+        String identifiant = textField.getText();
+        String password = passwordField.getText();
 
-
-
-        ViewFactory.getInstance().showProdDashboardInterface();
+        AccountDAO accountDAO = new AccountDAO();
+        try {
+            App.userConnected = accountDAO.connect(identifiant, password);
+            System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ") connected.");
+            ViewFactory.getInstance().showProdDashboardInterface();
+        } catch (Exception e) {
+            errorLabel.setText(e.getMessage());
+        }
     }
 
     @FXML

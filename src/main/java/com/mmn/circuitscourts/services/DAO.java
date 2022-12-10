@@ -10,11 +10,11 @@ import java.util.ArrayList;
  * Classe génératrice qui permet de manipuler tous les dyfferents types provenants de la BD.
  * @param <T>
  */
-public interface DAO <T>{
+public interface DAO<T>{
 
         /**
          * Permet de récuperer tout le contenu d'une table.
-         * @return une ArrayList  qui est constituée de l'entierté de la table
+         * @return une ArrayList qui est constituée de l'entierté de la table
          */
         public ArrayList<T> getAll() throws SQLException;
 

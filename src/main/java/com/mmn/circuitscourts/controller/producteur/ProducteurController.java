@@ -1,6 +1,8 @@
 package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.models.Commande;
+import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class ProducteurController {
 
@@ -32,12 +35,19 @@ public class ProducteurController {
 
     @FXML
     BorderPane container;
-
     @FXML
-    SVGPath svgPath;
+    Label commandesCount;
 
     @FXML
     public void initialize() {
+        try {
+            CommandeDAO commandeDAO = new CommandeDAO("jdbc:mysql://localhost/circuitscourts?serverTimezone=Europe/Paris", "root", "");
+            commandesCount.setText(String.valueOf(commandeDAO.countById()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void resize(SVGPath svg, double width, double height) {

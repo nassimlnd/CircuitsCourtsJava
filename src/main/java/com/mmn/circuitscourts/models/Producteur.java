@@ -2,16 +2,21 @@ package com.mmn.circuitscourts.models;
 
 public class Producteur {
     private int numSiret;
+
+    private Proprietaire proprietaire;
     private String adresse;
     private String numTel;
     private String coordonneesGps;
 
-    public Producteur(int numSiret, String adresse, String numTel, String coordonneesGps) {
+    public Producteur(int numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps) {
         this.numSiret = numSiret;
+        this.proprietaire = proprietaire;
         this.adresse = adresse;
         this.numTel = numTel;
         this.coordonneesGps = coordonneesGps;
     }
+
+
 
     public int getNumSiret() {
         return numSiret;

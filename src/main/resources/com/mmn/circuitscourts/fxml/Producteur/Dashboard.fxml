@@ -33,7 +33,7 @@
                                         <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="120.0" VBox.vgrow="ALWAYS">
                                             <children>
                                                 <Label styleClass="dashboard-stats-order-title" text="Commandes" />
-                                                <Label styleClass="dashboard-stats-order-number" text="50" />
+                                                <Label styleClass="dashboard-stats-order-number" text="50" fx:id="commandesCount" />
                                             </children>
                                         </VBox>
                                     </children>

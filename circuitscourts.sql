@@ -1,19 +1,37 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : BetGame
+Source Server         : Local
 Source Server Version : 50505
 Source Host           : localhost:3306
-Source Database       : circuit_court
+Source Database       : circuitscourts
 
 Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2022-12-08 17:08:47
+Date: 2022-12-10 01:51:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `accounts`
+-- ----------------------------
+DROP TABLE IF EXISTS `accounts`;
+CREATE TABLE `accounts` (
+  `accountId` int(11) NOT NULL AUTO_INCREMENT,
+  `identifiant` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `grade` int(11) NOT NULL,
+  PRIMARY KEY (`accountId`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of accounts
+-- ----------------------------
+INSERT INTO `accounts` VALUES ('5', 'nassim', '123456', '2');
+INSERT INTO `accounts` VALUES ('6', 'martin', '123456', '1');
 
 -- ----------------------------
 -- Table structure for `administrateur`
@@ -22,26 +40,14 @@ DROP TABLE IF EXISTS `administrateur`;
 CREATE TABLE `administrateur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
+  `adresse` varchar(50) NOT NULL,
+  `numTel` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of administrateur
 -- ----------------------------
-INSERT INTO `administrateur` VALUES ('1', 'martin', 'martin');
-INSERT INTO `administrateur` VALUES ('2', 'lounadi', 'nassim');
-INSERT INTO `administrateur` VALUES ('3', 'moutsouraev', 'magomed');
-INSERT INTO `administrateur` VALUES ('6', 'test', 'add');
-INSERT INTO `administrateur` VALUES ('7', 'martin', 'martin');
-INSERT INTO `administrateur` VALUES ('8', 'test', 'add');
-INSERT INTO `administrateur` VALUES ('9', 'martino', 'lebg');
-INSERT INTO `administrateur` VALUES ('10', 'test', 'add');
-INSERT INTO `administrateur` VALUES ('13', 'test', 'add');
-INSERT INTO `administrateur` VALUES ('14', 'test2', 'add2');
-INSERT INTO `administrateur` VALUES ('15', 'test2', 'add2');
-INSERT INTO `administrateur` VALUES ('16', 'test2', 'add2');
-INSERT INTO `administrateur` VALUES ('17', 'test2', 'add2');
 
 -- ----------------------------
 -- Table structure for `client`
@@ -52,12 +58,12 @@ CREATE TABLE `client` (
   `nom` varchar(50) NOT NULL,
   `prenom` varchar(50) NOT NULL,
   PRIMARY KEY (`idC`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of client
 -- ----------------------------
-INSERT INTO `client` VALUES ('1', 'luffy', 'zoro');
+INSERT INTO `client` VALUES ('2', 'nassim', 'nassim');
 
 -- ----------------------------
 -- Table structure for `commande`
@@ -79,19 +85,13 @@ CREATE TABLE `commande` (
   CONSTRAINT `idClient` FOREIGN KEY (`idClient`) REFERENCES `client` (`idC`),
   CONSTRAINT `idTournee` FOREIGN KEY (`idTournee`) REFERENCES `tournee` (`idT`),
   CONSTRAINT `numS` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of commande
 -- ----------------------------
-INSERT INTO `commande` VALUES ('1', 'pomme', '5', '0000-00-00', '0000-00-00', '1', '1', '1');
-INSERT INTO `commande` VALUES ('2', 'annanas', '150', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('3', 'annanas', '150', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('4', 'fraise', '50', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('5', 'annanas', '150', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('6', 'annanas', '150', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('8', 'annanas', '150', '15', '16', '1', '1', '1');
-INSERT INTO `commande` VALUES ('9', 'annanas', '150', '15', '16', '1', '1', '1');
+INSERT INTO `commande` VALUES ('1', 'test', '15', '10', '20', '2', '2', '1');
+INSERT INTO `commande` VALUES ('2', 'test', '15', '10', '20', '2', '2', '1');
 
 -- ----------------------------
 -- Table structure for `producteur`
@@ -103,13 +103,16 @@ CREATE TABLE `producteur` (
   `proprietaire` varchar(50) NOT NULL,
   `numTel` varchar(12) NOT NULL,
   `coordoneesGPS` varchar(50) NOT NULL,
-  PRIMARY KEY (`numSiret`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+  `accountId` int(11) NOT NULL,
+  PRIMARY KEY (`numSiret`),
+  KEY `accId` (`accountId`),
+  CONSTRAINT `accId` FOREIGN KEY (`accountId`) REFERENCES `accounts` (`accountId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of producteur
 -- ----------------------------
-INSERT INTO `producteur` VALUES ('1', 'chambray', ' martino', '0782937471', '12548854');
+INSERT INTO `producteur` VALUES ('1', 'test', 'test', 'test', 'test', '5');
 
 -- ----------------------------
 -- Table structure for `tournee`
@@ -126,12 +129,12 @@ CREATE TABLE `tournee` (
   KEY `numImmat` (`numImmat`),
   CONSTRAINT `numImmat` FOREIGN KEY (`numImmat`) REFERENCES `vehicule` (`numImmat`),
   CONSTRAINT `numSiret` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of tournee
 -- ----------------------------
-INSERT INTO `tournee` VALUES ('1', '0000-00-00', '0000-00-00', '1', '7855485478');
+INSERT INTO `tournee` VALUES ('2', '0000-00-00', '0000-00-00', '1', '15');
 
 -- ----------------------------
 -- Table structure for `vehicule`
@@ -140,10 +143,13 @@ DROP TABLE IF EXISTS `vehicule`;
 CREATE TABLE `vehicule` (
   `numImmat` varchar(50) NOT NULL,
   `poids` float NOT NULL,
-  PRIMARY KEY (`numImmat`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `numSiret` int(11) NOT NULL,
+  PRIMARY KEY (`numImmat`),
+  KEY `numProd` (`numSiret`),
+  CONSTRAINT `numProd` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- ----------------------------
 -- Records of vehicule
 -- ----------------------------
-INSERT INTO `vehicule` VALUES ('7855485478', '1000');
+INSERT INTO `vehicule` VALUES ('15', '150', '1');

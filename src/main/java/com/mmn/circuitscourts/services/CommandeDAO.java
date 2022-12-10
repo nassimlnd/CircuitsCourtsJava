@@ -1,11 +1,12 @@
 package com.mmn.circuitscourts.services;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CommandeDAO implements DAO{
+public class CommandeDAO implements DAO<Commande>{
     /**
      * @param con, connection avec la BD;
      */
@@ -16,7 +17,7 @@ public class CommandeDAO implements DAO{
     }
 
     @Override
-    public ArrayList getAll() throws SQLException {
+    public ArrayList<Commande> getAll() throws SQLException {
         String query = "SELECT * FROM commande";
         Statement st = con.createStatement();
         ResultSet resultSet = st.executeQuery(query);
@@ -75,7 +76,7 @@ public class CommandeDAO implements DAO{
     }
 
     @Override
-    public void add(Object o) throws SQLException {
+    public void add(Commande o) throws SQLException {
         if(o instanceof Commande){
             String query2 = "INSERT INTO Commande(libelle, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pst = con.prepareStatement(query2);
@@ -93,7 +94,7 @@ public class CommandeDAO implements DAO{
     }
 
     @Override
-    public void update(int numCommande, Object o) throws SQLException {
+    public void update(int numCommande, Commande o) throws SQLException {
         if(o instanceof Commande){
             String libelle = ((Commande) o).getLibelle();
             float poids = ((Commande) o).getPoids();
@@ -121,5 +122,14 @@ public class CommandeDAO implements DAO{
         String query  ="DELETE  FROM Commande WHERE numCommande="+ numCommande;
         Statement st = con.createStatement();
         st.executeUpdate(query);
+    }
+
+    public int countById() throws Exception {
+        String query = "SELECT COUNT(*) FROM commande INNER JOIN producteur ON commande.numSiret = producteur.numSiret INNER JOIN accounts ON producteur.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
+        Statement statement = con.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else return 0;
     }
 }

@@ -71,4 +71,28 @@ public class AccountDAO implements DAO<User> {
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();
     }
+
+    public String getPasswordByIdentifiant(String identifiant) throws Exception {
+        String query = "SELECT password FROM accounts WHERE identifiant=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, identifiant);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString(1);
+        } else throw new Exception("Identifiant introuvable.");
+    }
+
+    public User connect(String identifiant, String password) throws Exception {
+        String goodPass = getPasswordByIdentifiant(identifiant);
+
+        if (password.equals(goodPass)) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM accounts WHERE identifiant=? AND password=?");
+            preparedStatement.setString(1, identifiant);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
+            } else throw new SQLException("Problème !");
+        } else throw new Exception("Mot de passe incorrect.");
+    }
 }

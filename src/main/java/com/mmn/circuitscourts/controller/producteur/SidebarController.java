@@ -1,8 +1,10 @@
 package com.mmn.circuitscourts.controller.producteur;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class SidebarController {
 
@@ -14,10 +16,17 @@ public class SidebarController {
     Button tourneeTab;
     @FXML
     Button vehiculesTab;
+    @FXML
+    Label userName;
+    @FXML
+    Label userGrade;
 
     @FXML
     public void initialize() {
         String title = ViewFactory.getInstance().getMainStage().getTitle();
+
+        userName.setText(App.userConnected.getIdentifiant());
+        userGrade.setText(App.userConnected.getGradeName());
 
         switch (title) {
             case "CircuitsCourts - Tableau de bord" :
@@ -35,6 +44,8 @@ public class SidebarController {
     }
 
     public void onDisconnect() {
+        App.userConnected = null;
+        System.out.println("[DEBUG]User disconnected.");
         ViewFactory.getInstance().showLoginInterface();
     }
 
