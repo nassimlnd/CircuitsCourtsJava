@@ -30,7 +30,10 @@
                                 <Insets bottom="30.0" top="15.0" />
                             </VBox.margin>
                         </PasswordField>
-                        <Button fx:id="button" mnemonicParsing="false" text="Se connecter !" styleClass="bouton" onMouseClicked="#onLogin" disable="true">
+                        <Button fx:id="button" mnemonicParsing="false" text=" Se connecter !" styleClass="login-button" onMouseClicked="#onLogin" disable="true">
+                            <graphic>
+                                <Region styleClass="login-button-img"/>
+                            </graphic>
                             <VBox.margin>
                                 <Insets bottom="50.0" top="10.0" />
                             </VBox.margin>

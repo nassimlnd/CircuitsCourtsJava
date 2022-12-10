@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLOutput;
 
 public class ViewFactory {
     public static ViewFactory viewFactory;
@@ -35,7 +36,7 @@ public class ViewFactory {
 
     public void showProdDashboardInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Dashboard.fxml"));
-        System.out.println("[DEBUG]Dashboard loaded.");
+        System.out.println("[DEBUG]ProducteurDashboard loaded.");
         createScene(loader, "CircuitsCourts - Tableau de bord");
     }
 
@@ -43,7 +44,7 @@ public class ViewFactory {
         mainStage.setTitle(title);
         Scene scene = null;
         try {
-            scene = new Scene(loader.load(), 1000, 700);
+            scene = new Scene(loader.load(), 1200, 800);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -57,19 +58,25 @@ public class ViewFactory {
 
     public void showProdCommandesInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Commandes.fxml"));
-        System.out.println("[DEBUG]Commandes loaded.");
+        System.out.println("[DEBUG]ProducteurCommandes loaded.");
         createScene(loader, "CircuitsCourts - Commandes");
     }
 
     public void showProdVehiculesInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Vehicules.fxml"));
-        System.out.println("[DEBUG]Vehicules loaded.");
+        System.out.println("[DEBUG]ProducteurVehicules loaded.");
         createScene(loader, "CircuitsCourts - Véhicules");
     }
 
     public void showProdTourneeInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Tournees.fxml"));
-        System.out.println("[DEBUG]Tournee loaded.");
+        System.out.println("[DEBUG]ProducteurTournee loaded.");
         createScene(loader, "CircuitsCourts - Tournées");
+    }
+
+    public void showAdminDashboardInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Dashboard.fxml"));
+        System.out.println("[DEBUG]AdminDashboard loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Tableau de bord");
     }
 }

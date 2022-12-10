@@ -46,10 +46,10 @@ public class LoginController {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (checkInput(t1)) {
+                if (checkIdInput(t1)) {
                     textField.getStyleClass().clear();
                     textField.getStyleClass().add("login-input");
-                    if (checkInput(passwordField.getText())) {
+                    if (checkIdInput(passwordField.getText())) {
                         button.setDisable(false);
                         System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
                     }
@@ -63,10 +63,10 @@ public class LoginController {
         passwordField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                if (checkInput(t1)) {
+                if (checkPasswordInput(t1)) {
                     passwordField.getStyleClass().clear();
                     passwordField.getStyleClass().add("password-input");
-                    if (checkInput(textField.getText())) {
+                    if (checkPasswordInput(textField.getText())) {
                         button.setDisable(false);
                         System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
                     }
@@ -83,11 +83,15 @@ public class LoginController {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
-                    try {
-                        switchScene();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    onLogin();
+                }
+            }
+        });
+        passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER) {
+                    onLogin();
                 }
             }
         });
@@ -100,14 +104,27 @@ public class LoginController {
         AccountDAO accountDAO = new AccountDAO();
         try {
             App.userConnected = accountDAO.connect(identifiant, password);
-            System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ") connected.");
-            ViewFactory.getInstance().showProdDashboardInterface();
+            System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ", " + App.userConnected.getGrade() +") connected.");
+            switch (App.userConnected.getGrade()) {
+                case 1:
+                    errorLabel.setText("VIEW NOT SET.");
+                    break;
+                case 2:
+                    ViewFactory.getInstance().showProdDashboardInterface();
+                    break;
+                case 3:
+                    ViewFactory.getInstance().showAdminDashboardInterface();
+                    break;
+                default:
+                    errorLabel.setText("GRADE ERROR.");
+                    break;
+            }
         } catch (Exception e) {
             errorLabel.setText(e.getMessage());
         }
     }
 
-    @FXML
+    /*@FXML
     private void switchScene() throws IOException {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Dashboard.fxml"));
         Parent root = loader.load();
@@ -127,10 +144,27 @@ public class LoginController {
             parentContainer.getChildren().remove(container);
         });
         timeline.play();
+    }*/
+
+    /**
+     * Vérifie que l'identifiant a une taille supérieure ou égale à 4, qu'il n'est pas vide et qu'il ne contient pas d'espaces
+     * @param value l'identifiant à vérifier
+     * @return true si l'identifiant est valide et false sinon
+     */
+    public boolean checkIdInput(String value) {
+        if (value.length() >= 4 && !value.equals("") && !value.contains(" ")) {
+            return true;
+        } else return false;
     }
 
-    public boolean checkInput(String value) {
-        if (value.length() > 5 && !value.equals("")) {
+    /**
+     * Vérifie que la mot de passe a une taille supérieure ou égale à 4, qu'il n'est pas vide et qu'il ne contient pas d'espaces
+     * @param value le mot de passe à vérifier
+     * @return true si le mot de passe est valide et false sinon
+     */
+    public boolean checkPasswordInput(String value) {
+        // TODO: Change the value of the minimal number of characters
+        if (value.length() >= 4 && !value.equals("") && !value.contains(" ")) {
             return true;
         } else return false;
     }
