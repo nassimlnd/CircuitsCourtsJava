@@ -79,4 +79,10 @@ public class ViewFactory {
         System.out.println("[DEBUG]AdminDashboard loaded.");
         createScene(loader, "[ADMIN]CircuitsCourts - Tableau de bord");
     }
+
+    public void showProdAddCommandeInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddCommande.fxml"));
+        System.out.println("[DEBUG]ProducteurAddCommande loaded.");
+        createScene(loader, "CircuitsCourts - Ajout de commande");
+    }
 }

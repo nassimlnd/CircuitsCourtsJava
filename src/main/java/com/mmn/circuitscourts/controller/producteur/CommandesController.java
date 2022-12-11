@@ -2,6 +2,8 @@ package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.User;
+import com.mmn.circuitscourts.services.CommandeDAO;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,19 +19,25 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class CommandesController {
     @FXML
-    VBox commandeTable;
+    VBox contentTable;
 
     @FXML
-    public void initialize() {
+    public void initialize() throws SQLException {
         Commande commande = new Commande(1, "test", 150, "10", "20", 2, 2, 1);
         Commande commande2 = new Commande(2, "test", 150, "10", "20", 2, 2, 1);
 
-        createLine();
+        CommandeDAO commandeDAO = new CommandeDAO("jdbc:mysql://localhost/circuitscourts?serverTimezone=Europe/Paris", "root", "");
+        ArrayList<Commande> commandes = commandeDAO.getAll();
+
+        commandes.forEach(commande1 -> {
+            createLine(commande1) ;
+        });
         //initTableColumn();
         //ObservableList<Commande> list1 = FXCollections.observableArrayList(commande, commande2);
 
@@ -37,19 +45,23 @@ public class CommandesController {
 
     }
 
-    public void createLine() {
+    public void onAddButton() {
+        ViewFactory.getInstance().showProdAddCommandeInterface();
+    }
+
+    public void createLine(Commande commande) {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(56);
-        line.setPrefWidth(950);
+        line.setPrefWidth(850);
         line.setPadding(new Insets(0, 40, 0, 40));
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
-        Label numCommande = new Label("1");
-        Label libelle = new Label("line");
-        Label poids = new Label("test");
-        Label horaire = new Label("test");
-        Label dateCommande = new Label("test");
+        Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
+        Label libelle = new Label(commande.getLibelle());
+        Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
+        Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
+        Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
         labels.add(numCommande);
         labels.add(libelle);
         labels.add(poids);
@@ -66,7 +78,7 @@ public class CommandesController {
             line.getChildren().add(label);
         });
 
-        commandeTable.getChildren().add(line);
+        contentTable.getChildren().add(line);
     }
 
 

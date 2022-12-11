@@ -40,6 +40,9 @@ public class SidebarController {
                 break;
             case "CircuitsCourts - Véhicules" :
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "CircuitsCourts - Ajout de commande" :
+                commandesTab.getStyleClass().add("sidebar-tab-active");
         }
     }
 

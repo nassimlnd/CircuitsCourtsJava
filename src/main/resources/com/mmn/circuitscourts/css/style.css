@@ -478,6 +478,30 @@
     -fx-shape: "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z";
 }
 
+.back-button {
+    -fx-cursor: hand;
+    -fx-background-color: white;
+    -fx-border-style: none;
+    -fx-text-fill: #667085;
+}
+
+.back-button:hover {
+    -fx-underline: true;
+}
+
+.back-button-img {
+    -icon-paint: #667085;
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 14;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z";
+}
+
 .main-title {
     -fx-font: 24px 'Helvetica';
     -fx-font-weight: bold;
@@ -513,4 +537,28 @@
 
 .table-view .cell {
     -fx-font: 14px 'Helvetica';
+}
+
+.scroll-pane > .view-port {
+    -fx-background-color: transparent;
+    -fx-border-style: none;
+}
+
+.scroll-pane > .view-port:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background: white;
+    -fx-background-color: white;
+    -fx-background-radius: 0 0 8px 8px;
+    -fx-border-style: none;
+    -fx-border-radius: 0 0 8px 8px;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane:focused {
+    -fx-border-style: none;
+    -fx-border-color: transparent;
 }
