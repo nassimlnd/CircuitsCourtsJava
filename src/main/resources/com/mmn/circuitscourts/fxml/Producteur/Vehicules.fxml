@@ -1,18 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;"
-           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.mmn.circuitscourts.controller.producteur.VehiculesController">
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.producteur.VehiculesController">
     <children>
-        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
+        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white">
             <left>
-                <fx:include source="Sidebar.fxml"/>
+                <fx:include source="Sidebar.fxml" />
             </left>
             <center>
-
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label styleClass="main-title" text="Véhicules">
+                            <VBox.margin>
+                                <Insets bottom="75.0" />
+                            </VBox.margin>
+                        </Label>
+                        <VBox fx:id="commandeTable" prefHeight="500" prefWidth="950" styleClass="commande-tableview">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="950" styleClass="commande-tableview-header">
+                                    <children>
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Numéro">
+                                            <HBox.margin>
+                                                <Insets left="40.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Libellé" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Date de commande" />
+                                    </children>
+                                    <padding>
+                                        <Insets right="40.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="40.0" right="40.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="40.0" right="40.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="40.0" right="40.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="40.0" right="40.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
+                                    <children>
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
+                                    </children>
+                                    <padding>
+                                        <Insets left="40.0" right="40.0" />
+                                    </padding>
+                                </HBox>
+                            </children>
+                        </VBox>
+                        <Pane>
+                            <children>
+                                <Button fx:id="addButton" layoutX="847.0" layoutY="-24.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="addButton" textAlignment="CENTER">
+                                    <graphic>
+                                        <Region styleClass="addButton-img" />
+                                    </graphic>
+                                </Button>
+                            </children>
+                        </Pane>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+                    </BorderPane.margin>
+                </VBox>
             </center>
         </BorderPane>
     </children>
