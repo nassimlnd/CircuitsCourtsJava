@@ -35,10 +35,10 @@ public class CommandesController {
         Commande commande = new Commande(1, "test", 150, "10", "20", 2, 2, 1);
         Commande commande2 = new Commande(2, "test", 150, "10", "20", 2, 2, 1);
 
-        initTableColumn();
-        ObservableList<Commande> list1 = FXCollections.observableArrayList(commande, commande2);
+        //initTableColumn();
+        //ObservableList<Commande> list1 = FXCollections.observableArrayList(commande, commande2);
 
-        tableView.setItems(list1);
+        //tableView.setItems(list1);
 
     }
 

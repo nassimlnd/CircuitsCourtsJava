@@ -410,6 +410,11 @@
 .commande-tableview {
     -fx-background-color: white;
     -fx-background-radius: 8px;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #EAECF0;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -2px, 0px, 4px);
 }
 
 .commande-tableview-column {
@@ -417,6 +422,29 @@
     -fx-font: 14px 'Helvetica';
     -fx-text-fill: #475467;
     -fx-padding: 5px;
+}
+
+.commande-tableview-header {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #EAECF0;
+}
+
+.commande-tableview-header-title {
+    -fx-font: 14px 'Helvetica';
+    -fx-text-fill: #475467;
+}
+
+.commande-tableview-line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #EAECF0;
+}
+
+.commande-tableview-line-cell {
+
 }
 
 .addButton {
