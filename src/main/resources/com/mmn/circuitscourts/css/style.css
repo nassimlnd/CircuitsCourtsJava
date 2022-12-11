@@ -358,10 +358,13 @@
 .dashboard-feed-container {
     -fx-background-color: white;
     -fx-background-radius: 4px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -2px, 0px, 4px);
 }
 
-.dashboard-feed-list {
-    -fx-border-radius: 4px;
+.dashboard-feed-line {
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 0 1px;
+    -fx-border-color: #D0D5DD;
 }
 
 .dashboard-stats-box {

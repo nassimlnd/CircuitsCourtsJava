@@ -52,7 +52,7 @@ public class CommandesController {
     public void createLine(Commande commande) {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
-        line.setPrefHeight(56);
+        line.setPrefHeight(64);
         line.setPrefWidth(850);
         line.setPadding(new Insets(0, 40, 0, 40));
         line.getStyleClass().add("commande-tableview-line");

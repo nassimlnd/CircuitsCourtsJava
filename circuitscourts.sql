@@ -66,6 +66,67 @@ CREATE TABLE `client` (
 INSERT INTO `client` VALUES ('2', 'nassim', 'nassim');
 
 -- ----------------------------
+-- Table structure for `producteur`
+-- ----------------------------
+DROP TABLE IF EXISTS `producteur`;
+CREATE TABLE `producteur` (
+  `numSiret` int(15) NOT NULL AUTO_INCREMENT,
+  `adresse` varchar(50) NOT NULL,
+  `proprietaire` varchar(50) NOT NULL,
+  `numTel` varchar(12) NOT NULL,
+  `coordoneesGPS` varchar(50) NOT NULL,
+  `accountId` int(11) NOT NULL,
+  PRIMARY KEY (`numSiret`),
+  KEY `accId` (`accountId`),
+  CONSTRAINT `accId` FOREIGN KEY (`accountId`) REFERENCES `accounts` (`accountId`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of producteur
+-- ----------------------------
+INSERT INTO `producteur` VALUES ('1', 'test', 'test', 'test', 'test', '5');
+
+-- ----------------------------
+-- Table structure for `vehicule`
+-- ----------------------------
+DROP TABLE IF EXISTS `vehicule`;
+CREATE TABLE `vehicule` (
+  `numImmat` varchar(50) NOT NULL,
+  `poids` float NOT NULL,
+  `numSiret` int(11) NOT NULL,
+  PRIMARY KEY (`numImmat`),
+  KEY `numProd` (`numSiret`),
+  CONSTRAINT `numProd` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of vehicule
+-- ----------------------------
+INSERT INTO `vehicule` VALUES ('15', '150', '1');
+
+-- ----------------------------
+-- Table structure for `tournee`
+-- ----------------------------
+DROP TABLE IF EXISTS `tournee`;
+CREATE TABLE `tournee` (
+  `idT` int(10) NOT NULL AUTO_INCREMENT,
+  `horaireDebut` date NOT NULL,
+  `horaireFin` date NOT NULL,
+  `numSiret` int(15) NOT NULL,
+  `numImmat` varchar(50) NOT NULL,
+  PRIMARY KEY (`idT`),
+  KEY `numSiret` (`numSiret`),
+  KEY `numImmat` (`numImmat`),
+  CONSTRAINT `numImmat` FOREIGN KEY (`numImmat`) REFERENCES `vehicule` (`numImmat`),
+  CONSTRAINT `numSiret` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of tournee
+-- ----------------------------
+INSERT INTO `tournee` VALUES ('2', '0000-00-00', '0000-00-00', '1', '15');
+
+-- ----------------------------
 -- Table structure for `commande`
 -- ----------------------------
 DROP TABLE IF EXISTS `commande`;
@@ -92,64 +153,3 @@ CREATE TABLE `commande` (
 -- ----------------------------
 INSERT INTO `commande` VALUES ('1', 'test', '15', '10', '20', '2', '2', '1');
 INSERT INTO `commande` VALUES ('2', 'test', '15', '10', '20', '2', '2', '1');
-
--- ----------------------------
--- Table structure for `producteur`
--- ----------------------------
-DROP TABLE IF EXISTS `producteur`;
-CREATE TABLE `producteur` (
-  `numSiret` int(15) NOT NULL AUTO_INCREMENT,
-  `adresse` varchar(50) NOT NULL,
-  `proprietaire` varchar(50) NOT NULL,
-  `numTel` varchar(12) NOT NULL,
-  `coordoneesGPS` varchar(50) NOT NULL,
-  `accountId` int(11) NOT NULL,
-  PRIMARY KEY (`numSiret`),
-  KEY `accId` (`accountId`),
-  CONSTRAINT `accId` FOREIGN KEY (`accountId`) REFERENCES `accounts` (`accountId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of producteur
--- ----------------------------
-INSERT INTO `producteur` VALUES ('1', 'test', 'test', 'test', 'test', '5');
-
--- ----------------------------
--- Table structure for `tournee`
--- ----------------------------
-DROP TABLE IF EXISTS `tournee`;
-CREATE TABLE `tournee` (
-  `idT` int(10) NOT NULL AUTO_INCREMENT,
-  `horaireDebut` date NOT NULL,
-  `horaireFin` date NOT NULL,
-  `numSiret` int(15) NOT NULL,
-  `numImmat` varchar(50) NOT NULL,
-  PRIMARY KEY (`idT`),
-  KEY `numSiret` (`numSiret`),
-  KEY `numImmat` (`numImmat`),
-  CONSTRAINT `numImmat` FOREIGN KEY (`numImmat`) REFERENCES `vehicule` (`numImmat`),
-  CONSTRAINT `numSiret` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of tournee
--- ----------------------------
-INSERT INTO `tournee` VALUES ('2', '0000-00-00', '0000-00-00', '1', '15');
-
--- ----------------------------
--- Table structure for `vehicule`
--- ----------------------------
-DROP TABLE IF EXISTS `vehicule`;
-CREATE TABLE `vehicule` (
-  `numImmat` varchar(50) NOT NULL,
-  `poids` float NOT NULL,
-  `numSiret` int(11) NOT NULL,
-  PRIMARY KEY (`numImmat`),
-  KEY `numProd` (`numSiret`),
-  CONSTRAINT `numProd` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- ----------------------------
--- Records of vehicule
--- ----------------------------
-INSERT INTO `vehicule` VALUES ('15', '150', '1');
