@@ -27,7 +27,7 @@
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
     -fx-border-radius: 4px;
     -fx-text-fill: white;
-    -fx-font: 14px 'Inter';
+    -fx-font: 14px 'Helvetica';
     -fx-padding: 12px 24px;
     -fx-border-style: solid;
     -fx-border-width: 1px;
@@ -62,7 +62,7 @@
 
 .login-input {
     -fx-cursor: text;
-    -fx-font: 14px 'Inter';
+    -fx-font: 14px 'Helvetica';
     -fx-prompt-text-fill: gray;
     -fx-background-color: white;
     -fx-border-radius: 4px;
@@ -105,13 +105,13 @@
 
 .login-error {
     -fx-text-fill: red;
-    -fx-font: 12px 'Inter';
+    -fx-font: 12px 'Helvetica';
 }
 
 /* PasswordField -> Password Input */
 .password-input {
     -fx-cursor: text;
-    -fx-font: 14px 'Inter';
+    -fx-font: 14px 'Helvetica';
     -fx-background-color: white;
     -fx-prompt-text-fill: gray;
     -fx-border-radius: 4px;
@@ -154,7 +154,8 @@
 
 /* Label -> LoginTitle */
 .login-title {
-    -fx-font: 24px 'InterBold';
+    -fx-font: 24px 'Helvetica';
+    -fx-font-weight: bold;
     -fx-margin-bottom: 100px;
 }
 
@@ -173,7 +174,8 @@
 }
 
 .sidebar-title {
-    -fx-font: 24px 'InterBold';
+    -fx-font: 24px 'Helvetica';
+    -fx-font-weight: bold;
 }
 
 .sidebar-profil-container {
@@ -183,7 +185,7 @@
 }
 
 .sidebar-tab {
-    -fx-font: 14px 'Inter';
+    -fx-font: 14px 'Helvetica';
     -fx-text-fill: #667085;
     -fx-border-style: solid;
     -fx-border-width: 1px;
@@ -206,7 +208,7 @@
 }
 
 .sidebar-tab-subtitle {
-    -fx-font: 12px 'Inter';
+    -fx-font: 12px 'Helvetica';
     -fx-text-fill: #98A2B3;
 }
 
@@ -314,12 +316,12 @@
 }
 
 .sidebar-profil-name {
-    -fx-font: 12px 'Inter';
+    -fx-font: 12px 'Helvetica';
     -fx-text-fill: #101828;
 }
 
 .sidebar-profil-email {
-    -fx-font: 10px 'Inter';
+    -fx-font: 10px 'Helvetica';
     -fx-text-fill: #667085;
 }
 
@@ -393,11 +395,94 @@
 }
 
 .dashboard-stats-order-title {
-    -fx-font: 12px 'Inter';
+    -fx-font: 12px 'Helvetica';
     -fx-text-fill: #667085;
 }
 
 .dashboard-stats-order-number {
-    -fx-font: 20px 'InterBold';
+    -fx-font: 20px 'Helvetica';
+    -fx-font-weight: bold;
     -fx-text-fill: #154FEF;
+}
+
+/* Commande Interface */
+
+.commande-tableview {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+}
+
+.commande-tableview-column {
+    -fx-background-color: #F8FAFC;
+    -fx-font: 14px 'Helvetica';
+    -fx-text-fill: #475467;
+    -fx-padding: 5px;
+}
+
+.addButton {
+    -fx-cursor: hand;
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-radius: 50%;
+    -fx-text-fill: white;
+}
+
+.addButton:hover {
+    -fx-background-color: #154FEF;
+}
+
+.addButton:pressed {
+    -fx-background-color: #5280FF;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #5280FF;
+    -fx-border-radius: 50%;
+}
+.addButton-img {
+    -icon-paint: white;
+    -fx-background-color: -icon-paint;
+    -width-size: 10;
+    -height-size: 10;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z";
+}
+
+.main-title {
+    -fx-font: 24px 'Helvetica';
+    -fx-font-weight: bold;
+}
+
+.table-view {
+    -fx-size: 30px;
+    -fx-pref-tile-height: 64px;
+}
+
+.table-view:focused {
+    -fx-border-style: none;
+}
+
+.table-view .cell {
+    -fx-min-height: 64px;
+    -fx-alignment: center-left;
+}
+
+.table-view .column-resize-line {
+    -fx-background-color: red;
+}
+
+.table-view .column-header {
+    -fx-background-color: #F8FAFC;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: 1px;
+    -fx-font: 14px 'Helvetica';
+    -fx-text-fill: #475467;
+    -fx-cell-size: 56px;
+}
+
+.table-view .cell {
+    -fx-font: 14px 'Helvetica';
 }

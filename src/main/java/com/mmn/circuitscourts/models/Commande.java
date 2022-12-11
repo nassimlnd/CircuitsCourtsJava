@@ -1,5 +1,8 @@
 package com.mmn.circuitscourts.models;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class Commande {
     private int numCommande;
     private String libelle;
@@ -9,6 +12,7 @@ public class Commande {
     private int idClient;
     private int idTournee;
     private int numSiret;
+    private Date dateCommande;
     public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) {
         this.numCommande = numCommande;
         this.libelle = libelle;
@@ -18,6 +22,7 @@ public class Commande {
         this.idClient = idClient;
         this.idTournee = idTournee;
         this.numSiret = numSiret;
+        this.dateCommande = Calendar.getInstance().getTime();
     }
 
     public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) {
@@ -28,6 +33,7 @@ public class Commande {
         this.idClient = idClient;
         this.idTournee = idTournee;
         this.numSiret = numSiret;
+        this.dateCommande = Calendar.getInstance().getTime();
     }
     public int getNumCommande() {
         return numCommande;
@@ -91,6 +97,10 @@ public class Commande {
 
     public void setNumSiret(int numSiret) {
         this.numSiret = numSiret;
+    }
+
+    public Date getDateCommande() {
+        return dateCommande;
     }
 
     @Override

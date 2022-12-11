@@ -14,4 +14,5 @@ module com.mmn.circuitscourts {
     opens com.mmn.circuitscourts.controller.admin to javafx.fxml;
     exports com.mmn.circuitscourts.controller.producteur;
     opens com.mmn.circuitscourts.controller.producteur to javafx.fxml;
+    opens com.mmn.circuitscourts.models to javafx.base;
 }
