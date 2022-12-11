@@ -32,7 +32,7 @@ public class CommandesController {
         Commande commande = new Commande(1, "test", 150, "10", "20", 2, 2, 1);
         Commande commande2 = new Commande(2, "test", 150, "10", "20", 2, 2, 1);
 
-        CommandeDAO commandeDAO = new CommandeDAO("jdbc:mysql://localhost/circuitscourts?serverTimezone=Europe/Paris", "root", "");
+        CommandeDAO commandeDAO = new CommandeDAO();
         ArrayList<Commande> commandes = commandeDAO.getAll();
 
         commandes.forEach(commande1 -> {

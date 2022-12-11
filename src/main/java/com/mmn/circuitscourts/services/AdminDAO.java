@@ -18,7 +18,7 @@ public class AdminDAO implements DAO {
     private Connection con;
 
     public AdminDAO(String url, String login, String pwd) {
-        this.con = ConnectionMySQL.getInstance(url, login, pwd);
+        this.con = ConnectionMySQL.getInstance();
     }
 
     /**

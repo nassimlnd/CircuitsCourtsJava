@@ -8,7 +8,7 @@ import java.util.function.Function;
 
 public class AccountDAO implements DAO<User> {
 
-    static Connection connection = ConnectionMySQL.getInstance("jdbc:mysql://localhost/circuitscourts?serverTimezone=Europe/Paris", "root", "");
+    static Connection connection = ConnectionMySQL.getInstance();
 
     public AccountDAO() {}
     @Override

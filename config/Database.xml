@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <host>127.0.0.1</host>
+    <dbname>circuitscourts</dbname>
+    <login>root</login>
+    <password></password>
+</config>

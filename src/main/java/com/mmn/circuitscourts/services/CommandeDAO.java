@@ -12,8 +12,8 @@ public class CommandeDAO implements DAO<Commande>{
      */
     private Connection con;
 
-    public CommandeDAO(String url, String login, String pwd) throws SQLException {
-        this.con = ConnectionMySQL.getInstance(url, login, pwd);
+    public CommandeDAO() throws SQLException {
+        this.con = ConnectionMySQL.getInstance();
     }
 
     @Override

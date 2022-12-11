@@ -14,9 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.SVGPath;
@@ -34,6 +32,9 @@ public class ProducteurController {
     VBox disconnectContainer;
 
     @FXML
+    StackPane stackPane;
+
+    @FXML
     BorderPane container;
     @FXML
     Label commandesCount;
@@ -41,7 +42,7 @@ public class ProducteurController {
     @FXML
     public void initialize() {
         try {
-            CommandeDAO commandeDAO = new CommandeDAO("jdbc:mysql://localhost/circuitscourts?serverTimezone=Europe/Paris", "root", "");
+            CommandeDAO commandeDAO = new CommandeDAO();
             commandesCount.setText(String.valueOf(commandeDAO.countById()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
