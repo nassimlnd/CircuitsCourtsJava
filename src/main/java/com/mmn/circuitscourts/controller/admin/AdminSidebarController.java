@@ -5,6 +5,7 @@ import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 public class AdminSidebarController {
 
@@ -63,20 +64,24 @@ public class AdminSidebarController {
         ViewFactory.getInstance().showLoginInterface();
     }
 
+    /**
+     * permet de lier à l'event onMouseClicked sur le bouton dashBoard l'action showAdminDashboardInterface()
+     */
     public void onDashboardButton() {
 
+        ViewFactory.getInstance().showAdminDashboardInterface();
     }
 
-    public void onCommandesButton() {
-
+    public void onCommandesButton(){
+        ViewFactory.getInstance().showAdminCommandeInterface();
     }
 
     public void onTourneeButton() {
-
+        ViewFactory.getInstance().showAdminTourneeInterface();
     }
 
     public void onVehiculesButton() {
-
+    ViewFactory.getInstance().showAdminVehiculeInterface();
     }
 
     public void onProducteurButton() {
@@ -84,10 +89,11 @@ public class AdminSidebarController {
     }
 
     public void onClientButton() {
-
+        ViewFactory.getInstance().showAdminClientInterface();
     }
 
     public void onAccountButton() {
 
     }
+
 }

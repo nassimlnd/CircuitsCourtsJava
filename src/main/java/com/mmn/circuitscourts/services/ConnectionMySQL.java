@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public class ConnectionMySQL {
    /**
-    * Connection en static pour s'assurer qu'elle soit la unique.
+    * Connection en static pour s'assurer qu'elle soit l'unique.
     */
    public static Connection connectionMySQL;
    public static String url;

@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLOutput;
 
+/**
+ * Les méthodes show() servent à créer insstancier nouvelle scène depuis un fichier FXML.
+ * Pour cela il faut créer un FXMLLoader qui prend en paramètre les chemin du fichier fxml correspondant.
+ * Puis une scène est créée avec le loader et un titre.
+ */
 public class ViewFactory {
     public static ViewFactory viewFactory;
     private Stage mainStage;
@@ -80,9 +85,44 @@ public class ViewFactory {
         createScene(loader, "[ADMIN]CircuitsCourts - Tableau de bord");
     }
 
+    //PAS DE FICHIER FXML COMMANDES DANS LE PROJET
+    public void showAdminClientInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Sidebar.fxml"));
+        System.out.println("[DEBUG]AdminClientInterface loaded");
+        createScene(loader, "[ADMIN]CircuitCourts - Clients");
+    }
+    //==============new============
+    public void showAdminCommandeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Commandes.fxml"));
+        System.out.println("[DEBUG]AdminCommandeInterface loaded");
+        createScene(loader, "[ADMIN]CircuitCourts - Commandes");
+    }
+
+    //============new ===========
+    public void showAdminTourneeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Tournees.fxml"));
+        System.out.println("[DEBUG]AdminTourneeInterface loaded");
+        createScene(loader, "[ADMIN]CircuitCourts - Tournées");
+    }
+
+    //=============new ===============
+    public void showAdminVehiculeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Vehicules.fxml"));
+        System.out.println("[DEBUG]AdminVehiculeInterface loaded");
+        createScene(loader, "[ADMIN]CircuitCourts - Véhicules");
+    }
+
+    //=========new ==============
+    public void showAdminAddCommandeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddCommande.fxml"));
+        System.out.println("[DEBUG]AdminAddCommandesInterface laded.");
+        createScene(loader, "CircuitsCourts - Ajouter Commandes");
+    }
+
     public void showProdAddCommandeInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddCommande.fxml"));
         System.out.println("[DEBUG]ProducteurAddCommande loaded.");
         createScene(loader, "CircuitsCourts - Ajout de commande");
     }
+
 }

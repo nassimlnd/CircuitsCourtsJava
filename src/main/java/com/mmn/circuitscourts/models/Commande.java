@@ -1,5 +1,9 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.services.CommandeDAO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -13,7 +17,12 @@ public class Commande {
     private int idTournee;
     private int numSiret;
     private Date dateCommande;
-    public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) {
+
+    public Commande() throws SQLException {
+
+    }
+
+    public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
         this.numCommande = numCommande;
         this.libelle = libelle;
         this.poids = poids;
@@ -25,7 +34,7 @@ public class Commande {
         this.dateCommande = Calendar.getInstance().getTime();
     }
 
-    public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) {
+    public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
         this.libelle = libelle;
         this.poids = poids;
         this.horaireDebut = horaireDebut;
@@ -103,6 +112,18 @@ public class Commande {
         return dateCommande;
     }
 
+
+    public CommandeDAO cmd = new CommandeDAO();
+    /**
+     *recupères commandes grâce a la vonction getAll de commandes DAO
+     * @return arrayList de commandes, retourne toutes les commades dans la base de données
+     * @throws SQLException
+     */
+    public ArrayList<Commande> getCommandesInitialize() throws SQLException {
+        ArrayList<Commande> commandes = new ArrayList<Commande>();
+        commandes = cmd.getAll();
+        return commandes;
+    }
     @Override
     public String toString() {
         return "Commande{" +
