@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.function.Function;
 
-public class AccountDAO implements DAO<User> {
+public class AccountDAO implements DAO<User,Integer> {
 
     static Connection connection = ConnectionMySQL.getInstance();
 
@@ -27,7 +27,7 @@ public class AccountDAO implements DAO<User> {
     }
 
     @Override
-    public User getById(int id) throws SQLException {
+    public User getById(Integer id) throws SQLException {
         String query = "SELECT * FROM accounts WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -56,7 +56,7 @@ public class AccountDAO implements DAO<User> {
     }
 
     @Override
-    public boolean update(int id, User user) throws SQLException {
+    public boolean update(Integer id, User user) throws SQLException {
         boolean execute = false;
         String query = "UPDATE accounts SET identifiant=?, password=?, grade=? WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -69,7 +69,7 @@ public class AccountDAO implements DAO<User> {
     }
 
     @Override
-    public boolean remove(int id) throws SQLException {
+    public boolean remove(Integer id) throws SQLException {
         boolean execute = false;
         String query = "DELETE FROM accounts WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);

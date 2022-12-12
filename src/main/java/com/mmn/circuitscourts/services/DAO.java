@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Classe génératrice qui permet de manipuler tous les dyfferents types provenants de la BD.
  * @param <T>
  */
-public interface DAO<T>{
+public interface DAO<T,T1>{
 
         /**
          * Permet de récuperer tout le contenu d'une table.
@@ -23,7 +23,7 @@ public interface DAO<T>{
          * @param id
          * @return retourne l'objet <T> en queston.
          */
-        public T getById(int id) throws SQLException;
+        public T getById(T1 id) throws SQLException;
 
         /**
          * permet de  rajouter dans la BD un objet en particulier
@@ -34,11 +34,11 @@ public interface DAO<T>{
          * Permet de modifier dans la BD un objet t particulier.
          * @param id permet de retrouver l'objet à modifier
          */
-        public boolean update(int id, T t) throws SQLException;
+        public boolean update(T1 id, T t) throws SQLException;
 
         /**
          * Permet de supprimer un objet t de la BD
          * @param id permet de retrouver l'objet à supprimer
          */
-        public boolean remove(int id) throws SQLException;
+        public boolean remove(T1 id) throws SQLException;
     }

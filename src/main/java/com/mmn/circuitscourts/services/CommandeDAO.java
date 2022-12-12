@@ -6,7 +6,7 @@ import com.mmn.circuitscourts.models.Commande;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class CommandeDAO implements DAO<Commande>{
+public class CommandeDAO implements DAO<Commande, Integer>{
     /**
      * @param con, connection avec la BD;
      */
@@ -46,7 +46,7 @@ public class CommandeDAO implements DAO<Commande>{
 
 
     @Override
-    public Commande getById(int numCommande) throws SQLException {
+    public Commande getById(Integer numCommande) throws SQLException {
         String query = "SELECT * FROM commande WHERE numCommande=?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setInt(1, numCommande);
@@ -96,7 +96,7 @@ public class CommandeDAO implements DAO<Commande>{
     }
 
     @Override
-    public boolean update(int numCommande, Commande o) throws SQLException {
+    public boolean update(Integer numCommande, Commande o) throws SQLException {
         boolean execute = false;
         if(o instanceof Commande){
             String libelle = ((Commande) o).getLibelle();
@@ -122,7 +122,7 @@ public class CommandeDAO implements DAO<Commande>{
     }
 
     @Override
-    public boolean remove(int numCommande) throws SQLException {
+    public boolean remove(Integer numCommande) throws SQLException {
         //TODO : (exception 1)
         boolean execute = false;
         String query  ="DELETE  FROM Commande WHERE numCommande="+ numCommande;
