@@ -106,7 +106,7 @@
                         </VBox>
                         <Pane>
                             <children>
-                                <Button fx:id="addButton" layoutX="847.0" layoutY="-24.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="addButton" textAlignment="CENTER">
+                                <Button fx:id="addButton" layoutX="847.0" layoutY="-24.0" onMouseClicked="#onAddButton" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0" styleClass="addButton" textAlignment="CENTER">
                                     <graphic>
                                         <Region styleClass="addButton-img" />
                                     </graphic>

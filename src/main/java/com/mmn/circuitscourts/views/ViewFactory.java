@@ -115,8 +115,21 @@ public class ViewFactory {
     //=========new ==============
     public void showAdminAddCommandeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddCommande.fxml"));
-        System.out.println("[DEBUG]AdminAddCommandesInterface laded.");
-        createScene(loader, "CircuitsCourts - Ajouter Commandes");
+        System.out.println("[DEBUG]AdminAddCommandesInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Ajouter Commandes");
+    }
+
+    //=======new=========
+    public void showAdminAddTourneeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddTournees.fxml"));
+        System.out.println("[DEBUG]AdminAddTourneesInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Ajouter Tournées");
+    }
+    //========new==========
+    public void showAdminAddVehiculeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddVehicule.fxml"));
+        System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Ajouter Véhicules");
     }
 
     public void showProdAddCommandeInterface() {
