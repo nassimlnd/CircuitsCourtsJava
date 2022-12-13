@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.models.Tournee;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,6 +20,9 @@ public class TourneeController {
     @FXML
     VBox commandeTable;
 
+    public void onAddButton() {
+        ViewFactory.getInstance().showProducteurAddTourneeInterface();
+    }
     public void initialize() throws SQLException {
         Tournee t = new Tournee();
         ArrayList<Tournee> tournees = t.getCommandesInitializeByProducteur();

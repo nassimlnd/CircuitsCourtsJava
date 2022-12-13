@@ -134,6 +134,18 @@ public class ViewFactory {
         createScene(loader, "[ADMIN]CircuitsCourts - Ajouter Véhicules");
     }
 
+    public void showProducteurAddVehiculeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddVehicule.fxml"));
+        System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Ajouter tournées");
+    }
+
+    public void showProducteurAddTourneeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddVehicule.fxml"));
+        System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Ajouter véhicules");
+    }
+
     public void showProdAddCommandeInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddCommande.fxml"));
         System.out.println("[DEBUG]ProducteurAddCommande loaded.");
