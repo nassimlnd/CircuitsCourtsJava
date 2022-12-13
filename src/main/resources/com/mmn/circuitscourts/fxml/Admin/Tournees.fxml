@@ -33,9 +33,9 @@
                                                 <Insets left="40.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numéro d'immatriculation" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids du véhicule" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire" />
                                         <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numSiret" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numéro d'immatriculation" />
                                     </children>
                                     <padding>
                                         <Insets right="40.0" />

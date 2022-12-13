@@ -41,8 +41,13 @@ public class TourneeController {
         ArrayList<Label> labels = new ArrayList<>();
         Label idTournee = new Label(String.valueOf(trn.getId()));
         Label horaire = new Label(trn.getHoraireDebut() + "h à " + trn.getHoraireFin() + "h");
+        Label numSiret = new Label(String.valueOf(trn.getNumSiret()));
+        Label numImmat = new Label(String.valueOf(trn.getNumImmat()));
         labels.add(idTournee);
         labels.add(horaire);
+        labels.add(numSiret);
+        labels.add(numImmat);
+
 
         labels.forEach(label -> {
             label.getStyleClass().add("commande-tableview-line-cell");

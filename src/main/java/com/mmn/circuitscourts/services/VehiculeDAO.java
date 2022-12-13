@@ -96,4 +96,25 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         st.executeUpdate(query);
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
+
+    /**
+     * Permet de récuperer tout le contenu de la table vehicule.
+     *
+     * @return une ArrayList qui est constituée de l'entierté de la table.
+     */
+
+    public ArrayList<Vehicule> getAllByProducteur(int accountId) throws SQLException {
+        String query = "SELECT * FROM  vehicule INNER JOIN Producteur ON Vehicule.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + accountId;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        ArrayList<Vehicule> vehicules = new ArrayList<>();
+        String numImmat = null;
+        int poidsMax = 0;
+        while(rs.next()){
+            numImmat=rs.getString(1);
+            poidsMax=rs.getInt(2);
+            vehicules.add(new Vehicule(numImmat,poidsMax));
+        }
+        return vehicules;
+    }
 }

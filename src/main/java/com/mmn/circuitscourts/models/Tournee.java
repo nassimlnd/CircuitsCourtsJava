@@ -10,19 +10,27 @@ public class Tournee {
     private String horaireDebut;
     private String horaireFin;
 
+    private int numSiret;
+
+    private int numImmat;
+
 
     public Tournee(){
 
     }
-    public Tournee(int id, String horaireDebut, String horaireFin) {
+    public Tournee(int id, String horaireDebut, String horaireFin, int numSiret, int numImmat) {
         this.id = id;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
+        this.numSiret = numSiret;
+        this.numImmat = numImmat;
     }
 
-    public Tournee(String horaireDebut, String horaireFin) {
+    public Tournee(String horaireDebut, String horaireFin, int numSiret, int numImmat) {
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
+        this.numSiret = numSiret;
+        this.numImmat = numImmat;
     }
 
     public int getId() {
@@ -49,10 +57,25 @@ public class Tournee {
         this.horaireFin = horaireFin;
     }
 
+    public int getNumSiret() {
+        return numSiret;
+    }
+
+    public void setNumSiret(int numSiret) {
+        this.numSiret = numSiret;
+    }
+
+    public int getNumImmat() {
+        return numImmat;
+    }
+
+    public void setNumImmat(int numImmat) {
+        this.numImmat = numImmat;
+    }
+
     public ArrayList<Tournee> getCommandesInitialize() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAll();
-        System.out.println(tournees);
         return tournees;
     }
 }

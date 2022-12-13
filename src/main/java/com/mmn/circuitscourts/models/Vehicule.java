@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.services.VehiculeDAO;
 
 import java.sql.SQLException;
@@ -14,7 +15,10 @@ public class Vehicule {
     public Vehicule() {
 
     }
-
+    public Vehicule(String numImmate, int poidsmax) {
+        this.numImmate = numImmate;
+        this.poidsMax = poidsmax;
+    }
     public Vehicule(String numImmate, int poidsmax, int numSiret) {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
@@ -41,9 +45,16 @@ public class Vehicule {
         return numSiret;
     }
 
-    public ArrayList<Vehicule> getVehiculesInitilaze() throws SQLException {
+    public ArrayList<Vehicule>getVehiculesInitilize() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
         ArrayList<Vehicule> vehicules = v.getAll();
+        return vehicules;
+    }
+
+    public ArrayList<Vehicule> getVehiculesInitilizeByProducteur() throws SQLException {
+        VehiculeDAO v = new VehiculeDAO();
+        int idUser = App.userConnected.getId();
+        ArrayList<Vehicule> vehicules = v.getAllByProducteur(idUser);
         return vehicules;
     }
 }

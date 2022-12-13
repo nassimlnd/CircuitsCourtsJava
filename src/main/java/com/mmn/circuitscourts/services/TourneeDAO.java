@@ -27,11 +27,15 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
         int id = 0;
         String horaireDebut = null;
         String horaireFin = null;
+        int numSiret = -1;
+        int numImmat = -1;
         while(rs.next()){
             id=rs.getInt(1);
             horaireDebut=rs.getString(2);
             horaireFin=rs.getString(3);
-            tournees.add(new Tournee(id,horaireDebut,horaireFin));
+            numSiret = rs.getInt(4);
+            numImmat = rs.getInt(5);
+            tournees.add(new Tournee(id,horaireDebut,horaireFin, numSiret, numImmat));
         }
         return tournees;
     }
@@ -49,11 +53,15 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
         ResultSet rs = pst.executeQuery();
         String horaireDebut = null;
         String horaireFin = null;
+        int numSiret = -1;
+        int numImmat = -1;
         if(rs.next()){
             horaireDebut=rs.getString(2);
             horaireFin=rs.getString(3);
+            numSiret = rs.getInt(4);
+            numImmat = rs.getInt(5);
         }
-        return new Tournee(id,horaireDebut,horaireFin);
+        return new Tournee (id,horaireDebut,horaireFin, numSiret, numImmat);
 
 
 
