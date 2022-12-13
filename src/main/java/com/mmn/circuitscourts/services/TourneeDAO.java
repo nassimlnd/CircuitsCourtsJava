@@ -62,9 +62,6 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
             numImmat = rs.getInt(5);
         }
         return new Tournee (id,horaireDebut,horaireFin, numSiret, numImmat);
-
-
-
     }
 
     /**
@@ -117,4 +114,27 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
         } else return 0;
     }
 
+    public ArrayList<Tournee> getAllByProducteur(int accountId) throws SQLException {
+        String query = "SELECT * FROM tournee INNER JOIN Producteur ON tournee.numSiret=producteur.numSiret WHERE Producteur.accountId="+ accountId;
+        PreparedStatement pst = conn.prepareStatement(query);
+        ResultSet rs = pst.executeQuery();
+        int id = -1;
+        String horaireDebut = null;
+        String horaireFin = null;
+        int numSiret = -1;
+        int numImmat = -1;
+        ArrayList<Tournee> tournees = new ArrayList<>();
+        while(rs.next()){
+            id = rs.getInt(1);
+            horaireDebut=rs.getString(2);
+            horaireFin=rs.getString(3);
+            numSiret = rs.getInt(4);
+            numImmat = rs.getInt(5);
+            tournees.add(new Tournee(id, horaireDebut, horaireFin, numSiret, numImmat));
+        }
+         return tournees;
+    }
+
 }
+
+

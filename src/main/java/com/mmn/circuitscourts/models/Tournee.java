@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.services.TourneeDAO;
 
 import java.sql.SQLException;
@@ -76,6 +77,13 @@ public class Tournee {
     public ArrayList<Tournee> getCommandesInitialize() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAll();
+        return tournees;
+    }
+
+    public ArrayList<Tournee> getCommandesInitializeByProducteur() throws SQLException {
+        TourneeDAO t = new TourneeDAO();
+        ArrayList<Tournee> tournees = t.getAllByProducteur(App.userConnected.getId());
+        System.out.println(tournees);
         return tournees;
     }
 }

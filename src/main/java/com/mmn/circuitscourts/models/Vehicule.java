@@ -45,6 +45,8 @@ public class Vehicule {
         return numSiret;
     }
 
+
+
     public ArrayList<Vehicule>getVehiculesInitilize() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
         ArrayList<Vehicule> vehicules = v.getAll();
