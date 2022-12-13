@@ -107,7 +107,7 @@ public class LoginController {
             System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ", " + App.userConnected.getGrade() +") connected.");
             switch (App.userConnected.getGrade()) {
                 case 1:
-                    errorLabel.setText("VIEW NOT SET.");
+                    ViewFactory.getInstance().showClientDashboardInterface();
                     break;
                 case 2:
                     ViewFactory.getInstance().showProdDashboardInterface();
@@ -120,6 +120,7 @@ public class LoginController {
                     break;
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             errorLabel.setText(e.getMessage());
         }
     }

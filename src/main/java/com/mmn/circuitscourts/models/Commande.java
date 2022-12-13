@@ -117,7 +117,7 @@ public class Commande {
     }
 
 
-    public CommandeDAO cmd = new CommandeDAO();
+    public static CommandeDAO cmd = new CommandeDAO();
     public AccountDAO account = new AccountDAO();
 
     /**
@@ -126,10 +126,8 @@ public class Commande {
      * @return arrayList de commandes, retourne toutes les commades dans la base de données
      * @throws SQLException
      */
-    public ArrayList<Commande> getCommandesInitialize() throws SQLException {
-        ArrayList<Commande> commandes = new ArrayList<Commande>();
-        commandes = cmd.getAll();
-        return commandes;
+    public static ArrayList<Commande> getCommandesInitialize() throws SQLException {
+        return cmd.getAll();
     }
 
     /**

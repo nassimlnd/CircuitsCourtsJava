@@ -51,6 +51,7 @@ public class ViewFactory {
         try {
             scene = new Scene(loader.load(), 1200, 800);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
         scene.getStylesheets().add(App.class.getResource("css/style.css").toString());
@@ -87,29 +88,30 @@ public class ViewFactory {
 
     //PAS DE FICHIER FXML COMMANDES DANS LE PROJET
     public void showAdminClientInterface(){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Sidebar.fxml"));
-        System.out.println("[DEBUG]AdminClientInterface loaded");
-        createScene(loader, "[ADMIN]CircuitCourts - Clients");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Client.fxml"));
+        System.out.println("[DEBUG]AdminClientInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Clients");
     }
+
     //==============new============
     public void showAdminCommandeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Commandes.fxml"));
-        System.out.println("[DEBUG]AdminCommandeInterface loaded");
-        createScene(loader, "[ADMIN]CircuitCourts - Commandes");
+        System.out.println("[DEBUG]AdminCommandeInterface loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Commandes");
     }
 
     //============new ===========
     public void showAdminTourneeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Tournees.fxml"));
         System.out.println("[DEBUG]AdminTourneeInterface loaded");
-        createScene(loader, "[ADMIN]CircuitCourts - Tournées");
+        createScene(loader, "[ADMIN]CircuitsCourts - Tournées");
     }
 
     //=============new ===============
     public void showAdminVehiculeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Vehicules.fxml"));
         System.out.println("[DEBUG]AdminVehiculeInterface loaded");
-        createScene(loader, "[ADMIN]CircuitCourts - Véhicules");
+        createScene(loader, "[ADMIN]CircuitsCourts - Véhicules");
     }
 
     //=========new ==============
@@ -138,4 +140,9 @@ public class ViewFactory {
         createScene(loader, "CircuitsCourts - Ajout de commande");
     }
 
+    public void showClientDashboardInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/Dashboard.fxml"));
+        System.out.println("[DEBUG]ClientDashboard loaded.");
+        createScene(loader, "CircuitsCourts - Tableau de bord");
+    }
 }

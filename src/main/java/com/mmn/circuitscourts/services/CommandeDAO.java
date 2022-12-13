@@ -12,7 +12,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      */
     private Connection con;
 
-    public CommandeDAO() throws SQLException {
+    public CommandeDAO() {
         this.con = ConnectionMySQL.getInstance();
     }
 

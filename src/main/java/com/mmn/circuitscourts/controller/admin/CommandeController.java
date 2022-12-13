@@ -27,12 +27,8 @@ public class CommandeController {
      * @throws SQLException
      */
     public void initialize() throws SQLException {
-        Commande c = new Commande();
-        ArrayList<Commande> commandes = c.getCommandesInitialize();
-        for (Commande commande: commandes) {
-                createLine(commande);
-        }
-
+        ArrayList<Commande> commandes = Commande.getCommandesInitialize();
+        commandes.forEach(commande -> createLine(commande));
     }
 
     /**

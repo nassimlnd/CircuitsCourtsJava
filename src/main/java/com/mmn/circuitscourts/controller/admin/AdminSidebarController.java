@@ -28,33 +28,34 @@ public class AdminSidebarController {
     @FXML
     Button accountsTab;
 
+    @FXML
     public void initialize() {
         String title = ViewFactory.getInstance().getMainStage().getTitle();
         userName.setText(App.userConnected.getIdentifiant());
         userGrade.setText(App.userConnected.getGradeName());
 
         switch (title) {
-            case ("[ADMIN]CircuitsCourts - Tableau de bord"):
+            case "[ADMIN]CircuitsCourts - Tableau de bord":
                 dashboardTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Commandes"):
+            case "[ADMIN]CircuitsCourts - Commandes":
                 commandesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Tournées"):
+            case "[ADMIN]CircuitsCourts - Tournées":
                 tourneeTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Véhicules"):
+            case "[ADMIN]CircuitsCourts - Véhicules":
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Producteur"):
+            case "[ADMIN]CircuitsCourts - Producteur":
                 producteurTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Client"):
+            case "[ADMIN]CircuitsCourts - Clients":
                 clientTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case ("[ADMIN]CircuitsCourts - Comptes"):
+            case "[ADMIN]CircuitsCourts - Comptes":
                 accountsTab.getStyleClass().add("sidebar-tab-active");
-
+                break;
         }
     }
 
@@ -68,7 +69,6 @@ public class AdminSidebarController {
      * permet de lier à l'event onMouseClicked sur le bouton dashBoard l'action showAdminDashboardInterface()
      */
     public void onDashboardButton() {
-
         ViewFactory.getInstance().showAdminDashboardInterface();
     }
 
