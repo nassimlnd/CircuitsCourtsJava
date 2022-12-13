@@ -10,6 +10,9 @@ import java.util.ArrayList;
 public class TourneeDAO implements DAO<Tournee,Integer> {
     private Connection conn;
 
+    public TourneeDAO() throws SQLException {
+        this.conn = ConnectionMySQL.getInstance();
+    }
     /**
      * Permet de récuperer tout le contenu d'une table.
      *

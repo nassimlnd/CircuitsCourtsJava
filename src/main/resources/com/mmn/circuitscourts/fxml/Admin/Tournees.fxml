@@ -33,73 +33,12 @@
                                                 <Insets left="40.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire de début" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire de fin" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Véhicule" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Commandes" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numéro d'immatriculation" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids du véhicule" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numSiret" />
                                     </children>
                                     <padding>
                                         <Insets right="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" right="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" right="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" right="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" right="40.0" />
-                                    </padding>
-                                </HBox>
-                                <HBox alignment="CENTER_LEFT" prefHeight="64" prefWidth="950" styleClass="commande-tableview-line">
-                                    <children>
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="1" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                        <Label maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-line-cell" text="test" />
-                                    </children>
-                                    <padding>
-                                        <Insets left="40.0" right="40.0" />
                                     </padding>
                                 </HBox>
                             </children>

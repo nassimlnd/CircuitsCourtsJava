@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class VehiculeDAO implements DAO<Vehicule,String>{
     private Connection conn;
+
+    public VehiculeDAO() throws SQLException {
+        this.conn = ConnectionMySQL.getInstance();
+    }
     /**
      * Permet de récuperer tout le contenu de la table vehicule.
      *
@@ -21,11 +25,13 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         ArrayList<Vehicule> vehicules = new ArrayList<>();
         String numImmat = null;
         int poidsMax = 0;
+        int numSiret = -1;
         while(rs.next()){
+            numImmat=rs.getString(1);
+            poidsMax=rs.getInt(2);
+            numSiret = rs.getInt(3);
 
-            numImmat=rs.getString(2);
-            poidsMax=rs.getInt(3);
-            vehicules.add(new Vehicule(numImmat,poidsMax));
+            vehicules.add(new Vehicule(numImmat,poidsMax, numSiret));
         }
         return vehicules;
     }
@@ -42,10 +48,12 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
         int poidsMax = 0;
+        int numSiret = -1;
         if(rs.next()){
             poidsMax=rs.getInt(2);
+            numSiret = rs.getInt(3);
         }
-        return new Vehicule(numImmat,poidsMax);
+        return new Vehicule(numImmat,poidsMax, numSiret);
     }
 
     /**

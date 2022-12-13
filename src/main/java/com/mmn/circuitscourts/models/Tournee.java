@@ -1,11 +1,19 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.services.TourneeDAO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class Tournee {
     private int id;
     private String horaireDebut;
     private String horaireFin;
 
 
+    public Tournee(){
+
+    }
     public Tournee(int id, String horaireDebut, String horaireFin) {
         this.id = id;
         this.horaireDebut = horaireDebut;
@@ -39,5 +47,12 @@ public class Tournee {
 
     public void setHoraireFin(String horaireFin) {
         this.horaireFin = horaireFin;
+    }
+
+    public ArrayList<Tournee> getCommandesInitialize() throws SQLException {
+        TourneeDAO t = new TourneeDAO();
+        ArrayList<Tournee> tournees = t.getAll();
+        System.out.println(tournees);
+        return tournees;
     }
 }
