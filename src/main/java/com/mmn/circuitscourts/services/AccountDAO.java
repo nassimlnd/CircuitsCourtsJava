@@ -98,4 +98,16 @@ public class AccountDAO implements DAO<User,Integer> {
             } else throw new SQLException("Problème !");
         } else throw new Exception("Mot de passe incorrect.");
     }
+
+
+    public User getName(String name) throws SQLException {
+        String query = "SELECT * FROM accounts WHERE identifiant=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
+        } else throw new SQLException("ID introuvable.");
+    }
 }

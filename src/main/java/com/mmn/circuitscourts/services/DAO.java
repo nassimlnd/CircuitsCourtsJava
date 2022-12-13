@@ -44,5 +44,4 @@ public interface DAO<T,T1>{
          */
         public boolean remove(T1 id) throws SQLException;
 
-
 }

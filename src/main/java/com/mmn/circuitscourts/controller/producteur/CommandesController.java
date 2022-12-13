@@ -1,48 +1,30 @@
 package com.mmn.circuitscourts.controller.producteur;
-
 import com.mmn.circuitscourts.models.Commande;
-import com.mmn.circuitscourts.models.User;
-import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 public class CommandesController {
     @FXML
     VBox contentTable;
 
     @FXML
+    Button addButton;
+
     public void initialize() throws SQLException {
-        Commande commande = new Commande(1, "test", 150, "10", "20", 2, 2, 1);
-        Commande commande2 = new Commande(2, "test", 150, "10", "20", 2, 2, 1);
-
-        CommandeDAO commandeDAO = new CommandeDAO();
-        ArrayList<Commande> commandes = commandeDAO.getAll();
-
-        commandes.forEach(commande1 -> {
-            createLine(commande1) ;
-        });
-        //initTableColumn();
-        //ObservableList<Commande> list1 = FXCollections.observableArrayList(commande, commande2);
-
-        //tableView.setItems(list1);
-
+        Commande c = new Commande();
+        ArrayList<Commande> commandes = c.getCommandesInitializeByAccountId();
+        for (Commande commande: commandes) {
+            createLine(commande);
+        }
     }
 
     public void onAddButton() {

@@ -128,4 +128,32 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             return resultSet.getInt(1);
         } else return 0;
     }
+
+
+    public ArrayList<Commande> getAllByProducteur(int accountId) throws SQLException {
+        String query = "SELECT * FROM  commande INNER JOIN Producteur ON Commande.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + accountId;
+        Statement st = con.createStatement();
+        ResultSet resultSet = st.executeQuery(query);
+        ArrayList<Commande> result = new ArrayList<>();
+        int numCommande = -1;
+        String libelle = "";
+        float poids = -1;
+        String horaireDebut = "";
+        String horaireFin = "";
+        int idClient = -1;
+        int idTournee = -1;
+        int numSiret = -1;
+        while (resultSet.next()) {
+            numCommande = resultSet.getInt(1);
+            libelle = resultSet.getString(2);
+            poids = resultSet.getFloat(3);
+            horaireDebut = resultSet.getString(4);
+            horaireFin = resultSet.getString(5);
+            idClient = resultSet.getInt(6);
+            idTournee = resultSet.getInt(7);
+            numSiret = resultSet.getInt(8);
+            result.add(new Commande(numCommande, libelle, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret));
+        }
+        return result;
+    }
 }

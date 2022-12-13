@@ -1,5 +1,8 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.controller.producteur.ProducteurController;
+import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.services.CommandeDAO;
 
 import java.sql.SQLException;
@@ -44,6 +47,7 @@ public class Commande {
         this.numSiret = numSiret;
         this.dateCommande = Calendar.getInstance().getTime();
     }
+
     public int getNumCommande() {
         return numCommande;
     }
@@ -114,8 +118,11 @@ public class Commande {
 
 
     public CommandeDAO cmd = new CommandeDAO();
+    public AccountDAO account = new AccountDAO();
+
     /**
-     *recupères commandes grâce a la vonction getAll de commandes DAO
+     * recupères commandes grâce a la vonction getAll de commandes DAO
+     *
      * @return arrayList de commandes, retourne toutes les commades dans la base de données
      * @throws SQLException
      */
@@ -124,6 +131,21 @@ public class Commande {
         commandes = cmd.getAll();
         return commandes;
     }
+
+    /**
+     * recupères commandes grâce a la vonction getAll de commandes DAO
+     *
+     * @return arrayList de commandes, retourne toutes les commades dans la base de données d'un certain producteur
+     * @throws SQLException
+     */
+    public ArrayList<Commande> getCommandesInitializeByAccountId() throws SQLException {
+        //id du compte connecté
+        int idUser = App.userConnected.getId();
+        ArrayList<Commande> commandes = cmd.getAllByProducteur(idUser);
+        return commandes;
+
+    }
+
     @Override
     public String toString() {
         return "Commande{" +

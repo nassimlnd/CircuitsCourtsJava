@@ -79,4 +79,5 @@ public class SidebarController {
             ViewFactory.getInstance().showProdVehiculesInterface();
         }
     }
+
 }

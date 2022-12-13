@@ -1,4 +1,7 @@
 package com.mmn.circuitscourts.models;
+import com.mmn.circuitscourts.App;
+
+import java.util.ArrayList;
 
 public class Producteur {
     private int numSiret;
@@ -49,4 +52,6 @@ public class Producteur {
     public void setCoordonneesGps(String coordonneesGps) {
         this.coordonneesGps = coordonneesGps;
     }
-}
+
+    }
+
