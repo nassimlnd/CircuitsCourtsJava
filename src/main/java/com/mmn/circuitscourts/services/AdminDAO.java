@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.services;
 
 import com.mmn.circuitscourts.models.Administrateur;
+import com.mmn.circuitscourts.models.Personne;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * Classe de communication directe  avec la BD.
  * Classe génératrice qui permet de manipuler les Administrateurs.
  */
-public class AdminDAO implements DAO {
+public class AdminDAO implements DAO<Administrateur, Integer> {
     /**
      * @param con, connection avec la BD;
      */
@@ -51,79 +52,68 @@ public class AdminDAO implements DAO {
      * @param id
      * @return un objet administrateur
      */
-    public Administrateur getById(int id) throws SQLException {
+    @Override
+    public Administrateur getById(Integer id) throws SQLException {
         String query = "SELECT * FROM Administrateur WHERE id=?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setInt(1, id);
         ResultSet rs = pst.executeQuery();
+        int idAdmin = -1;
+        String nom = "";
+        String adresse = "";
+        String numTel = "";
         if (rs.next()) {
-            int idAdmin = -1;
-            String nom = "";
-            String adresse = "";
-            String numTel = "";
             idAdmin = rs.getInt(1);
             nom = rs.getString(2);
             adresse = rs.getString(3);
             numTel = rs.getString(4);
-
-            return new Administrateur(idAdmin, nom, adresse, numTel);
         }
-        //TODO : créer exception pour spécifier si on ne trouve pas d'admin avec cet id (exception 1)
-        throw new SQLException();
+        return new Administrateur(idAdmin, nom, adresse, numTel);
     }
 
-    @Override
-    public boolean add(Object o) throws SQLException {
-        boolean execute = false;
-        if (o instanceof Administrateur) {
-            String nom = ((Administrateur) o).getNom();
-            String adresse = ((Administrateur) o).getAdresse();
-            String query2 = "INSERT INTO Administrateur(nom, prenom) VALUES (?, ?)";
-            PreparedStatement pst = con.prepareStatement(query2);
-            pst.setString(1, nom);
-            pst.setString(2, adresse);
-            pst.executeUpdate();
-            return execute = true;
-        }
-        //TODO : créer exception pour spécifier que l'objet passé en parametre n'est pas un admin (exception 2)
-        else return execute;
+    public boolean add(Administrateur admin) throws SQLException {
+        PreparedStatement pst = null;
+        String nom = admin.getNom();
+        String adresse = admin.getAdresse();
+        String query2 = "INSERT INTO Administrateur(nom, prenom) VALUES (?, ?)";
+        pst = con.prepareStatement(query2);
+        pst.setString(1, nom);
+        pst.setString(2, adresse);
+        pst.executeUpdate();
+        return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 
     /**
      * Permet de mofifier dans la BD un  administrateur particulier. Ne change pas son ID.
      *
      * @param id , adinistrateur à modifier
-     * @param o  objet  qui va remplacer l'ancien.
+     * @param admin qui va remplacer l'ancien.
      */
-    public boolean update(int id, Object o) throws SQLException {
-        boolean execute = false;
-        if (o instanceof Administrateur) {
-            String nom = ((Administrateur) o).getNom();
-            String adresse = ((Administrateur) o).getAdresse();
-            String numTel = ((Administrateur) o).getNumTel();
-            String query2 = "UPDATE Administrateur SET nom=?, prenom=? WHERE id =" + id;
-            PreparedStatement pst = con.prepareStatement(query2);
-            pst.setString(1, nom);
-            pst.setString(2, adresse);
-            pst.setString(3, numTel);
-            pst.executeUpdate();
-            return execute  = true;
-        }//TODO : (exception 2)
-        return execute;
+    public boolean update(Integer id, Administrateur admin) throws SQLException {
+        String nom = admin.getNom();
+        String adresse = admin.getAdresse();
+        String numTel = admin.getNumTel();
+        String query2 = "UPDATE Administrateur SET nom=?, prenom=? WHERE id =" + id;
+        PreparedStatement pst = con.prepareStatement(query2);
+        pst.setString(1, nom);
+        pst.setString(2, adresse);
+        pst.setString(3, numTel);
+        pst.executeUpdate();
+        return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
+
     }
 
     /**
      * Permet de supprimer un  administrateur de la BD via son id
      *
-     * @param id
+     * @param id est l'id d'un admin
      */
-    public boolean remove(int id) throws SQLException {
-        boolean execute = false;
-        //TODO : (exception 1)
+
+    public boolean remove(Integer id) throws SQLException {
         String query = "DELETE  FROM Administrateur WHERE id=" + id;
         Statement st = con.createStatement();
         st.executeUpdate(query);
-        return execute = true;
+        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 
 

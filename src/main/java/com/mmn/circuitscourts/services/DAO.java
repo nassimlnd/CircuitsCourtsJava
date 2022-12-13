@@ -1,5 +1,7 @@
 package com.mmn.circuitscourts.services;
 
+import com.mmn.circuitscourts.models.Administrateur;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -41,4 +43,6 @@ public interface DAO<T,T1>{
          * @param id permet de retrouver l'objet à supprimer
          */
         public boolean remove(T1 id) throws SQLException;
-    }
+
+
+}
