@@ -695,3 +695,67 @@
     -fx-border-style: none;
     -fx-border-color: transparent;
 }
+
+/* AddCommande Interface */
+
+.addCommandeButton {
+    -fx-cursor: hand;
+    -fx-font: 14px 'Helvetica';
+    -fx-font-weight: 700;
+    -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-text-fill: white;
+    -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.addCommandeButton:hover {
+    -fx-background-color: #154FEF;
+}
+
+.addCommandeButton:pressed {
+    -fx-background-color: #5280FF;
+    -fx-border-color: #5280FF;
+}
+
+.combo-box {
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #667085;
+    -fx-font: 14px 'Helvetica';
+    -fx-border-radius: 4px;
+    -fx-border-color: #EAECF0;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+}
+
+.combo-box:hover {
+    -fx-background-color: #F8FAFC;
+}
+
+.combo-box:focused {
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+    -fx-border-radius: 4px;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #D0D5DD;
+    -fx-border-radius: 4px;
+    -fx-prompt-text-fill: #667085;
+    -fx-font: 14px 'Helvetica';
+}
+
+.text-field:hover {
+    -fx-background-color: #F8FAFC;
+    -fx-border-color: #EAECF0;
+}
+
+.text-field:focused {
+    -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+}

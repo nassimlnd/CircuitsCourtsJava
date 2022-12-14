@@ -54,10 +54,16 @@ public class ClientSidebarController {
     }
 
     public void onDisconnect() {
-
+        App.userConnected = null;
+        System.out.println("[DEBUG]User disconnected.");
+        ViewFactory.getInstance().showLoginInterface();
     }
 
     public void onDashboardButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "CircuitsCourts - Tableau de bord") {
+            ViewFactory.getInstance().showClientDashboardInterface();
+        }
     }
 
     public void onProfilButton() {
@@ -70,6 +76,10 @@ public class ClientSidebarController {
     }
 
     public void onMarketplaceButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "CircuitsCourts - Marketplace") {
+            ViewFactory.getInstance().showClientMarketplaceInterface();
+        }
     }
 
     public void onTicketButton() {

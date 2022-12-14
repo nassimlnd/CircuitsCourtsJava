@@ -157,4 +157,22 @@ public class ViewFactory {
         System.out.println("[DEBUG]ClientDashboard loaded.");
         createScene(loader, "CircuitsCourts - Tableau de bord");
     }
+
+    public void showProdArticlesInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Articles.fxml"));
+        System.out.println("[DEBUG]ProdArticles loaded.");
+        createScene(loader, "CircuitsCourts - Articles");
+    }
+
+    public void showProdAddArticlesInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddArticles.fxml"));
+        System.out.println("[DEBUG]ProdAddArticles loaded.");
+        createScene(loader, "CircuitsCourts - Ajout d'un article");
+    }
+
+    public void showClientMarketplaceInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/Marketplace.fxml"));
+        System.out.println("[DEBUG]ClientMarketPlace loaded.");
+        createScene(loader, "CircuitsCourts - Marketplace");
+    }
 }

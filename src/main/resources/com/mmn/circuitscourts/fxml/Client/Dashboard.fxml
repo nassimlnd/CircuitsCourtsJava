@@ -45,7 +45,7 @@
                                 </VBox>
                                 <HBox alignment="CENTER" prefHeight="79.0" prefWidth="224.0">
                                     <children>
-                                        <Button prefHeight="32.0" prefWidth="131.0" styleClass="dashboard-welcome-buttonwhite" text="Mes commandes" />
+                                        <Button prefHeight="32.0" prefWidth="131.0" styleClass="dashboard-welcome-buttonwhite" text="Mes commandes" onMouseClicked="#onCommandeButton"/>
                                         <Button prefHeight="32.0" prefWidth="63.0" styleClass="dashboard-welcome-buttonblue" text="Profil">
                                             <HBox.margin>
                                                 <Insets left="25.0" />

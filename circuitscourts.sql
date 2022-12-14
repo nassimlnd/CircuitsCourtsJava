@@ -158,3 +158,23 @@ CREATE TABLE `commande` (
 INSERT INTO `commande` VALUES ('1', 'test', '15', '10', '20', '2', '2', '1');
 INSERT INTO `commande` VALUES ('2', 'test', '15', '10', '20', '2', '2', '1');
 INSERT INTO `commande` VALUES ('11', 'testMArtin', '120', '10', '20', '2', '2', '1');
+
+-- ----------------------------
+-- Table structure for `articles`
+-- ----------------------------
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE `articles` (
+  `idArticle` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `categorie` varchar(20) NOT NULL,
+  `price` double NOT NULL,
+  `weight` double NOT NULL,
+  `numSiret` int(11) NOT NULL,
+  PRIMARY KEY (`idArticle`),
+  KEY `numSi` (`numSiret`),
+  CONSTRAINT `numSi` FOREIGN KEY (`numSiret`) REFERENCES `producteur` (`numSiret`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- ----------------------------
+-- Records of articles
+-- ----------------------------

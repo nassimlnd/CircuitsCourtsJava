@@ -5,6 +5,7 @@ import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 
 public class SidebarController {
 
@@ -16,6 +17,8 @@ public class SidebarController {
     Button tourneeTab;
     @FXML
     Button vehiculesTab;
+    @FXML
+    Button articlesTab;
     @FXML
     Label userName;
     @FXML
@@ -43,6 +46,13 @@ public class SidebarController {
                 break;
             case "CircuitsCourts - Ajout de commande" :
                 commandesTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "CircuitsCourts - Articles" :
+                articlesTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "CircuitsCourts - Ajout d'un article" :
+                articlesTab.getStyleClass().add("sidebar-tab-active");
+                break;
         }
     }
 
@@ -80,4 +90,10 @@ public class SidebarController {
         }
     }
 
+    public void onArticleButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "CircuitsCourts - Articles") {
+            ViewFactory.getInstance().showProdArticlesInterface();
+        }
+    }
 }
