@@ -35,8 +35,8 @@
                             </VBox.margin></Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <ComboBox minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
-                                <TextField maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
+                                <TextField fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
+                                <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
                                     <HBox.margin>
                                         <Insets left="200.0" />
                                     </HBox.margin>
@@ -48,8 +48,8 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <ComboBox minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le client"/>
-                                <TextField minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison">
+                                <ComboBox fx:id="client" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le client" onMouseClicked="#clientInitialize"/>
+                                <TextField fx:id="horaire" minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison">
                                     <HBox.margin>
                                         <Insets left="200.0" />
                                     </HBox.margin>
@@ -59,9 +59,22 @@
                                 <Insets top="25.0" />
                             </VBox.margin>
                         </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ComboBox fx:id="numSiret" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Numéro Siret"/>
+                                <ComboBox fx:id="tournee" minHeight="40.0" minWidth="250.0" promptText="Tournée n°">
+                                    <HBox.margin>
+                                        <Insets left="200.0" />
+                                    </HBox.margin>
+                                </ComboBox>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
+                        </HBox>
                         <HBox alignment="CENTER" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <DatePicker minHeight="40.0" minWidth="250.0" promptText="Selectionner la date"/>
+                                <DatePicker id="datePicker" minHeight="40.0" minWidth="250.0" promptText="Selectionner la date"/>
                             </children>
                             <VBox.margin>
                                 <Insets />
@@ -69,7 +82,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter la commande" onMouseClicked="#onCreateButton" styleClass="addCommandeButton"/>
+                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter la commande" onMouseClicked="#onCreateButton" styleClass="addCommandeButton"/>
                             </children>
                         </HBox>
                     </children>

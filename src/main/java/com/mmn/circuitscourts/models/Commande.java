@@ -36,13 +36,12 @@ public class Commande {
         this.dateCommande = Calendar.getInstance().getTime();
     }
 
-    public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
+    public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
         this.libelle = libelle;
         this.poids = poids;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
-        this.idTournee = idTournee;
         this.numSiret = numSiret;
         this.dateCommande = Calendar.getInstance().getTime();
     }
@@ -142,5 +141,9 @@ public class Commande {
     @Override
     public String toString() {
         return "Commande{" + "numCommande=" + numCommande + ", libelle='" + libelle + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
+    }
+
+    public static void  addCommandeToDb(Commande commande) throws SQLException {
+        cmd.add(commande);
     }
 }

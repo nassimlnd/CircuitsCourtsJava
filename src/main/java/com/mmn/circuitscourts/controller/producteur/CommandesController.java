@@ -19,9 +19,20 @@ public class CommandesController {
     @FXML
     Button addButton;
 
+    @FXML
+    VBox successPopup;
+
+    static VBox popup;
+
+
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitializeByAccountId();
         commandes.forEach(commande -> createLine(commande));
+        popup = successPopup;
+    }
+
+    public static void showSuccessPopUp() {
+        popup.setVisible(true);
     }
 
     public void onAddButton() {
@@ -58,6 +69,9 @@ public class CommandesController {
         });
 
         contentTable.getChildren().add(line);
+    }
+    public void onClosePopup() {
+        successPopup.setVisible(false);
     }
 
 

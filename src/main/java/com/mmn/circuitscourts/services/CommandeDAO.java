@@ -77,15 +77,15 @@ public class CommandeDAO implements DAO<Commande, Integer> {
 
     @Override
     public boolean add(Commande o) throws SQLException {
-        String query2 = "INSERT INTO Commande(libelle, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query2 = "INSERT INTO Commande(libelle, poids, horaireDebut, horaireFin, idClient, numSiret) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = con.prepareStatement(query2);
         pst.setString(1, ((Commande) o).getLibelle());
         pst.setFloat(2, ((Commande) o).getPoids());
         pst.setString(3, ((Commande) o).getHoraireDebut());
         pst.setString(4, ((Commande) o).getHoraireFin());
         pst.setInt(5, ((Commande) o).getIdClient());
-        pst.setInt(6, ((Commande) o).getIdTournee());
-        pst.setInt(7, ((Commande) o).getNumSiret());
+       // pst.setInt(6, ((Commande) o).getIdTournee());
+        pst.setInt(6, ((Commande) o).getNumSiret());
         pst.executeUpdate();
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }

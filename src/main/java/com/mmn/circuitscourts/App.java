@@ -12,7 +12,6 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         ViewFactory viewFactory = new ViewFactory(stage);
         viewFactory.showLoginInterface();
-
         stage.show();
     }
 }

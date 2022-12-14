@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.producteur.AddCommandesProducteur">
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.producteur.AddCommandesController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;">
             <left>
@@ -35,8 +35,8 @@
                      </VBox.margin></Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ComboBox minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
-                        <TextField maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
+                        <TextField fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
+                        <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
                            <HBox.margin>
                               <Insets left="200.0" />
                            </HBox.margin>
@@ -48,20 +48,17 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <ComboBox minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le client"/>
-                        <TextField minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison">
-                           <HBox.margin>
-                              <Insets left="200.0" />
-                           </HBox.margin>
-                        </TextField>
+                         <ComboBox fx:id="client" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le client" onMouseClicked="#clientInitialize"/>
+                        <TextField fx:id="horaire" minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison"/>
                      </children>
                      <VBox.margin>
                         <Insets top="25.0" />
                      </VBox.margin>
                   </HBox>
+                        <TextField fx:id="poids" minHeight="40.0" minWidth="250.0" promptText="poids"/>
                   <HBox alignment="CENTER" minWidth="0.0" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <DatePicker minHeight="40.0" minWidth="250.0" promptText="Selectionner la date"/>
+                        <DatePicker fx:id="date" minHeight="40.0" minWidth="250.0" promptText="Selectionner la date"/>
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -69,7 +66,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter la commande" styleClass="addCommandeButton"/>
+                        <Button minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter la commande" styleClass="addCommandeButton" onMouseClicked="#onCreateButton"/>
                      </children>
                   </HBox>
                     </children>

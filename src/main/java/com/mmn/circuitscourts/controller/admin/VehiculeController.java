@@ -24,8 +24,7 @@ public class VehiculeController {
     }
 
     public void initialize() throws SQLException {
-        Vehicule vehicule = new Vehicule();
-        ArrayList<Vehicule> vehicules = vehicule.getVehiculesInitilize();
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
         for (Vehicule v: vehicules) {
             createLine(v);
         }

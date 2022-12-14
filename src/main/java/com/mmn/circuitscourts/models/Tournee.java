@@ -15,6 +15,7 @@ public class Tournee {
 
     private int numImmat;
 
+
     public Tournee(int id, String horaireDebut, String horaireFin, int numSiret, int numImmat) {
         this.id = id;
         this.horaireDebut = horaireDebut;
@@ -70,7 +71,7 @@ public class Tournee {
         this.numImmat = numImmat;
     }
 
-    public ArrayList<Tournee> getCommandesInitialize() throws SQLException {
+    public  static ArrayList<Tournee> getCommandesInitialize() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAll();
         return tournees;

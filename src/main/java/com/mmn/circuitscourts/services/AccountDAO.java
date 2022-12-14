@@ -110,4 +110,18 @@ public class AccountDAO implements DAO<User,Integer> {
             return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
         } else throw new SQLException("ID introuvable.");
     }
+
+    public ArrayList<User> getAllClient() throws SQLException {
+        String query = "SELECT * FROM accounts WHERE grade = 1";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        ArrayList<User> accountsList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            accountsList.add(new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4)));
+        }
+
+        return accountsList;
+    }
 }

@@ -23,8 +23,7 @@ public class TourneeController {
     }
 
     public void initialize() throws SQLException {
-        Tournee t = new Tournee();
-        ArrayList<Tournee> tournees = t.getCommandesInitialize();
+        ArrayList<Tournee> tournees = Tournee.getCommandesInitialize();
         for (Tournee tournee: tournees) {
             createLine(tournee);
         }
