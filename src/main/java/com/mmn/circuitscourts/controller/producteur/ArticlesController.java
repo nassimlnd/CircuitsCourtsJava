@@ -19,11 +19,8 @@ public class ArticlesController {
     @FXML
     VBox contentTable;
 
-    public void initialize() throws SQLException {
-        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
-        marketplaceDAO.getAll().forEach(article -> {
-            createLine(article);
-        });
+    public void initialize() {
+        Article.getAll().forEach(article -> createLine(article));
     }
 
     public void onAddButton() {

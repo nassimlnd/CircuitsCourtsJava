@@ -16,19 +16,16 @@ public class TourneeController {
 
     @FXML
     Button addButton;
-
     @FXML
     VBox commandeTable;
 
+    public void initialize() throws SQLException {
+        ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByProducteur();
+        tournees.forEach(tournee -> createLine(tournee));
+    }
+
     public void onAddButton() {
         ViewFactory.getInstance().showProducteurAddTourneeInterface();
-    }
-    public void initialize() throws SQLException {
-        Tournee t = new Tournee();
-        ArrayList<Tournee> tournees = t.getCommandesInitializeByProducteur();
-        for (Tournee trn: tournees) {
-            createLine(trn);
-        }
     }
 
     public void createLine(Tournee trn) {

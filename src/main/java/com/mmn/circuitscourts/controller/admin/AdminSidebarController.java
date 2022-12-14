@@ -41,19 +41,37 @@ public class AdminSidebarController {
             case "[ADMIN]CircuitsCourts - Commandes":
                 commandesTab.getStyleClass().add("sidebar-tab-active");
                 break;
+            case "[ADMIN]CircuitsCourts - Ajout d'une commande" :
+                commandesTab.getStyleClass().add("sidebar-tab-active");
+                break;
             case "[ADMIN]CircuitsCourts - Tournées":
+                tourneeTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "[ADMIN]CircuitsCourts - Ajout d'une tournée" :
                 tourneeTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Véhicules":
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Producteur":
+            case "[ADMIN]CircuitsCourts - Ajout d'un véhicule" :
+                vehiculesTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "[ADMIN]CircuitsCourts - Producteurs":
+                producteurTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "[ADMIN]CircuitsCourts - Ajout d'un producteur" :
                 producteurTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Clients":
                 clientTab.getStyleClass().add("sidebar-tab-active");
                 break;
+            case "[ADMIN]CircuitsCourts - Ajout d'un client" :
+                clientTab.getStyleClass().add("sidebar-tab-active");
+                break;
             case "[ADMIN]CircuitsCourts - Comptes":
+                accountsTab.getStyleClass().add("sidebar-tab-active");
+                break;
+            case "[ADMIN]CircuitsCourts - Ajout d'un compte" :
                 accountsTab.getStyleClass().add("sidebar-tab-active");
                 break;
         }
@@ -69,31 +87,52 @@ public class AdminSidebarController {
      * permet de lier à l'event onMouseClicked sur le bouton dashBoard l'action showAdminDashboardInterface()
      */
     public void onDashboardButton() {
-        ViewFactory.getInstance().showAdminDashboardInterface();
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Tableau de bord") {
+            ViewFactory.getInstance().showAdminDashboardInterface();
+        }
     }
 
-    public void onCommandesButton(){
-        ViewFactory.getInstance().showAdminCommandeInterface();
+    public void onCommandesButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Commandes") {
+            ViewFactory.getInstance().showAdminCommandeInterface();
+        }
     }
 
     public void onTourneeButton() {
-        ViewFactory.getInstance().showAdminTourneeInterface();
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Tournées") {
+            ViewFactory.getInstance().showAdminTourneeInterface();
+        }
     }
 
     public void onVehiculesButton() {
-    ViewFactory.getInstance().showAdminVehiculeInterface();
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Véhicules") {
+            ViewFactory.getInstance().showAdminVehiculeInterface();
+        }
     }
 
     public void onProducteurButton() {
-
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Producteurs") {
+            ViewFactory.getInstance().showAdminProducteurInterface();
+        }
     }
 
     public void onClientButton() {
-        ViewFactory.getInstance().showAdminClientInterface();
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Clients") {
+            ViewFactory.getInstance().showAdminClientInterface();
+        }
     }
 
     public void onAccountButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "[ADMIN]CircuitsCourts - Comptes") {
 
+        }
     }
 
 }

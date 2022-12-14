@@ -23,11 +23,8 @@ public class VehiculesController {
     VBox commandeTable;
 
     public void initialize() throws SQLException {
-        Vehicule vehicule = new Vehicule();
-        ArrayList<Vehicule> vehicules = vehicule.getVehiculesInitilize();
-        for (Vehicule v: vehicules) {
-            createLine(v);
-        }
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        vehicules.forEach(vehicule -> createLine(vehicule));
     }
 
     public void createLine(Vehicule v) {

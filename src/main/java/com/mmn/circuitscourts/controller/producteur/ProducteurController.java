@@ -63,8 +63,8 @@ public class ProducteurController {
         svg.setScaleY(scaleY);
     }
 
-    @FXML
-    public void onDisconnectButtonClick() throws IOException {
+
+    /*public void onDisconnectButtonClick() throws IOException {
         disconnectButton.setDisable(true);
         disconnectContainer.setDisable(true);
 
@@ -87,5 +87,5 @@ public class ProducteurController {
         });
         timeline.play();
 
-    }
+    }*/
 }

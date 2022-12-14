@@ -12,9 +12,6 @@ public class Vehicule {
 
     private int numSiret;
 
-    public Vehicule() {
-
-    }
     public Vehicule(String numImmate, int poidsmax) {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
@@ -47,7 +44,7 @@ public class Vehicule {
 
 
 
-    public ArrayList<Vehicule>getVehiculesInitilize() throws SQLException {
+    public static ArrayList<Vehicule>getVehiculesInitilize() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
         ArrayList<Vehicule> vehicules = v.getAll();
         return vehicules;

@@ -25,7 +25,6 @@ public class TourneeController {
     public void initialize() throws SQLException {
         Tournee t = new Tournee();
         ArrayList<Tournee> tournees = t.getCommandesInitialize();
-        System.out.println(tournees);
         for (Tournee tournee: tournees) {
             createLine(tournee);
         }
@@ -63,4 +62,6 @@ public class TourneeController {
     }
 
 
+    public void onClosePopup() {
+    }
 }

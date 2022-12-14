@@ -9,7 +9,7 @@
 
 ### Fonctionnalitées :
 
-- Ajout de producteur
+- Ajout de producteurs
 - Ajout de clients
 - Accès à l'ensembles des tables
 
@@ -30,3 +30,8 @@
 - [ ] Faire une notification lors de l'ajout de la commande
 - [ ] Faire de la pagination pour l'affichage des tournées et des commandes
 - [ ] Faire des tooltips sous les icones de la sidebar de la page de Tournée et Commandes
+
+
+# Idées de fonctionnalités à faire à la fin
+
+- [ ] Switch DarkMode/LightMode

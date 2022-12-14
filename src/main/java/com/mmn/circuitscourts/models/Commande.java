@@ -20,10 +20,9 @@ public class Commande {
     private int idTournee;
     private int numSiret;
     private Date dateCommande;
+    public static CommandeDAO cmd = new CommandeDAO();
+    public AccountDAO account = new AccountDAO();
 
-    public Commande() throws SQLException {
-
-    }
 
     public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
         this.numCommande = numCommande;
@@ -117,9 +116,6 @@ public class Commande {
     }
 
 
-    public static CommandeDAO cmd = new CommandeDAO();
-    public AccountDAO account = new AccountDAO();
-
     /**
      * recupères commandes grâce a la vonction getAll de commandes DAO
      *
@@ -131,30 +127,20 @@ public class Commande {
     }
 
     /**
-     * recupères commandes grâce a la vonction getAll de commandes DAO
+     * Récupère les commandes du producteur depuis la base de données
      *
-     * @return arrayList de commandes, retourne toutes les commades dans la base de données d'un certain producteur
+     * @return arrayList de commandes, retourne toutes les commandes dans la base de données d'un certain producteur
      * @throws SQLException
      */
-    public ArrayList<Commande> getCommandesInitializeByAccountId() throws SQLException {
-        //id du compte connecté
+    public static ArrayList<Commande> getCommandesInitializeByAccountId() throws SQLException {
         int idUser = App.userConnected.getId();
         ArrayList<Commande> commandes = cmd.getAllByProducteur(idUser);
+        System.out.println("[DATABASE]CommandesByAccountID done.");
         return commandes;
-
     }
 
     @Override
     public String toString() {
-        return "Commande{" +
-                "numCommande=" + numCommande +
-                ", libelle='" + libelle + '\'' +
-                ", poids=" + poids +
-                ", horaireDebut='" + horaireDebut + '\'' +
-                ", horaireFin='" + horaireFin + '\'' +
-                ", idClient=" + idClient +
-                ", idTournee=" + idTournee +
-                ", numSiret=" + numSiret +
-                '}';
+        return "Commande{" + "numCommande=" + numCommande + ", libelle='" + libelle + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
     }
 }

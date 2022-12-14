@@ -612,6 +612,66 @@
 
 }
 
+.successPopup {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -4, 0, 4);
+}
+
+.successPopup-indicator {
+    -fx-background-color: #16B364;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-border-radius: 8px 8px 0 0;
+}
+
+.successPopup-img {
+    -icon-paint: #16B364;
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 14;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z";
+}
+
+.successPopup-title {
+    -fx-font: 14px 'Helvetica';
+    -fx-font-weight: 700;
+}
+
+.successPopup-subtitle {
+    -fx-text-fill: #667085;
+    -fx-font: 14px 'Helvetica';
+}
+
+.successPopup-close {
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.successPopup-close:hover {
+    -fx-border-color: black;
+    -fx-border-radius: 4px;
+}
+
+.successPopup-close-img {
+    -icon-paint: #475467;
+    -fx-background-color: -icon-paint;
+    -width-size: 8;
+    -height-size: 8;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z";
+}
+
 .addButton {
     -fx-cursor: hand;
     -fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);

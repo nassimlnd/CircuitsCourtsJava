@@ -20,11 +20,8 @@ public class CommandesController {
     Button addButton;
 
     public void initialize() throws SQLException {
-        Commande c = new Commande();
-        ArrayList<Commande> commandes = c.getCommandesInitializeByAccountId();
-        for (Commande commande: commandes) {
-            createLine(commande);
-        }
+        ArrayList<Commande> commandes = Commande.getCommandesInitializeByAccountId();
+        commandes.forEach(commande -> createLine(commande));
     }
 
     public void onAddButton() {

@@ -1,5 +1,10 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.services.MarketplaceDAO;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class Article {
     private int id;
     private String name;
@@ -60,5 +65,14 @@ public class Article {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public static ArrayList<Article> getAll() {
+        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
+        try {
+            return marketplaceDAO.getAll();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

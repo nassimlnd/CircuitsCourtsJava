@@ -20,6 +20,10 @@ public class CommandeController {
 
     @FXML
     Button addButton;
+    @FXML
+    VBox successPopup;
+
+    static VBox popup;
 
     /**
      * Appel de la méthode du modèle pour récuperer toutes les commande présentes dans la base de données.
@@ -29,6 +33,11 @@ public class CommandeController {
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitialize();
         commandes.forEach(commande -> createLine(commande));
+        popup = successPopup;
+    }
+
+    public static void showSuccessPopUp() {
+        popup.setVisible(true);
     }
 
     /**
@@ -69,6 +78,10 @@ public class CommandeController {
 
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddCommandeInterface();
+    }
+
+    public void onClosePopup() {
+        successPopup.setVisible(false);
     }
 
 

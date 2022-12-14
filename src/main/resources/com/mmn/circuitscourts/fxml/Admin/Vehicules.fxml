@@ -19,11 +19,65 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Label styleClass="main-title" text="Véhicules">
+                        <HBox prefHeight="120.0" prefWidth="871.0">
                             <VBox.margin>
-                                <Insets bottom="75.0" />
+                                <Insets bottom="20.0"/>
                             </VBox.margin>
-                        </Label>
+                            <children>
+                                <Label prefHeight="35.0" prefWidth="142.0" styleClass="main-title" text="Véhicules">
+                                    <HBox.margin>
+                                        <Insets top="30.0"/>
+                                    </HBox.margin>
+                                </Label>
+                                <VBox maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0"
+                                      fx:id="successPopup" styleClass="successPopup" visible="false">
+                                    <HBox.margin>
+                                        <Insets left="325.0"/>
+                                    </HBox.margin>
+                                    <children>
+                                        <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0"
+                                              styleClass="successPopup-indicator"/>
+                                        <HBox prefHeight="120.0" prefWidth="340.0" styleClass="successPopup-container">
+                                            <children>
+                                                <Label prefHeight="17.0" prefWidth="33.0">
+                                                    <padding>
+                                                        <Insets left="10.0" top="17.0"/>
+                                                    </padding>
+                                                    <graphic>
+                                                        <Region styleClass="successPopup-img"/>
+                                                    </graphic>
+                                                </Label>
+                                                <VBox prefHeight="110.0" prefWidth="312.0">
+                                                    <children>
+                                                        <Label styleClass="successPopup-title"
+                                                               text="Véhicule ajoutée !"/>
+                                                        <Label styleClass="successPopup-subtitle"
+                                                               text="Le véhicule immatriculé : X a bien été ajoutée !"/>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets left="15.0" top="15.0"/>
+                                                    </padding>
+                                                </VBox>
+                                                <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
+                                                    <children>
+                                                        <Button mnemonicParsing="false" prefHeight="28.0"
+                                                                prefWidth="28.0" styleClass="successPopup-close"
+                                                                onMouseClicked="#onClosePopup">
+                                                            <graphic>
+                                                                <Region styleClass="successPopup-close-img"/>
+                                                            </graphic>
+                                                            <VBox.margin>
+                                                                <Insets right="15.0" top="20.0"/>
+                                                            </VBox.margin>
+                                                        </Button>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
                         <VBox fx:id="commandeTable" prefHeight="500" prefWidth="950" styleClass="commande-tableview">
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="950" styleClass="commande-tableview-header">
