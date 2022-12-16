@@ -15,20 +15,20 @@ import java.util.function.Function;
 
 public class AccountDAO implements DAO<User,Integer> {
     /**
-     * @param connection connection static renvoyée par la méthode getInstance() qui assure l'unicité de la connection.
+     * @param connection Element statique de type Connection renvoyée par la méthode getInstance() qui assure l'unicité de la connection.
      */
     static Connection connection = ConnectionMySQL.getInstance();
 
     /**
-     * constructeur vide pour pouvoir instancier la classeAccountDAO
+     * Constructeur vide pour pouvoir instancier la classe AccountDAO
      */
     public AccountDAO() {
 
     }
 
     /**
-     * implémentation de la méthode getAll de l'interface DAO.
-     * @return une liste contenant tous les comptes présents dans la base de données
+     * Implémentation de la méthode getAll de l'interface DAO.
+     * @return Une liste contenant tous les comptes présents dans la base de données
      * @throws SQLException
      */
     @Override
@@ -45,9 +45,9 @@ public class AccountDAO implements DAO<User,Integer> {
     }
 
     /**
-     * implémentation de la méthode getById de l'interface DAO. Si l'Id n'est pas trouvé l'erreur "ID introuvable" est lancée
-     * @param id qui est l'Id du compte recherché.
-     * @return l'objet USER instancié avec les données du compte recherché dnas la base de données.
+     * Implémentation de la méthode getById de l'interface DAO. Si l'Id n'est pas trouvé l'erreur "ID introuvable" est lancée
+     * @param id Id du compte recherché.
+     * @return l'objet User instancié avec les données du compte recherché dans la base de données.
      * @throws SQLException
      */
     @Override
@@ -63,9 +63,9 @@ public class AccountDAO implements DAO<User,Integer> {
     }
 
     /**
-     *implémentation de la méthode add de l'interface DAO.
-     * @param user, prend un objet user avec tous ses paramètres que l'on veut ajouter à la base de données.
-     * @return un boolean qui nous indique si l'executeUpdate s'est bien effectuée.
+     * Implémentation de la méthode add de l'interface DAO.
+     * @param user Prends en paramètre un objet user avec tous ses paramètres que l'on veut ajouter à la base de données.
+     * @return un boolean qui nous indique si l'update s'est bien effectuée.
      * @throws SQLException
      */
     @Override
@@ -85,12 +85,12 @@ public class AccountDAO implements DAO<User,Integer> {
     }
 
     /**
-     * implémentation de la méthode update de l'interface DAO.
-     * Modifie dans la base de donnée un Compte particulier.
-     * @param id permet de retrouver l'objet à modifier
+     * Implémentation de la méthode update de l'interface DAO.
+     * Modifie dans la base de donnée un compte.
+     * @param id Id du compte à modifier.
      * @param user un user contenant les nouveaux attributs, l'id du compte reste inchangé.
-     * @returnun boolean qui nous indique si l'executeUpdate s'est bien effectuée.
-     * @throws SQLException
+     * @returnun boolean qui nous indique si l'update s'est bien effectuée.
+     * @throws SQLException Retourne une SQL exception si la requête échoue.
      */
     @Override
     public boolean update(Integer id, User user) throws SQLException {
@@ -105,10 +105,10 @@ public class AccountDAO implements DAO<User,Integer> {
     }
 
     /**
-     * implémentation de la méthode remove de l'interface DAO.
+     * Implémentation de la méthode remove de l'interface DAO.
      * @param id permet de retrouver l'objet à supprimer.
-     * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
-     * @throws SQLException
+     * @return boolean qui nous indique si l'update s'est bien effectuée.
+     * @throws SQLException Retourne une SQLException si la requête échoue.
      */
     @Override
     public boolean remove(Integer id) throws SQLException {
@@ -121,8 +121,8 @@ public class AccountDAO implements DAO<User,Integer> {
 
     /**
      * Retourne le mot de passe correspondant à un nom d'uilisateur.
-     * Si l'identifiant est introuvable dans la base de donnée la méthode lance l'exception "Idnetifiant introuvable".
-     * @param identifiant
+     * Si l'identifiant est introuvable dans la base de donnée la méthode lance l'exception "Identifiant introuvable".
+     * @param identifiant Identifiant du compte à retrouver dans la base de données.
      * @return le mot de passe correspondant à cet identifiant
      * @throws Exception
      */
@@ -157,25 +157,6 @@ public class AccountDAO implements DAO<User,Integer> {
                 return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
             } else throw new SQLException("Problème !");
         } else throw new Exception("Mot de passe incorrect.");
-    }
-
-
-    /**
-     * Renvoie un objet USER instanciée avec les informations appartenant a l'account avec le nom voulu.
-     * Si l'identifiant passé en pramètre est inexistat
-     * @param name
-     * @return un nouvel utilisateur.
-     * @throws SQLException
-     */
-    public User getName(String name) throws SQLException {
-        String query = "SELECT * FROM accounts WHERE identifiant=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, name);
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        if (resultSet.next()) {
-            return new User(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getInt(4));
-        } else throw new SQLException("Identifiant introuvable.");
     }
 
     /**

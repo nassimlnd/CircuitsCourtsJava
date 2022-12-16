@@ -116,9 +116,8 @@ public class Commande {
 
 
     /**
-     * recupères commandes grâce a la vonction getAll de commandes DAO
-     *
-     * @return arrayList de commandes, retourne toutes les commades dans la base de données
+     * Récupère toutes lmes commandes grâce à la fonction getAll de commandes DAO
+     * @return arrayList de commandes, retourne toutes les commandes dans la base de données
      * @throws SQLException
      */
     public static ArrayList<Commande> getCommandesInitialize() throws SQLException {

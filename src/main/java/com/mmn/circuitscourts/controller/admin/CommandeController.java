@@ -14,21 +14,23 @@ import javafx.scene.layout.VBox;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
+/**
+ * Controller qui gère la vue Commandes.fxml
+ */
 public class CommandeController {
     @FXML
     VBox contentTable;
-
     @FXML
     Button addButton;
     @FXML
     VBox successPopup;
-
     static VBox popup;
 
     /**
      * Appel de la méthode du modèle pour récuperer toutes les commande présentes dans la base de données.
      * pour chaque commande créer la ligne correspondante dans la vue Admin.Commandes
-     * @throws SQLException
+     * @throws SQLException si
      */
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitialize();
@@ -36,13 +38,16 @@ public class CommandeController {
         popup = successPopup;
     }
 
+    /**
+     * Affichage de la popup de réussite de l'action.
+     */
     public static void showSuccessPopUp() {
         popup.setVisible(true);
     }
 
     /**
-     * pour une commandé crée dans la vue associée la ligne de la commande spécifique.
-     * @param commande une commande
+     * Création d'une ligne dans le tableau des commandes depuis la commande entrée en paramètre.
+     * @param commande La commande que l'on veut afficher.
      */
     public void createLine(Commande commande) {
         HBox line = new HBox();
@@ -76,10 +81,16 @@ public class CommandeController {
         contentTable.getChildren().add(line);
     }
 
+    /**
+     * Appel l'instance de ViewFactory qui afficheras l'interface d'ajout de commande
+     */
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddCommandeInterface();
     }
 
+    /**
+     * Fonction de fermeture de la popup
+     */
     public void onClosePopup() {
         successPopup.setVisible(false);
     }

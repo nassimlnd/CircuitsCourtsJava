@@ -14,42 +14,44 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Controller qui gère la vue AddCommande.fxml
+ */
 public class AddCommandesController {
 
     @FXML
     TextField article;
-
     @FXML
     TextField quantite;
-
     @FXML
     ComboBox client;
-
     @FXML
     TextField horaire;
-
-    @FXML
-    DatePicker datePicker;
-
-    @FXML
-    Button cmdButton;
-
     @FXML
     ComboBox tournee;
-
     @FXML
     ComboBox numSiret;
 
+    /**
+     * Récupère toutes les informations entrées dans les inputs, et créer une commande avec.
+     * Renvoie sur la page des Commandes et affiche la popup correspondantes à la réussite de l'opération
+     */
     public void onCreateButton() {
         ViewFactory.getInstance().showAdminCommandeInterface();
         CommandeController.showSuccessPopUp();
     }
 
+    /**
+     * Fonction de retour vers la vue précédente.
+     */
     public void onBackButton() {
-
         ViewFactory.getInstance().showAdminCommandeInterface();
     }
 
+    /**
+     * Fonction qui initialise les clients dans la comboBox afin de pouvoir selectionner le client correspondant à la commande.
+     * @throws SQLException Renvoie une exception si la requête échoue.
+     */
     public void clientInitialize() throws SQLException {
         ArrayList<User> lesClients = Client.getClientsInitialize();
         ArrayList<String> names = new ArrayList<>();
