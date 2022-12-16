@@ -63,10 +63,15 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      * @return retoure un boolean qui atteste de la reussite ou non de l'ajout.
      */
     @Override
-    public boolean add(Vehicule vehicule) throws SQLException {
+    public int add(Vehicule vehicule) throws SQLException {
         String query = "INSERT INTO vehicule(numImmat, poids, numSiret) VALUES ('" + vehicule.getNumImmate()+"', "+vehicule.getPoidsMax()+","+ vehicule.getnumSiret()+")";
-        PreparedStatement pst = conn.prepareStatement(query);
-        return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
+        PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        pst.executeUpdate();
+
+        ResultSet resultSet = pst.getGeneratedKeys();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else throw new SQLException("ERREUR ADD VEHICULE");
     }
 
     /**

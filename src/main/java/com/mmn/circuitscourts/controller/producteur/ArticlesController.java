@@ -19,8 +19,28 @@ public class ArticlesController {
     @FXML
     VBox contentTable;
 
+    @FXML
+    VBox successPopup;
+
+    static VBox popup;
+    static Label popupid;
+
+    @FXML
+    Label successPopupId;
+
     public void initialize() {
         Article.getAll().forEach(article -> createLine(article));
+        popup = successPopup;
+        popupid = successPopupId;
+    }
+
+    public static void showSuccessPopUp(int id) {
+        popupid.setText("L'article n°"+id+" a bien été ajoutée !");
+        popup.setVisible(true);
+    }
+
+    public void onClosePopup() {
+        successPopup.setVisible(false);
     }
 
     public void onAddButton() {

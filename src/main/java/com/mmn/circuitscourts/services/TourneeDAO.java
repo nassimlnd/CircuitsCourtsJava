@@ -70,10 +70,15 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
      * @return retoure un boolean qui atteste de la reussite ou non de l'ajout.
      */
     @Override
-    public boolean add(Tournee tournee) throws SQLException {
+    public int add(Tournee tournee) throws SQLException {
         String query = "INSERT INTO tournee(id=" + tournee.getId()+",horairedebut= '"+tournee.getHoraireDebut()+"',horaireFin= '"+tournee.getHoraireFin()+"'";
         PreparedStatement pst = conn.prepareStatement(query);
-        return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
+        pst.executeUpdate();
+
+        ResultSet resultSet = pst.getGeneratedKeys();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else throw new SQLException("ERREUR ADD TOURNEE");
 
     }
 

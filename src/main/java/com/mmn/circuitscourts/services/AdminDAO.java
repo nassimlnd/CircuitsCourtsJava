@@ -71,7 +71,7 @@ public class AdminDAO implements DAO<Administrateur, Integer> {
         return new Administrateur(idAdmin, nom, adresse, numTel);
     }
 
-    public boolean add(Administrateur admin) throws SQLException {
+    public int add(Administrateur admin) throws SQLException {
         PreparedStatement pst = null;
         String nom = admin.getNom();
         String adresse = admin.getAdresse();
@@ -80,7 +80,11 @@ public class AdminDAO implements DAO<Administrateur, Integer> {
         pst.setString(1, nom);
         pst.setString(2, adresse);
         pst.executeUpdate();
-        return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
+
+        ResultSet resultSet = pst.getGeneratedKeys();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else throw new SQLException("ERREUR ADD ADMIN");
     }
 
     /**

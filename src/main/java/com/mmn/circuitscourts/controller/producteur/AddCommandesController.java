@@ -29,7 +29,6 @@ public class AddCommandesController {
     public void onCreateButton() throws SQLException {
         String[] idClient = client.getValue().split("-");
         int id = Integer.parseInt(idClient[0]);
-        int idUser = App.userConnected.getId();
         Commande c = new Commande(article.getText(), Integer.parseInt(poids.getText()),horaire.getText(), horaire.getText(), id, 1 );
         CommandesController.showSuccessPopUp();
         c.addCommandeToDb(c);
