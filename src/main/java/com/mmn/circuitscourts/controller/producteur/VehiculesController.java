@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -22,8 +23,10 @@ public class VehiculesController {
     @FXML
     VBox commandeTable;
 
+
+
     public void initialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilizeByid();
         vehicules.forEach(vehicule -> createLine(vehicule));
     }
 
@@ -54,5 +57,8 @@ public class VehiculesController {
     }
     public void onAddButton() {
         ViewFactory.getInstance().showProducteurAddVehiculeInterface();
+    }
+
+    public void onClosePopup(MouseEvent mouseEvent) {
     }
 }

@@ -24,6 +24,7 @@
                                 <Insets bottom="75.0" />
                             </VBox.margin>
                         </Label>
+
                         <VBox fx:id="commandeTable" prefHeight="500" prefWidth="950" styleClass="commande-tableview">
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="950" styleClass="commande-tableview-header">

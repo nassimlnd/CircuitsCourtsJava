@@ -16,7 +16,6 @@
                 <fx:include source="Sidebar.fxml"/>
             </left>
             <center>
-
             </center>
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -27,6 +26,7 @@
                             </graphic>
                         </Button>
                     </children>
+
                     <BorderPane.margin>
                         <Insets/>
                     </BorderPane.margin>

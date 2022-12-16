@@ -6,6 +6,6 @@ import javafx.scene.input.MouseEvent;
 public class AddTourneesController {
 
     public void onBackButton(MouseEvent mouseEvent) {
-        ViewFactory.getInstance().showAdminTourneeInterface();
+        ViewFactory.getInstance().showProdTourneeInterface();
     }
 }

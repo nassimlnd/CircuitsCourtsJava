@@ -50,6 +50,16 @@ public class AddCommandesController {
         ViewFactory.getInstance().showAdminCommandeInterface();
     }
 
+    public void clientInitialize() throws SQLException {
+        ArrayList<User> lesClients = Client.getClientsInitialize();
+        ArrayList<String> names = new ArrayList<>();
+        for (User u : lesClients) {
+            names.add(u.getId()+"-"+u.getIdentifiant());
+        }
+        System.out.println(names);
+        client.getItems().addAll(names);
+        client.setValue(names.get(0));
+    }
 
 
 

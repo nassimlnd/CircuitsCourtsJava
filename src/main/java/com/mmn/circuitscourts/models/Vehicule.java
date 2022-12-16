@@ -1,6 +1,8 @@
 package com.mmn.circuitscourts.models;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.services.AccountDAO;
+import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.services.VehiculeDAO;
 
 import java.sql.SQLException;
@@ -12,11 +14,21 @@ public class Vehicule {
 
     private int numSiret;
 
-    public Vehicule(String numImmate, int poidsmax) {
+    public static VehiculeDAO vehiculeDAO;
+
+    static {
+        try {
+            vehiculeDAO = new VehiculeDAO();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Vehicule(String numImmate, int poidsmax) throws SQLException {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
     }
-    public Vehicule(String numImmate, int poidsmax, int numSiret) {
+    public Vehicule(String numImmate, int poidsmax, int numSiret) throws SQLException {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
@@ -54,6 +66,22 @@ public class Vehicule {
         VehiculeDAO v = new VehiculeDAO();
         int idUser = App.userConnected.getId();
         ArrayList<Vehicule> vehicules = v.getAllByProducteur(idUser);
+        return vehicules;
+    }
+
+    public static void addVehiculeToDb(Vehicule v) throws SQLException {
+        vehiculeDAO.add(v);
+    }
+
+    public static int getNumSiretConnected() throws SQLException {
+       int numSiretConnected = vehiculeDAO.getNumSiretConnected(App.userConnected.getId());
+       return numSiretConnected;
+    }
+
+    public static ArrayList<Vehicule>getVehiculesInitilizeByid() throws SQLException {
+        int id = App.userConnected.getId();
+        VehiculeDAO v = new VehiculeDAO();
+        ArrayList<Vehicule> vehicules = v.getAllByProducteur(id);
         return vehicules;
     }
 }

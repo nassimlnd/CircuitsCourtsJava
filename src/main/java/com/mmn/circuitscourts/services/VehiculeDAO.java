@@ -64,7 +64,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean add(Vehicule vehicule) throws SQLException {
-        String query = "INSERT INTO vehicule(numImmat='" + vehicule.getNumImmate()+"',poidsMax= "+vehicule.getPoidsMax();
+        String query = "INSERT INTO vehicule(numImmat, poids, numSiret) VALUES ('" + vehicule.getNumImmate()+"', "+vehicule.getPoidsMax()+","+ vehicule.getnumSiret()+")";
         PreparedStatement pst = conn.prepareStatement(query);
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
@@ -116,5 +116,16 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
             vehicules.add(new Vehicule(numImmat,poidsMax));
         }
         return vehicules;
+    }
+
+    public int getNumSiretConnected(int idUser) throws SQLException {
+        String query = "SELECT DISTINCT Vehicule.numSiret FROM Vehicule INNER JOIN Producteur ON Vehicule.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + idUser;
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(query);
+        if(rs.next()){
+            int numSiret = rs.getInt(1);
+            return numSiret;
+        }
+        throw new SQLException("numSiret introuvable");
     }
 }
