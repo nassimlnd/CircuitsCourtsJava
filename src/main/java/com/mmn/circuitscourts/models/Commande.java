@@ -10,7 +10,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Classe Commande sert à créer l'objet Commande.
+ */
 public class Commande {
+    /**
+     * tous les attributs qui constituent la commande.
+     */
     private int numCommande;
     private String libelle;
     private float poids;
@@ -20,10 +26,23 @@ public class Commande {
     private int idTournee;
     private int numSiret;
     private Date dateCommande;
+    /**
+     * instanciation statique de CommandeDAO pour avoir acces au méthodes de la classe CommandeDAO.
+     */
     public static CommandeDAO cmd = new CommandeDAO();
-    public AccountDAO account = new AccountDAO();
 
-
+    /**
+     * Constructeur avec le numCommande.
+     * @param numCommande
+     * @param libelle
+     * @param poids
+     * @param horaireDebut
+     * @param horaireFin
+     * @param idClient
+     * @param idTournee
+     * @param numSiret
+     * @throws SQLException
+     */
     public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
         this.numCommande = numCommande;
         this.libelle = libelle;
@@ -36,6 +55,16 @@ public class Commande {
         this.dateCommande = Calendar.getInstance().getTime();
     }
 
+    /**
+     * constructeur sans numCommande.
+     * @param libelle
+     * @param poids
+     * @param horaireDebut
+     * @param horaireFin
+     * @param idClient
+     * @param numSiret
+     * @throws SQLException
+     */
     public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
         this.libelle = libelle;
         this.poids = poids;
@@ -116,7 +145,7 @@ public class Commande {
 
 
     /**
-     * Récupère toutes lmes commandes grâce à la fonction getAll de commandes DAO
+     * Récupère toutes les commandes grâce à la fonction getAll de commandes DAO
      * @return arrayList de commandes, retourne toutes les commandes dans la base de données
      * @throws SQLException
      */
@@ -141,6 +170,11 @@ public class Commande {
         return "Commande{" + "numCommande=" + numCommande + ", libelle='" + libelle + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
     }
 
+    /**
+     * fonction qui via CommandeDao apelle la méthode add().
+     * @param commande
+     * @throws SQLException
+     */
     public static void  addCommandeToDb(Commande commande) throws SQLException {
         cmd.add(commande);
     }

@@ -158,6 +158,11 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 
+    /**
+     * Compte le nombre de commandes d'un compte producteur.
+     * @return le nombre de commande appartenant au compte.
+     * @throws Exception
+     */
     public int countById() throws Exception {
         String query = "SELECT COUNT(*) FROM commande INNER JOIN producteur ON commande.numSiret = producteur.numSiret INNER JOIN accounts ON producteur.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
         Statement statement = con.createStatement();
