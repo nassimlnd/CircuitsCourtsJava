@@ -30,17 +30,20 @@ public interface DAO<T,T1>{
         /**
          * permet de  rajouter dans la BD un objet en particulier
          * @param t, l'objet à ajouter en quesion.
+         * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
          */
         public boolean add(T t) throws SQLException;
         /**
          * Permet de modifier dans la BD un objet t particulier.
          * @param id permet de retrouver l'objet à modifier
+         * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
          */
         public boolean update(T1 id, T t) throws SQLException;
 
         /**
          * Permet de supprimer un objet t de la BD
          * @param id permet de retrouver l'objet à supprimer
+         * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
          */
         public boolean remove(T1 id) throws SQLException;
 

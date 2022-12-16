@@ -6,16 +6,28 @@ import com.mmn.circuitscourts.models.Commande;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * @author  martin
+ * @author nassim
+ */
 public class CommandeDAO implements DAO<Commande, Integer> {
     /**
      * @param con, connection avec la BD;
      */
     private Connection con;
 
+    /**
+     * constructeur qui permet d'établir une connection avec la base de donnée. la méthode getInstance est utilisée pour assurer l'uncité de la connection.
+     */
     public CommandeDAO() {
         this.con = ConnectionMySQL.getInstance();
     }
 
+    /**
+     * implémentation de la méthode getAll de l'interface DAO.
+     * @return une liste contenant toutes les commandes présents dans la base de données
+     * @throws SQLException
+     */
     @Override
     public ArrayList<Commande> getAll() throws SQLException {
         String query = "SELECT * FROM commande";
@@ -44,7 +56,12 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         return result;
     }
 
-
+    /**
+     * implémentation de la méthode getById de l'interface DAO.
+     * @return la Commande correspondante au numéro voulu.
+     * @param numCommande est le numéro de commande.
+     * @throws SQLException
+     */
     @Override
     public Commande getById(Integer numCommande) throws SQLException {
         String query = "SELECT * FROM commande WHERE numCommande=?";
@@ -75,6 +92,13 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         throw new SQLException();
     }
 
+    /**
+     * Implémentation de la méthode add de l'interface DAO.
+     * Prend la commande avec tous ses paramètres que l'on veut ajouter à la base de données.
+     * @param o, la commande.
+     * @return un boolean qui nous indique si l'executeUpdate s'est bien effectuée.
+     * @throws SQLException
+     */
     @Override
     public boolean add(Commande o) throws SQLException {
         String query2 = "INSERT INTO Commande(libelle, poids, horaireDebut, horaireFin, idClient, numSiret) VALUES (?, ?, ?, ?, ?, ?)";
@@ -90,6 +114,14 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 
+    /**
+     * implémentation de la méthode update de l'interface DAO.
+     * Modifie dans la base de donnée une commande en particulier.
+     * @param numCommande permet de retrouver la à modifier
+     * @param o est la commande contenant les nouveaux attributs que l'on veut modifier dans la base de données.
+     * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
+     * @throws SQLException
+     */
     @Override
     public boolean update(Integer numCommande, Commande o) throws SQLException {
         String libelle = ((Commande) o).getLibelle();
@@ -112,6 +144,12 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 
+    /**
+     * Permer de suprimmer de la base de données  une commande en particulier.
+     * @param numCommande permet de retrouver la commande à supprimer
+     * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
+     * @throws SQLException
+     */
     @Override
     public boolean remove(Integer numCommande) throws SQLException {
         String query = "DELETE  FROM Commande WHERE numCommande=" + numCommande;
@@ -130,6 +168,12 @@ public class CommandeDAO implements DAO<Commande, Integer> {
     }
 
 
+    /**
+     * Permet de recuperer toutes les commandes appartenant à un prducteur.
+     * @param accountId est l'id du compte du producteur.
+     * @return ArrayLis contenant toutes les commandes appartenant au producteur voulu.
+     * @throws SQLException
+     */
     public ArrayList<Commande> getAllByProducteur(int accountId) throws SQLException {
         String query = "SELECT * FROM  commande INNER JOIN Producteur ON Commande.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + accountId;
         Statement st = con.createStatement();

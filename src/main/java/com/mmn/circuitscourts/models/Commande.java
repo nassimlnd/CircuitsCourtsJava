@@ -127,7 +127,6 @@ public class Commande {
 
     /**
      * Récupère les commandes du producteur depuis la base de données
-     *
      * @return arrayList de commandes, retourne toutes les commandes dans la base de données d'un certain producteur
      * @throws SQLException
      */
