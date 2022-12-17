@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.views;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.controller.client.NewCommandeController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -174,11 +175,25 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/Marketplace.fxml"));
         System.out.println("[DEBUG]ClientMarketPlace loaded.");
         createScene(loader, "CircuitsCourts - Marketplace");
+
     }
 
     public void showAdminProducteurInterface() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Producteur.fxml"));
         System.out.println("[DEBUG]AdminProducteur loaded.");
         createScene(loader, "[ADMIN]CircuitsCourts - Producteurs");
+    }
+
+    public void showClientProfilInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/Profil.fxml"));
+        System.out.println("[DEBUG]ClientProfil loaded.");
+        createScene(loader, "CircuitsCourts - Profil");
+    }
+
+    public void showClientNewCommandeInterface(int id) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/NewCommande.fxml"));
+        System.out.println("[DEBUG]ClientNewCommande loaded.");
+        NewCommandeController.articleId = id;
+        createScene(loader, "CircuitsCourts - Nouvelle commande");
     }
 }

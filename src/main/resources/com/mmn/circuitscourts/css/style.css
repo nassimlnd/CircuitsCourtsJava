@@ -1,6 +1,6 @@
 @font-face {
-    -fx-font-family: 'Inter';
-    src: local('Inter'), url("../fonts/Inter-Regular.ttf");
+    -fx-font-family: Inter;
+    src: url("../fonts/Inter-Regular.ttf");
 }
 
 @font-face {
@@ -802,6 +802,8 @@
 }
 
 .text-field {
+    -fx-cursor: text;
+    -fx-padding: 8px 16px;
     -fx-background-color: white;
     -fx-border-width: 1px;
     -fx-border-style: solid;
@@ -818,6 +820,24 @@
 
 .text-field:focused {
     -fx-border-color: linear-gradient(from 0.0% 0.0% to 100.0% 0.0%, #2970FF 0.2%, #0040C1 99.99%);
+}
+
+.text-field-error {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.text-field-error:hover {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
+}
+
+.text-field-error:focused {
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: red;
 }
 
 /* Marketplace */
@@ -926,4 +946,60 @@
     -fx-max-width: -width-size;
 
     -fx-shape: "M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48z";
+}
+
+.loading-container {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -2, 0, 4);
+}
+
+.loading-title {
+    -fx-font: 14px 'Helvetica';
+    -fx-font-weight: 700;
+}
+
+/* Profil */
+.profil-img {
+    -icon-paint: black;
+    -fx-background-color: -icon-paint;
+    -width-size: 90;
+    -height-size: 90;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z";
+}
+
+.profil-username {
+    -fx-text-fill: #101828;
+    -fx-font-weight: 600;
+    -fx-font-size: 16;
+}
+
+.profil-grade {
+    -fx-font-size: 14;
+    -fx-text-fill: #667085;
+}
+
+.profil-container {
+    -fx-border-radius: 8px;
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #EAECF0;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -2, 0, 4);
+}
+
+.profil-container-header {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 8px 8px 0 0;
+}
+
+.profil-container-header-title {
+    -fx-font-size: 14;
+    -fx-text-fill: #475467;
 }

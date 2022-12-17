@@ -83,11 +83,14 @@ public class AddArticlesController {
         FileChooser fC = new FileChooser();
         file = fC.showOpenDialog(ViewFactory.getInstance().getMainStage());
 
-        Image image1 = new Image(file.toURI().toURL().toString());
-        ImageView imageView = new ImageView(image1);
-        imageView.setFitHeight(200);
-        imageView.setFitWidth(200);
-        imageContainer.getChildren().add(imageView);
+        if (file != null) {
+            Image image1 = new Image(file.toURI().toURL().toString());
+            ImageView imageView = new ImageView(image1);
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(200);
+            imageContainer.getChildren().clear();
+            imageContainer.getChildren().add(imageView);
+        }
     }
 
     public void onCreate() throws SQLException, FileNotFoundException {

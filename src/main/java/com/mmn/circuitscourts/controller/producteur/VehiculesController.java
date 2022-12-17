@@ -23,11 +23,26 @@ public class VehiculesController {
     @FXML
     VBox commandeTable;
 
+    @FXML
+    VBox successPopup;
+
+    @FXML
+    Label popupSubtitle;
+    static VBox popup;
+    static Label popupId;
+
 
 
     public void initialize() throws SQLException {
         ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilizeByid();
         vehicules.forEach(vehicule -> createLine(vehicule));
+        popup = successPopup;
+        popupId = popupSubtitle;
+    }
+
+    public static void showSuccessPopUp(String id) {
+        popup.setVisible(true);
+        popupId.setText("Le véhicule immatriculé : " + id +" a bien été ajoutée !");
     }
 
     public void createLine(Vehicule v) {
@@ -59,6 +74,7 @@ public class VehiculesController {
         ViewFactory.getInstance().showProducteurAddVehiculeInterface();
     }
 
-    public void onClosePopup(MouseEvent mouseEvent) {
+    public void onClosePopup() {
+        popup.setVisible(false);
     }
 }

@@ -4,54 +4,66 @@ import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.services.ImageDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class MarketplaceController {
+public class NewCommandeController {
 
+    public static int articleId = 0;
     @FXML
-    VBox lineContainer;
-
+    VBox articleContainer;
     @FXML
-    HBox tagsContainer;
+    TextField tfQuantity;
     @FXML
-    VBox loadingContainer;
+    Label totalPrice;
 
-    public void initialize() throws SQLException {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
+
+    public void initialize() throws SQLException, IOException {
+        articleContainer.getChildren().add(createArticle(articleId));
+        tfQuantity.textProperty().addListener((observableValue, s, t1) -> {
+            if (!t1.equals("")) {
+                tfQuantity.getStyleClass().clear();
+                tfQuantity.getStyleClass().add("text-field");
                 try {
-                    showAllTags();
-                    showAllArticles();
-                    loadingContainer.setVisible(false);
+                    Double.parseDouble(t1);
+                    totalPrice.setText("Prix total : " + calculTotalPrice(articleId, Integer.parseInt(t1)) + " €");
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
+                } catch (NumberFormatException e) {
+                    tfQuantity.getStyleClass().clear();
+                    tfQuantity.getStyleClass().add("text-field");
+                    tfQuantity.getStyleClass().add("text-field-error");
                 }
             }
         });
-
     }
 
-    /**
-     * Méthode créant un article dans la vue du Marketplace
-     *
-     * @return
-     */
-    public VBox createArticle(Article a) throws IOException, SQLException {
+    public double calculTotalPrice(int articleId, int quantity) throws SQLException {
+        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
+        Article article = marketplaceDAO.getById(articleId);
+        return article.getPrice() * quantity;
+    }
+
+    public VBox createArticle(int id) throws SQLException, IOException {
+        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
+        Article a = null;
+        try {
+            a = marketplaceDAO.getById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
         VBox article = new VBox();
         article.setMaxHeight(414);
         article.setPrefHeight(414);
@@ -116,9 +128,7 @@ public class MarketplaceController {
 
         /* Button commander */
         Button commanderButton = new Button("Commander");
-        commanderButton.setOnMouseClicked(mouseEvent -> {
-            ViewFactory.getInstance().showClientNewCommandeInterface(a.getId());
-        });
+        commanderButton.setDisable(true);
         commanderButton.setMnemonicParsing(false);
         commanderButton.getStyleClass().add("marketplace-article-button");
         articleBottom.getChildren().add(commanderButton);
@@ -138,89 +148,7 @@ public class MarketplaceController {
         tags.getChildren().add(tag);
     }
 
-    public HBox createLine() {
-        HBox articleLine = new HBox();
-        articleLine.setAlignment(Pos.CENTER_LEFT);
-        articleLine.setMinHeight(420);
-        articleLine.setPrefHeight(420);
-        articleLine.setPrefWidth(934);
-        articleLine.setPadding(new Insets(15, 40, 0, 10));
-        VBox.setMargin(articleLine, new Insets(20, 0, 0, 0));
-        return articleLine;
+    public void onBackButton() {
+        ViewFactory.getInstance().showClientMarketplaceInterface();
     }
-
-    public Button createTag(String tagName) {
-        Button tag = new Button(tagName);
-        tag.getStyleClass().add("marketplace-tag");
-        tag.setOnMouseClicked(mouseEvent -> {
-            Platform.runLater(() -> {
-                try {
-                    showArticleByTag(tagName);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            tag.getStyleClass().add("marketplace-tag-active");
-        });
-        HBox.setMargin(tag, new Insets(0, 5, 0, 0));
-        return tag;
-    }
-
-    public void showAllArticles() throws SQLException {
-        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
-        ArrayList<Article> articles = marketplaceDAO.getAll();
-        ArrayList<HBox> lines = new ArrayList<>();
-
-        int numberLines = 0;
-        if (articles.size() < 3) {
-            numberLines = 1;
-        } else if (articles.size() % 3 == 0) {
-            numberLines = articles.size() / 3;
-        } else {
-            numberLines = (articles.size() / 3) + 1;
-        }
-
-        for (int i = 0; i < numberLines; i++) {
-            lines.add(createLine());
-        }
-
-        articles.forEach(article -> {
-            int index = articles.indexOf(article);
-            int indexLine = (index / 3);
-            try {
-                lines.get(indexLine).getChildren().add(createArticle(article));
-            } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
-
-        lines.forEach(hBox -> {
-            lineContainer.getChildren().add(hBox);
-        });
-
-    }
-
-    public void showAllTags() throws SQLException {
-        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
-        ArrayList<String> tagsName = marketplaceDAO.getAllTags();
-        ArrayList<Button> tags = new ArrayList<>();
-
-        tagsName.forEach(tag -> {
-            tags.add(createTag(tag));
-        });
-
-        tags.forEach(tag -> {
-            tagsContainer.getChildren().add(tag);
-        });
-    }
-
-    public void showArticleByTag(String tagName) throws SQLException {
-        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
-        ArrayList<Article> articles = marketplaceDAO.getByTag(tagName);
-    }
-
 }

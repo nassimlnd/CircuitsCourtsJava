@@ -42,7 +42,12 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
 
     @Override
     public Article getById(Integer id) throws SQLException {
-        return null;
+        String query = "SELECT * FROM articles WHERE idArticle = "+id;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        if (resultSet.next()) {
+            return new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getInt(7));
+        } else throw new SQLException("ID INTROUVABLE");
     }
 
     @Override
@@ -72,5 +77,18 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
     @Override
     public boolean remove(Integer id) throws SQLException {
         return false;
+    }
+
+    public ArrayList<Article> getByTag(String tagName) throws SQLException {
+        String query = "SELECT * FROM articles WHERE categorie=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, tagName);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ArrayList<Article> articles = new ArrayList<>();
+        while (resultSet.next()) {
+            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getInt(7)));
+        }
+        return articles;
     }
 }

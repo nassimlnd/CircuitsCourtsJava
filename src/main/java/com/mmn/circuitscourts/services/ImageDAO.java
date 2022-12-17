@@ -53,10 +53,11 @@ public class ImageDAO {
                     Files.createDirectories(Path.of(Paths.get("").toAbsolutePath().toString() + File.separator + "data"));
                 }
                 OutputStream outputStream = new FileOutputStream(new File("data"+File.separator+"img"+id+ext));
-                int b = 0;
+                inputStream.transferTo(outputStream);
+                /*int b = 0;
                 while ((b = inputStream.read()) > -1) {
                     outputStream.write(b);
-                }
+                }*/
             }
         }
     }
