@@ -19,7 +19,7 @@ public class ClientDAO implements DAO<Client, Integer> {
         ResultSet resultSet = statement.executeQuery(query);
         ArrayList<Client> clients = new ArrayList<>();
         while (resultSet.next()) {
-            clients.add(new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4)));
+            clients.add(new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5)));
         }
         return clients;
     }
@@ -31,7 +31,7 @@ public class ClientDAO implements DAO<Client, Integer> {
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4));
+            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5));
         } else throw new SQLException("ID INTROUVABLE");
     }
 
@@ -58,5 +58,16 @@ public class ClientDAO implements DAO<Client, Integer> {
     @Override
     public boolean remove(Integer id) throws SQLException {
         return false;
+    }
+
+    public Client getByAccountId(int accountId) throws SQLException {
+        String query = "SELECT * FROM client WHERE accountId = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, accountId);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5));
+        } else throw new SQLException("ACCOUNTID INTROUVABLE.");
     }
 }

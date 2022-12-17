@@ -12,8 +12,8 @@ import java.util.Date;
 
 public class Commande {
     private int numCommande;
-    private String libelle;
-    private float poids;
+    private int articleId;
+    private double poids;
     private String horaireDebut;
     private String horaireFin;
     private int idClient;
@@ -24,26 +24,28 @@ public class Commande {
     public AccountDAO account = new AccountDAO();
 
 
-    public Commande(int numCommande, String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
+    public Commande(int numCommande, int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
         this.numCommande = numCommande;
-        this.libelle = libelle;
+        this.articleId = articleId;
         this.poids = poids;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
         this.idTournee = idTournee;
         this.numSiret = numSiret;
-        this.dateCommande = Calendar.getInstance().getTime();
     }
 
-    public Commande(String libelle, float poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
-        this.libelle = libelle;
+    public Commande(int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
+        this.articleId = articleId;
         this.poids = poids;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
         this.numSiret = numSiret;
         this.dateCommande = Calendar.getInstance().getTime();
+
+        CommandeDAO commandeDAO = new CommandeDAO();
+        this.numCommande = commandeDAO.add(this);
     }
 
     public int getNumCommande() {
@@ -54,19 +56,18 @@ public class Commande {
         this.numCommande = numCommande;
     }
 
-    public String getLibelle() {
-        return libelle;
+    public int getArticleId() {
+        return articleId;
     }
 
-    public void setLibelle(String libelle) {
-        this.libelle = libelle;
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
     }
-
-    public float getPoids() {
+    public double getPoids() {
         return poids;
     }
 
-    public void setPoids(float poids) {
+    public void setPoids(double poids) {
         this.poids = poids;
     }
 
@@ -140,7 +141,7 @@ public class Commande {
 
     @Override
     public String toString() {
-        return "Commande{" + "numCommande=" + numCommande + ", libelle='" + libelle + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
+        return "Commande{" + "numCommande=" + numCommande + ", articleId='" + articleId + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
     }
 
     public static void  addCommandeToDb(Commande commande) throws SQLException {

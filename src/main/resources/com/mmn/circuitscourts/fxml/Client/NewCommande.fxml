@@ -38,8 +38,10 @@
                         <VBox alignment="CENTER" minWidth="400" prefHeight="200" prefWidth="400" spacing="33.0">
                            <children>
                               <TextField fx:id="tfQuantity" maxWidth="250" prefHeight="40" promptText="Quantité" />
-                              <Label fx:id="totalPrice" styleClass="main-title" text="Prix total : " />
-                              <Button minHeight="40.0" mnemonicParsing="false" prefWidth="132.0" styleClass="addCommandeButton" text="Commander" />
+                              <TextField fx:id="tfHoraireDebut" maxWidth="250" prefHeight="40" promptText="Horaire de début" />
+                              <TextField fx:id="tfHoraireFin" maxWidth="250" prefHeight="40" promptText="Horaire de fin" />
+                              <Label fx:id="totalPrice" styleClass="marketplace-article-title" text="Prix total : " />
+                              <Button minHeight="40.0" mnemonicParsing="false" prefWidth="132.0" styleClass="addCommandeButton" text="Commander" onMouseClicked="#onCreate"/>
                            </children>
                         </VBox>
                      </children>

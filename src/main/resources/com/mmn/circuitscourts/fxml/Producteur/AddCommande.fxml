@@ -35,7 +35,7 @@
                      </VBox.margin></Label>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
+                        <ComboBox fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
                         <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
                            <HBox.margin>
                               <Insets left="200.0" />

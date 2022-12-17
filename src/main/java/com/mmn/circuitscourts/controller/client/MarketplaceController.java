@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -29,8 +30,13 @@ public class MarketplaceController {
     HBox tagsContainer;
     @FXML
     VBox loadingContainer;
+    @FXML
+    VBox successPopup;
+    static VBox popup;
+
 
     public void initialize() throws SQLException {
+        popup = successPopup;
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -297,4 +303,14 @@ public class MarketplaceController {
         loadingContainer.setVisible(false);
     }
 
+    public static void showFailPopup(String message) {
+    }
+
+    public static void showSuccessPopup() {
+        popup.setVisible(true);
+    }
+
+    public void onClosePopup() {
+        popup.setVisible(false);
+    }
 }

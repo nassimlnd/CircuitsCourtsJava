@@ -53,12 +53,12 @@ public class CommandeController {
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
-        Label libelle = new Label(commande.getLibelle());
+        Label articleId = new Label(String.valueOf(commande.getArticleId()));
         Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
         Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
         Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
         labels.add(numCommande);
-        labels.add(libelle);
+        labels.add(articleId);
         labels.add(poids);
         labels.add(horaire);
         labels.add(dateCommande);

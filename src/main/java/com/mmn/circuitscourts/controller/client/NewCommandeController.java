@@ -1,6 +1,10 @@
 package com.mmn.circuitscourts.controller.client;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Article;
+import com.mmn.circuitscourts.models.Client;
+import com.mmn.circuitscourts.models.Commande;
+import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.services.ImageDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
@@ -25,6 +29,10 @@ public class NewCommandeController {
     VBox articleContainer;
     @FXML
     TextField tfQuantity;
+    @FXML
+    TextField tfHoraireDebut;
+    @FXML
+    TextField tfHoraireFin;
     @FXML
     Label totalPrice;
 
@@ -150,5 +158,24 @@ public class NewCommandeController {
 
     public void onBackButton() {
         ViewFactory.getInstance().showClientMarketplaceInterface();
+    }
+
+    public void onCreate() {
+        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
+        ClientDAO clientDAO = new ClientDAO();
+        Client client = null;
+        Article article = null;
+        try {
+            article = marketplaceDAO.getById(articleId);
+            client = clientDAO.getByAccountId(App.userConnected.getId());
+            int quantity = Integer.parseInt(tfQuantity.getText());
+            Double weight = article.getWeight() * quantity;
+            new Commande(article.getId(), weight, tfHoraireDebut.getText(), tfHoraireFin.getText(), client.getId(), article.getNumSiret());
+        } catch (SQLException e) {
+            ViewFactory.getInstance().showClientMarketplaceInterface();
+            MarketplaceController.showFailPopup(e.getMessage());
+        }
+        ViewFactory.getInstance().showClientMarketplaceInterface();
+        MarketplaceController.showSuccessPopup();
     }
 }
