@@ -74,6 +74,7 @@ public class ClientSidebarController {
     }
 
     public void onCommandesButton() {
+        ViewFactory.getInstance().showClientCommandesInterface();
     }
 
     public void onAdressesButton() {

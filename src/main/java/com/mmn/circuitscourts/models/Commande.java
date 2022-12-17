@@ -35,30 +35,28 @@ public class Commande {
     /**
      * Constructeur avec le numCommande.
      * @param numCommande
-     * @param libelle
+     * @param articleId
      * @param poids
      * @param horaireDebut
      * @param horaireFin
      * @param idClient
-     * @param idTournee
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int numCommande, int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret) throws SQLException {
+    public Commande(int numCommande, int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
         this.numCommande = numCommande;
         this.articleId = articleId;
         this.poids = poids;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
-        this.idTournee = idTournee;
         this.numSiret = numSiret;
     }
 
 
     /**
      * constructeur sans numCommande.
-     * @param libelle
+     * @param articleId
      * @param poids
      * @param horaireDebut
      * @param horaireFin

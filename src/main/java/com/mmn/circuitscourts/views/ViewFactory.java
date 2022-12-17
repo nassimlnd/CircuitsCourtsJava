@@ -1,15 +1,14 @@
 package com.mmn.circuitscourts.views;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.controller.client.CommandeInfoController;
 import com.mmn.circuitscourts.controller.client.NewCommandeController;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 /**
  * Les méthodes show() servent à créer insstancier nouvelle scène depuis un fichier FXML.
@@ -195,5 +194,18 @@ public class ViewFactory {
         System.out.println("[DEBUG]ClientNewCommande loaded.");
         NewCommandeController.articleId = id;
         createScene(loader, "CircuitsCourts - Nouvelle commande");
+    }
+
+    public void showClientCommandesInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/Commandes.fxml"));
+        System.out.println("[DEBUG]ClientCommandes loaded.");
+        createScene(loader, "CircuitsCourts - Mes commandes");
+    }
+
+    public void showClientCommandesInfoInterface(int id) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Client/CommandeInfo.fxml"));
+        System.out.println("[DEBUG]ClientCommandeInfo loaded.");
+        CommandeInfoController.commandeId = id;
+        createScene(loader, "CircuitsCourts - Commande n°" + id);
     }
 }

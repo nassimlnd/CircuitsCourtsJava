@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.client.CommandesController">
+    <children>
+        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
+            <left>
+                <fx:include source="Sidebar.fxml" />
+            </left>
+            <center>
+
+            </center>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label styleClass="main-title" text="Mes commandes" />
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="50.0" />
+               </BorderPane.margin>
+                <VBox fx:id="commandeTable" prefHeight="500" prefWidth="950.0" styleClass="commande-tableview">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="871.0" styleClass="commande-tableview-header">
+                            <children>
+                                <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Numéro">
+                                    <HBox.margin>
+                                        <Insets left="40.0" />
+                                    </HBox.margin>
+                                </Label>
+                                <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Article" />
+                                <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids" />
+                                <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire" />
+                                <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Date de commande" />
+                            </children>
+                            <padding>
+                                <Insets right="40.0" />
+                            </padding>
+                        <VBox.margin>
+                           <Insets />
+                        </VBox.margin>
+                        </HBox>
+                        <ScrollPane prefHeight="444.0" prefWidth="869.0">
+                            <content>
+                                <VBox fx:id="contentTable" style="-fx-background-color: white;">
+                                    <children>
+
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                  <VBox.margin>
+                     <Insets top="60.0" />
+                  </VBox.margin>
+                </VBox>
+            </VBox>
+         </center>
+        </BorderPane>
+    </children>
+</StackPane>

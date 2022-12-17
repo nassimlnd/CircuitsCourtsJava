@@ -1003,3 +1003,127 @@
     -fx-font-size: 14;
     -fx-text-fill: #475467;
 }
+
+.client-commande-tableview-line {
+    -fx-cursor: hand;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #EAECF0;
+}
+
+.client-commande-tableview-line:hover {
+    -fx-background-color: #EAECF0;
+}
+
+.client-commande-tableview-line:pressed {
+
+}
+
+.client-commande-state-title {
+    -fx-font-size: 16;
+    -fx-font-weight: 700;
+}
+
+.client-commande-state {
+    -fx-background-color: #EAECF0;
+    -fx-background-radius: 50%;
+    -fx-border-width: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #EAECF0;
+    -fx-border-radius: 50%;
+}
+
+.client-commande-state-done {
+    -fx-background-color: #E1FBEA;
+    -fx-background-radius: 50%;
+    -fx-border-width: 20px;
+    -fx-border-style: solid;
+    -fx-border-color: #E1FBEA;
+    -fx-border-radius: 50%;
+}
+
+.client-commande-first-state-img {
+    -icon-paint: #667085;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 24;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+}
+
+.client-commande-first-state-img-done {
+    -icon-paint: #099250;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 24;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z";
+}
+
+.client-commande-second-state-img {
+    -icon-paint: #667085;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 24;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M256 512C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z";
+}
+
+.client-commande-second-state-img-done {
+    -icon-paint: #099250;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 24;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M256 512C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z";
+}
+
+.client-commande-third-state-img {
+    -icon-paint: #667085;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 24;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z";
+}
+
+.client-commande-third-state-img-done {
+    -icon-paint: #099250;
+    -fx-background-color: -icon-paint;
+    -width-size: 24;
+    -height-size: 20;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z";
+}
+
+.client-commande-details-line {
+    -fx-border-color: #EAECF0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-style: solid;
+}
+
+.client-commande-details-line-title {
+    -fx-text-fill: #667085;
+}

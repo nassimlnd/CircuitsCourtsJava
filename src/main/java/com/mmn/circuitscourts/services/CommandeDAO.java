@@ -43,7 +43,9 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int idClient = resultSet.getInt(6);
             int idTournee = resultSet.getInt(7);
             int numSiret = resultSet.getInt(8);
-            result.add(new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret));
+            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
+            commande.setIdTournee(idTournee);
+            result.add(commande);
         }
         return result;
     }
@@ -51,7 +53,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
     /**
      * implémentation de la méthode getById de l'interface DAO.
      * @return la Commande correspondante au numéro voulu.
-     * @param numCommande est le numéro de commande.
+     * @param id est le numéro de commande.
      * @throws SQLException
      */
     @Override
@@ -69,7 +71,9 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int idClient = resultSet.getInt(6);
             int idTournee = resultSet.getInt(7);
             int numSiret = resultSet.getInt(8);
-            return new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret);
+            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
+            commande.setIdTournee(idTournee);
+            return commande;
         }
         //TODO : créer exception pour spécifier si on ne trouve pas d'admin avec cet id (exception 1)
         throw new SQLException();
@@ -78,7 +82,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
     /**
      * Implémentation de la méthode add de l'interface DAO.
      * Prend la commande avec tous ses paramètres que l'on veut ajouter à la base de données.
-     * @param o, la commande.
+     * @param commande, la commande.
      * @return un boolean qui nous indique si l'executeUpdate s'est bien effectuée.
      * @throws SQLException
      */
@@ -104,7 +108,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      * implémentation de la méthode update de l'interface DAO.
      * Modifie dans la base de donnée une commande en particulier.
      * @param numCommande permet de retrouver la à modifier
-     * @param o est la commande contenant les nouveaux attributs que l'on veut modifier dans la base de données.
+     * @param commande est la commande contenant les nouveaux attributs que l'on veut modifier dans la base de données.
      * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
      * @throws SQLException
      */
@@ -172,8 +176,25 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int idClient = resultSet.getInt(6);
             int idTournee = resultSet.getInt(7);
             int numSiret = resultSet.getInt(8);
-            result.add(new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, idTournee, numSiret));
+            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
+            commande.setIdTournee(idTournee);
+            result.add(commande);
         }
         return result;
+    }
+
+    public ArrayList<Commande> getByClientId(int clientId) throws SQLException {
+        String query = "SELECT * FROM commande WHERE idClient=?";
+        PreparedStatement preparedStatement = con.prepareStatement(query);
+        preparedStatement.setInt(1, clientId);
+
+        ArrayList<Commande> commandes = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Commande commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6), resultSet.getInt(8));
+            commande.setIdTournee(resultSet.getInt(7));
+            commandes.add(commande);
+        }
+        return commandes;
     }
 }
