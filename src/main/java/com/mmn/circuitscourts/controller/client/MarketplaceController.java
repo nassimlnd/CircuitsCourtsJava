@@ -151,18 +151,28 @@ public class MarketplaceController {
 
     public Button createTag(String tagName) {
         Button tag = new Button(tagName);
+        tag.setMinHeight(24);
+        tag.setPadding(new Insets(0, 5, 0, 5));
         tag.getStyleClass().add("marketplace-tag");
+        HBox.setMargin(tag, new Insets(0, 5, 0, 0));
         tag.setOnMouseClicked(mouseEvent -> {
+            loadingContainer.setVisible(true);
             Platform.runLater(() -> {
                 try {
+                    tagsContainer.getChildren().forEach(node -> {
+                        if (node instanceof Button) {
+                            node.getStyleClass().clear();
+                            node.getStyleClass().add("marketplace-tag");
+                        }
+                    });
+                    tag.getStyleClass().add("marketplace-tag-active");
                     showArticleByTag(tagName);
+                    loadingContainer.setVisible(false);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
             });
-            tag.getStyleClass().add("marketplace-tag-active");
         });
-        HBox.setMargin(tag, new Insets(0, 5, 0, 0));
         return tag;
     }
 
@@ -209,6 +219,34 @@ public class MarketplaceController {
         ArrayList<String> tagsName = marketplaceDAO.getAllTags();
         ArrayList<Button> tags = new ArrayList<>();
 
+        Button tagAll = new Button("Tout");
+        tagAll.setMinHeight(24);
+        tagAll.setPadding(new Insets(0, 5, 0, 5));
+        tagAll.getStyleClass().add("marketplace-tag");
+        tagAll.getStyleClass().add("marketplace-tag-active");
+        HBox.setMargin(tagAll, new Insets(0, 5, 0, 0));
+        tagAll.setOnMouseClicked(mouseEvent -> {
+            loadingContainer.setVisible(true);
+            Platform.runLater(() -> {
+                try {
+                    tagsContainer.getChildren().forEach(node -> {
+                        if (node instanceof Button) {
+                            node.getStyleClass().clear();
+                            node.getStyleClass().add("marketplace-tag");
+                        }
+                    });
+                    tagAll.getStyleClass().add("marketplace-tag-active");
+                    lineContainer.getChildren().clear();
+                    showAllArticles();
+                    loadingContainer.setVisible(false);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        });
+
+        tags.add(tagAll);
+
         tagsName.forEach(tag -> {
             tags.add(createTag(tag));
         });
@@ -219,8 +257,44 @@ public class MarketplaceController {
     }
 
     public void showArticleByTag(String tagName) throws SQLException {
+        loadingContainer.setVisible(true);
         MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
         ArrayList<Article> articles = marketplaceDAO.getByTag(tagName);
+        ArrayList<HBox> lines = new ArrayList<>();
+
+        lineContainer.getChildren().clear();
+
+        int numberLines = 0;
+        if (articles.size() < 3) {
+            numberLines = 1;
+        } else if (articles.size() % 3 == 0) {
+            numberLines = articles.size() / 3;
+        } else {
+            numberLines = (articles.size() / 3) + 1;
+        }
+
+        for (int i = 0; i < numberLines; i++) {
+            lines.add(createLine());
+        }
+
+        articles.forEach(article -> {
+            int index = articles.indexOf(article);
+            int indexLine = (index / 3);
+            try {
+                lines.get(indexLine).getChildren().add(createArticle(article));
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        lines.forEach(hBox -> {
+            lineContainer.getChildren().add(hBox);
+        });
+        loadingContainer.setVisible(false);
     }
 
 }
