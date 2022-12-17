@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;"
+           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mmn.circuitscourts.controller.client.ProfilController">
+    <children>
+        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
+            <left>
+                <fx:include source="Sidebar.fxml"/>
+            </left>
+            <center>
+
+            </center>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox alignment="CENTER" minHeight="220.0" prefHeight="200.0" prefWidth="100.0">
+                            <children>
+                                <Label alignment="CENTER" minHeight="90.0" minWidth="90.0" styleClass="profil-img"/>
+                                <Label fx:id="labelUsername" styleClass="profil-username" text="Username">
+                                    <VBox.margin>
+                                        <Insets top="20.0"/>
+                                    </VBox.margin>
+                                </Label>
+                                <Label fx:id="labelGrade" styleClass="profil-grade" text="Grade">
+                                    <VBox.margin>
+                                        <Insets top="5.0"/>
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" minHeight="450.0" prefHeight="100.0" prefWidth="200.0"
+                              spacing="30.0">
+                            <children>
+                                <VBox maxHeight="445.0" minHeight="445.0" minWidth="430.0" prefHeight="200.0"
+                                      prefWidth="100.0" styleClass="profil-container">
+                                    <children>
+                                        <VBox alignment="CENTER_LEFT" minHeight="56.0"
+                                              styleClass="profil-container-header">
+                                            <children>
+                                                <Label styleClass="profil-container-header-title"
+                                                       text="Données personnelles"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0"/>
+                                            </padding>
+                                        </VBox>
+                                        <VBox styleClass="profil-container-content">
+                                            <children>
+
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox maxHeight="445.0" minWidth="431.0" prefHeight="200.0" prefWidth="100.0"
+                                      styleClass="profil-container">
+                                    <children>
+                                        <VBox alignment="CENTER_LEFT" minHeight="56"
+                                              styleClass="profil-container-header">
+                                            <children>
+                                                <Label styleClass="profil-container-header-title"
+                                                       text="Photo de profil"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0"/>
+                                            </padding>
+                                        </VBox>
+                                        <VBox styleClass="profil-container-content">
+                                            <children>
+
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="40.0" left="30.0" right="30.0" top="40.0"/>
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</StackPane>

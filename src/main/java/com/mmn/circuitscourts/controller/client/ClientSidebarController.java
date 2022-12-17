@@ -67,6 +67,10 @@ public class ClientSidebarController {
     }
 
     public void onProfilButton() {
+        String title = ViewFactory.getInstance().getMainStage().getTitle();
+        if (title != "CircuitsCourts - Profil") {
+            ViewFactory.getInstance().showClientProfilInterface();
+        }
     }
 
     public void onCommandesButton() {

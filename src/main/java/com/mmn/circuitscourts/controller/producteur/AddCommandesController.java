@@ -18,8 +18,10 @@ import java.util.ArrayList;
 public class AddCommandesController {
 
     @FXML
-    TextField article, quantite, horaire, poids;
+    TextField quantite, horaire, poids;
 
+    @FXML
+    ComboBox article;
     @FXML
     ComboBox<String> client;
 
@@ -29,8 +31,7 @@ public class AddCommandesController {
     public void onCreateButton() throws SQLException {
         String[] idClient = client.getValue().split("-");
         int id = Integer.parseInt(idClient[0]);
-        int idUser = App.userConnected.getId();
-        Commande c = new Commande(article.getText(), Integer.parseInt(poids.getText()),horaire.getText(), horaire.getText(), id, 1 );
+        Commande c = new Commande(0, Integer.parseInt(poids.getText()),horaire.getText(), horaire.getText(), id, 1 );
         CommandesController.showSuccessPopUp();
         c.addCommandeToDb(c);
         ViewFactory.getInstance().showProdCommandesInterface();

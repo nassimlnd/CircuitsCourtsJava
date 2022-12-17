@@ -1,5 +1,9 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.services.AccountDAO;
+
+import java.sql.SQLException;
+
 /**
  * Classe réprésentant un utilisateur donc un account dans la base de donneés.
  */
@@ -10,10 +14,13 @@ public class User {
     private String password;
     private int grade;
 
-    public User(String identifiant, String password, int grade) {
+    public User(String identifiant, String password, int grade) throws SQLException {
         this.identifiant = identifiant;
         this.password = password;
         this.grade = grade;
+
+        AccountDAO accountDAO = new AccountDAO();
+        this.id = accountDAO.add(this);
     }
 
     public User(int id, String identifiant, String password, int grade) {

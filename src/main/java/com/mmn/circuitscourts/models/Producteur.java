@@ -1,4 +1,5 @@
 package com.mmn.circuitscourts.models;
+
 import com.mmn.circuitscourts.App;
 
 import java.util.ArrayList;
@@ -10,16 +11,16 @@ public class Producteur {
     private String adresse;
     private String numTel;
     private String coordonneesGps;
+    private int accountId;
 
-    public Producteur(int numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps) {
+    public Producteur(int numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps, int accountId) {
         this.numSiret = numSiret;
         this.proprietaire = proprietaire;
         this.adresse = adresse;
         this.numTel = numTel;
         this.coordonneesGps = coordonneesGps;
+        this.accountId = accountId;
     }
-
-
 
     public int getNumSiret() {
         return numSiret;
@@ -53,5 +54,12 @@ public class Producteur {
         this.coordonneesGps = coordonneesGps;
     }
 
+    public int getAccountId() {
+        return accountId;
     }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
+    }
+}
 

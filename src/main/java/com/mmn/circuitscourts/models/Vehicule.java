@@ -32,6 +32,7 @@ public class Vehicule {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
+        vehiculeDAO.add(this);
     }
 
     public String getNumImmate() {
@@ -69,9 +70,6 @@ public class Vehicule {
         return vehicules;
     }
 
-    public static void addVehiculeToDb(Vehicule v) throws SQLException {
-        vehiculeDAO.add(v);
-    }
 
     public static int getNumSiretConnected() throws SQLException {
        int numSiretConnected = vehiculeDAO.getNumSiretConnected(App.userConnected.getId());
@@ -79,9 +77,8 @@ public class Vehicule {
     }
 
     public static ArrayList<Vehicule>getVehiculesInitilizeByid() throws SQLException {
-        int id = App.userConnected.getId();
         VehiculeDAO v = new VehiculeDAO();
-        ArrayList<Vehicule> vehicules = v.getAllByProducteur(id);
+        ArrayList<Vehicule> vehicules = v.getAllByProducteur(App.userConnected.getId());
         return vehicules;
     }
 }

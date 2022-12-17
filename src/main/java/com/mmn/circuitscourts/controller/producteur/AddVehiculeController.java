@@ -24,7 +24,7 @@ public class AddVehiculeController {
     public void onCreateButton() throws SQLException {
         int numSiret = Vehicule.getNumSiretConnected();
         Vehicule v = new Vehicule(String.valueOf(numImmat.getText()), Integer.parseInt(poids.getText()), numSiret);
-        Vehicule.addVehiculeToDb(v);
         ViewFactory.getInstance().showProdVehiculesInterface();
+        VehiculesController.showSuccessPopUp(v.getNumImmate());
     }
 }

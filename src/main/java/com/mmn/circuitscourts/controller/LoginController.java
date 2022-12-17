@@ -49,12 +49,14 @@ public class LoginController {
                 if (checkIdInput(t1)) {
                     textField.getStyleClass().clear();
                     textField.getStyleClass().add("login-input");
-                    if (checkIdInput(passwordField.getText())) {
+                    if (checkPasswordInput(passwordField.getText())) {
                         button.setDisable(false);
-                        System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
+                        //System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
                     }
                 } else {
                     button.setDisable(true);
+                    textField.getStyleClass().clear();
+                    textField.getStyleClass().add("login-input");
                     textField.getStyleClass().add("login-input-error");
                 }
             }
@@ -66,9 +68,9 @@ public class LoginController {
                 if (checkPasswordInput(t1)) {
                     passwordField.getStyleClass().clear();
                     passwordField.getStyleClass().add("password-input");
-                    if (checkPasswordInput(textField.getText())) {
+                    if (checkIdInput(textField.getText())) {
                         button.setDisable(false);
-                        System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
+                        //System.out.println("ID : " + textField.getText() + "\nPassword : " + passwordField.getText());
                     }
                 } else {
                     button.setDisable(true);
@@ -82,7 +84,7 @@ public class LoginController {
         textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (keyEvent.getCode() == KeyCode.ENTER && checkIdInput(textField.getText()) && checkPasswordInput(passwordField.getText())) {
                     onLogin();
                 }
             }
@@ -90,7 +92,7 @@ public class LoginController {
         passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode() == KeyCode.ENTER) {
+                if (keyEvent.getCode() == KeyCode.ENTER && checkIdInput(textField.getText()) && checkPasswordInput(passwordField.getText())) {
                     onLogin();
                 }
             }

@@ -69,7 +69,7 @@ public class AccountDAO implements DAO<User,Integer> {
      * @throws SQLException
      */
     @Override
-    public boolean add(User user) throws SQLException {
+    public int add(User user) throws SQLException {
         String query = "INSERT INTO accounts(identifiant, password, grade) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, user.getIdentifiant());
@@ -79,9 +79,8 @@ public class AccountDAO implements DAO<User,Integer> {
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
         if (resultSet.next()) {
-            user.setId(resultSet.getInt(1));
-        }
-        return Boolean.valueOf(String.valueOf(preparedStatement.executeUpdate()));
+            return resultSet.getInt(1);
+        } else throw new RuntimeException();
     }
 
     /**

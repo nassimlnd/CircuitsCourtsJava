@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.services.ImageDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 
 import java.sql.SQLException;
@@ -9,22 +10,38 @@ public class Article {
     private int id;
     private String name;
     private String categorie;
+    private String description;
     private double price;
     private double weight;
+    private int imageId;
+    private int numSiret;
 
-    public Article(String name, String categorie, double price, double weight) {
+    public Article(String name, String categorie, String description, double price, double weight, int imageId, int numSiret) {
         this.name = name;
         this.categorie = categorie;
+        this.description = description;
         this.price = price;
         this.weight = weight;
+        this.imageId = imageId;
+        this.numSiret = numSiret;
+
+        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
+        try {
+            this.id = marketplaceDAO.add(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public Article(int id, String name, String categorie, double price, double weight) {
+    public Article(int id, String name, String categorie, String description, double price, double weight, int imageId, int numSiret) {
         this.id = id;
         this.name = name;
         this.categorie = categorie;
+        this.description = description;
         this.price = price;
         this.weight = weight;
+        this.imageId = imageId;
+        this.numSiret = numSiret;
     }
 
     public int getId() {
@@ -51,8 +68,16 @@ public class Article {
         this.categorie = categorie;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public double getPrice() {
-        return price;
+        return this.price;
     }
 
     public void setPrice(double price) {
@@ -65,6 +90,22 @@ public class Article {
 
     public void setWeight(double weight) {
         this.weight = weight;
+    }
+
+    public int getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
+    }
+
+    public int getNumSiret() {
+        return numSiret;
+    }
+
+    public void setNumSiret(int numSiret) {
+        this.numSiret = numSiret;
     }
 
     public static ArrayList<Article> getAll() {
