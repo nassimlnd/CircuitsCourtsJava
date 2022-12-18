@@ -166,6 +166,11 @@ public class Commande {
         return commandes;
     }
 
+    public static Commande getCommandeById(int numCommande) throws SQLException {
+        Commande temp = cmd.getById(numCommande);
+        return temp;
+    }
+
     @Override
     public String toString() {
         return "Commande{" + "numCommande=" + numCommande + ", articleId='" + articleId + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
@@ -176,7 +181,7 @@ public class Commande {
      * @param commande
      * @throws SQLException
      */
-    public static void  addCommandeToDb(Commande commande) throws SQLException {
+    public static void addCommandeToDb(Commande commande) throws SQLException {
         cmd.add(commande);
     }
 }

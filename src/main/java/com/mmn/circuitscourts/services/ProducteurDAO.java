@@ -2,10 +2,7 @@ package com.mmn.circuitscourts.services;
 
 import com.mmn.circuitscourts.models.Producteur;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ProducteurDAO implements DAO<Producteur, Integer>{
@@ -13,7 +10,15 @@ public class ProducteurDAO implements DAO<Producteur, Integer>{
     static Connection connection = ConnectionMySQL.getInstance();
     @Override
     public ArrayList<Producteur> getAll() throws SQLException {
-        return null;
+        String query = "SELECT * FROM producteur";
+        Statement st = connection.createStatement();
+        ResultSet resultSet = st.executeQuery(query);
+        ArrayList<Producteur> producteurs = new ArrayList<>();
+        ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
+        while (resultSet.next()){
+            producteurs.add(new Producteur(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
+        }
+        return producteurs;
     }
 
     @Override

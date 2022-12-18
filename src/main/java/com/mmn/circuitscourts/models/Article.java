@@ -1,8 +1,5 @@
 package com.mmn.circuitscourts.models;
-
-import com.mmn.circuitscourts.services.ImageDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,6 +30,7 @@ public class Article {
         }
     }
 
+    public static MarketplaceDAO article = new MarketplaceDAO();
     public Article(int id, String name, String categorie, String description, double price, double weight, int imageId, int numSiret) {
         this.id = id;
         this.name = name;
@@ -116,4 +114,5 @@ public class Article {
             throw new RuntimeException(e);
         }
     }
+
 }

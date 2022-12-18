@@ -114,16 +114,15 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      */
     @Override
     public boolean update(Integer numCommande, Commande commande) throws SQLException {
-        String query = "UPDATE Commande SET articleId=?, poids=?, horaireDebut=?, horaireFin=?, idClient=?, idTournee=?, numSiret=? WHERE numCommande =?";
+        String query = "UPDATE Commande SET articleId=?, poids=?, horaireDebut=?, horaireFin=?, idClient=?, numSiret=? WHERE numCommande =?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setInt(1, commande.getArticleId());
         pst.setDouble(2, commande.getPoids());
         pst.setString(3, commande.getHoraireDebut());
         pst.setString(4, commande.getHoraireFin());
         pst.setInt(5, commande.getIdClient());
-        pst.setInt(6, commande.getIdTournee());
-        pst.setInt(7, commande.getNumSiret());
-        pst.setInt(8, commande.getNumCommande());
+        pst.setInt(6, commande.getNumSiret());
+        pst.setInt(7, commande.getNumCommande());
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 

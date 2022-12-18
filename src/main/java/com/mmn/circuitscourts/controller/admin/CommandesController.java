@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -35,7 +36,13 @@ public class CommandesController {
      */
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitialize();
-        commandes.forEach(commande -> createLine(commande));
+        commandes.forEach(commande -> {
+            try {
+                createLine(commande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         popup = successPopup;
     }
 
@@ -50,7 +57,7 @@ public class CommandesController {
      * Création d'une ligne dans le tableau des commandes depuis la commande entrée en paramètre.
      * @param commande La commande que l'on veut afficher.
      */
-    public void createLine(Commande commande) {
+    public void createLine(Commande commande) throws SQLException {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
@@ -59,7 +66,7 @@ public class CommandesController {
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
-        Label articleId = new Label(String.valueOf(commande.getArticleId()));
+        Label articleId = new Label(String.valueOf(getArticle(commande).getName()));
         Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
         Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
         Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
@@ -97,7 +104,11 @@ public class CommandesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-
+            try {
+                onDelete((commande.getNumCommande()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         line.getChildren().add(edit);
@@ -106,7 +117,7 @@ public class CommandesController {
     }
 
     /**
-     * Appel l'instance de ViewFactory qui afficheras l'interface d'ajout de commande
+     * Appel l'instance de ViewFactory qui affichera l'interface d'ajout de commande
      */
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddCommandeInterface();
@@ -128,4 +139,22 @@ public class CommandesController {
     }
 
 
+    private  void onDelete(int numCommande) throws SQLException {
+        Commande.cmd.remove(numCommande);
+        System.out.println("[DEBUG]Commande deleted");
+        contentTable.getChildren().clear();
+        ArrayList<Commande> commandes = Commande.getCommandesInitialize();
+        commandes.forEach(commande -> {
+            try {
+                createLine(commande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public Article getArticle(Commande c) throws SQLException {
+        Article a = Article.article.getById(c.getArticleId());
+        return a;
+    }
 }

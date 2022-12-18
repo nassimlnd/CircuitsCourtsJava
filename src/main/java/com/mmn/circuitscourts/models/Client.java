@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.models;
 
 import com.mmn.circuitscourts.services.AccountDAO;
+import com.mmn.circuitscourts.services.ClientDAO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ public class Client extends Personne{
     private int id;
 
     private int accountId;
+
+    public static ClientDAO client = new ClientDAO();
 
     public Client(String nom, String adresse, String numTel) {
         super(nom, adresse, numTel);
@@ -36,4 +39,6 @@ public class Client extends Personne{
     public void setId(int id) {
         this.id = id;
     }
+
+
 }
