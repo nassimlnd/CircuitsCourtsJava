@@ -3,6 +3,7 @@ package com.mmn.circuitscourts.controller.admin;
 import com.mmn.circuitscourts.models.Client;
 import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.User;
+import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class AddCommandesController {
      */
     public void onCreateButton() {
         ViewFactory.getInstance().showAdminCommandeInterface();
-        CommandeController.showSuccessPopUp();
+        CommandesController.showSuccessPopUp();
     }
 
     /**
@@ -53,15 +54,17 @@ public class AddCommandesController {
      * @throws SQLException Renvoie une exception si la requête échoue.
      */
     public void clientInitialize() throws SQLException {
-        ArrayList<User> lesClients = Client.getClientsInitialize();
+        ClientDAO clientDAO = new ClientDAO();
+        ArrayList<Client> lesClients = clientDAO.getAll();
         ArrayList<String> names = new ArrayList<>();
-        for (User u : lesClients) {
-            names.add(u.getId()+"-"+u.getIdentifiant());
+        for (Client client : lesClients) {
+            names.add(client.getId()+"-"+client.getNom());
         }
-        System.out.println(names);
         client.getItems().addAll(names);
         client.setValue(names.get(0));
     }
+
+
 
 
 

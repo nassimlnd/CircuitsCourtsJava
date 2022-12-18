@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.controller.client;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -15,6 +16,10 @@ public class ClientController {
     }
 
     public void onCommandeButton() {
+        ViewFactory.getInstance().showClientCommandesInterface();
+    }
 
+    public void onProfilButton() {
+        ViewFactory.getInstance().showClientProfilInterface();
     }
 }

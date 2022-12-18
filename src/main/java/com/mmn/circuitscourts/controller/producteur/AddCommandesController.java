@@ -5,6 +5,7 @@ import com.mmn.circuitscourts.controller.producteur.CommandesController;
 import com.mmn.circuitscourts.models.Client;
 import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.User;
+import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,10 +42,11 @@ public class AddCommandesController {
      * prend l'id du client et le concatène avec le nom de ce client pour mettre dans la ComboBox;
      */
     public void clientInitialize() throws SQLException {
-        ArrayList<User> lesClients = Client.getClientsInitialize();
+        ClientDAO clientDAO = new ClientDAO();
+        ArrayList<Client> lesClients = clientDAO.getAll();
         ArrayList<String> names = new ArrayList<>();
-        for (User u : lesClients) {
-            names.add(u.getId()+"-"+u.getIdentifiant());
+        for (Client client : lesClients) {
+            names.add(client.getId()+"-"+client.getNom());
         }
         System.out.println(names);
         client.getItems().addAll(names);

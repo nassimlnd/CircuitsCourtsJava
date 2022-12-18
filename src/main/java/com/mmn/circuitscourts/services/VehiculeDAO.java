@@ -129,4 +129,15 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         }
         throw new SQLException("numSiret introuvable");
     }
+
+    public boolean exists(Vehicule vehicule) throws SQLException {
+        String query = "SELECT * FROM vehicule WHERE numImmat=?";
+        PreparedStatement preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, vehicule.getNumImmate());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return true;
+        } else return false;
+    }
 }

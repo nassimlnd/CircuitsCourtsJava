@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Producteur {
     private int numSiret;
-
     private Proprietaire proprietaire;
     private String adresse;
     private String numTel;
@@ -60,6 +59,14 @@ public class Producteur {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
+    }
+
+    public Proprietaire getProprietaire() {
+        return proprietaire;
+    }
+
+    public void setProprietaire(Proprietaire proprietaire) {
+        this.proprietaire = proprietaire;
     }
 }
 

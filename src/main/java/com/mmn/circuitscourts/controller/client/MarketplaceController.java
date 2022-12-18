@@ -76,7 +76,7 @@ public class MarketplaceController {
 
         ImageDAO imageDAO = new ImageDAO();
         ImageView imageView = new ImageView(imageDAO.getImage(a.getImageId(), ".png"));
-        imageView.setFitWidth(200);
+        imageView.setFitWidth(230);
         imageView.setFitHeight(200);
 
         imageContainer.getChildren().add(imageView);

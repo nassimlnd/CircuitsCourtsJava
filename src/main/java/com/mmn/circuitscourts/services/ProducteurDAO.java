@@ -18,7 +18,16 @@ public class ProducteurDAO implements DAO<Producteur, Integer>{
 
     @Override
     public Producteur getById(Integer id) throws SQLException {
-        return null;
+        String query = "SELECT * FROM producteur WHERE numSiret=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
+
+        if (resultSet.next()) {
+            return new Producteur(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+        } else throw new SQLException("NUMSIRET INTROUVABLE");
     }
 
     @Override

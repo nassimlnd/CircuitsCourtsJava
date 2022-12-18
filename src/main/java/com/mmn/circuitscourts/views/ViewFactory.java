@@ -3,6 +3,7 @@ package com.mmn.circuitscourts.views;
 import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.controller.client.CommandeInfoController;
 import com.mmn.circuitscourts.controller.client.NewCommandeController;
+import com.mmn.circuitscourts.controller.producteur.EditCommandeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -207,5 +208,19 @@ public class ViewFactory {
         System.out.println("[DEBUG]ClientCommandeInfo loaded.");
         CommandeInfoController.commandeId = id;
         createScene(loader, "CircuitsCourts - Commande n°" + id);
+    }
+
+    public void showProdEditCommandeInterface(int id) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditCommande.fxml"));
+        System.out.println("[DEBUG]ProdEditCommande loaded.");
+        EditCommandeController.commandeId = id;
+        createScene(loader, "CircuitsCourts - Modification de la commande n°" + id);
+    }
+
+    public void showAdminEditCommandeInterface(int numCommande) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditCommande.fxml"));
+        System.out.println("[ADMIN]AdminEditCommande loaded.");
+        com.mmn.circuitscourts.controller.admin.EditCommandeController.commandeId = numCommande;
+        createScene(loader, "CircuitsCourts - Modification de la commande n°" + numCommande);
     }
 }

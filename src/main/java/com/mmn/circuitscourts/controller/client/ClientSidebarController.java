@@ -50,6 +50,13 @@ public class ClientSidebarController {
             case "CircuitsCourts - Ouvrir un ticket" :
                 ticketTab.getStyleClass().add("sidebar-tab-active");
                 break;
+            case "CircuitsCourts - Nouvelle commande" :
+                marketplaceTab.getStyleClass().add("sidebar-tab-active");
+                break;
+        }
+
+        if (title.contains("CircuitsCourts - Commande n°")) {
+            commandesTab.getStyleClass().add("sidebar-tab-active");
         }
     }
 
@@ -60,29 +67,28 @@ public class ClientSidebarController {
     }
 
     public void onDashboardButton() {
-        String title = ViewFactory.getInstance().getMainStage().getTitle();
-        if (title != "CircuitsCourts - Tableau de bord") {
+        if (!dashboardTab.getStyleClass().contains("sidebar-tab-active")) {
             ViewFactory.getInstance().showClientDashboardInterface();
         }
     }
 
     public void onProfilButton() {
-        String title = ViewFactory.getInstance().getMainStage().getTitle();
-        if (title != "CircuitsCourts - Profil") {
+        if (!profilTab.getStyleClass().contains("sidebar-tab-active")) {
             ViewFactory.getInstance().showClientProfilInterface();
         }
     }
 
     public void onCommandesButton() {
-        ViewFactory.getInstance().showClientCommandesInterface();
+        if (!commandesTab.getStyleClass().contains("sidebar-tab-active")) {
+            ViewFactory.getInstance().showClientCommandesInterface();
+        }
     }
 
     public void onAdressesButton() {
     }
 
     public void onMarketplaceButton() {
-        String title = ViewFactory.getInstance().getMainStage().getTitle();
-        if (title != "CircuitsCourts - Marketplace") {
+        if (!marketplaceTab.getStyleClass().contains("sidebar-tab-active")) {
             ViewFactory.getInstance().showClientMarketplaceInterface();
         }
     }

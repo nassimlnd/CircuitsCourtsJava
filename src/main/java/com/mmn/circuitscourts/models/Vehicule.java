@@ -32,7 +32,10 @@ public class Vehicule {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
-        vehiculeDAO.add(this);
+
+        if (!vehiculeDAO.exists(this)) {
+            vehiculeDAO.add(this);
+        }
     }
 
     public String getNumImmate() {

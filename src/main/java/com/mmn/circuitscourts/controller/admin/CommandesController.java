@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Controller qui gère la vue Commandes.fxml
  */
-public class CommandeController {
+public class CommandesController {
     @FXML
     VBox contentTable;
     @FXML
@@ -54,7 +55,7 @@ public class CommandeController {
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
         line.setPrefWidth(850);
-        line.setPadding(new Insets(0, 40, 0, 40));
+        line.setPadding(new Insets(0, 0, 0, 40));
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
@@ -72,12 +73,35 @@ public class CommandeController {
             label.getStyleClass().add("commande-tableview-line-cell");
             label.setMaxHeight(1.7976931348623157E308);
             label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(151);
-            label.setMinWidth(151);
-            label.setMaxWidth(151);
+            label.setPrefWidth(141);
+            label.setMinWidth(141);
+            label.setMaxWidth(141);
             line.getChildren().add(label);
         });
 
+        Button edit = new Button();
+        edit.getStyleClass().add("edit-button");
+        Region editImg = new Region();
+        editImg.getStyleClass().add("edit-button-img");
+        edit.setGraphic(editImg);
+        edit.setPickOnBounds(true);
+        HBox.setMargin(edit, new Insets(0, 0, 0, 30));
+        edit.setOnMouseClicked(mouseEvent -> {
+            onEdit(commande.getNumCommande());
+        });
+
+        Button delete = new Button();
+        delete.getStyleClass().add("delete-button");
+        Region deleteImg = new Region();
+        deleteImg.getStyleClass().add("delete-button-img");
+        delete.setGraphic(deleteImg);
+        delete.setPickOnBounds(true);
+        delete.setOnMouseClicked(event -> {
+
+        });
+
+        line.getChildren().add(edit);
+        line.getChildren().add(delete);
         contentTable.getChildren().add(line);
     }
 
@@ -93,6 +117,14 @@ public class CommandeController {
      */
     public void onClosePopup() {
         successPopup.setVisible(false);
+    }
+
+    /**
+     * Fonction de handle du bouton de modification
+     * @param numCommande
+     */
+    private void onEdit(int numCommande) {
+        ViewFactory.getInstance().showAdminEditCommandeInterface(numCommande);
     }
 
 

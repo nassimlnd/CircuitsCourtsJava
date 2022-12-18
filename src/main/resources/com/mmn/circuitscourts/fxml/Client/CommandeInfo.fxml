@@ -26,7 +26,7 @@
                            <Region styleClass="back-button-img" />
                        </graphic>
                    </Button>
-                  <Label styleClass="main-title" text="Commande n°">
+                  <Label fx:id="mainTitle" styleClass="main-title" text="Commande n°">
                      <VBox.margin>
                         <Insets top="40.0" />
                      </VBox.margin>
@@ -52,7 +52,7 @@
                               <HBox alignment="CENTER_LEFT" maxHeight="43.0" prefHeight="100.0" prefWidth="200.0" spacing="220.0" styleClass="client-commande-details-line">
                                  <children>
                                     <Label styleClass="client-commande-details-line-title" text="Article" />
-                                    <Label text="Label" />
+                                    <Label fx:id="articleName" text="Label" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" />
@@ -64,7 +64,7 @@
                               <HBox alignment="CENTER_LEFT" maxHeight="43.0" prefHeight="100.0" prefWidth="200.0" spacing="197.0" styleClass="client-commande-details-line">
                                  <children>
                                     <Label styleClass="client-commande-details-line-title" text="Poids total" />
-                                    <Label text="Label" />
+                                    <Label fx:id="totalWeight" text="Label" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" />
@@ -76,7 +76,7 @@
                               <HBox alignment="CENTER_LEFT" maxHeight="43.0" prefHeight="100.0" prefWidth="200.0" spacing="150.0" styleClass="client-commande-details-line">
                                  <children>
                                     <Label styleClass="client-commande-details-line-title" text="Date de commande" />
-                                    <Label text="Label" />
+                                    <Label fx:id="dateCommande" text="Label" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" />
@@ -88,7 +88,7 @@
                               <HBox alignment="CENTER_LEFT" maxHeight="43.0" prefHeight="100.0" prefWidth="200.0" spacing="196.0" styleClass="client-commande-details-line">
                                  <children>
                                     <Label styleClass="client-commande-details-line-title" text="Producteur" />
-                                    <Label text="Label" />
+                                    <Label fx:id="producteurName" text="Label" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" />
@@ -124,9 +124,9 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" spacing="50.0">
                                  <children>
-                                    <Label styleClass="client-commande-state">
+                                    <Label fx:id="secondState" styleClass="client-commande-state">
                                        <graphic>
-                                          <Region styleClass="client-commande-second-state-img" />
+                                          <Region fx:id="secondStateImg" styleClass="client-commande-second-state-img" />
                                        </graphic>
                                     </Label>
                                     <Label styleClass="client-commande-state-title" text="Livraison programmée" />
@@ -137,9 +137,9 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="200.0" spacing="50.0">
                                  <children>
-                                    <Label styleClass="client-commande-state">
+                                    <Label fx:id="thirdState" styleClass="client-commande-state">
                                        <graphic>
-                                          <Region styleClass="client-commande-third-state-img" />
+                                          <Region fx:id="thirdStateImg" styleClass="client-commande-third-state-img" />
                                        </graphic>
                                     </Label>
                                     <Label styleClass="client-commande-state-title" text="Livrée">
