@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;"
-           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.mmn.circuitscourts.controller.client.ProfilController">
+<?import javafx.scene.layout.Region?>
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.client.ProfilController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
             <left>
-                <fx:include source="Sidebar.fxml"/>
+                <fx:include source="Sidebar.fxml" />
             </left>
             <center>
 
@@ -23,33 +23,29 @@
                     <children>
                         <VBox alignment="CENTER" minHeight="220.0" prefHeight="200.0" prefWidth="100.0">
                             <children>
-                                <Label alignment="CENTER" minHeight="90.0" minWidth="90.0" styleClass="profil-img"/>
+                                <Label alignment="CENTER" minHeight="90.0" minWidth="90.0" styleClass="profil-img" />
                                 <Label fx:id="labelUsername" styleClass="profil-username" text="Username">
                                     <VBox.margin>
-                                        <Insets top="20.0"/>
+                                        <Insets top="20.0" />
                                     </VBox.margin>
                                 </Label>
                                 <Label fx:id="labelGrade" styleClass="profil-grade" text="Grade">
                                     <VBox.margin>
-                                        <Insets top="5.0"/>
+                                        <Insets top="5.0" />
                                     </VBox.margin>
                                 </Label>
                             </children>
                         </VBox>
-                        <HBox alignment="CENTER_LEFT" minHeight="450.0" prefHeight="100.0" prefWidth="200.0"
-                              spacing="30.0">
+                        <HBox alignment="TOP_CENTER" minHeight="450.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
                             <children>
-                                <VBox maxHeight="445.0" minHeight="445.0" minWidth="430.0" prefHeight="200.0"
-                                      prefWidth="100.0" styleClass="profil-container">
+                                <VBox alignment="TOP_CENTER" maxHeight="445.0" minHeight="445.0" minWidth="430.0" prefHeight="200.0" prefWidth="100.0" styleClass="profil-container">
                                     <children>
-                                        <VBox alignment="CENTER_LEFT" minHeight="56.0"
-                                              styleClass="profil-container-header">
+                                        <VBox alignment="CENTER_LEFT" minHeight="56.0" styleClass="profil-container-header">
                                             <children>
-                                                <Label styleClass="profil-container-header-title"
-                                                       text="Données personnelles"/>
+                                                <Label styleClass="profil-container-header-title" text="Données personnelles" />
                                             </children>
                                             <padding>
-                                                <Insets left="20.0"/>
+                                                <Insets left="20.0" />
                                             </padding>
                                         </VBox>
                                         <VBox styleClass="profil-container-content">
@@ -57,19 +53,64 @@
 
                                             </children>
                                         </VBox>
+                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="275.0" styleClass="profil-container-line">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label styleClass="profil-container-line-title" text="Identifiant" />
+                                    <Label fx:id="identifiant" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="255.0" styleClass="profil-container-line">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label styleClass="profil-container-line-title" text="Mot de passe" />
+                                    <Label fx:id="password" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="300.0" styleClass="profil-container-line">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label styleClass="profil-container-line-title" text="Nom" />
+                                    <Label fx:id="clientName" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="210.0" styleClass="profil-container-line">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <Label styleClass="profil-container-line-title" text="Numéro de téléphone" />
+                                    <Label fx:id="numTel" text="Label" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                              </HBox>
                                     </children>
                                 </VBox>
-                                <VBox maxHeight="445.0" minWidth="431.0" prefHeight="200.0" prefWidth="100.0"
-                                      styleClass="profil-container">
+                                <VBox alignment="TOP_CENTER" maxHeight="202.0" minWidth="431.0" prefHeight="200.0" prefWidth="100.0" styleClass="profil-container">
                                     <children>
-                                        <VBox alignment="CENTER_LEFT" minHeight="56"
-                                              styleClass="profil-container-header">
+                                        <VBox alignment="CENTER_LEFT" minHeight="56" styleClass="profil-container-header">
                                             <children>
-                                                <Label styleClass="profil-container-header-title"
-                                                       text="Photo de profil"/>
+                                                <Label styleClass="profil-container-header-title" text="Photo de profil" />
                                             </children>
                                             <padding>
-                                                <Insets left="20.0"/>
+                                                <Insets left="20.0" />
                                             </padding>
                                         </VBox>
                                         <VBox styleClass="profil-container-content">
@@ -77,13 +118,21 @@
 
                                             </children>
                                         </VBox>
+                              <Button maxHeight="71.0" maxWidth="400.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" styleClass="filechooser-button" text="Parcourir" onMouseClicked="#onBrowse">
+                                  <graphic>
+                                      <Region styleClass="filechooser-button-img"/>
+                                  </graphic>
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
                                     </children>
                                 </VBox>
                             </children>
                         </HBox>
                     </children>
                     <padding>
-                        <Insets bottom="40.0" left="30.0" right="30.0" top="40.0"/>
+                        <Insets bottom="40.0" left="30.0" right="30.0" top="40.0" />
                     </padding>
                 </VBox>
             </center>

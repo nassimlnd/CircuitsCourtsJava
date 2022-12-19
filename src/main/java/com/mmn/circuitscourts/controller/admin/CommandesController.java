@@ -8,7 +8,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -27,11 +26,18 @@ public class CommandesController {
     Button addButton;
     @FXML
     VBox successPopup;
+    @FXML
+    VBox confirmationDialog;
+    @FXML
+    Button okButton;
+    @FXML
+    Button cancelButton;
     static VBox popup;
 
     /**
      * Appel de la méthode du modèle pour récuperer toutes les commande présentes dans la base de données.
      * pour chaque commande créer la ligne correspondante dans la vue Admin.Commandes
+     *
      * @throws SQLException si
      */
     public void initialize() throws SQLException {
@@ -55,6 +61,7 @@ public class CommandesController {
 
     /**
      * Création d'une ligne dans le tableau des commandes depuis la commande entrée en paramètre.
+     *
      * @param commande La commande que l'on veut afficher.
      */
     public void createLine(Commande commande) throws SQLException {
@@ -104,11 +111,7 @@ public class CommandesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            try {
-                onDelete((commande.getNumCommande()));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            showConfirmationDialog(commande.getNumCommande());
         });
 
         line.getChildren().add(edit);
@@ -132,6 +135,7 @@ public class CommandesController {
 
     /**
      * Fonction de handle du bouton de modification
+     *
      * @param numCommande
      */
     private void onEdit(int numCommande) {
@@ -139,7 +143,7 @@ public class CommandesController {
     }
 
 
-    private  void onDelete(int numCommande) throws SQLException {
+    private void onDelete(int numCommande) throws SQLException {
         Commande.cmd.remove(numCommande);
         System.out.println("[DEBUG]Commande deleted");
         contentTable.getChildren().clear();
@@ -156,5 +160,20 @@ public class CommandesController {
     public Article getArticle(Commande c) throws SQLException {
         Article a = Article.article.getById(c.getArticleId());
         return a;
+    }
+
+    public void showConfirmationDialog(int numCommande) {
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                onDelete(numCommande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+        });
     }
 }
