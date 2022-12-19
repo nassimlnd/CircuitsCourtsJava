@@ -223,4 +223,12 @@ public class ViewFactory {
         com.mmn.circuitscourts.controller.admin.EditCommandeController.commandeId = numCommande;
         createScene(loader, "CircuitsCourts - Modification de la commande n°" + numCommande);
     }
+
+    public void showAdminEditVehiculeInterface(String numImmat){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditVehicule.fxml"));
+        System.out.println("[ADMIN]EditVehiculeController loaded.");
+        com.mmn.circuitscourts.controller.admin.EditVehiculeController.numImmat = numImmat;
+        createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ numImmat);
+
+    }
 }

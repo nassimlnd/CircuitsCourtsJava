@@ -38,6 +38,11 @@ public class Vehicule {
         }
     }
 
+    public static ArrayList<Vehicule> getCommandesInitialize() throws SQLException {
+        ArrayList<Vehicule> vehicules = vehiculeDAO.getAll();
+        return vehicules;
+    }
+
     public String getNumImmate() {
         return numImmate;
     }

@@ -79,7 +79,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean update(String numImmat, Vehicule vehicule) throws SQLException {
-        String query = "UPDATE vehicule SET numImmat='" + vehicule.getNumImmate()+"',poidsMax= "+vehicule.getPoidsMax();
+        String query = "UPDATE vehicule SET numImmat='" + vehicule.getNumImmate()+"',poids= "+vehicule.getPoidsMax();
         PreparedStatement pst = conn.prepareStatement(query);
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
@@ -92,10 +92,15 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean remove(String numImmat) throws SQLException {
-        String query  ="DELETE  FROM vehicule WHERE numImmat='"+ numImmat+"'";
+        String query0 = "DELETE FROM tournee WHERE numImmat='"+numImmat+"'";
         Statement st = conn.createStatement();
-        st.executeUpdate(query);
-        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
+        st.executeUpdate(query0);
+        String query1  ="DELETE  FROM vehicule WHERE numImmat='"+ numImmat+"'";
+        st.executeUpdate(query1);
+        if (Boolean.valueOf(String.valueOf(st.executeUpdate(query0))) && Boolean.valueOf(String.valueOf(st.executeUpdate(query1)))){
+            return true;
+        }
+        else return false;
     }
 
     /**
