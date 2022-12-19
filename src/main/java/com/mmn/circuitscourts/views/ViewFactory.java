@@ -226,9 +226,23 @@ public class ViewFactory {
 
     public void showAdminEditVehiculeInterface(String numImmat){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditVehicule.fxml"));
-        System.out.println("[ADMIN]EditVehiculeController loaded.");
+        System.out.println("[ADMIN]EditVehicule loaded.");
         com.mmn.circuitscourts.controller.admin.EditVehiculeController.numImmat = numImmat;
         createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ numImmat);
 
+    }
+
+    public void showAdminEditProducteurInterface(int numSiret){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml:Admin/EditProducteur"));
+        System.out.println("[ADMIN]EditProducteur loaded.");
+        com.mmn.circuitscourts.controller.admin.EditProducteurController.numSiret = numSiret;
+        createScene(loader, "CircuitsCourts - Modification du producteur n°"+ numSiret);
+
+    }
+
+    public void showAdminAddProducteurInterface(){
+        FXMLLoader loader = new FXMLLoader((App.class.getResource("fxml/Admin/AddProducteur.fxml")));
+        System.out.println("[ADMIN]AddProducteur loaded.");
+        createScene(loader, "CircuitsCourts - Ajout d'un producteur");
     }
 }

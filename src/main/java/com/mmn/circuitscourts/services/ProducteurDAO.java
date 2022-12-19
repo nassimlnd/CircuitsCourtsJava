@@ -61,4 +61,16 @@ public class ProducteurDAO implements DAO<Producteur, Integer>{
             return new Producteur(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
         } else throw new SQLException("ID INTROUVABLE");
     }
+
+    public Producteur getBynumSiret(int numSiret) throws SQLException {
+        String query = "SELECT * FROM producteur WHERE accountId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, numSiret);  
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
+        if (resultSet.next()) {
+            return new Producteur(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+        } else throw new SQLException("ID INTROUVABLE");
+    }
+
 }
