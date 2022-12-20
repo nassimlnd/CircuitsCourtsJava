@@ -245,4 +245,12 @@ public class ViewFactory {
         System.out.println("[ADMIN]AddProducteur loaded.");
         createScene(loader, "CircuitsCourts - Ajout d'un producteur");
     }
+    public void showProdEditVehiculeInterface(String numImmat){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditVehicule.fxml"));
+        System.out.println("[PRODUCTEUR]EditVehicule loaded.");
+        com.mmn.circuitscourts.controller.producteur.EditVehiculeController.numImmat = numImmat;
+        createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ numImmat);
+
+    }
 }
+

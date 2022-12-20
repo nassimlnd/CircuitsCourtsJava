@@ -19,13 +19,9 @@ import java.util.ArrayList;
 
 public class VehiculesController {
 
-    @FXML
-    Button addButton;
-    @FXML
-    VBox commandeTable;
 
     @FXML
-    VBox successPopup;
+    VBox successPopup,contentTable;
 
     @FXML
     Label popupSubtitle;
@@ -35,10 +31,10 @@ public class VehiculesController {
 
 
     public void initialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilizeByid();
-        vehicules.forEach(vehicule -> createLine(vehicule));
-        popup = successPopup;
-        popupId = popupSubtitle;
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        for (Vehicule v: vehicules) {createLine(v);}
+        popup=successPopup;
+        popupId=popupSubtitle;
     }
 
     public static void showSuccessPopUp(String id) {
@@ -87,22 +83,37 @@ public class VehiculesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-
+            try {
+                onDelete((v.getNumImmate()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
 
         line.getChildren().add(edit);
         line.getChildren().add(delete);
 
-        commandeTable.getChildren().add(line);
+        contentTable.getChildren().add(line);
     }
-    public void onEdit(String s){
 
-    }
     public void onAddButton() {
         ViewFactory.getInstance().showProducteurAddVehiculeInterface();
     }
 
     public void onClosePopup() {
         popup.setVisible(false);
+    }
+
+    public void onEdit(String numImmat){
+        ViewFactory.getInstance().showProdEditVehiculeInterface(numImmat);
+    }
+    public void onDelete(String numImmat) throws SQLException {
+        Vehicule.vehiculeDAO.remove(numImmat);
+        System.out.println("[DEBUG]Commande deleted");
+        contentTable.getChildren().clear();
+        ArrayList<Vehicule> vehicules = Vehicule.getCommandesInitialize();
+        vehicules.forEach(vehicule -> {
+            createLine(vehicule);
+        });
     }
 }
