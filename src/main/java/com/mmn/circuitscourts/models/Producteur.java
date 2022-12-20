@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.models;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.services.ProducteurDAO;
 
 import java.util.ArrayList;
 
@@ -11,9 +12,18 @@ public class Producteur {
     private String numTel;
     private String coordonneesGps;
     private int accountId;
+    public static ProducteurDAO producteurDAO = new ProducteurDAO();
 
     public Producteur(int numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps, int accountId) {
         this.numSiret = numSiret;
+        this.proprietaire = proprietaire;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.coordonneesGps = coordonneesGps;
+        this.accountId = accountId;
+    }
+
+    public Producteur(String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps, int accountId) {
         this.proprietaire = proprietaire;
         this.adresse = adresse;
         this.numTel = numTel;

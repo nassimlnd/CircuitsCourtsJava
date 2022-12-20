@@ -1,9 +1,11 @@
 package com.mmn.circuitscourts.services;
 
+import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.function.Function;
 
 /**
@@ -175,5 +177,22 @@ public class AccountDAO implements DAO<User,Integer> {
         }
 
         return accountsList;
+    }
+
+    /**
+     * crée une array list composé d'un nom de compte(obligatoirement d'un producteur) et du numéro de siret associé à ce compte.
+     * @return arrayList
+     * @throws SQLException
+     */
+    public ArrayList<String> getAllproducteursNameAndSiret() throws SQLException {
+        String query = "SELECT accounts.identifiant, producteur.numSiret FROM accounts  INNER JOIN producteur ON accounts.accountId = producteur.accountID WHERE grade = 2";
+        Statement st = connection.createStatement();
+        ResultSet resultSet =  st.executeQuery(query);
+        ArrayList<String> namesAndSiret = new ArrayList<>();
+        while(resultSet.next()){
+           namesAndSiret.add(resultSet.getString(1) + "-" + resultSet.getInt(2));
+
+        }
+        return namesAndSiret;
     }
 }

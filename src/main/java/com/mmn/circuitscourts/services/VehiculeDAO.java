@@ -64,9 +64,9 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public int add(Vehicule vehicule) throws SQLException {
-        String query = "INSERT INTO vehicule(numImmat, poids, numSiret) VALUES ('" + vehicule.getNumImmate()+"', "+vehicule.getPoidsMax()+","+ vehicule.getnumSiret()+")";
+        String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmate()+"', "+vehicule.getPoidsMax()+", "+vehicule.getnumSiret()+")";
         PreparedStatement pst = conn.prepareStatement(query);
-
+        System.out.println(vehicule);
         return pst.executeUpdate();
     }
 
@@ -79,7 +79,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean update(String numImmat, Vehicule vehicule) throws SQLException {
-        String query = "UPDATE vehicule SET numImmat='" + vehicule.getNumImmate()+"',poidsMax= "+vehicule.getPoidsMax();
+        String query = "UPDATE vehicule SET poids= "+vehicule.getPoidsMax()+" WHERE numImmat='"+ numImmat+"'";
         PreparedStatement pst = conn.prepareStatement(query);
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
@@ -92,10 +92,10 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean remove(String numImmat) throws SQLException {
-        String query  ="DELETE  FROM vehicule WHERE numImmat='"+ numImmat+"'";
         Statement st = conn.createStatement();
-        st.executeUpdate(query);
-        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
+        String query1 = "DELETE  FROM vehicule WHERE numImmat='" + numImmat + "'";
+        st.executeUpdate(query1);
+        return Boolean.valueOf(String.valueOf(st.executeUpdate(query1)));
     }
 
     /**
