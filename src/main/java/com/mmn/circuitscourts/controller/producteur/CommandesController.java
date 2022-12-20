@@ -87,6 +87,11 @@ public class CommandesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
+            try {
+                onDelete(commande.getNumCommande());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
 
         });
 
@@ -100,6 +105,15 @@ public class CommandesController {
 
     public void onEdit(int id) {
         ViewFactory.getInstance().showProdEditCommandeInterface(id);
+    }
+    private void onDelete(int numCommande) throws SQLException {
+        Commande.cmd.remove(numCommande);
+        System.out.println("[DEBUG]Commande deleted");
+        contentTable.getChildren().clear();
+        ArrayList<Commande> commandes = Commande.getCommandesInitialize();
+        commandes.forEach(commande -> {
+            createLine(commande);
+        });
     }
 
 

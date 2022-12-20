@@ -8,6 +8,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
 <StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.producteur.EditCommandeController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
@@ -27,6 +30,33 @@
                                 <Insets top="20.0" />
                             </VBox.margin>
                         </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <ComboBox fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
+                                <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
+                                    <HBox.margin>
+                                        <Insets left="200.0" />
+                                    </HBox.margin>
+                                </TextField>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="75.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="horaire" minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison"></TextField>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="25.0" />
+                            </VBox.margin>
+                        </HBox>
+
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Modifier la commande" onMouseClicked="#onEditButton" styleClass="addCommandeButton"/>
+                            </children>
+                        </HBox>
                     </children>
                     <padding>
                         <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />

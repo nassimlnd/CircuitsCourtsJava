@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
@@ -66,9 +67,36 @@ public class VehiculesController {
             label.setMinWidth(151);
             label.setMaxWidth(151);
             line.getChildren().add(label);
+
+        });
+        Button edit = new Button();
+        edit.getStyleClass().add("edit-button");
+        Region editImg = new Region();
+        editImg.getStyleClass().add("edit-button-img");
+        edit.setGraphic(editImg);
+        edit.setPickOnBounds(true);
+        HBox.setMargin(edit, new Insets(0,0,0, 20));
+        edit.setOnMouseClicked(mouseEvent -> {
+            onEdit(v.getNumImmate());
         });
 
+        Button delete = new Button();
+        delete.getStyleClass().add("delete-button");
+        Region deleteImg = new Region();
+        deleteImg.getStyleClass().add("delete-button-img");
+        delete.setGraphic(deleteImg);
+        delete.setPickOnBounds(true);
+        delete.setOnMouseClicked(event -> {
+
+        });
+
+        line.getChildren().add(edit);
+        line.getChildren().add(delete);
+
         commandeTable.getChildren().add(line);
+    }
+    public void onEdit(String s){
+
     }
     public void onAddButton() {
         ViewFactory.getInstance().showProducteurAddVehiculeInterface();
