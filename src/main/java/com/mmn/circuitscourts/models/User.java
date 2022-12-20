@@ -3,6 +3,7 @@ package com.mmn.circuitscourts.models;
 import com.mmn.circuitscourts.services.AccountDAO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Classe réprésentant un utilisateur donc un account dans la base de donneés.
@@ -13,6 +14,8 @@ public class User {
     private String identifiant;
     private String password;
     private int grade;
+
+    public static AccountDAO accountDAO = new AccountDAO();
 
     public User(String identifiant, String password, int grade) throws SQLException {
         this.identifiant = identifiant;
@@ -62,4 +65,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
 }
+
+

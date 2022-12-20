@@ -34,7 +34,7 @@
                     </children>
                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                         <children>
-                            <ComboBox fx:id="vehicule" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le véhicule"/>
+                            <Label fx:id="vehicule" minHeight="40.0" minWidth="250.0" prefWidth="150.0"/>
                             <TextField fx:id="poids" minHeight="40.0" minWidth="250.0" promptText="Horaire de livraison">
                                 <HBox.margin>
                                     <Insets left="200.0" />

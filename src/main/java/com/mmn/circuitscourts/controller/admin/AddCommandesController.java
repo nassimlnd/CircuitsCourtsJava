@@ -64,10 +64,7 @@ public class AddCommandesController {
         client.setValue(names.get(0));
     }
 
-
-
-
-
 }
+
 
 
