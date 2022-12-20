@@ -21,6 +21,10 @@ public class VehiculeController {
 
     @FXML
     VBox contentTable;
+    @FXML VBox confirmationDialog;
+    @FXML Button okButton;
+    @FXML Button cancelButton;
+    @FXML Label descDialog;
 
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddVehiculeInterface();
@@ -38,7 +42,7 @@ public class VehiculeController {
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
         line.setPrefWidth(850);
-        line.setPadding(new Insets(0, 40, 0, 40));
+        line.setPadding(new Insets(0, 0, 0, 40));
         line.getStyleClass().add("vehicule-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numImmatriculation = new Label(String.valueOf(vehicule.getNumImmate()));
@@ -58,13 +62,14 @@ public class VehiculeController {
             line.getChildren().add(label);
 
         });
+
         Button edit = new Button();
         edit.getStyleClass().add("edit-button");
         Region editImg = new Region();
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 30));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 290));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(vehicule.getNumImmate());
         });
@@ -76,11 +81,7 @@ public class VehiculeController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            try {
-                onDelete((vehicule.getNumImmate()));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            showConfirmationDialog(vehicule.getNumImmate());
         });
 
         line.getChildren().add(edit);
@@ -103,6 +104,22 @@ public class VehiculeController {
         ArrayList<Vehicule> vehicules = Vehicule.getCommandesInitialize();
         vehicules.forEach(vehicule -> {
             createLine(vehicule);
+        });
+    }
+
+    public void showConfirmationDialog(String numImmat) {
+        descDialog.setText("Voulez vous vraiment supprimer le véhicule immatriculé : " + numImmat);
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                onDelete(numImmat);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
         });
     }
 }

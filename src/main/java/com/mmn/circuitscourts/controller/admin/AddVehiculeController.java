@@ -38,12 +38,9 @@ public class AddVehiculeController {
     }
 
     public void onCreateButton() throws SQLException {
-
         String[] temp =  namesProd.getValue().split("-");
         int newNumSiret = Integer.parseInt(temp[1]);
         Vehicule v = new Vehicule(numImmat.getText(), Integer.parseInt(poids.getText()),newNumSiret);
-        System.out.println(numImmat.getText());
-        Vehicule.vehiculeDAO.add(v);
         System.out.println("[DEBUG]Vehicule Added.");
         ViewFactory.getInstance().showAdminVehiculeInterface();
     }

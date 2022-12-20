@@ -24,7 +24,7 @@ public class Vehicule {
         }
     }
 
-    public Vehicule(String numImmate, int poidsmax) throws SQLException {
+    public Vehicule(String numImmate, int poidsmax) {
         this.numImmate = numImmate;
         this.poidsMax = poidsmax;
     }

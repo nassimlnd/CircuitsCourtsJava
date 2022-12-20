@@ -32,6 +32,7 @@ public class CommandesController {
     Button okButton;
     @FXML
     Button cancelButton;
+    @FXML Label descDialog;
     static VBox popup;
 
     /**
@@ -163,6 +164,7 @@ public class CommandesController {
     }
 
     public void showConfirmationDialog(int numCommande) {
+        descDialog.setText("Voulez vous vraiment supprimer la commande n°"+ numCommande);
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);
