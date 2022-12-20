@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.controller.producteur.VehiculesController;
 import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.models.Vehicule;
@@ -12,6 +13,8 @@ import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class AddVehiculeController {
     @FXML
@@ -38,10 +41,23 @@ public class AddVehiculeController {
     }
 
     public void onCreateButton() throws SQLException {
-        String[] temp =  namesProd.getValue().split("-");
-        int newNumSiret = Integer.parseInt(temp[1]);
-        Vehicule v = new Vehicule(numImmat.getText(), Integer.parseInt(poids.getText()),newNumSiret);
-        System.out.println("[DEBUG]Vehicule Added.");
-        ViewFactory.getInstance().showAdminVehiculeInterface();
+        String[] immat = numImmat.getText().split("-");
+        boolean identique=false;
+        if(immat[0].matches("([A-Z][A-Z])")&&immat[1].matches("([0-9][0-9][0-9])")&&immat[2].matches("([A-Z][A-Z])")&&parseInt(poids.getText())>0){
+            ArrayList<Vehicule> v = new ArrayList<>();
+            v=Vehicule.vehiculeDAO.getAll();
+            for(int i=0;i<v.size();i++){
+                if(v.get(i).getNumImmate().equals(numImmat.getText())){
+                    identique=true;
+                    break;
+                }
+            }
+            if(identique==false) {
+                int numSiret = Vehicule.getNumSiretConnected();
+                Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
+                ViewFactory.getInstance().showProdVehiculesInterface();
+                VehiculesController.showSuccessPopUp(vehicule.getNumImmate());
+            }
+        }
     }
 }

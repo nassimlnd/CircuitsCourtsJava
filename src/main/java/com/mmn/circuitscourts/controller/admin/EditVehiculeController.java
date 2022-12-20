@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 public class EditVehiculeController {
 
     @FXML
@@ -36,9 +38,11 @@ public class EditVehiculeController {
     }
 
     public void onEditButton() throws SQLException {
-        Vehicule v = new Vehicule(vehicule.getText(), Integer.parseInt(poids.getText()));
-        Vehicule.vehiculeDAO.update(numImmat, v);
-        System.out.println("[DEBUG]Vehicule updated");
-        ViewFactory.getInstance().showAdminVehiculeInterface();
+        if(parseInt(poids.getText())>0) {
+            Vehicule v = new Vehicule(vehicule.getText(), parseInt(poids.getText()));
+            Vehicule.vehiculeDAO.update(numImmat, v);
+            System.out.println("[DEBUG]Vehicule updated");
+            ViewFactory.getInstance().showProdVehiculesInterface();
+        }
     }
 }

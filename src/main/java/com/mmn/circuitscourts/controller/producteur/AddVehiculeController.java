@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 
 public class AddVehiculeController {
 
@@ -22,9 +25,26 @@ public class AddVehiculeController {
     }
 
     public void onCreateButton() throws SQLException {
-        int numSiret = Vehicule.getNumSiretConnected();
-        Vehicule v = new Vehicule(String.valueOf(numImmat.getText()), Integer.parseInt(poids.getText()), numSiret);
-        ViewFactory.getInstance().showProdVehiculesInterface();
-        VehiculesController.showSuccessPopUp(v.getNumImmate());
+        String[] immat = numImmat.getText().split("-");
+        boolean identique=false;
+        if(immat[0].matches("([A-Z][A-Z])")&&immat[1].matches("([0-9][0-9][0-9])")&&immat[2].matches("([A-Z][A-Z])")&&parseInt(poids.getText())>0){
+            ArrayList<Vehicule> v = new ArrayList<>();
+            v=Vehicule.vehiculeDAO.getAll();
+            for(int i=0;i<v.size();i++){
+                if(v.get(i).getNumImmate().equals(numImmat.getText())){
+                    identique=true;
+                    break;
+                }
+            }
+            if(identique==false) {
+                int numSiret = Vehicule.getNumSiretConnected();
+                Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
+                ViewFactory.getInstance().showProdVehiculesInterface();
+                VehiculesController.showSuccessPopUp(vehicule.getNumImmate());
+            }
+        }
+
+
+
     }
 }

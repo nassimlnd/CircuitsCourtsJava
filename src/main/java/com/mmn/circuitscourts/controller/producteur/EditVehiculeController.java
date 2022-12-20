@@ -8,6 +8,8 @@ import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
 
+import static java.lang.Integer.parseInt;
+
 public class EditVehiculeController {
 
     public static String numImmat;
@@ -31,9 +33,11 @@ public class EditVehiculeController {
         poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
     }
     public void onEditButton() throws SQLException {
-        Vehicule v = new Vehicule(vehicule.getText(), Integer.parseInt(poids.getText()));
-        Vehicule.vehiculeDAO.update(numImmat, v);
-        System.out.println("[DEBUG]Vehicule updated");
-        ViewFactory.getInstance().showProdVehiculesInterface();
+        if(parseInt(poids.getText())>0) {
+            Vehicule v = new Vehicule(vehicule.getText(), parseInt(poids.getText()));
+            Vehicule.vehiculeDAO.update(numImmat, v);
+            System.out.println("[DEBUG]Vehicule updated");
+            ViewFactory.getInstance().showProdVehiculesInterface();
+        }
     }
 }
