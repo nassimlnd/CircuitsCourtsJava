@@ -19,7 +19,13 @@ public class CommandesController {
 
     @FXML
     Button addButton;
-
+    @FXML
+    VBox confirmationDialog;
+    @FXML
+    Button okButton;
+    @FXML
+    Button cancelButton;
+    @FXML Label descDialog;
     @FXML
     VBox successPopup;
 
@@ -87,12 +93,7 @@ public class CommandesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            try {
-                onDelete(commande.getNumCommande());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
+            showConfirmationDialog(commande.getNumCommande());
         });
 
         line.getChildren().add(edit);
@@ -113,6 +114,21 @@ public class CommandesController {
         ArrayList<Commande> commandes = Commande.getCommandesInitialize();
         commandes.forEach(commande -> {
             createLine(commande);
+        });
+    }
+    public void showConfirmationDialog(int numCommande) {
+        descDialog.setText("Voulez vous vraiment supprimer la commande n°"+ numCommande);
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                onDelete(numCommande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
         });
     }
 
