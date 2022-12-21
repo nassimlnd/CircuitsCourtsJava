@@ -1,74 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mmn.circuitscourts.controller.admin.EditProducteurController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.EditVehiculeController">
-<children>
-    <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
-        <left>
-            <fx:include source="Sidebar.fxml" />
-        </left>
-        <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                <children>
-                    <Button mnemonicParsing="false" styleClass="back-button" text="Retour" onMouseClicked="#onBackButton">
-                        <graphic>
-                            <Region styleClass="back-button-img" />
-                        </graphic>
-                    </Button>
-                    <Label styleClass="main-title" text="Modification de la commande n°">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.EditProducteurController">
+    <children>
+        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
+            <left>
+                <fx:include source="Sidebar.fxml" />
+            </left>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button mnemonicParsing="false" styleClass="back-button" text="Retour" onMouseClicked="#onBackButton">
+                            <graphic>
+                                <Region styleClass="back-button-img" />
+                            </graphic>
+                        </Button>
+                        <Label fx:id ="title" styleClass="main-title" text="Modification du propriétaire n°">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <TextField fx:id="adresse" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'article"/>
+                            <TextField fx:id="numTel" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité">
+                                <HBox.margin>
+                                    <Insets left="200.0" />
+                                </HBox.margin>
+                            </TextField>
+                        </children>
                         <VBox.margin>
-                            <Insets top="20.0" />
+                            <Insets top="75.0" />
                         </VBox.margin>
-                    </Label>
-                </children>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <TextField fx:id="adresse" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner l'adresse"/>
-                        <ComboBox fx:id="proprietaire" minHeight="40.0" minWidth="250.0" promptText="Séléctioner le propriétaire">
-                            <HBox.margin>
-                                <Insets left="200.0" />
-                            </HBox.margin>
-                        </ComboBox>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="25.0" />
-                    </VBox.margin>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <TextField fx:id="numTel" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le tel"/>
-                        <TextField fx:id="gps" minHeight="40.0" minWidth="250.0" promptText="gps">
-                            <HBox.margin>
-                                <Insets left="200.0" />
-                            </HBox.margin>
-                        </TextField>
-                    </children>
-                    <VBox.margin>
-                        <Insets top="25.0" />
-                    </VBox.margin>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <children>
-                        <Button id="vehiculeButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Modifier le Porducteur" onMouseClicked="#onEditButton" styleClass="addCommandeButton"/>
-                    </children>
-                </HBox>
-                <padding>
-                    <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
-                </padding>
-            </VBox>
-        </center>
-    </BorderPane>
-</children>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <TextField fx:id="gps" minHeight="40.0" minWidth="250.0" promptText="coordonnées GPS"/>
+                        </children>
+                        <VBox.margin>
+                            <Insets top="25.0" />
+                        </VBox.margin>
+                    </HBox>
+                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <children>
+                            <Button id="editButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Modifier le propriétaire" onMouseClicked="#onEditButton" styleClass="addCommandeButton"/>
+                        </children>
+                    </HBox>
+                    <padding>
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
 </StackPane>

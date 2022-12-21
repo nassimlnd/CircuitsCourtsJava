@@ -233,7 +233,7 @@ public class ViewFactory {
     }
 
     public void showAdminEditProducteurInterface(int numSiret){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml:Admin/EditProducteur"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditProducteur.fxml"));
         System.out.println("[ADMIN]EditProducteur loaded.");
         com.mmn.circuitscourts.controller.admin.EditProducteurController.numSiret = numSiret;
         createScene(loader, "CircuitsCourts - Modification du producteur n°"+ numSiret);

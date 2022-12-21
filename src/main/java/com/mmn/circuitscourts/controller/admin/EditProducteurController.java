@@ -4,6 +4,7 @@ import com.mmn.circuitscourts.models.Proprietaire;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
@@ -15,7 +16,10 @@ public class EditProducteurController {
     TextField adresse, numTel, gps;
 
     @FXML
-    ComboBox<String> proprietaire;
+    ComboBox<String> prodNonProprietaire;
+
+    @FXML
+    Label title;
 
     public static int numSiret = 0;
 
@@ -24,28 +28,26 @@ public class EditProducteurController {
        return p;
     }
 
-    public void proprietaireIntialize() throws SQLException {
-        ArrayList<Proprietaire> proprietaires = Proprietaire.proprietaireDAO.getAll();
-        ArrayList<String> propNames = new ArrayList<>();
-        for (Proprietaire p: proprietaires) {
-            propNames.add(p.getId()+"-"+p.getNom());
-        }
-        proprietaire.getItems().addAll(propNames);
-    }
+
 
     public void initialize() throws SQLException {
+        title.setText("Modification du producteur n°"+ numSiret);
         adresse.setText(getThisProducteur().getAdresse());
         numTel.setText(getThisProducteur().getNumTel());
         gps.setText(getThisProducteur().getCoordonneesGps());
 
     }
 
-    public void onBackButton(MouseEvent mouseEvent) {
+    public void onBackButton() {
         ViewFactory.getInstance().showAdminProducteurInterface();
     }
 
-    public void onEditButton(MouseEvent mouseEvent) {
-        int idPropietaire = Integer.parseInt(proprietaire.getValue().split("-")[0]);
-        //Producteur p = new Producteur()
+    public void onEditButton() throws SQLException {
+        Proprietaire proprio = getThisProducteur().getProprietaire();
+        int numProprietaire = proprio.getId();
+        Producteur p = new Producteur(getThisProducteur().getNumSiret(),adresse.getText(), Proprietaire.proprietaireDAO.getById(numProprietaire), numTel.getText(), gps.getText(), getThisProducteur().getAccountId());
+        Producteur.producteurDAO.update(getThisProducteur().getNumSiret(), p);
+        System.out.println("[DEBUG] producteur n°"+ numSiret+ " updated.");
+        ViewFactory.getInstance().showAdminProducteurInterface();
     }
 }
