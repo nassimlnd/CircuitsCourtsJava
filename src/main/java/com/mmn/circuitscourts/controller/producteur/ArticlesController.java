@@ -1,14 +1,17 @@
 package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.models.Article;
+import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
@@ -18,13 +21,17 @@ public class ArticlesController {
 
     @FXML
     VBox contentTable;
-
+    @FXML
+    VBox confirmationDialog;
+    @FXML
+    Button okButton;
+    @FXML
+    Button cancelButton;
+    @FXML Label descDialog;
     @FXML
     VBox successPopup;
-
     static VBox popup;
     static Label popupid;
-
     @FXML
     Label successPopupId;
 
@@ -75,7 +82,58 @@ public class ArticlesController {
             label.setMaxWidth(151);
             line.getChildren().add(label);
         });
+        Button edit = new Button();
+        edit.getStyleClass().add("edit-button");
+        Region editImg = new Region();
+        editImg.getStyleClass().add("edit-button-img");
+        edit.setGraphic(editImg);
+        edit.setPickOnBounds(true);
+        HBox.setMargin(edit, new Insets(0,0,0, 20));
+        edit.setOnMouseClicked(mouseEvent -> {
+            onEdit(article.getId());
+        });
 
+        Button delete = new Button();
+        delete.getStyleClass().add("delete-button");
+        Region deleteImg = new Region();
+        deleteImg.getStyleClass().add("delete-button-img");
+        delete.setGraphic(deleteImg);
+        delete.setPickOnBounds(true);
+        delete.setOnMouseClicked(event -> {
+            showConfirmationDialog(article.getId());
+        });
+
+        line.getChildren().add(edit);
+        line.getChildren().add(delete);
         contentTable.getChildren().add(line);
     }
+    public void onEdit(int id) {
+        ViewFactory.getInstance().showProdEditArticleInterface(id);
+    }
+    public void showConfirmationDialog(int id) {
+        descDialog.setText("Voulez vous vraiment supprimer l'article n°"+ id+" et les commandes qui lui sont liées");
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                Commande.cmd.removeById(id);
+                onDelete(id);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+        });
+    }
+    private void onDelete(int id) throws SQLException {
+        Article.article.remove(id);
+        System.out.println("[DEBUG]Article deleted");
+        contentTable.getChildren().clear();
+        Article.getAll().forEach(article -> createLine(article));
+
+
+
+    }
+
 }

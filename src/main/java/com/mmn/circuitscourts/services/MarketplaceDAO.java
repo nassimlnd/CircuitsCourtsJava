@@ -71,20 +71,24 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
 
     @Override
     public boolean update(Integer id, Article article) throws SQLException {
-        String query = "UPDATE article SET name=?, categorie=?, description=?, price=?, weight?, imageId=?";
+        String query = "UPDATE articles SET name=?, categorie=?, description=?, price=?, weight=?, imageId=? WHERE idArticle = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, article.getName());
         preparedStatement.setString(2, article.getCategorie());
-        preparedStatement.setDouble(3, article.getPrice());
-        preparedStatement.setDouble(4, article.getWeight());
-        preparedStatement.setInt(5, article.getImageId());
+        preparedStatement.setString(3, article.getDescription());
+        preparedStatement.setDouble(4, article.getPrice());
+        preparedStatement.setDouble(5, article.getWeight());
+        preparedStatement.setInt(6, article.getImageId());
+        preparedStatement.setInt(7,id);
 
         return Boolean.valueOf(String.valueOf(preparedStatement.executeUpdate()));
     }
 
     @Override
     public boolean remove(Integer id) throws SQLException {
-        return false;
+        String query = "DELETE  FROM articles WHERE idArticle=" + id;
+        Statement st = connection.createStatement();
+        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 
     public ArrayList<Article> getByTag(String tagName) throws SQLException {

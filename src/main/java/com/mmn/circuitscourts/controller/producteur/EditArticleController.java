@@ -2,6 +2,7 @@ package com.mmn.circuitscourts.controller.producteur;
 
 import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Article;
+import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.services.ImageDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.services.ProducteurDAO;
@@ -16,16 +17,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import org.w3c.dom.Document;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
-public class AddArticlesController {
+public class EditArticleController {
+    public static int id;
     @FXML
     Label articleName;
     @FXML
@@ -56,8 +57,18 @@ public class AddArticlesController {
         ViewFactory.getInstance().showProdArticlesInterface();
     }
 
+    public Article getThisArticle() throws SQLException {
+        Article v = Article.article.getById(id);
+        return v;
+    }
+
     public void initialize() throws SQLException {
         initTags();
+        tfDescription.setText(getThisArticle().getDescription());
+        tfName.setText(getThisArticle().getName());
+        tfPrice.setText(String.valueOf(getThisArticle().getPrice()));
+        cbTag.setValue(getThisArticle().getCategorie());
+        tfWeight.setText(String.valueOf(getThisArticle().getWeight()));
         tfDescription.textProperty().addListener((observableValue, s, t1) -> {
             articleDescription.setText(t1);
         });
@@ -93,22 +104,22 @@ public class AddArticlesController {
         }
     }
 
-    public void onCreate() throws SQLException, FileNotFoundException {
+    public void onEdit() throws SQLException, FileNotFoundException {
         String name = tfName.getText();
         String description = tfDescription.getText();
         double price = Double.parseDouble(tfPrice.getText());
         String categorie = (String) cbTag.getValue();
         double weight = Double.parseDouble(tfWeight.getText());
-        ImageDAO imageDAO = new ImageDAO();
-        int imageId = imageDAO.add(file);
+       // ImageDAO imageDAO = new ImageDAO();
+        int imageId = getThisArticle().getImageId();
 
         ProducteurDAO producteurDAO = new ProducteurDAO();
-        Article a = new Article(name, categorie, description, price, weight, imageId, producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
-
-
+        Article a = new Article(id,name, categorie, description, price, weight, imageId, producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
+        System.out.println(a.getWeight());
+        Article.article.update(id,a);
 
         ViewFactory.getInstance().showProdArticlesInterface();
-        ArticlesController.showSuccessPopUp(a.getId());
+        //ArticlesController.showSuccessPopUp(a.getId());
 
     }
 }

@@ -136,7 +136,6 @@ public class CommandeDAO implements DAO<Commande, Integer> {
     public boolean remove(Integer numCommande) throws SQLException {
         String query = "DELETE  FROM Commande WHERE numCommande=" + numCommande;
         Statement st = con.createStatement();
-        st.executeUpdate(query);
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 
@@ -195,5 +194,10 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             commandes.add(commande);
         }
         return commandes;
+    }
+    public boolean removeById(int id) throws SQLException {
+        String query="DELETE FROM commande WHERE articleid ="+id;
+        Statement st = con.createStatement();
+        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 }

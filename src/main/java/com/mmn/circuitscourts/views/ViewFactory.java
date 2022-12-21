@@ -252,5 +252,12 @@ public class ViewFactory {
         createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ numImmat);
 
     }
+    public void showProdEditArticleInterface(int id){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditArticle.fxml"));
+        System.out.println("[PRODUCTEUR]EditArticle loaded.");
+        com.mmn.circuitscourts.controller.producteur.EditArticleController.id = id;
+        createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ id);
+
+    }
 }
 

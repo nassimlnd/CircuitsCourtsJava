@@ -111,7 +111,7 @@ public class VehiculesController {
         Vehicule.vehiculeDAO.remove(numImmat);
         System.out.println("[DEBUG]Commande deleted");
         contentTable.getChildren().clear();
-        ArrayList<Vehicule> vehicules = Vehicule.getCommandesInitialize();
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
         vehicules.forEach(vehicule -> {
             createLine(vehicule);
         });
