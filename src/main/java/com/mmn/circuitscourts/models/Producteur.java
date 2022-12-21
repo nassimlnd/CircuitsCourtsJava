@@ -3,6 +3,7 @@ package com.mmn.circuitscourts.models;
 import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.services.ProducteurDAO;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Producteur {
@@ -29,6 +30,14 @@ public class Producteur {
         this.numTel = numTel;
         this.coordonneesGps = coordonneesGps;
         this.accountId = accountId;
+    }
+
+    public Producteur(String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps) throws SQLException {
+        this.proprietaire = proprietaire;
+        this.adresse = adresse;
+        this.numTel = numTel;
+        this.coordonneesGps = coordonneesGps;
+        producteurDAO.add(this);
     }
 
     public int getNumSiret() {

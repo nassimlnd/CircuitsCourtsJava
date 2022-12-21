@@ -2,10 +2,7 @@ package com.mmn.circuitscourts.services;
 
 import com.mmn.circuitscourts.models.Proprietaire;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
@@ -18,6 +15,7 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
 
     @Override
     public Proprietaire getById(Integer id) throws SQLException {
+        System.out.println(id);
         String query = "SELECT * FROM proprietaire WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
@@ -30,8 +28,18 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
 
     @Override
     public int add(Proprietaire proprietaire) throws SQLException {
-        return 0;
+        String query2 = "INSERT INTO Proprietaire (nom, adresse, numTel) VALUES ( ?, ?, ?)";
+        PreparedStatement pst = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+        pst.setString(1, proprietaire.getNom());
+        pst.setString(2, proprietaire.getAdresse());
+        pst.setString(3, proprietaire.getNumTel());
+        pst.executeUpdate();
+        ResultSet resultSet = pst.getGeneratedKeys();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        } else throw new SQLException("ERREUR ADD COMMANDE");
     }
+
 
     @Override
     public boolean update(Integer id, Proprietaire proprietaire) throws SQLException {
@@ -40,6 +48,18 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
 
     @Override
     public boolean remove(Integer id) throws SQLException {
-        return false;
+        String query = "DELETE FROM proprietaire WHERE id ="+id;
+        Statement st = connection.createStatement();
+        st.executeUpdate(query);
+        return  Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
+
+    }
+
+    public boolean removeFromPropSiret(int numSiret) throws SQLException {
+        String query = "DELETE p FROM proprietaire p INNER JOIN producteur prod  ON p.id=prod.proprietaire WHERE prod.numSiret = "+ numSiret;
+        Statement st = connection.createStatement();
+        st.executeUpdate(query);
+        return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
+
     }
 }

@@ -42,6 +42,7 @@ public class ProducteurController {
     }
 
 
+
     public static void showSuccessPopUp() {
         popup.setVisible(true);
     }
@@ -114,12 +115,13 @@ public class ProducteurController {
     }
 
 
-    private void onEdit(int numCommande) {
-        ViewFactory.getInstance().showAdminEditProducteurInterface(numCommande);
+    private void onEdit(int numSiret) {
+        ViewFactory.getInstance().showAdminEditProducteurInterface(numSiret);
     }
 
 
     private  void onDelete(int numSiret) throws SQLException {
+        Proprietaire.proprietaireDAO.removeFromPropSiret(numSiret);
         Producteur.producteurDAO.remove(numSiret);
         System.out.println("[DEBUG]Producteur deleted");
         contentTable.getChildren().clear();
