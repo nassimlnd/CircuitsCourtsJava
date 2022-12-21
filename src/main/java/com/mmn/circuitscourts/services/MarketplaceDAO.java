@@ -71,7 +71,15 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
 
     @Override
     public boolean update(Integer id, Article article) throws SQLException {
-        return false;
+        String query = "UPDATE article SET name=?, categorie=?, description=?, price=?, weight?, imageId=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, article.getName());
+        preparedStatement.setString(2, article.getCategorie());
+        preparedStatement.setDouble(3, article.getPrice());
+        preparedStatement.setDouble(4, article.getWeight());
+        preparedStatement.setInt(5, article.getImageId());
+
+        return Boolean.valueOf(String.valueOf(preparedStatement.executeUpdate()));
     }
 
     @Override
