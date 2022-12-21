@@ -6,6 +6,7 @@ import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.services.CommandeDAO;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,12 +21,13 @@ public class Commande {
     private int numCommande;
     private int articleId;
     private double poids;
+    private int quantity;
     private String horaireDebut;
     private String horaireFin;
     private int idClient;
     private int idTournee;
     private int numSiret;
-    private Date dateCommande;
+    private LocalDate dateCommande;
     /**
      * instanciation statique de CommandeDAO pour avoir acces au méthodes de la classe CommandeDAO.
      */
@@ -43,14 +45,29 @@ public class Commande {
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int numCommande, int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
+    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int numSiret, LocalDate dateCommande) throws SQLException {
         this.numCommande = numCommande;
         this.articleId = articleId;
         this.poids = poids;
+        this.quantity = quantity;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
         this.numSiret = numSiret;
+        this.dateCommande = dateCommande;
+    }
+
+    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret, LocalDate dateCommande) throws SQLException {
+        this.numCommande = numCommande;
+        this.articleId = articleId;
+        this.poids = poids;
+        this.quantity = quantity;
+        this.horaireDebut = horaireDebut;
+        this.horaireFin = horaireFin;
+        this.idClient = idClient;
+        this.idTournee = idTournee;
+        this.numSiret = numSiret;
+        this.dateCommande = dateCommande;
     }
 
 
@@ -64,14 +81,15 @@ public class Commande {
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int articleId, double poids, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
+    public Commande(int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int numSiret) throws SQLException {
         this.articleId = articleId;
         this.poids = poids;
+        this.quantity = quantity;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.idClient = idClient;
         this.numSiret = numSiret;
-        this.dateCommande = Calendar.getInstance().getTime();
+        this.dateCommande = LocalDate.now();
 
         CommandeDAO commandeDAO = new CommandeDAO();
         this.numCommande = commandeDAO.add(this);
@@ -130,6 +148,11 @@ public class Commande {
 
     public void setIdTournee(int idTournee) {
         this.idTournee = idTournee;
+        try {
+            cmd.update(this.numCommande, this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getNumSiret() {
@@ -140,10 +163,17 @@ public class Commande {
         this.numSiret = numSiret;
     }
 
-    public Date getDateCommande() {
+    public LocalDate getDateCommande() {
         return dateCommande;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     /**
      * Récupère toutes les commandes grâce à la fonction getAll de commandes DAO

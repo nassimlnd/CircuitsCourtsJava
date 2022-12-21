@@ -4,18 +4,23 @@ import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.services.TourneeDAO;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Classe Tournée sert à créer l'objet Tournée.
  */
 public class Tournee {
     private int id;
+    private LocalDate date;
     private String horaireDebut;
     private String horaireFin;
-
     private int numSiret;
 
-    private int numImmat;
+    private String numImmat;
+
+    public static TourneeDAO tourneeDAO = new TourneeDAO();
 
     /**
      * constructeur avec l'id de la tournée.
@@ -25,8 +30,9 @@ public class Tournee {
      * @param numSiret
      * @param numImmat
      */
-    public Tournee(int id, String horaireDebut, String horaireFin, int numSiret, int numImmat) {
+    public Tournee(int id, LocalDate date, String horaireDebut, String horaireFin, int numSiret, String numImmat) {
         this.id = id;
+        this.date = date;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.numSiret = numSiret;
@@ -40,11 +46,18 @@ public class Tournee {
      * @param numSiret
      * @param numImmat
      */
-    public Tournee(String horaireDebut, String horaireFin, int numSiret, int numImmat) {
+    public Tournee(LocalDate date, String horaireDebut, String horaireFin, int numSiret, String numImmat) {
+        this.date = date;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
         this.numSiret = numSiret;
         this.numImmat = numImmat;
+
+        try {
+            this.id = tourneeDAO.add(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getId() {
@@ -53,6 +66,14 @@ public class Tournee {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getHoraireDebut() {
@@ -79,11 +100,11 @@ public class Tournee {
         this.numSiret = numSiret;
     }
 
-    public int getNumImmat() {
+    public String getNumImmat() {
         return numImmat;
     }
 
-    public void setNumImmat(int numImmat) {
+    public void setNumImmat(String numImmat) {
         this.numImmat = numImmat;
     }
 
@@ -106,7 +127,6 @@ public class Tournee {
     public static ArrayList<Tournee> getCommandesInitializeByProducteur() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAllByProducteur(App.userConnected.getId());
-        System.out.println(tournees);
         return tournees;
     }
 }

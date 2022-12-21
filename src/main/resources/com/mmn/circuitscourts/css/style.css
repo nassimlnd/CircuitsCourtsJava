@@ -1255,3 +1255,114 @@
     -fx-max-width: -width-size;
     -fx-shape: "M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224c0-17.7-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32z";
 }
+
+/* Time input */
+
+.clock-title {
+    -fx-font-size: 14;
+}
+
+.clock-container {
+    -fx-border-color: #EAECF0;
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 2px 0;
+    -fx-border-radius: 4px;
+}
+
+.clock-plus-button {
+    -fx-cursor: hand;
+    -fx-background-color: white;
+    -fx-border-color: #EAECF0;
+    -fx-border-radius: 4px;
+}
+
+.clock-digits {
+    -fx-font-weight: 700;
+    -fx-font-size: 16;
+}
+
+.clock-minus-button {
+    -fx-cursor: hand;
+    -fx-background-color: white;
+    -fx-border-color: #EAECF0;
+    -fx-border-radius: 4px;
+}
+
+/* Tournee commande chooser */
+
+.tournee-chooser-container {
+    -fx-border-radius: 8px;
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-border-color: #EAECF0;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -2, 0, 4);
+}
+
+.tournee-chooser-title {
+    -fx-font-size: 18;
+    -fx-font-weight: 700;
+}
+
+/* ErrorPopup */
+
+.errorPopup {
+    -fx-background-color: #F8FAFC;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, -4, 0, 4);
+}
+
+.errorPopup-indicator {
+    -fx-background-color: red;
+    -fx-background-radius: 8px 8px 0 0;
+    -fx-border-radius: 8px 8px 0 0;
+}
+
+.errorPopup-img {
+    -icon-paint: red;
+    -fx-background-color: -icon-paint;
+    -width-size: 14;
+    -height-size: 14;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224c0-17.7-14.3-32-32-32s-32 14.3-32 32s14.3 32 32 32s32-14.3 32-32z";
+}
+
+.errorPopup-title {
+    -fx-font: 14px 'Helvetica';
+    -fx-font-weight: 700;
+}
+
+.errorPopup-subtitle {
+    -fx-text-fill: #667085;
+    -fx-font: 14px 'Helvetica';
+}
+
+.errorPopup-close {
+    -fx-cursor: hand;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.errorPopup-close:hover {
+    -fx-border-color: black;
+    -fx-border-radius: 4px;
+}
+
+.errorPopup-close-img {
+    -icon-paint: #475467;
+    -fx-background-color: -icon-paint;
+    -width-size: 8;
+    -height-size: 8;
+    -fx-min-height: -height-size;
+    -fx-min-width: -width-size;
+    -fx-max-height: -height-size;
+    -fx-max-width: -width-size;
+
+    -fx-shape: "M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z";
+}

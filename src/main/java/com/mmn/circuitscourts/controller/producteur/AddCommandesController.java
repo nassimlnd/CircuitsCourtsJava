@@ -4,6 +4,7 @@ import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.controller.producteur.CommandesController;
 import com.mmn.circuitscourts.models.Client;
 import com.mmn.circuitscourts.models.Commande;
+import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
@@ -22,7 +23,7 @@ public class AddCommandesController {
     TextField quantite, horaire, poids;
 
     @FXML
-    ComboBox article;
+    ComboBox<String> article;
     @FXML
     ComboBox<String> client;
 
@@ -30,11 +31,15 @@ public class AddCommandesController {
     DatePicker date;
 
     public void onCreateButton() throws SQLException {
-        String[] idClient = client.getValue().split("-");
-        int id = Integer.parseInt(idClient[0]);
-        Commande c = new Commande(0, Integer.parseInt(poids.getText()),horaire.getText(), horaire.getText(), id, 1 );
+        int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
+        String[] horaires = horaire.getText().split("-");
+        String horaireDebut = horaires[0];
+        String horaireFin = horaires[1];
+        int idClient = Integer.parseInt(client.getValue().split("-")[0]);
+        int quantity = Integer.parseInt(quantite.getText());
+
+        Commande c = new Commande(idArticle, Double.parseDouble(poids.getText()), quantity, horaire.getText(), horaire.getText(), idClient, Producteur.producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
         CommandesController.showSuccessPopUp();
-        c.addCommandeToDb(c);
         ViewFactory.getInstance().showProdCommandesInterface();
     }
 

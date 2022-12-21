@@ -170,7 +170,7 @@ public class NewCommandeController {
             client = clientDAO.getByAccountId(App.userConnected.getId());
             int quantity = Integer.parseInt(tfQuantity.getText());
             Double weight = article.getWeight() * quantity;
-            new Commande(article.getId(), weight, tfHoraireDebut.getText(), tfHoraireFin.getText(), client.getId(), article.getNumSiret());
+            new Commande(article.getId(), weight, quantity, tfHoraireDebut.getText(), tfHoraireFin.getText(), client.getId(), article.getNumSiret());
         } catch (SQLException e) {
             ViewFactory.getInstance().showClientMarketplaceInterface();
             MarketplaceController.showFailPopup(e.getMessage());

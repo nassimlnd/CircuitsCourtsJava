@@ -4,6 +4,7 @@ import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -38,13 +39,20 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int numCommande = resultSet.getInt(1);
             int articleId = resultSet.getInt(2);
             double poids = resultSet.getDouble(3);
-            String horaireDebut = resultSet.getString(4);
-            String horaireFin = resultSet.getString(5);
-            int idClient = resultSet.getInt(6);
-            int idTournee = resultSet.getInt(7);
-            int numSiret = resultSet.getInt(8);
-            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
-            commande.setIdTournee(idTournee);
+            int quantity = resultSet.getInt(4);
+            String horaireDebut = resultSet.getString(5);
+            String horaireFin = resultSet.getString(6);
+            int idClient = resultSet.getInt(7);
+            int idTournee = resultSet.getInt(8);
+            int numSiret = resultSet.getInt(9);
+            LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
+            Commande commande = null;
+            if (idTournee > 0) {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, idTournee, numSiret, dateCommande);
+            } else {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, dateCommande);
+            }
+
             result.add(commande);
         }
         return result;
@@ -66,13 +74,21 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int numCommande = resultSet.getInt(1);
             int articleId = resultSet.getInt(2);
             double poids = resultSet.getDouble(3);
-            String horaireDebut = resultSet.getString(4);
-            String horaireFin = resultSet.getString(5);
-            int idClient = resultSet.getInt(6);
-            int idTournee = resultSet.getInt(7);
-            int numSiret = resultSet.getInt(8);
-            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
-            commande.setIdTournee(idTournee);
+            int quantity = resultSet.getInt(4);
+            String horaireDebut = resultSet.getString(5);
+            String horaireFin = resultSet.getString(6);
+            int idClient = resultSet.getInt(7);
+            int idTournee = resultSet.getInt(8);
+            int numSiret = resultSet.getInt(9);
+            LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
+            Commande commande = null;
+            if (idTournee > 0) {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, idTournee, numSiret, dateCommande);
+            } else {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, dateCommande);
+            }
+
+
             return commande;
         }
         //TODO : créer exception pour spécifier si on ne trouve pas d'admin avec cet id (exception 1)
@@ -88,14 +104,16 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      */
     @Override
     public int add(Commande commande) throws SQLException {
-        String query2 = "INSERT INTO Commande(articleId, poids, horaireDebut, horaireFin, idClient, numSiret) VALUES (?, ?, ?, ?, ?, ?)";
+        String query2 = "INSERT INTO Commande(articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = con.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
         pst.setInt(1, commande.getArticleId());
         pst.setDouble(2, commande.getPoids());
-        pst.setString(3, commande.getHoraireDebut());
-        pst.setString(4, commande.getHoraireFin());
-        pst.setInt(5, commande.getIdClient());
-        pst.setInt(6, commande.getNumSiret());
+        pst.setInt(3, commande.getQuantity());
+        pst.setString(4, commande.getHoraireDebut());
+        pst.setString(5, commande.getHoraireFin());
+        pst.setInt(6, commande.getIdClient());
+        pst.setInt(7, commande.getNumSiret());
+        pst.setDate(8, Date.valueOf(commande.getDateCommande()));
         pst.executeUpdate();
 
         ResultSet resultSet = pst.getGeneratedKeys();
@@ -114,15 +132,18 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      */
     @Override
     public boolean update(Integer numCommande, Commande commande) throws SQLException {
-        String query = "UPDATE Commande SET articleId=?, poids=?, horaireDebut=?, horaireFin=?, idClient=?, numSiret=? WHERE numCommande =?";
+        String query = "UPDATE Commande SET articleId=?, poids=?, quantity=?, horaireDebut=?, horaireFin=?, idClient=?, idTournee=?, numSiret=?, date=? WHERE numCommande =?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setInt(1, commande.getArticleId());
         pst.setDouble(2, commande.getPoids());
-        pst.setString(3, commande.getHoraireDebut());
-        pst.setString(4, commande.getHoraireFin());
-        pst.setInt(5, commande.getIdClient());
-        pst.setInt(6, commande.getNumSiret());
-        pst.setInt(7, commande.getNumCommande());
+        pst.setInt(3, commande.getQuantity());
+        pst.setString(4, commande.getHoraireDebut());
+        pst.setString(5, commande.getHoraireFin());
+        pst.setInt(6, commande.getIdClient());
+        pst.setInt(7, commande.getIdTournee());
+        pst.setInt(8, commande.getNumSiret());
+        pst.setDate(9, Date.valueOf(commande.getDateCommande()));
+        pst.setInt(10, commande.getNumCommande());
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 
@@ -169,13 +190,19 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             int numCommande = resultSet.getInt(1);
             int articleId = resultSet.getInt(2);
             double poids = resultSet.getDouble(3);
-            String horaireDebut = resultSet.getString(4);
-            String horaireFin = resultSet.getString(5);
-            int idClient = resultSet.getInt(6);
-            int idTournee = resultSet.getInt(7);
-            int numSiret = resultSet.getInt(8);
-            Commande commande = new Commande(numCommande, articleId, poids, horaireDebut, horaireFin, idClient, numSiret);
-            commande.setIdTournee(idTournee);
+            int quantity = resultSet.getInt(4);
+            String horaireDebut = resultSet.getString(5);
+            String horaireFin = resultSet.getString(6);
+            int idClient = resultSet.getInt(7);
+            int idTournee = resultSet.getInt(8);
+            int numSiret = resultSet.getInt(9);
+            LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
+            Commande commande = null;
+            if (idTournee > 0) {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, idTournee, numSiret, dateCommande);
+            } else {
+                commande = new Commande(numCommande, articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, dateCommande);
+            }
             result.add(commande);
         }
         return result;
@@ -189,8 +216,14 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         ArrayList<Commande> commandes = new ArrayList<>();
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Commande commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6), resultSet.getInt(8));
-            commande.setIdTournee(resultSet.getInt(7));
+            Commande commande = null;
+            if (resultSet.getInt(7) > 0) {
+                commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getDate(10).toLocalDate());
+            } else {
+                commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), resultSet.getString(5), resultSet.getString(6), resultSet.getInt(7), resultSet.getInt(9), resultSet.getDate(10).toLocalDate());
+            }
+
+
             commandes.add(commande);
         }
         return commandes;

@@ -58,9 +58,10 @@ public class EditCommandeController {
         String[] horaires = horaire.getText().split("-");
         String horaireDebut = horaires[0];
         String horaireFin = horaires[1];
+        int quantity = Integer.parseInt(quantite.getText());
         int idC = getCommande().getIdClient();
         int finalNumSiret = getCommande().getNumSiret();
-        Commande c = new Commande(commandeId, idArticle, getCommande().getPoids(), horaireDebut, horaireFin, idC, finalNumSiret);
+        Commande c = new Commande(commandeId, idArticle, getCommande().getPoids(), quantity, horaireDebut, horaireFin, idC, finalNumSiret, getCommande().getDateCommande());
         CommandeDAO cmd = new CommandeDAO();
         if (cmd.update(commandeId, c)){
             System.out.println("[DEBUG]Commande uptate");

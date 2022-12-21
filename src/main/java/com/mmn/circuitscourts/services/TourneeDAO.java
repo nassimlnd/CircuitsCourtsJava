@@ -5,13 +5,15 @@ import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.Tournee;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TourneeDAO implements DAO<Tournee,Integer> {
-    private static Connection conn = ConnectionMySQL.getInstance();;
+public class TourneeDAO implements DAO<Tournee, Integer> {
+    private static Connection conn = ConnectionMySQL.getInstance();
 
-    public TourneeDAO() throws SQLException {
+    public TourneeDAO() {
     }
+
     /**
      * Permet de récuperer tout le contenu d'une table.
      *
@@ -23,19 +25,17 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         ArrayList<Tournee> tournees = new ArrayList<>();
-        int id = 0;
-        String horaireDebut = null;
-        String horaireFin = null;
-        int numSiret = -1;
-        int numImmat = -1;
-        while(rs.next()){
-            id=rs.getInt(1);
-            horaireDebut=rs.getString(2);
-            horaireFin=rs.getString(3);
-            numSiret = rs.getInt(4);
-            numImmat = rs.getInt(5);
-            tournees.add(new Tournee(id,horaireDebut,horaireFin, numSiret, numImmat));
+
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            LocalDate date = rs.getDate(2).toLocalDate();
+            String horaireDebut = String.valueOf(rs.getTime(3));
+            String horaireFin = String.valueOf(rs.getTime(4));
+            int numSiret = rs.getInt(5);
+            String numImmat = rs.getString(6);
+            tournees.add(new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat));
         }
+
         return tournees;
     }
 
@@ -47,20 +47,18 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
      */
     @Override
     public Tournee getById(Integer id) throws SQLException {
-        String query = "SELECT * FROM tournee WHERE id="+id;
+        String query = "SELECT * FROM tournee WHERE id=" + id;
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
-        String horaireDebut = null;
-        String horaireFin = null;
-        int numSiret = -1;
-        int numImmat = -1;
-        if(rs.next()){
-            horaireDebut=rs.getString(2);
-            horaireFin=rs.getString(3);
-            numSiret = rs.getInt(4);
-            numImmat = rs.getInt(5);
-        }
-        return new Tournee (id,horaireDebut,horaireFin, numSiret, numImmat);
+
+        if (rs.next()) {
+            LocalDate date = rs.getDate(2).toLocalDate();
+            String horaireDebut = String.valueOf(rs.getTime(3));
+            String horaireFin = String.valueOf(rs.getTime(4));
+            int numSiret = rs.getInt(5);
+            String numImmat = rs.getString(6);
+            return new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat);
+        } else throw new SQLException("Id introuvable.");
     }
 
     /**
@@ -71,8 +69,13 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
      */
     @Override
     public int add(Tournee tournee) throws SQLException {
-        String query = "INSERT INTO tournee(id=" + tournee.getId()+",horairedebut= '"+tournee.getHoraireDebut()+"',horaireFin= '"+tournee.getHoraireFin()+"'";
-        PreparedStatement pst = conn.prepareStatement(query);
+        String query = "INSERT INTO tournee(date, horaireDebut, horaireFin, numSiret, numImmat) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        pst.setDate(1, Date.valueOf(tournee.getDate()));
+        pst.setTime(2, Time.valueOf(tournee.getHoraireDebut()));
+        pst.setTime(3, Time.valueOf(tournee.getHoraireFin()));
+        pst.setInt(4, tournee.getNumSiret());
+        pst.setString(5, tournee.getNumImmat());
         pst.executeUpdate();
 
         ResultSet resultSet = pst.getGeneratedKeys();
@@ -91,7 +94,7 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
      */
     @Override
     public boolean update(Integer id, Tournee tournee) throws SQLException {
-        String query = "UPDATE tournee SET id ="+id+",horairedebut= '"+tournee.getHoraireDebut()+"',horaireFin= '"+tournee.getHoraireFin()+"'";
+        String query = "UPDATE tournee SET id =" + id + ",horairedebut= '" + tournee.getHoraireDebut() + "',horaireFin= '" + tournee.getHoraireFin() + "'";
         PreparedStatement pst = conn.prepareStatement(query);
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
@@ -104,11 +107,12 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
      */
     @Override
     public boolean remove(Integer id) throws SQLException {
-        String query  ="DELETE  FROM tournee WHERE id="+ id;
+        String query = "DELETE  FROM tournee WHERE id=" + id;
         Statement st = conn.createStatement();
         st.executeUpdate(query);
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
+
     public int countById() throws Exception {
         String query = "SELECT COUNT(*) FROM tournee INNER JOIN producteur ON tournee.numSiret = producteur.numSiret INNER JOIN accounts ON producteur.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
         Statement statement = conn.createStatement();
@@ -119,26 +123,22 @@ public class TourneeDAO implements DAO<Tournee,Integer> {
     }
 
     public ArrayList<Tournee> getAllByProducteur(int accountId) throws SQLException {
-        String query = "SELECT * FROM tournee INNER JOIN Producteur ON tournee.numSiret=producteur.numSiret WHERE Producteur.accountId="+ accountId;
+        String query = "SELECT * FROM tournee INNER JOIN Producteur ON tournee.numSiret=producteur.numSiret WHERE Producteur.accountId=" + accountId;
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
-        int id = -1;
-        String horaireDebut = null;
-        String horaireFin = null;
-        int numSiret = -1;
-        int numImmat = -1;
         ArrayList<Tournee> tournees = new ArrayList<>();
-        while(rs.next()){
-            id = rs.getInt(1);
-            horaireDebut=rs.getString(2);
-            horaireFin=rs.getString(3);
-            numSiret = rs.getInt(4);
-            numImmat = rs.getInt(5);
-            tournees.add(new Tournee(id, horaireDebut, horaireFin, numSiret, numImmat));
-        }
-         return tournees;
-    }
 
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            LocalDate date = rs.getDate(2).toLocalDate();
+            String horaireDebut = String.valueOf(rs.getTime(3));
+            String horaireFin = String.valueOf(rs.getTime(4));
+            int numSiret = rs.getInt(5);
+            String numImmat = rs.getString(6);
+            tournees.add(new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat));
+        }
+        return tournees;
+    }
 
 
 }
