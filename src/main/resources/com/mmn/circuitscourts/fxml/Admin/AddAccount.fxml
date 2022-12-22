@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.PasswordField?>
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.AddAccountController">
+    <children>
+        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;">
+            <left>
+                <fx:include source="Sidebar.fxml" />
+            </left>
+            <center>
+
+            </center>
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button mnemonicParsing="false" onMouseClicked="#onBackButton" pickOnBounds="true" styleClass="back-button" text="Retour">
+                            <graphic>
+                                <Region styleClass="back-button-img" />
+                            </graphic>
+                        </Button>
+                        <Label styleClass="main-title" text="Création d'un producteur">
+                            <VBox.margin>
+                                <Insets top="20.0" />
+                            </VBox.margin></Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <TextField fx:id="identifiant" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Saisir l'identifiant"/>
+                                <PasswordField fx:id="mdp" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Saisir mot de passe">
+                                    <HBox.margin>
+                                        <Insets left="200.0" />
+                                    </HBox.margin>
+                                </PasswordField>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="75.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <PasswordField fx:id="confirmMdp" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Confirmation du mot de passe"/>
+                                <ComboBox fx:id="grade" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="grade"/>
+                            </children>
+                            <VBox.margin>
+                                <Insets top="75.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter le producteur" onMouseClicked="#onCreateButton" styleClass="addCommandeButton"/>
+                            </children>
+                        </HBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets />
+                    </BorderPane.margin>
+                    <padding>
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </center>
+        </BorderPane>
+    </children>
+</StackPane>

@@ -131,7 +131,7 @@ public class AdminSidebarController {
     public void onAccountButton() {
         String title = ViewFactory.getInstance().getMainStage().getTitle();
         if (title != "[ADMIN]CircuitsCourts - Comptes") {
-
+            ViewFactory.getInstance().showAdminAccountInterface();
         }
     }
 

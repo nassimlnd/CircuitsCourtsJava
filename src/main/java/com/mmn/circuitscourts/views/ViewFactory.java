@@ -259,5 +259,17 @@ public class ViewFactory {
         createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ id);
 
     }
+
+    public void showAdminAddAccountInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddAccount.fxml"));
+        System.out.println("[DEBUG]AddAccount loaded");
+        createScene(loader , "CircuitsCourts - Ajout d'un compte");
+    }
+
+    public void showAdminAccountInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Account.fxml"));
+        System.out.println("[DEBUG]Account loaded.");
+        createScene(loader, "CircuitsCourt - Comptes");
+    }
 }
 
