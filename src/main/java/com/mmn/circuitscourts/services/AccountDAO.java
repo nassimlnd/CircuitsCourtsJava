@@ -54,7 +54,7 @@ public class AccountDAO implements DAO<User,Integer> {
      */
     @Override
     public User getById(Integer id) throws SQLException {
-        String query = "SELECT * FROM accounts WHERE id=?";
+        String query = "SELECT * FROM accounts WHERE accountId=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -95,7 +95,7 @@ public class AccountDAO implements DAO<User,Integer> {
      */
     @Override
     public boolean update(Integer id, User user) throws SQLException {
-        String query = "UPDATE accounts SET identifiant=?, password=?, grade=? WHERE id=?";
+        String query = "UPDATE accounts SET identifiant=?, password=?, grade=? WHERE accountId=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, user.getIdentifiant());
         preparedStatement.setString(2, user.getPassword());
@@ -113,7 +113,7 @@ public class AccountDAO implements DAO<User,Integer> {
      */
     @Override
     public boolean remove(Integer id) throws SQLException {
-        String query = "DELETE FROM accounts WHERE id=?";
+        String query = "DELETE FROM accounts WHERE accountId=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);
         preparedStatement.executeUpdate();

@@ -271,5 +271,14 @@ public class ViewFactory {
         System.out.println("[DEBUG]Account loaded.");
         createScene(loader, "CircuitsCourt - Comptes");
     }
+
+    public void showAdminEditAccountInterface(int accountId) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditAccount.fxml"));
+        System.out.println("[DEBUG]EditAccount loaded.");
+        com.mmn.circuitscourts.controller.admin.EditAccountController.accountId = accountId;
+        createScene(loader, "CircuitsCourts - Modification du compte n°"+ accountId);
+
+
+    }
 }
 

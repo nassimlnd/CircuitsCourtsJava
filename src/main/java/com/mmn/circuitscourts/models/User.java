@@ -66,6 +66,18 @@ public class User {
         this.id = id;
     }
 
+    public int getGradeNumber(String grade){
+        switch (grade){
+            case "Client" :
+                return 1;
+            case "Producteur" :
+                return 2;
+            case "Administrateur":
+                return 3;
+            default:
+                return 1;
+        }
+    }
 }
 
 

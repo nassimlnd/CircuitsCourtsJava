@@ -115,14 +115,14 @@ public class AccountController {
         }
 
 
-        private void onEdit(int numCommande) {
-
+        private void onEdit(int AccountId) {
+            ViewFactory.getInstance().showAdminEditAccountInterface(AccountId);
         }
 
 
-        private void onDelete(int numCommande) throws SQLException {
-            User.accountDAO.remove(numCommande);
-            System.out.println("[DEBUG]Commande deleted");
+        private void onDelete(int accountId) throws SQLException {
+            User.accountDAO.remove(accountId);
+            System.out.println("[DEBUG]Account deleted");
             contentTable.getChildren().clear();
             ArrayList<User> users = User.accountDAO.getAll();
             users.forEach(user -> {
@@ -134,13 +134,13 @@ public class AccountController {
             });
         }
 
-        public void showConfirmationDialog(int id) {
-            descDialog.setText("Voulez vous vraiment supprimer le compte n°"+ id);
+        public void showConfirmationDialog(int accountId) {
+            descDialog.setText("Voulez vous vraiment supprimer le compte n°"+ accountId);
             confirmationDialog.setVisible(true);
             okButton.setOnMouseClicked(mouseEvent -> {
                 confirmationDialog.setVisible(false);
                 try {
-                    onDelete(id);
+                    onDelete(accountId);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
