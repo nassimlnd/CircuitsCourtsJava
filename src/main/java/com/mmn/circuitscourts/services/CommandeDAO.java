@@ -115,19 +115,22 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         pst.setDate(8, Date.valueOf(commande.getDateCommande()));
         pst.executeUpdate();
 
+        ResultSet resultSet = pst.getGeneratedKeys();
+        int result = 0;
+        if (resultSet.next()) {
+            result = resultSet.getInt(1);
+        } else throw new SQLException("ERREUR ADD COMMANDE");
+
         String query2 = "INSERT INTO logs(accountId, categorie, objectId, date, time) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement1 = con.prepareStatement(query2);
         preparedStatement1.setInt(1, App.userConnected.getId());
         preparedStatement1.setString(2, "newcommande");
-        preparedStatement1.setInt(3, commande.getNumCommande());
+        preparedStatement1.setInt(3, result);
         preparedStatement1.setDate(4, Date.valueOf(LocalDate.now()));
         preparedStatement1.setTime(5, Time.valueOf(LocalTime.now()));
         preparedStatement1.executeUpdate();
 
-        ResultSet resultSet = pst.getGeneratedKeys();
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
-        } else throw new SQLException("ERREUR ADD COMMANDE");
+        return result;
     }
 
     /**

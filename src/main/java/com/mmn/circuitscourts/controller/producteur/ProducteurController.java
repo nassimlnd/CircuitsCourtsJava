@@ -31,6 +31,8 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class ProducteurController {
@@ -65,7 +67,9 @@ public class ProducteurController {
         LogsDAO logsDAO = new LogsDAO();
         try {
             ArrayList<ArrayList<String>> logs = logsDAO.getAll();
-            logs.forEach(log -> createFeedLine(log));
+            for (int i = logs.size() - 1; i >= 0; i--) {
+                createFeedLine(logs.get(i));
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -83,23 +87,26 @@ public class ProducteurController {
         vBox.setAlignment(Pos.CENTER_LEFT);
 
         Label title = new Label();
-        title.setPrefWidth(678);
+        title.setPrefWidth(640);
         title.setPrefHeight(20);
         title.setStyle("-fx-font-size: 14");
+
+        Label subtitle = new Label("Subtitle");
 
         switch (log.get(2)) {
             case "newcommande" :
                 title.setText("Nouvelle commande !");
+                subtitle.setText("La commande n°" + log.get(3));
                 break;
             case "newclient" :
                 title.setText("Nouveau client !");
+                subtitle.setText("Le client n°" + log.get(3));
                 break;
             case "newtournee" :
                 title.setText("Nouvelle tournée !");
+                subtitle.setText("La tournée n°" + log.get(3));
                 break;
         }
-
-        Label subtitle = new Label("Subtitle");
 
         vBox.getChildren().add(title);
         vBox.getChildren().add(subtitle);
@@ -111,7 +118,27 @@ public class ProducteurController {
         if (Date.valueOf(log.get(4)) == Date.valueOf(LocalDate.now())) {
 
         } else {
-            time.setText(String.valueOf(Date.valueOf(log.get(4)).getTime() - Date.valueOf(LocalDate.now()).getTime()));
+            Period periode = Period.between(Date.valueOf(log.get(4)).toLocalDate(), LocalDate.now());
+            if (periode.getDays() > 31) {
+                if (periode.getMonths() > 12) {
+                    time.setText("Il y a " + periode.getYears() + " année(s).");
+                } else {
+                    time.setText("Il y a " + periode.getMonths() + " mois.");
+                }
+            } else if (periode.getDays() == 0) {
+                Time t1 = Time.valueOf(log.get(5));
+                Time now = Time.valueOf(LocalTime.now());
+
+                long diff = now.getTime() - t1.getTime();
+
+                if ((diff / 1000) > 60) {
+                    if (diff / (1000 * 60) > 60) {
+                        time.setText("Il y a " + diff / (1000 * 60 * 60) + " heures");
+                    } else time.setText("Il y a " + diff / (1000 * 60) + " minutes");
+                } else time.setText("Il y a " + diff / 1000 + " secondes");
+            } else {
+                time.setText("Il y a " + periode.getDays() + " jour(s).");
+            }
         }
 
         line.getChildren().add(time);

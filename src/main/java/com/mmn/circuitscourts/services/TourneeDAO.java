@@ -6,6 +6,7 @@ import com.mmn.circuitscourts.models.Tournee;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TourneeDAO implements DAO<Tournee, Integer> {
@@ -77,6 +78,15 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
         pst.setInt(4, tournee.getNumSiret());
         pst.setString(5, tournee.getNumImmat());
         pst.executeUpdate();
+
+        String query2 = "INSERT INTO logs(accountId, categorie, objectId, date, time) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement preparedStatement1 = conn.prepareStatement(query2);
+        preparedStatement1.setInt(1, App.userConnected.getId());
+        preparedStatement1.setString(2, "newcommande");
+        preparedStatement1.setInt(3, tournee.getId());
+        preparedStatement1.setDate(4, Date.valueOf(LocalDate.now()));
+        preparedStatement1.setTime(5, Time.valueOf(LocalTime.now()));
+        preparedStatement1.executeUpdate();
 
         ResultSet resultSet = pst.getGeneratedKeys();
         if (resultSet.next()) {
