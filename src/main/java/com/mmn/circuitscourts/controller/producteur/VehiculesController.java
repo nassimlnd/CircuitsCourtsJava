@@ -59,9 +59,9 @@ public class VehiculesController {
             label.getStyleClass().add("commande-tableview-line-cell");
             label.setMaxHeight(1.7976931348623157E308);
             label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(151);
-            label.setMinWidth(151);
-            label.setMaxWidth(151);
+            label.setPrefWidth(200);
+            label.setMinWidth(200);
+            label.setMaxWidth(200);
             line.getChildren().add(label);
 
         });
@@ -71,7 +71,7 @@ public class VehiculesController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0,0,0, 20));
+        HBox.setMargin(edit, new Insets(0,0,0, 320));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(v.getNumImmat());
         });

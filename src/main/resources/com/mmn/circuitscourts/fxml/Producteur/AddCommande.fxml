@@ -68,7 +68,7 @@
                                          <Insets left="20.0" />
                                      </padding>
                                      <children>
-                                         <Label styleClass="profil-container-header-title" text="Horaires de la tournée" />
+                                         <Label styleClass="profil-container-header-title" text="Horaires de livraison" />
                                      </children>
                                  </VBox>
                                  <VBox alignment="CENTER_LEFT" prefHeight="275.0" prefWidth="418.0">

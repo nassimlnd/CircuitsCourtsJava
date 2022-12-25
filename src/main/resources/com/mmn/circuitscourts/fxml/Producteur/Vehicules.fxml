@@ -86,18 +86,15 @@
                                       styleClass="commande-tableview-header">
                                     <children>
                                         <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-                                               maxWidth="151.0" prefWidth="151.0"
-                                               styleClass="commande-tableview-header-title" text="Numéro">
+                                               maxWidth="200.0" prefWidth="200.0"
+                                               styleClass="commande-tableview-header-title" text="Numéro d'immmatriculation">
                                             <HBox.margin>
                                                 <Insets left="40.0"/>
                                             </HBox.margin>
                                         </Label>
                                         <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-                                               prefWidth="151.0" styleClass="commande-tableview-header-title"
-                                               text="Libellé"/>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308"
-                                               maxWidth="151.0" prefWidth="151.0"
-                                               styleClass="commande-tableview-header-title" text="Poids"/>
+                                               maxWidth="200.0" prefWidth="200.0"
+                                               styleClass="commande-tableview-header-title" text="Poids maximum"/>
                                     </children>
                                     <padding>
                                         <Insets right="40.0"/>

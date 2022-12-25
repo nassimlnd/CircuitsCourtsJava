@@ -29,13 +29,9 @@ public class NewCommandeController {
     @FXML
     VBox articleContainer;
     @FXML
-    TextField tfQuantity;
+    TextField tfQuantity, tfHoraireDebut, tfHoraireFin;
     @FXML
-    TextField tfHoraireDebut;
-    @FXML
-    TextField tfHoraireFin;
-    @FXML
-    Label totalPrice;
+    Label totalPrice, hourDebut, hourFin, minutesDebut, minutesFin;
 
 
     public void initialize() throws SQLException, IOException {
@@ -167,16 +163,127 @@ public class NewCommandeController {
         Client client = null;
         Article article = null;
         try {
+            String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
+            String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
             article = marketplaceDAO.getById(articleId);
             client = clientDAO.getByAccountId(App.userConnected.getId());
             int quantity = Integer.parseInt(tfQuantity.getText());
             Double weight = article.getWeight() * quantity;
-            new Commande(article.getId(), weight, quantity, tfHoraireDebut.getText(), tfHoraireFin.getText(), client.getId(), article.getNumSiret(), LocalDate.now());
+            new Commande(article.getId(), weight, quantity, horaireDebut, horaireFin, client.getId(), article.getNumSiret(), LocalDate.now());
         } catch (SQLException e) {
             ViewFactory.getInstance().showClientMarketplaceInterface();
             MarketplaceController.showFailPopup(e.getMessage());
         }
         ViewFactory.getInstance().showClientMarketplaceInterface();
         MarketplaceController.showSuccessPopup();
+    }
+
+    public void onPlusHourDebut() {
+        int hour = Integer.parseInt(hourDebut.getText());
+        if (hour < 23) {
+            hour++;
+            hourDebut.setText(String.valueOf(hour));
+        } else if (hour == 23) {
+            hour = 00;
+            hourDebut.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Ajoute une minute au compteur
+     */
+    public void onPlusMinutesDebut() {
+        int minutes = Integer.parseInt(minutesDebut.getText());
+        if (minutes < 59) {
+            minutes++;
+            minutesDebut.setText(String.valueOf(minutes));
+        } else if (minutes == 59) {
+            minutes = 0;
+            minutesDebut.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Retire une heure au compteur
+     */
+    public void onMinusHourDebut() {
+        int hour = Integer.parseInt(hourDebut.getText());
+        if (hour > 0) {
+            hour--;
+            hourDebut.setText(String.valueOf(hour));
+        } else if (hour == 0) {
+            hour = 23;
+            hourDebut.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Retire une minute au compteur
+     */
+    public void onMinusMinutesDebut() {
+        int minutes = Integer.parseInt(minutesDebut.getText());
+        if (minutes > 0) {
+            minutes--;
+            minutesDebut.setText(String.valueOf(minutes));
+        } else if (minutes == 0) {
+            minutes = 59;
+            minutesDebut.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Ajoute une heure au compteur
+     */
+    public void onPlusHourFin() {
+        int hour = Integer.parseInt(hourFin.getText());
+        if (hour < 23) {
+            hour++;
+            hourFin.setText(String.valueOf(hour));
+        } else if (hour == 23) {
+            hour = 00;
+            hourFin.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Ajoute une minute au compteur
+     */
+    public void onPlusMinutesFin() {
+        int minutes = Integer.parseInt(minutesFin.getText());
+        if (minutes < 59) {
+            minutes++;
+            minutesFin.setText(String.valueOf(minutes));
+        } else if (minutes == 59) {
+            minutes = 0;
+            minutesFin.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Retire une heure au compteur
+     */
+    public void onMinusHourFin() {
+        int hour = Integer.parseInt(hourFin.getText());
+        if (hour > 0) {
+            hour--;
+            hourFin.setText(String.valueOf(hour));
+        } else if (hour == 0) {
+            hour = 23;
+            hourFin.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Retire une minute au compteur
+     */
+    public void onMinusMinutesFin() {
+        int minutes = Integer.parseInt(minutesFin.getText());
+        if (minutes > 0) {
+            minutes--;
+            minutesFin.setText(String.valueOf(minutes));
+        } else if (minutes == 0) {
+            minutes = 59;
+            minutesFin.setText(String.valueOf(minutes));
+        }
     }
 }

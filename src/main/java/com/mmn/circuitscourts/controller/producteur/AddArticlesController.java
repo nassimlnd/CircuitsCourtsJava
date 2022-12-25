@@ -27,30 +27,16 @@ import java.util.ArrayList;
 
 public class AddArticlesController {
     @FXML
-    Label articleName;
+    Label articleName, articlePrice, articleDescription, tagName;
     @FXML
-    Label articlePrice;
+    TextField tfName, tfPrice, tfDescription, tfWeight, tfCategorie;
     @FXML
-    Label articleDescription;
-    @FXML
-    Label tagName;
-    @FXML
-    TextField tfName;
-    @FXML
-    TextField tfPrice;
-    @FXML
-    TextField tfDescription;
-    @FXML
-    TextField tfWeight;
-    @FXML
-    ComboBox cbTag;
+    ComboBox<String> cbTag;
     @FXML
     Button fileChooser;
     @FXML
-    VBox imageContainer;
-
+    VBox imageContainer, addCategorieContainer;
     File file;
-
 
     public void onBackButton() {
         ViewFactory.getInstance().showProdArticlesInterface();
@@ -112,5 +98,19 @@ public class AddArticlesController {
         ViewFactory.getInstance().showProdArticlesInterface();
         ArticlesController.showSuccessPopUp(a.getId());
 
+    }
+
+    public void onAddCategorie() {
+        tfCategorie.setText("");
+        addCategorieContainer.setVisible(true);
+    }
+
+    public void onCreateCategorie() {
+        cbTag.getItems().add(tfCategorie.getText());
+        addCategorieContainer.setVisible(false);
+    }
+
+    public void onCloseCategorie() {
+        addCategorieContainer.setVisible(false);
     }
 }
