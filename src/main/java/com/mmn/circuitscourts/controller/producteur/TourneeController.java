@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.controller.producteur;
 
+import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -17,13 +18,22 @@ import java.util.ArrayList;
 public class TourneeController {
 
     @FXML
-    Button addButton;
+    Button addButton, okButton, cancelButton;
     @FXML
-    VBox contentTable;
+    VBox contentTable, successPopup, confirmationDialog;
+    @FXML
+    Label popupTitle, popupSubtitle, descDialog;
+
+    static Label titlePopup, subtitlePopup;
+    static VBox popup;
 
     public void initialize() throws SQLException {
         ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByProducteur();
         tournees.forEach(tournee -> createLine(tournee));
+
+        titlePopup = popupTitle;
+        subtitlePopup = popupSubtitle;
+        popup = successPopup;
     }
 
     public void onAddButton() {
@@ -40,9 +50,11 @@ public class TourneeController {
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numTournee = new Label(String.valueOf(trn.getId()));
+        Label date = new Label(trn.getDate().toString());
         Label horaire = new Label(trn.getHoraireDebut() + "h à " + trn.getHoraireFin() + "h");
         Label numImmat = new Label(String.valueOf(trn.getNumImmat()));
         labels.add(numTournee);
+        labels.add(date);
         labels.add(horaire);
         labels.add(numImmat);
 
@@ -61,16 +73,59 @@ public class TourneeController {
         Region editImg = new Region();
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 60));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 100));
         edit.setOnMouseClicked(mouseEvent -> {
             ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
         });
 
+        Button delete = new Button();
+        delete.getStyleClass().add("delete-button");
+        Region deleteImg = new Region();
+        deleteImg.getStyleClass().add("delete-button-img");
+        delete.setGraphic(deleteImg);
+        delete.setOnMouseClicked(mouseEvent -> {
+            showConfirmationDialog(trn);
+        });
+
         line.getChildren().add(edit);
+        line.getChildren().add(delete);
         contentTable.getChildren().add(line);
     }
 
-    public void onClosePopup() {
+    private void onDelete(Tournee trn) throws SQLException {
+        Tournee.tourneeDAO.remove(trn.getId());
+        ArrayList<Commande> commandes = Commande.cmd.getAllByTournee(trn.getId());
+        commandes.forEach(commande -> {
+            commande.setIdTournee(0);
+        });
 
+        ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByProducteur();
+        tournees.forEach(tournee -> createLine(tournee));
+    }
+
+    public void showConfirmationDialog(Tournee tournee) {
+        descDialog.setText("Voulez vous vraiment supprimer la tournée n°"+ tournee.getId());
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                onDelete(tournee);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+        });
+    }
+
+    public void onClosePopup() {
+        popup.setVisible(false);
+    }
+
+    public static void showPopupSuccess(String title, String message) {
+        titlePopup.setText(title);
+        subtitlePopup.setText(message);
+        popup.setVisible(true);
     }
 }

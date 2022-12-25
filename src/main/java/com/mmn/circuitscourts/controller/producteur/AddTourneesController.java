@@ -186,34 +186,6 @@ public class AddTourneesController {
             chooser.setVisible(false);
         });
 
-        /*Button edit = new Button();
-        edit.getStyleClass().add("edit-button");
-        Region editImg = new Region();
-        editImg.getStyleClass().add("edit-button-img");
-        edit.setGraphic(editImg);
-        edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0,0,0, 20));
-        edit.setOnMouseClicked(mouseEvent -> {
-            onEdit(commande.getNumCommande());
-        });
-
-        Button delete = new Button();
-        delete.getStyleClass().add("delete-button");
-        Region deleteImg = new Region();
-        deleteImg.getStyleClass().add("delete-button-img");
-        delete.setGraphic(deleteImg);
-        delete.setPickOnBounds(true);
-        delete.setOnMouseClicked(event -> {
-            try {
-                onDelete(commande.getNumCommande());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-
-        });
-
-        line.getChildren().add(edit);
-        line.getChildren().add(delete);*/
         chooserContentTable.getChildren().add(line);
     }
 
@@ -416,14 +388,14 @@ public class AddTourneesController {
                 }
                 Tournee tournee = new Tournee(datePicker.getValue(), horaireDebut, horaireFin, Producteur.producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret(), vehicule.getNumImmat());
                 commandes.forEach(commande -> commande.setIdTournee(tournee.getId()));
+                TourneeController.showPopupSuccess("Tournée ajoutée !", "La tournée n°" + tournee.getId() + " a bien été ajoutée !");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
             ViewFactory.getInstance().showProdTourneeInterface();
         } else {
             showErrorPopup("L'horaire de fin est avant celui de début.");
         }
-
-        //TourneeController.showSuccessPopup(int id);
     }
 }

@@ -91,9 +91,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
 
 
             return commande;
-        }
-        //TODO : créer exception pour spécifier si on ne trouve pas d'admin avec cet id (exception 1)
-        throw new SQLException();
+        } else throw new SQLException("Id de la commande introuvable");
     }
 
     /**
@@ -117,12 +115,13 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         pst.setDate(8, Date.valueOf(commande.getDateCommande()));
         pst.executeUpdate();
 
-        String query2 = "INSERT INTO logs(accountId, categorie, date, time) VALUES (?, ?, ?, ?)";
+        String query2 = "INSERT INTO logs(accountId, categorie, objectId, date, time) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement1 = con.prepareStatement(query2);
         preparedStatement1.setInt(1, App.userConnected.getId());
         preparedStatement1.setString(2, "newcommande");
-        preparedStatement1.setDate(3, Date.valueOf(LocalDate.now()));
-        preparedStatement1.setTime(4, Time.valueOf(LocalTime.now()));
+        preparedStatement1.setInt(3, commande.getNumCommande());
+        preparedStatement1.setDate(4, Date.valueOf(LocalDate.now()));
+        preparedStatement1.setTime(5, Time.valueOf(LocalTime.now()));
         preparedStatement1.executeUpdate();
 
         ResultSet resultSet = pst.getGeneratedKeys();
@@ -241,5 +240,17 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         String query="DELETE FROM commande WHERE articleid ="+id;
         Statement st = con.createStatement();
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
+    }
+
+    public ArrayList<Commande> getAllByTournee(int tourneeId) throws SQLException {
+        String query = "SELECT * FROM commande WHERE idTournee=?";
+        PreparedStatement preparedStatement = con.prepareStatement(query);
+        preparedStatement.setInt(1, tourneeId);
+        ArrayList<Commande> commandes = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            commandes.add(new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getDate(10).toLocalDate()));
+        }
+        return commandes;
     }
 }

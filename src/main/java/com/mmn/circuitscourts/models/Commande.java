@@ -1,15 +1,11 @@
 package com.mmn.circuitscourts.models;
 
 import com.mmn.circuitscourts.App;
-import com.mmn.circuitscourts.controller.producteur.ProducteurController;
-import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.services.CommandeDAO;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Classe Commande sert à créer l'objet Commande.
@@ -146,7 +142,7 @@ public class Commande {
         return idTournee;
     }
 
-    public void setIdTournee(int idTournee) {
+    public void setIdTournee(Integer idTournee) {
         this.idTournee = idTournee;
         try {
             cmd.update(this.numCommande, this);
