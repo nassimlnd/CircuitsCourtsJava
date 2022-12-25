@@ -50,7 +50,7 @@ public class VehiculesController {
         line.setPadding(new Insets(0, 40, 0, 40));
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
-        Label numImmatriculation = new Label(String.valueOf(v.getNumImmate()));
+        Label numImmatriculation = new Label(String.valueOf(v.getNumImmat()));
         Label poids = new Label(String.valueOf(v.getPoidsMax()));
         labels.add(numImmatriculation);
         labels.add(poids);
@@ -73,7 +73,7 @@ public class VehiculesController {
         edit.setPickOnBounds(true);
         HBox.setMargin(edit, new Insets(0,0,0, 20));
         edit.setOnMouseClicked(mouseEvent -> {
-            onEdit(v.getNumImmate());
+            onEdit(v.getNumImmat());
         });
 
         Button delete = new Button();
@@ -84,7 +84,7 @@ public class VehiculesController {
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
             try {
-                onDelete((v.getNumImmate()));
+                onDelete(v.getNumImmat());
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }

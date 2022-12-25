@@ -17,18 +17,12 @@ import java.util.ArrayList;
 public class AddCommandesController {
     @FXML
     Button plusHourDebut, plusMinutesDebut, minusHourDebut, minusMinutesDebut, plusHourFin, plusMinutesFin, minusMinutesFin, minusHourFin;
-
     @FXML
     Label hourDebut, minutesDebut, hourFin, minutesFin;
-
     @FXML
-    TextField quantite, horaire, poids;
-
+    TextField quantite;
     @FXML
-    ComboBox<String> article;
-    @FXML
-    ComboBox<String> client;
-
+    ComboBox<String> article, client;
     @FXML
     DatePicker date;
 
@@ -78,6 +72,9 @@ public class AddCommandesController {
         ViewFactory.getInstance().showProdCommandesInterface();
     }
 
+    /**
+     * Ajoute une heure au compteur
+     */
     public void onPlusHourDebut() {
         int hour = Integer.parseInt(hourDebut.getText());
         if (hour < 23) {

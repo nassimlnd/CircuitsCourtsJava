@@ -19,7 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
@@ -62,13 +64,31 @@ public class EditArticleController {
         return v;
     }
 
-    public void initialize() throws SQLException {
+    public void initialize() throws SQLException, MalformedURLException {
         initTags();
+        ImageDAO imageDAO = new ImageDAO();
+        Image image = null;
+        try {
+            image = imageDAO.getImage(getThisArticle().getImageId(), imageDAO.getExtById(getThisArticle().getImageId()));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(200);
+        imageView.setFitWidth(230);
+        imageContainer.getChildren().clear();
+        imageContainer.getChildren().add(imageView);
+        articleName.setText(getThisArticle().getName());
+        articleDescription.setText(getThisArticle().getDescription());
+        articlePrice.setText(getThisArticle().getPrice() + " €");
+        tagName.setText(getThisArticle().getCategorie());
+
         tfDescription.setText(getThisArticle().getDescription());
         tfName.setText(getThisArticle().getName());
         tfPrice.setText(String.valueOf(getThisArticle().getPrice()));
         cbTag.setValue(getThisArticle().getCategorie());
         tfWeight.setText(String.valueOf(getThisArticle().getWeight()));
+
         tfDescription.textProperty().addListener((observableValue, s, t1) -> {
             articleDescription.setText(t1);
         });
@@ -92,13 +112,15 @@ public class EditArticleController {
 
     public void onBrowse() throws MalformedURLException {
         FileChooser fC = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Images files (*.png, *.jpg)", "*.png", "*.jpg");
+        fC.getExtensionFilters().add(extensionFilter);
         file = fC.showOpenDialog(ViewFactory.getInstance().getMainStage());
 
         if (file != null) {
             Image image1 = new Image(file.toURI().toURL().toString());
             ImageView imageView = new ImageView(image1);
             imageView.setFitHeight(200);
-            imageView.setFitWidth(200);
+            imageView.setFitWidth(230);
             imageContainer.getChildren().clear();
             imageContainer.getChildren().add(imageView);
         }
@@ -110,7 +132,9 @@ public class EditArticleController {
         double price = Double.parseDouble(tfPrice.getText());
         String categorie = (String) cbTag.getValue();
         double weight = Double.parseDouble(tfWeight.getText());
-       // ImageDAO imageDAO = new ImageDAO();
+        ImageDAO imageDAO = new ImageDAO();
+        imageDAO.update(getThisArticle().getImageId(), file);
+
         int imageId = getThisArticle().getImageId();
 
         ProducteurDAO producteurDAO = new ProducteurDAO();

@@ -45,7 +45,7 @@ public class VehiculeController {
         line.setPadding(new Insets(0, 0, 0, 40));
         line.getStyleClass().add("vehicule-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
-        Label numImmatriculation = new Label(String.valueOf(vehicule.getNumImmate()));
+        Label numImmatriculation = new Label(String.valueOf(vehicule.getNumImmat()));
         Label poids = new Label(String.valueOf(vehicule.getPoidsMax()));
         Label numSiret = new Label(String.valueOf(vehicule.getnumSiret()));
         labels.add(numImmatriculation);
@@ -71,7 +71,7 @@ public class VehiculeController {
         edit.setPickOnBounds(true);
         HBox.setMargin(edit, new Insets(0, 0, 0, 290));
         edit.setOnMouseClicked(mouseEvent -> {
-            onEdit(vehicule.getNumImmate());
+            onEdit(vehicule.getNumImmat());
         });
 
         Button delete = new Button();
@@ -81,7 +81,7 @@ public class VehiculeController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            showConfirmationDialog(vehicule.getNumImmate());
+            showConfirmationDialog(vehicule.getNumImmat());
         });
 
         line.getChildren().add(edit);

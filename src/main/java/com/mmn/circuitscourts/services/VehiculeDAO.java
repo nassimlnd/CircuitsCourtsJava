@@ -64,7 +64,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public int add(Vehicule vehicule) throws SQLException {
-        String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmate()+"', "+vehicule.getPoidsMax()+", "+vehicule.getnumSiret()+")";
+        String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmat()+"', "+vehicule.getPoidsMax()+", "+vehicule.getnumSiret()+")";
         PreparedStatement pst = conn.prepareStatement(query);
         System.out.println(vehicule);
         return pst.executeUpdate();
@@ -133,7 +133,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
     public boolean exists(Vehicule vehicule) throws SQLException {
         String query = "SELECT * FROM vehicule WHERE numImmat=?";
         PreparedStatement preparedStatement = conn.prepareStatement(query);
-        preparedStatement.setString(1, vehicule.getNumImmate());
+        preparedStatement.setString(1, vehicule.getNumImmat());
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {

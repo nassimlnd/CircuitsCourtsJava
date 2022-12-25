@@ -59,7 +59,7 @@ public class ArticlesController {
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
         line.setPrefWidth(850);
-        line.setPadding(new Insets(0, 40, 0, 40));
+        line.setPadding(new Insets(0, 0, 0, 40));
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label id = new Label(String.valueOf(article.getId()));
@@ -77,18 +77,19 @@ public class ArticlesController {
             label.getStyleClass().add("commande-tableview-line-cell");
             label.setMaxHeight(1.7976931348623157E308);
             label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(151);
-            label.setMinWidth(151);
-            label.setMaxWidth(151);
+            label.setPrefWidth(141);
+            label.setMinWidth(141);
+            label.setMaxWidth(141);
             line.getChildren().add(label);
         });
+
         Button edit = new Button();
         edit.getStyleClass().add("edit-button");
         Region editImg = new Region();
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0,0,0, 20));
+        HBox.setMargin(edit, new Insets(0,0,0, 10));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(article.getId());
         });
@@ -111,7 +112,7 @@ public class ArticlesController {
         ViewFactory.getInstance().showProdEditArticleInterface(id);
     }
     public void showConfirmationDialog(int id) {
-        descDialog.setText("Voulez vous vraiment supprimer l'article n°"+ id+" et les commandes qui lui sont liées");
+        descDialog.setText("Voulez vous vraiment supprimer l'article n°"+ id+" et \nles commandes qui lui sont liées");
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);

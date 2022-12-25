@@ -5,6 +5,7 @@ import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
@@ -104,8 +105,8 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      */
     @Override
     public int add(Commande commande) throws SQLException {
-        String query2 = "INSERT INTO Commande(articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement pst = con.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+        String query = "INSERT INTO Commande(articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         pst.setInt(1, commande.getArticleId());
         pst.setDouble(2, commande.getPoids());
         pst.setInt(3, commande.getQuantity());
@@ -115,6 +116,14 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         pst.setInt(7, commande.getNumSiret());
         pst.setDate(8, Date.valueOf(commande.getDateCommande()));
         pst.executeUpdate();
+
+        String query2 = "INSERT INTO logs(accountId, categorie, date, time) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement1 = con.prepareStatement(query2);
+        preparedStatement1.setInt(1, App.userConnected.getId());
+        preparedStatement1.setString(2, "newcommande");
+        preparedStatement1.setDate(3, Date.valueOf(LocalDate.now()));
+        preparedStatement1.setTime(4, Time.valueOf(LocalTime.now()));
+        preparedStatement1.executeUpdate();
 
         ResultSet resultSet = pst.getGeneratedKeys();
         if (resultSet.next()) {

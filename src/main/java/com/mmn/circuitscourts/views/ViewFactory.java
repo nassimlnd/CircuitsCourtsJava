@@ -4,6 +4,7 @@ import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.controller.client.CommandeInfoController;
 import com.mmn.circuitscourts.controller.client.NewCommandeController;
 import com.mmn.circuitscourts.controller.producteur.EditCommandeController;
+import com.mmn.circuitscourts.controller.producteur.EditTourneeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -279,6 +280,13 @@ public class ViewFactory {
         createScene(loader, "CircuitsCourts - Modification du compte n°"+ accountId);
 
 
+    }
+
+    public void showProdEditTourneeInterface(int id) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditTournee.fxml"));
+        System.out.println("[DEBUG]EditTournee loaded.");
+        EditTourneeController.tourneeId = id;
+        createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);
     }
 }
 

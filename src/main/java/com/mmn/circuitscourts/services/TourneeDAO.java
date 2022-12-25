@@ -47,7 +47,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
      */
     @Override
     public Tournee getById(Integer id) throws SQLException {
-        String query = "SELECT * FROM tournee WHERE id=" + id;
+        String query = "SELECT * FROM tournee WHERE idT=" + id;
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
 

@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.services;
 
 import javafx.scene.image.Image;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -23,11 +24,10 @@ public class ImageDAO {
 
     public int add(File file) throws SQLException, FileNotFoundException {
         FileInputStream input = new FileInputStream(file);
-        String query = "INSERT INTO image(size, image, ext) VALUES (?,?, ?)";
+        String query = "INSERT INTO image(image, ext) VALUES (?,?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setDouble(1, 99);
         preparedStatement.setBinaryStream(2, (InputStream) input, (int) file.length());
-        preparedStatement.setString(3, "png");
+        preparedStatement.setString(3, FilenameUtils.getExtension(file.getName()));
 
         preparedStatement.executeUpdate();
 
@@ -62,11 +62,33 @@ public class ImageDAO {
         }
     }
 
+    public void update(int id, File file) throws SQLException, FileNotFoundException {
+        FileInputStream input = new FileInputStream(file);
+        String query = "UPDATE image SET image=?, ext=? WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setBinaryStream(1, (InputStream) input, (int) file.length());
+        preparedStatement.setString(2, FilenameUtils.getExtension(file.getName()));
+        preparedStatement.setInt(3, id);
+
+        preparedStatement.executeUpdate();
+    }
+
     public Image getImage(int id, String ext) throws IOException, SQLException {
-        File file = new File("data/img"+id+ext);
+        File file = new File("data/img"+id+"."+ext);
         if (!file.exists()) {
             getById(id);
         }
         return new Image(file.toURI().toURL().toString());
+    }
+
+    public String getExtById(int id) throws SQLException {
+        String query = "SELECT ext FROM image WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString(1);
+        } else throw new SQLException("ID introuvable");
     }
 }

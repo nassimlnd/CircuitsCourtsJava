@@ -54,7 +54,7 @@ public class AddTourneesController {
         try {
             ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAllByProducteur(App.userConnected.getId());
             ArrayList<String> values = new ArrayList<>();
-            vehicules.forEach(vehicule -> values.add(vehicule.getNumImmate() + " - PoidsMax: " + vehicule.getPoidsMax() + " kg"));
+            vehicules.forEach(vehicule -> values.add(vehicule.getNumImmat() + " - PoidsMax: " + vehicule.getPoidsMax() + " kg"));
             vehiculeCb.getItems().addAll(values);
         } catch (SQLException e) {
             System.out.println("Erreur lors du chargement des véhicules");
@@ -381,6 +381,7 @@ public class AddTourneesController {
 
     /**
      * Créer la tournée depuis le véhicule selectionné et les commandes ajoutées à la liste de commande
+     * Vérifie toutes les conditions avant la création
      */
     public void onCreate() {
         String horaireDebut = hourDebut.getText()+":"+minutesDebut.getText()+":00";
@@ -413,7 +414,7 @@ public class AddTourneesController {
                     showErrorPopup("Le poids total est supérieur à ce que peut \nsupporter le véhicule");
                     return;
                 }
-                Tournee tournee = new Tournee(datePicker.getValue(), horaireDebut, horaireFin, Producteur.producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret(), vehicule.getNumImmate());
+                Tournee tournee = new Tournee(datePicker.getValue(), horaireDebut, horaireFin, Producteur.producteurDAO.getByAccountId(App.userConnected.getId()).getNumSiret(), vehicule.getNumImmat());
                 commandes.forEach(commande -> commande.setIdTournee(tournee.getId()));
             } catch (SQLException e) {
                 throw new RuntimeException(e);

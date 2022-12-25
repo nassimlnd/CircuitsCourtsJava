@@ -29,7 +29,7 @@ public class EditVehiculeController {
         return v;
     }
     public void initialize() throws SQLException {
-        vehicule.setText(getThisVehicule().getNumImmate());
+        vehicule.setText(getThisVehicule().getNumImmat());
         poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
     }
     public void onEditButton() throws SQLException {

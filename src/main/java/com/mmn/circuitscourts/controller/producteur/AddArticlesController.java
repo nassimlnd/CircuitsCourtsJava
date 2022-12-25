@@ -81,6 +81,8 @@ public class AddArticlesController {
 
     public void onBrowse() throws MalformedURLException {
         FileChooser fC = new FileChooser();
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Images files (*.png, *.jpg)", "*.png", "*.jpg");
+        fC.getExtensionFilters().add(extensionFilter);
         file = fC.showOpenDialog(ViewFactory.getInstance().getMainStage());
 
         if (file != null) {

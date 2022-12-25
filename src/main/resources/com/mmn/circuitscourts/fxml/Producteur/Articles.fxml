@@ -83,15 +83,15 @@
                             <children>
                                 <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="871.0" styleClass="commande-tableview-header">
                                     <children>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Numéro">
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="141.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Numéro">
                                             <HBox.margin>
                                                 <Insets left="40.0" />
                                             </HBox.margin>
                                         </Label>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Nom" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Catégorie" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Prix" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="141.0" styleClass="commande-tableview-header-title" text="Nom" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="141.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Catégorie" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="141.0" styleClass="commande-tableview-header-title" text="Prix" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="141.0" styleClass="commande-tableview-header-title" text="Poids" />
                                     </children>
                                     <padding>
                                         <Insets right="40.0" />

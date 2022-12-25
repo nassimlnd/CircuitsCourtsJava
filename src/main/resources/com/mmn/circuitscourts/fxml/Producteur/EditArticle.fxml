@@ -119,7 +119,7 @@
                         </HBox>
                         <VBox alignment="CENTER" prefHeight="200" prefWidth="100">
                             <children>
-                                <Button mnemonicParsing="false" styleClass="EditCommandeButton" onMouseClicked="#onEdit" text="odifier l'article"/>
+                                <Button minHeight="40" minWidth="250" mnemonicParsing="false" styleClass="addCommandeButton" onMouseClicked="#onEdit" text="Modifier l'article"/>
                             </children>
                         </VBox>
                     </children>

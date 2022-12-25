@@ -1,4 +1,5 @@
 package com.mmn.circuitscourts.controller.producteur;
+import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -34,7 +35,13 @@ public class CommandesController {
 
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitializeByAccountId();
-        commandes.forEach(commande -> createLine(commande));
+        commandes.forEach(commande -> {
+            try {
+                createLine(commande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
         popup = successPopup;
     }
 
@@ -46,7 +53,7 @@ public class CommandesController {
         ViewFactory.getInstance().showProdAddCommandeInterface();
     }
 
-    public void createLine(Commande commande) {
+    public void createLine(Commande commande) throws SQLException {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
@@ -55,7 +62,7 @@ public class CommandesController {
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
-        Label libelle = new Label(String.valueOf(commande.getArticleId()));
+        Label libelle = new Label(Article.article.getById(commande.getArticleId()).getName());
         Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
         Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
         Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
@@ -113,7 +120,11 @@ public class CommandesController {
         contentTable.getChildren().clear();
         ArrayList<Commande> commandes = Commande.getCommandesInitialize();
         commandes.forEach(commande -> {
-            createLine(commande);
+            try {
+                createLine(commande);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
     public void showConfirmationDialog(int numCommande) {

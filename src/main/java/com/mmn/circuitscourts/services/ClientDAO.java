@@ -1,8 +1,11 @@
 package com.mmn.circuitscourts.services;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Client;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class ClientDAO implements DAO<Client, Integer> {
@@ -43,6 +46,13 @@ public class ClientDAO implements DAO<Client, Integer> {
         preparedStatement.setString(2, client.getAdresse());
         preparedStatement.setString(3, client.getNumTel());
         preparedStatement.executeUpdate();
+
+        String query2 = "INSERT INTO logs(accountId, categorie, date, time) VALUES (?, ?, ?, ?)";
+        PreparedStatement preparedStatement1 = connection.prepareStatement(query2);
+        preparedStatement1.setInt(1, App.userConnected.getId());
+        preparedStatement1.setString(2, "newclient");
+        preparedStatement1.setDate(3, Date.valueOf(LocalDate.now()));
+        preparedStatement1.setTime(4, Time.valueOf(LocalTime.now()));
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
         if (resultSet.next()) {

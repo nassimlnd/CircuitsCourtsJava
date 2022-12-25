@@ -31,7 +31,7 @@ public class AddVehiculeController {
             ArrayList<Vehicule> v = new ArrayList<>();
             v=Vehicule.vehiculeDAO.getAll();
             for(int i=0;i<v.size();i++){
-                if(v.get(i).getNumImmate().equals(numImmat.getText())){
+                if(v.get(i).getNumImmat().equals(numImmat.getText())){
                     identique=true;
                     break;
                 }
@@ -40,7 +40,7 @@ public class AddVehiculeController {
                 int numSiret = Vehicule.getNumSiretConnected();
                 Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
                 ViewFactory.getInstance().showProdVehiculesInterface();
-                VehiculesController.showSuccessPopUp(vehicule.getNumImmate());
+                VehiculesController.showSuccessPopUp(vehicule.getNumImmat());
             }
         }
 

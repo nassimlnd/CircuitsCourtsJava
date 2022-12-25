@@ -7,7 +7,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class TourneeController {
     @FXML
     Button addButton;
     @FXML
-    VBox commandeTable;
+    VBox contentTable;
 
     public void initialize() throws SQLException {
         ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByProducteur();
@@ -31,6 +33,7 @@ public class TourneeController {
     public void createLine(Tournee trn) {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
+        line.setMinHeight(64);
         line.setPrefHeight(64);
         line.setPrefWidth(850);
         line.setPadding(new Insets(0, 40, 0, 40));
@@ -53,7 +56,21 @@ public class TourneeController {
             line.getChildren().add(label);
         });
 
-        commandeTable.getChildren().add(line);
+        Button edit = new Button();
+        edit.getStyleClass().add("edit-button");
+        Region editImg = new Region();
+        editImg.getStyleClass().add("edit-button-img");
+        edit.setGraphic(editImg);
+        HBox.setMargin(edit, new Insets(0, 0, 0, 60));
+        edit.setOnMouseClicked(mouseEvent -> {
+            ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
+        });
+
+        line.getChildren().add(edit);
+        contentTable.getChildren().add(line);
     }
 
+    public void onClosePopup() {
+
+    }
 }

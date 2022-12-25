@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Vehicule {
-    private String numImmate;
+    private String numImmat;
     private int poidsMax;
 
     private int numSiret;
@@ -24,12 +24,12 @@ public class Vehicule {
         }
     }
 
-    public Vehicule(String numImmate, int poidsmax) {
-        this.numImmate = numImmate;
+    public Vehicule(String numImmat, int poidsmax) {
+        this.numImmat = numImmat;
         this.poidsMax = poidsmax;
     }
-    public Vehicule(String numImmate, int poidsmax, int numSiret) throws SQLException {
-        this.numImmate = numImmate;
+    public Vehicule(String numImmat, int poidsmax, int numSiret) throws SQLException {
+        this.numImmat = numImmat;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
 
@@ -43,12 +43,12 @@ public class Vehicule {
         return vehicules;
     }
 
-    public String getNumImmate() {
-        return numImmate;
+    public String getNumImmat() {
+        return numImmat;
     }
 
-    public void setNumImmate(String numImmate) {
-        this.numImmate = numImmate;
+    public void setNumImmat(String numImmat) {
+        this.numImmat = numImmat;
     }
 
     public int getPoidsMax() {
