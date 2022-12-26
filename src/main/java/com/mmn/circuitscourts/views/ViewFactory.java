@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.views;
 
 import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.controller.admin.EditClientController;
 import com.mmn.circuitscourts.controller.client.CommandeInfoController;
 import com.mmn.circuitscourts.controller.client.NewCommandeController;
 import com.mmn.circuitscourts.controller.producteur.EditCommandeController;
@@ -287,6 +288,21 @@ public class ViewFactory {
         System.out.println("[DEBUG]EditTournee loaded.");
         EditTourneeController.tourneeId = id;
         createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);
+    }
+
+    public void showAdminEditClientInterface(int accountId) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditCLient.fxml"));
+        System.out.println("[DEBUG]EditCLient loaded.");
+        EditClientController.accountId = accountId;
+        createScene(loader, "CircuitsCourts - Modification du client n°"+ accountId);
+
+
+    }
+
+    public void showAdminAddCLientInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddClient.fxml"));
+        System.out.println("[DEBUG]AddClientInterface loaded.");
+        createScene(loader, "CircuitsCourts - Ajout d'un client");
     }
 }
 
