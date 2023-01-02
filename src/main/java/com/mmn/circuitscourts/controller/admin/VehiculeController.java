@@ -1,7 +1,5 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.models.Commande;
-import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -9,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -21,10 +18,14 @@ public class VehiculeController {
 
     @FXML
     VBox contentTable;
-    @FXML VBox confirmationDialog;
-    @FXML Button okButton;
-    @FXML Button cancelButton;
-    @FXML Label descDialog;
+    @FXML
+    VBox confirmationDialog;
+    @FXML
+    Button okButton;
+    @FXML
+    Button cancelButton;
+    @FXML
+    Label descDialog;
 
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddVehiculeInterface();
@@ -32,7 +33,7 @@ public class VehiculeController {
 
     public void initialize() throws SQLException {
         ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
-        for (Vehicule v: vehicules) {
+        for (Vehicule v : vehicules) {
             createLine(v);
         }
     }
@@ -93,7 +94,7 @@ public class VehiculeController {
     public void onClosePopup() {
     }
 
-    public void onEdit(String numImmat){
+    public void onEdit(String numImmat) {
         ViewFactory.getInstance().showAdminEditVehiculeInterface(numImmat);
     }
 

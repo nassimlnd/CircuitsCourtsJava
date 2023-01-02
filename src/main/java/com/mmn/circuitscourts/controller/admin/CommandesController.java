@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * Controller qui gère la vue Commandes.fxml
  */
 public class CommandesController {
+    static VBox popup;
     @FXML
     VBox contentTable;
     @FXML
@@ -32,8 +33,15 @@ public class CommandesController {
     Button okButton;
     @FXML
     Button cancelButton;
-    @FXML Label descDialog;
-    static VBox popup;
+    @FXML
+    Label descDialog;
+
+    /**
+     * Affichage de la popup de réussite de l'action.
+     */
+    public static void showSuccessPopUp() {
+        popup.setVisible(true);
+    }
 
     /**
      * Appel de la méthode du modèle pour récuperer toutes les commande présentes dans la base de données.
@@ -51,13 +59,6 @@ public class CommandesController {
             }
         });
         popup = successPopup;
-    }
-
-    /**
-     * Affichage de la popup de réussite de l'action.
-     */
-    public static void showSuccessPopUp() {
-        popup.setVisible(true);
     }
 
     /**
@@ -158,13 +159,20 @@ public class CommandesController {
         });
     }
 
+    /**
+     * Récupère un article lié a une commande.
+     *
+     * @param c est la commande en question.
+     * @return l'article lié à la commande en paramètre.
+     * @throws SQLException
+     */
     public Article getArticle(Commande c) throws SQLException {
         Article a = Article.article.getById(c.getArticleId());
         return a;
     }
 
     public void showConfirmationDialog(int numCommande) {
-        descDialog.setText("Voulez vous vraiment supprimer la commande n°"+ numCommande);
+        descDialog.setText("Voulez vous vraiment supprimer la commande n°" + numCommande);
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);

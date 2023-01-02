@@ -1,30 +1,32 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.models.*;
-import com.mmn.circuitscourts.services.*;
+import com.mmn.circuitscourts.models.Article;
+import com.mmn.circuitscourts.models.Client;
+import com.mmn.circuitscourts.models.Commande;
+import com.mmn.circuitscourts.models.Producteur;
+import com.mmn.circuitscourts.services.ClientDAO;
+import com.mmn.circuitscourts.services.CommandeDAO;
+import com.mmn.circuitscourts.services.MarketplaceDAO;
+import com.mmn.circuitscourts.services.ProducteurDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class EditCommandeController {
+    public static int commandeId = 0;
     @FXML
     TextField quantite, horaire;
-
     @FXML
     ComboBox<String> client, numSiret, article;
-
     @FXML
     DatePicker datePicker;
 
-    public static int commandeId = 0;
-
-    public  Commande getCommande() throws SQLException {
+    public Commande getCommande() throws SQLException {
         Commande c = Commande.getCommandeById(commandeId);
         return c;
     }
@@ -35,30 +37,28 @@ public class EditCommandeController {
     }
 
     public void clientInitialize() throws SQLException {
-        ClientDAO clientDAO = new ClientDAO();
-        ArrayList<Client> lesClients = clientDAO.getAll();
-        ArrayList<String> names = new ArrayList<>();
-        for (Client client : lesClients) {
-            names.add(client.getId()+"-"+client.getNom());
+        ArrayList<Client> clients = Client.client.getAll();
+        ArrayList<String> noms = new ArrayList<>();
+        for (Client client : clients) {
+            noms.add(client.getId() + "-" + client.getNom());
         }
-        client.getItems().addAll(names);
+        client.getItems().addAll(noms);
     }
+
     public void getArticlesInitialize() throws SQLException {
         MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
         ArrayList<Article> lesArticles = marketplaceDAO.getAll();
         ArrayList<String> namesArticles = new ArrayList<>();
-        for(Article art : lesArticles){
-            namesArticles.add(art.getId()+"-"+art.getName());
+        for (Article art : lesArticles) {
+            namesArticles.add(art.getId() + "-" + art.getName());
         }
         article.getItems().addAll(namesArticles);
     }
 
     public void getNumSiretInitialize() throws SQLException {
-        ProducteurDAO producteur = new ProducteurDAO();
-        ArrayList<Producteur> lesProducteurs = producteur.getAll();
+        ArrayList<Producteur> producteurs = Producteur.producteurDAO.getAll();
         ArrayList<String> numSirets = new ArrayList<>();
-        for (Producteur prd : lesProducteurs) {
-            System.out.println(prd.getNumSiret());
+        for (Producteur prd : producteurs) {
             numSirets.add(String.valueOf(prd.getNumSiret()));
         }
         numSiret.getItems().addAll(numSirets);
@@ -68,8 +68,8 @@ public class EditCommandeController {
         getArticlesInitialize();
         clientInitialize();
         getNumSiretInitialize();
-        quantite.setText("");
-        horaire.setText(getCommande().getHoraireDebut()+"-"+getCommande().getHoraireFin());
+        quantite.setText(String.valueOf(getCommande().getQuantity()));
+        horaire.setText(getCommande().getHoraireDebut() + "-" + getCommande().getHoraireFin());
     }
 
     public void onBackButton() {
@@ -87,7 +87,7 @@ public class EditCommandeController {
         int finalNumSiret = Integer.parseInt(numSiret.getValue());
         Commande c = new Commande(commandeId, idArticle, getCommande().getPoids(), quantity, horaireDebut, horaireFin, idC, finalNumSiret, getCommande().getDateCommande());
         CommandeDAO cmd = new CommandeDAO();
-        if (cmd.update(commandeId, c)){
+        if (cmd.update(commandeId, c)) {
             System.out.println("[DEBUG]Commande uptate");
         }
         ViewFactory.getInstance().showAdminCommandeInterface();

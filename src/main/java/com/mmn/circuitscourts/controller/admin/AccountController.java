@@ -1,7 +1,5 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.models.Article;
-import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 
 public class AccountController {
 
+    static VBox popup;
     @FXML
     VBox contentTable;
     @FXML
@@ -32,7 +31,13 @@ public class AccountController {
     Button cancelButton;
     @FXML
     Label descDialog;
-    static VBox popup;
+
+    /**
+     * méthode appelé lors de la suppression d'un compte, rend visible la popup de confirmation de la supression
+     */
+    public static void showSuccessPopUp() {
+        popup.setVisible(true);
+    }
 
     /**
      * Méthode qui est appelé lors du chargement de la page fxml associée a ce controller.
@@ -53,14 +58,6 @@ public class AccountController {
         });
         popup = successPopup;
     }
-
-    /**
-     * méthode appelé lors de la suppression d'un compte, rend visible la popup de confirmation de la supression
-     */
-    public static void showSuccessPopUp() {
-        popup.setVisible(true);
-    }
-
 
     /**
      * La page fxml est constituée d'un tableau, ce tableau n'est pas un tableau fxml il est seulement composée de lignes et de labels.
@@ -142,6 +139,7 @@ public class AccountController {
     /**
      * Méthode appelée lorsqu'un utilisateur appuie sur le boutton modifier sur la page fxml.
      * Appel de la méthode showAdminEditAccountInterface() de la classe ViewFactory qui permet de changer de scene dans l'application.
+     *
      * @param AccountId qui est l'id du compte à modifier.
      */
     private void onEdit(int AccountId) {
@@ -152,6 +150,7 @@ public class AccountController {
     /**
      * Suppression du compte et de la ligne de ce compte constituant le tableau.
      * La suppression se fait via l'appel de la méthode remove de la classe accountDAO
+     *
      * @param accountId id du compte à supprimer
      * @throws SQLException
      */
@@ -172,6 +171,7 @@ public class AccountController {
     /**
      * Affichage de la confiramtion de suppression du compte pour plus de sécurité.
      * La suppressin de compte ne s'effectue seulement si l'utilisateur clique sur le boutton "confirmer"
+     *
      * @param accountId
      */
     public void showConfirmationDialog(int accountId) {

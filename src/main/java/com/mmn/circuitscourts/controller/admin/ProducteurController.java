@@ -1,7 +1,5 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.models.Article;
-import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.Proprietaire;
 import com.mmn.circuitscourts.views.ViewFactory;
@@ -10,7 +8,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -20,17 +17,20 @@ import java.util.ArrayList;
 
 
 public class ProducteurController {
+    static VBox popup;
     @FXML
     VBox contentTable;
     @FXML
     Button addButton;
     @FXML
     VBox successPopup;
-    static VBox popup;
 
+    public static void showSuccessPopUp() {
+        popup.setVisible(true);
+    }
 
     public void initialize() throws SQLException {
-       ArrayList<Producteur> producteurs = Producteur.producteurDAO.getAll();
+        ArrayList<Producteur> producteurs = Producteur.producteurDAO.getAll();
         producteurs.forEach(producteur -> {
             try {
                 createLine(producteur);
@@ -40,13 +40,6 @@ public class ProducteurController {
         });
         popup = successPopup;
     }
-
-
-
-    public static void showSuccessPopUp() {
-        popup.setVisible(true);
-    }
-
 
     public void createLine(Producteur producteur) throws SQLException {
         HBox line = new HBox();
@@ -120,7 +113,7 @@ public class ProducteurController {
     }
 
 
-    private  void onDelete(int numSiret) throws SQLException {
+    private void onDelete(int numSiret) throws SQLException {
         Proprietaire.proprietaireDAO.removeFromPropSiret(numSiret);
         Producteur.producteurDAO.remove(numSiret);
         System.out.println("[DEBUG]Producteur deleted");

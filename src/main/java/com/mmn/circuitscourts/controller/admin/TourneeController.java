@@ -1,13 +1,11 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -15,8 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TourneeController {
-     @FXML
-     VBox commandeTable;
+    @FXML
+    VBox commandeTable;
 
     public void onAddButton() {
         ViewFactory.getInstance().showAdminAddTourneeInterface();
@@ -24,7 +22,7 @@ public class TourneeController {
 
     public void initialize() throws SQLException {
         ArrayList<Tournee> tournees = Tournee.getCommandesInitialize();
-        for (Tournee tournee: tournees) {
+        for (Tournee tournee : tournees) {
             createLine(tournee);
         }
     }

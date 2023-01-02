@@ -1,17 +1,10 @@
 package com.mmn.circuitscourts.controller.admin;
-
 import com.mmn.circuitscourts.models.Client;
-import com.mmn.circuitscourts.models.Commande;
-import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -51,6 +44,7 @@ public class AddCommandesController {
 
     /**
      * Fonction qui initialise les clients dans la comboBox afin de pouvoir selectionner le client correspondant à la commande.
+     *
      * @throws SQLException Renvoie une exception si la requête échoue.
      */
     public void clientInitialize() throws SQLException {
@@ -58,7 +52,7 @@ public class AddCommandesController {
         ArrayList<Client> lesClients = clientDAO.getAll();
         ArrayList<String> names = new ArrayList<>();
         for (Client client : lesClients) {
-            names.add(client.getId()+"-"+client.getNom());
+            names.add(client.getId() + "-" + client.getNom());
         }
         client.getItems().addAll(names);
         client.setValue(names.get(0));

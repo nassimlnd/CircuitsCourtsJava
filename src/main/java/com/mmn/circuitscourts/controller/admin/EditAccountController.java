@@ -1,4 +1,5 @@
 package com.mmn.circuitscourts.controller.admin;
+
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -12,38 +13,60 @@ import java.util.ArrayList;
 
 public class EditAccountController {
 
+    /**
+     * L'id du compte que l'on veut modifier.
+     */
+    public static int accountId = 0;
     @FXML
     Label title;
     @FXML
     TextField identifiant, mdp;
-
     @FXML
     ComboBox<String> grade;
 
-    public static int accountId = 0;
-
+    /**
+     * Récupère le compte et ses informations que l'utilisateur veut modifier.
+     *
+     * @return le compte de l'utilisarteur connecté.
+     * @throws SQLException
+     */
     public User getThisAccount() throws SQLException {
         return User.accountDAO.getById(accountId);
     }
 
+    /**
+     * Renvoi à la page des comptes de l'administrateur lors du clique sur le bouton retour.
+     */
     public void onBackButton() {
         ViewFactory.getInstance().showAdminAccountInterface();
     }
 
     public void initialize() throws SQLException {
         User u = getThisAccount();
-        title.setText("Modification du compte n°"+ accountId);
+        title.setText("Modification du compte n°" + accountId);
         identifiant.setText(u.getIdentifiant());
         mdp.setText(u.getPassword());
         getGradesInitialize();
     }
+
+    /**
+     * Initialise dans la ComboBox des grades tous les grades existants, le grade du compte à mofifier est set comme valeur par défaut.
+     *
+     * @throws SQLException
+     */
     public void getGradesInitialize() throws SQLException {
         ArrayList<String> gradesNames = new ArrayList<>();
-        gradesNames.add("Client");gradesNames.add("Producteur");gradesNames.add("Administrateur");
+        gradesNames.add("Client");
+        gradesNames.add("Producteur");
+        gradesNames.add("Administrateur");
         grade.setValue(getThisAccount().getGradeName());
         grade.getItems().addAll(gradesNames);
     }
 
+    /**
+     * @param grade nom d'un grade.
+     * @return le numéro du grade correspondant au texte.
+     */
     public int getGradeNumber(String grade) {
         switch (grade) {
             case "Client":
@@ -57,10 +80,15 @@ public class EditAccountController {
         }
     }
 
+    /**
+     * Création d'un nouvel objet compte sans id et update dans la base de donnée.
+     *
+     * @throws SQLException
+     */
     public void onEditButton() throws SQLException {
         User u = new User(accountId, identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
         User.accountDAO.update(accountId, u);
-        System.out.println("[DEBUG]User n°"+ accountId+" updated.");
+        System.out.println("[DEBUG]User n°" + accountId + " updated.");
         ViewFactory.getInstance().showAdminAccountInterface();
     }
 }

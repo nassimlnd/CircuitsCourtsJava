@@ -1,8 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
 import com.mmn.circuitscourts.models.Client;
-import com.mmn.circuitscourts.models.Producteur;
-import com.mmn.circuitscourts.models.Proprietaire;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -10,7 +8,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 
 public class ClientController {
 
+    static VBox popup;
     @FXML
     VBox contentTable;
     @FXML
@@ -35,9 +33,6 @@ public class ClientController {
     @FXML
     Label descDialog;
 
-    static VBox popup;
-
-
     public void onClosePopup() {
     }
 
@@ -46,14 +41,26 @@ public class ClientController {
     }
 
 
+    /**
+     * Récupère tous les clients de la base de données via la fonction getClientsInitilize().
+     * Pour chaque client appel de la fonction createLine().
+     *
+     * @throws SQLException
+     */
     public void initialize() throws SQLException {
         ArrayList<User> clients = Client.getClientsInitialize();
-        for (User u: clients) {
+        for (User u : clients) {
             createLine(u);
         }
 
     }
 
+    /**
+     * Supprime un client de la base de donnée via la méthode remove de la classe accountDAO, puis actualise le tableau avec un nouvelle initialisation des clients dans le tableau.
+     *
+     * @param accountId l'id du compte que l'Administrateur veut supprimer.
+     * @throws SQLException
+     */
     public void onDelete(int accountId) throws SQLException {
         User.accountDAO.remove(accountId);
         System.out.println("[DEBUG]Account deleted");
@@ -68,6 +75,13 @@ public class ClientController {
         });
     }
 
+    /**
+     * Crée une ligne dans le tableau avec tous les champs d'un compte client de la base de donnée.
+     * pour chaque ligne création des bouttons de modification et de suppression du compte.
+     *
+     * @param user le compte fournit les données à mettre dans la ligne.
+     * @throws SQLException
+     */
     public void createLine(User user) throws SQLException {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
@@ -121,8 +135,13 @@ public class ClientController {
         contentTable.getChildren().add(line);
     }
 
+    /**
+     * lors de la suppression d'un compte permet de faire apparaitre une popUp de validation de la suppression du compte.
+     *
+     * @param accountId est l'id du compte à supprimer.
+     */
     public void showConfirmationDialog(int accountId) {
-        descDialog.setText("Voulez vous vraiment supprimer le compte n°"+ accountId);
+        descDialog.setText("Voulez vous vraiment supprimer le compte n°" + accountId);
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);
@@ -138,6 +157,11 @@ public class ClientController {
     }
 
 
+    /**
+     * Renvoi vers la page de modification d'un compte.
+     *
+     * @param numSiret
+     */
     private void onEdit(int numSiret) {
         ViewFactory.getInstance().showAdminEditClientInterface(numSiret);
     }

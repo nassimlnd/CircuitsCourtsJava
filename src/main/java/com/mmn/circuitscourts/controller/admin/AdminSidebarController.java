@@ -5,10 +5,11 @@ import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 
 public class AdminSidebarController {
-
+    /**
+     * Classe qui permet de créer la sideBar et de connecter tous ses boutons.
+     */
     @FXML
     Label userName;
     @FXML
@@ -41,37 +42,37 @@ public class AdminSidebarController {
             case "[ADMIN]CircuitsCourts - Commandes":
                 commandesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'une commande" :
+            case "[ADMIN]CircuitsCourts - Ajout d'une commande":
                 commandesTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Tournées":
                 tourneeTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'une tournée" :
+            case "[ADMIN]CircuitsCourts - Ajout d'une tournée":
                 tourneeTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Véhicules":
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'un véhicule" :
+            case "[ADMIN]CircuitsCourts - Ajout d'un véhicule":
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Producteurs":
                 producteurTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'un producteur" :
+            case "[ADMIN]CircuitsCourts - Ajout d'un producteur":
                 producteurTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Clients":
                 clientTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'un client" :
+            case "[ADMIN]CircuitsCourts - Ajout d'un client":
                 clientTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Comptes":
                 accountsTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'un compte" :
+            case "[ADMIN]CircuitsCourts - Ajout d'un compte":
                 accountsTab.getStyleClass().add("sidebar-tab-active");
                 break;
         }
