@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-        <?import javafx.geometry.Insets?>
-        <?import javafx.scene.control.Button?>
-        <?import javafx.scene.layout.BorderPane?>
-        <?import javafx.scene.layout.StackPane?>
-        <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-        <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;"
-           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" fx:id="stackPane" minHeight="800.0" minWidth="1200.0"
+           style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19"
            fx:controller="com.mmn.circuitscourts.controller.admin.AddVehiculeController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;">
@@ -25,40 +25,46 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button styleClass="back-button" mnemonicParsing="false" text="Retour" pickOnBounds="true" onMouseClicked="#onBackButton">
+                        <Button styleClass="back-button" mnemonicParsing="false" text="Retour" pickOnBounds="true"
+                                onMouseClicked="#onBackButton">
                             <graphic>
                                 <Region styleClass="back-button-img"/>
                             </graphic>
                         </Button>
                         <Label styleClass="main-title" text="Ajout d'un véhicule">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="20.0"/>
                             </VBox.margin>
                         </Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <TextField fx:id="numImmat" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Numéro d'immatriculation"/>
-                                <TextField fx:id="poids" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Poids">
+                                <TextField fx:id="numImmat" minHeight="40.0" minWidth="250.0" prefWidth="150.0"
+                                           promptText="Numéro d'immatriculation"/>
+                                <TextField fx:id="poids" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0"
+                                           promptText="Poids">
                                     <HBox.margin>
-                                        <Insets left="200.0" />
+                                        <Insets left="200.0"/>
                                     </HBox.margin>
                                 </TextField>
                             </children>
                             <VBox.margin>
-                                <Insets top="75.0" />
+                                <Insets top="75.0"/>
                             </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <ComboBox fx:id="namesProd" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="numSirets"/>
+                                <ComboBox fx:id="namesProd" minHeight="40.0" minWidth="250.0" prefWidth="150.0"
+                                          promptText="producteurs"/>
                             </children>
                             <VBox.margin>
-                                <Insets top="75.0" />
+                                <Insets top="75.0"/>
                             </VBox.margin>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" text="Ajouter le véhicule" onMouseClicked="#onCreateButton" styleClass="addCommandeButton"/>
+                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false"
+                                        text="Ajouter le véhicule" onMouseClicked="#onCreateButton"
+                                        styleClass="addCommandeButton"/>
                             </children>
                         </HBox>
                     </children>

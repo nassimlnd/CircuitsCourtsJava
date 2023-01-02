@@ -13,6 +13,9 @@ import static java.lang.Integer.parseInt;
 public class EditVehiculeController {
 
     public static String numImmat = "";
+
+    @FXML
+    Label title;
     @FXML
     TextField poids;
     @FXML
@@ -28,6 +31,7 @@ public class EditVehiculeController {
     }
 
     public void initialize() throws SQLException {
+        title.setText("Modification du véhicule n°"+ numImmat);
         vehicule.setText(getThisVehicule().getNumImmat());
         poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
     }

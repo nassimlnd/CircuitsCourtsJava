@@ -130,7 +130,7 @@ public class ViewFactory {
         System.out.println("[DEBUG]AdminAddTourneesInterface loaded.");
         createScene(loader, "[ADMIN]CircuitsCourts - Ajout d'une tournée");
     }
-    //========new==========
+
     public void showAdminAddVehiculeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/AddVehicule.fxml"));
         System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");

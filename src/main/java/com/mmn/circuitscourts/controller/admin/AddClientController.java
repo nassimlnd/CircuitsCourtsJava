@@ -6,10 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class AddClientController {
     @FXML
@@ -29,16 +27,8 @@ public class AddClientController {
      */
     public void onCreateButton() throws SQLException {
         error.setText("");
-        if (!(identifiant.getText().isEmpty() && mdp.getText().isEmpty() && confirmMdp.getText().isEmpty())) {
-            if (Objects.equals(mdp.getText(), confirmMdp.getText())) {
-                new User(identifiant.getText(), mdp.getText(), 1);
-                System.out.println("[DEBUG]Account added");
-            }
-            error.setText("Mauvaise confirmation du mot de passe !");
-        }
-        error.setText("tous les champs ne sont pas remplis !");
-
-
+        new User(identifiant.getText(), mdp.getText(), 1);
+        System.out.println("[DEBUG]Account added");
     }
 
 

@@ -24,7 +24,7 @@
                                 <Region styleClass="back-button-img" />
                             </graphic>
                         </Button>
-                        <Label styleClass="main-title" text="Modification de la commande n°">
+                        <Label fx:id="title" styleClass="main-title">
                             <VBox.margin>
                                 <Insets top="20.0" />
                             </VBox.margin>

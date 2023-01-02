@@ -12,6 +12,7 @@ import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.sql.SQLException;
@@ -25,6 +26,8 @@ public class EditCommandeController {
     ComboBox<String> client, numSiret, article;
     @FXML
     DatePicker datePicker;
+    @FXML
+    Label title;
 
     public Commande getCommande() throws SQLException {
         Commande c = Commande.getCommandeById(commandeId);
@@ -65,6 +68,7 @@ public class EditCommandeController {
     }
 
     public void initialize() throws SQLException {
+        title.setText("Modification de la commande n°"+ getCommande().getNumCommande());
         getArticlesInitialize();
         clientInitialize();
         getNumSiretInitialize();

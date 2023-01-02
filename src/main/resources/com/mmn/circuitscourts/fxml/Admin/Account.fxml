@@ -156,8 +156,7 @@
                                 </Label>
                                 <VBox prefWidth="500.0">
                                     <children>
-                                        <Label prefWidth="460.0" styleClass="confirm-dialog-title"
-                                               text="Supprimer la commande ?"/>
+                                        <Label prefWidth="460.0" styleClass="confirm-dialog-title"/>
                                         <Label fx:id="descDialog"/>
                                         <HBox alignment="CENTER" prefHeight="68.0" prefWidth="356.0" spacing="40.0">
                                             <children>
