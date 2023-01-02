@@ -22,7 +22,7 @@ public class ClientDAO implements DAO<Client, Integer> {
         ResultSet resultSet = statement.executeQuery(query);
         ArrayList<Client> clients = new ArrayList<>();
         while (resultSet.next()) {
-            clients.add(new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5)));
+            clients.add(new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
         }
         return clients;
     }
@@ -34,17 +34,18 @@ public class ClientDAO implements DAO<Client, Integer> {
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5));
+            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
         } else throw new SQLException("ID INTROUVABLE");
     }
 
     @Override
     public int add(Client client) throws SQLException {
-        String query = "INSERT INTO clients(nom, adresse, numTel) VALUES (?, ?, ?)";
+        String query = "INSERT INTO clients(nom, adresse, numTel, email) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, client.getNom());
         preparedStatement.setString(2, client.getAdresse());
         preparedStatement.setString(3, client.getNumTel());
+        preparedStatement.setString(4, client.getEmail());
         preparedStatement.executeUpdate();
 
         String query2 = "INSERT INTO logs(accountId, categorie, date, time) VALUES (?, ?, ?, ?)";
@@ -62,7 +63,18 @@ public class ClientDAO implements DAO<Client, Integer> {
 
     @Override
     public boolean update(Integer id, Client client) throws SQLException {
-        return false;
+        String query = "UPDATE client SET nom=?, adresse=?, numTel=?, email=?, accountId=? WHERE idC=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, client.getNom());
+        preparedStatement.setString(2, client.getAdresse());
+        preparedStatement.setString(3, client.getNumTel());
+        preparedStatement.setString(4, client.getEmail());
+        preparedStatement.setInt(5, client.getAccountId());
+        preparedStatement.setInt(6, id);
+
+        preparedStatement.executeUpdate();
+
+        return true;
     }
 
     @Override
@@ -77,7 +89,7 @@ public class ClientDAO implements DAO<Client, Integer> {
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getInt(5));
+            return new Client(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
         } else throw new SQLException("ACCOUNTID INTROUVABLE.");
     }
 }

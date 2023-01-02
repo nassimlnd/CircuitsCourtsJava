@@ -31,8 +31,9 @@ public class AddVehiculeController {
      * @throws SQLException
      */
     public void getNomProdInitialize() throws SQLException {
-        ArrayList<String> names = User.accountDAO.getAllproducteursNameAndSiret();
-        for (String s : names) {
+        ArrayList<String> namesAndSiret = User.accountDAO.getAllproducteursNameAndSiret();
+        ArrayList<String> names = new ArrayList();
+        for (String s : namesAndSiret) {
             names.add(s);
         }
         namesProd.getItems().addAll(names);
@@ -58,8 +59,7 @@ public class AddVehiculeController {
         String[] immat = numImmat.getText().split("-");
         boolean identique = false;
         if (immat[0].matches("([A-Z][A-Z])") && immat[1].matches("([0-9][0-9][0-9])") && immat[2].matches("([A-Z][A-Z])") && parseInt(poids.getText()) > 0) {
-            ArrayList<Vehicule> v = new ArrayList<>();
-            v = Vehicule.vehiculeDAO.getAll();
+            ArrayList<Vehicule> v = Vehicule.vehiculeDAO.getAll();
             for (int i = 0; i < v.size(); i++) {
                 if (v.get(i).getNumImmat().equals(numImmat.getText())) {
                     identique = true;

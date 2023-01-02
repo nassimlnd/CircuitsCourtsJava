@@ -101,7 +101,7 @@ public class LoginController {
 
     public void onLogin() {
         String identifiant = textField.getText();
-        String password = passwordField.getText();
+        String password = User.getPasswordHashed(passwordField.getText());
 
         AccountDAO accountDAO = new AccountDAO();
         try {
@@ -126,28 +126,6 @@ public class LoginController {
             errorLabel.setText(e.getMessage());
         }
     }
-
-    /*@FXML
-    private void switchScene() throws IOException {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Dashboard.fxml"));
-        Parent root = loader.load();
-        Scene scene = button.getScene();
-        root.translateXProperty().set(scene.getWidth());
-
-        StackPane parentContainer = (StackPane) button.getScene().getRoot();
-
-        parentContainer.getChildren().add(root);
-
-        Timeline timeline = new Timeline();
-        KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
-        KeyFrame kf = new KeyFrame(Duration.millis(500), kv);
-        timeline.getKeyFrames().add(kf);
-        timeline.setOnFinished(t -> {
-            ((Stage) scene.getWindow()).setTitle("CircuitsCourts - Tableau de bord");
-            parentContainer.getChildren().remove(container);
-        });
-        timeline.play();
-    }*/
 
     /**
      * Vérifie que l'identifiant a une taille supérieure ou égale à 4, qu'il n'est pas vide et qu'il ne contient pas d'espaces

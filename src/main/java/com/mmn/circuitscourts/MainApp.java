@@ -1,8 +1,10 @@
 package com.mmn.circuitscourts;
 
+import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.services.ImageDAO;
 import javafx.application.Application;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

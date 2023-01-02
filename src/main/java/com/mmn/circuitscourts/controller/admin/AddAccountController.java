@@ -44,10 +44,10 @@ public class AddAccountController {
     public void onCreateButton() throws SQLException {
         if (Objects.equals(mdp.getText(), confirmMdp.getText())) {
             new User(identifiant.getText(), String.valueOf(confirmMdp.getText()), getGradeNumber(grade.getValue()));
-            System.out.println("[DEBUG]Acount succesfully created.");
+            System.out.println("[DEBUG]Account succesfully created.");
             ViewFactory.getInstance().showAdminAccountInterface();
-
-        } else System.out.println("mot de passe non identiques réessayez");
+        }
+        else System.out.println("mot de passe non identiques réessayez");
 
     }
 
