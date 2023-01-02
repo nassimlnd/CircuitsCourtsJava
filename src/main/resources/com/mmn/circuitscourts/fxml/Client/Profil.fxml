@@ -3,12 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.layout.Region?>
 <StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.client.ProfilController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
@@ -36,9 +38,9 @@
                                 </Label>
                             </children>
                         </VBox>
-                        <HBox alignment="TOP_CENTER" minHeight="450.0" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
+                        <HBox alignment="CENTER" minHeight="450.0" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <VBox alignment="TOP_CENTER" maxHeight="445.0" minHeight="445.0" minWidth="430.0" prefHeight="200.0" prefWidth="100.0" styleClass="profil-container">
+                                <VBox alignment="TOP_CENTER" maxHeight="445.0" minHeight="445.0" minWidth="430.0" prefHeight="445.0" prefWidth="588.0" styleClass="profil-container">
                                     <children>
                                         <VBox alignment="CENTER_LEFT" minHeight="56.0" styleClass="profil-container-header">
                                             <children>
@@ -53,79 +55,144 @@
 
                                             </children>
                                         </VBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="275.0" styleClass="profil-container-line">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label styleClass="profil-container-line-title" text="Identifiant" />
-                                    <Label fx:id="identifiant" text="Label" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="255.0" styleClass="profil-container-line">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label styleClass="profil-container-line-title" text="Mot de passe" />
-                                    <Label fx:id="password" text="Label" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="300.0" styleClass="profil-container-line">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label styleClass="profil-container-line-title" text="Nom" />
-                                    <Label fx:id="clientName" text="Label" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" maxWidth="413.0" prefHeight="43.0" prefWidth="413.0" spacing="210.0" styleClass="profil-container-line">
-                                 <VBox.margin>
-                                    <Insets top="10.0" />
-                                 </VBox.margin>
-                                 <children>
-                                    <Label styleClass="profil-container-line-title" text="Numéro de téléphone" />
-                                    <Label fx:id="numTel" text="Label" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </HBox>
-                                    </children>
-                                </VBox>
-                                <VBox alignment="TOP_CENTER" maxHeight="202.0" minWidth="431.0" prefHeight="200.0" prefWidth="100.0" styleClass="profil-container">
-                                    <children>
-                                        <VBox alignment="CENTER_LEFT" minHeight="56" styleClass="profil-container-header">
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="413.0" styleClass="profil-container-line">
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
                                             <children>
-                                                <Label styleClass="profil-container-header-title" text="Photo de profil" />
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Identifiant" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefHeight="42.0" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="identifiant" text="Label" textAlignment="RIGHT" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
                                             </children>
                                             <padding>
                                                 <Insets left="20.0" />
                                             </padding>
-                                        </VBox>
-                                        <VBox styleClass="profil-container-content">
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" onMouseClicked="#onPasswordEdit" prefHeight="43.0" prefWidth="413.0" style="-fx-cursor: hand" styleClass="profil-container-line">
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
                                             <children>
-
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Mot de passe" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="password" text="Label" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
                                             </children>
-                                        </VBox>
-                              <Button maxHeight="71.0" maxWidth="400.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="265.0" styleClass="filechooser-button" text="Parcourir" onMouseClicked="#onBrowse">
-                                  <graphic>
-                                      <Region styleClass="filechooser-button-img"/>
-                                  </graphic>
-                                 <VBox.margin>
-                                    <Insets top="20.0" />
-                                 </VBox.margin>
-                              </Button>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="413.0" styleClass="profil-container-line">
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Nom" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="clientName" text="Label" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" onMouseClicked="#onNumTelEdit" prefHeight="43.0" prefWidth="413.0" style="-fx-cursor: hand" styleClass="profil-container-line">
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Numéro de téléphone" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="numTel" text="Label" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" onMouseClicked="#onEmailEdit" prefHeight="43.0" prefWidth="413.0" style="-fx-cursor: hand" styleClass="profil-container-line">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Adresse e-mail" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="emailAdress" text="Label" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" onMouseClicked="#onAdresseEdit" prefHeight="43.0" prefWidth="413.0" style="-fx-cursor: hand" styleClass="profil-container-line">
+                                            <children>
+                                                <HBox alignment="CENTER_LEFT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label styleClass="profil-container-line-title" text="Adresse de livraison" />
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER_RIGHT" prefWidth="293.0">
+                                                    <children>
+                                                        <Label fx:id="deliveryAdress" text="Label" />
+                                                    </children>
+                                                    <padding>
+                                                        <Insets right="20.0" />
+                                                    </padding>
+                                                </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" />
+                                            </padding>
+                                            <VBox.margin>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                            </VBox.margin>
+                                        </HBox>
                                     </children>
                                 </VBox>
                             </children>
@@ -137,5 +204,118 @@
                 </VBox>
             </center>
         </BorderPane>
+        <VBox fx:id="editPasswordContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, 0.25);" visible="false">
+            <children>
+                <VBox alignment="TOP_CENTER" maxWidth="600.0" prefHeight="300.0" prefWidth="100.0" spacing="30.0" styleClass="profil-container">
+                    <children>
+                  <HBox alignment="CENTER_LEFT" spacing="170.0">
+                     <children>
+                              <Label prefWidth="367.0" styleClass="main-title" text="Modification du mot de passe" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onCloseEdit" prefHeight="22.0" prefWidth="26.0" styleClass="errorPopup-close">
+                           <graphic>
+                              <Region prefHeight="200.0" prefWidth="200.0" styleClass="errorPopup-close-img" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                        <PasswordField fx:id="newPassword" maxWidth="300.0" promptText="Rentrez votre nouveau mot de passe" />
+                        <PasswordField fx:id="newPasswordR" maxWidth="300.0" promptText="Repetez votre nouveau mot de passe" />
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnEditPassword" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="addCommandeButton" text="Modifier" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </VBox>
+        <VBox fx:id="editEmailContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, 0.25);" visible="false">
+            <children>
+                <VBox alignment="TOP_CENTER" maxWidth="600.0" prefHeight="300.0" prefWidth="100.0" spacing="30.0" styleClass="profil-container">
+                    <children>
+                  <HBox alignment="CENTER_LEFT" spacing="180.0">
+                     <children>
+                              <Label styleClass="main-title" text="Modification de l'adresse email" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onCloseEdit" prefHeight="22.0" prefWidth="26.0" styleClass="errorPopup-close">
+                           <graphic>
+                              <Region prefHeight="200.0" prefWidth="200.0" styleClass="errorPopup-close-img" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                        <TextField fx:id="newEmail" maxWidth="300.0" prefHeight="38.0" prefWidth="433.0" promptText="Rentrez votre nouvelle adresse email" />
+                        <TextField fx:id="newEmailR" maxWidth="300.0" prefHeight="38.0" prefWidth="433.0" promptText="Retapez votre nouvelle adresse email" />
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnEditEmail" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="addCommandeButton" text="Modifier" onMouseClicked="#onEditEmail"/>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </VBox>
+        <VBox fx:id="editAdresseContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, 0.25);" visible="false">
+            <children>
+                <VBox alignment="TOP_CENTER" maxWidth="600.0" prefHeight="350.0" prefWidth="100.0" spacing="30.0" styleClass="profil-container">
+                    <children>
+                  <HBox alignment="CENTER_LEFT" spacing="110.0">
+                     <children>
+                              <Label styleClass="main-title" text="Modification de l'adresse de livraison" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onCloseEdit" prefHeight="22.0" prefWidth="26.0" styleClass="errorPopup-close">
+                           <graphic>
+                              <Region prefHeight="200.0" prefWidth="200.0" styleClass="errorPopup-close-img" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                        <TextField fx:id="newAdresse" maxWidth="300.0" prefHeight="38.0" prefWidth="433.0" promptText="Adresse" />
+                        <TextField fx:id="newCodePostal" maxWidth="300.0" prefHeight="38.0" prefWidth="433.0" promptText="Code postal" />
+                        <TextField fx:id="newCity" maxWidth="300.0" prefHeight="38.0" prefWidth="433.0" promptText="Ville" />
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnEditAdresse" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="addCommandeButton" text="Modifier" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </VBox>
+        <VBox fx:id="editNumTelContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, 0.25);" visible="false">
+            <children>
+                <VBox alignment="TOP_CENTER" maxWidth="600.0" prefHeight="300.0" prefWidth="100.0" spacing="30.0" styleClass="profil-container">
+                    <children>
+                  <HBox alignment="CENTER_LEFT" spacing="100.0">
+                     <children>
+                              <Label styleClass="main-title" text="Modification du numéro de téléphone" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onCloseEdit" prefHeight="22.0" prefWidth="26.0" styleClass="errorPopup-close">
+                           <graphic>
+                              <Region prefHeight="200.0" prefWidth="200.0" styleClass="errorPopup-close-img" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                        <TextField fx:id="newNumTel" maxWidth="350.0" prefHeight="38.0" prefWidth="433.0" promptText="Rentrez votre nouveau numéro de téléphone" />
+                        <TextField fx:id="newNumTelR" maxWidth="350.0" prefHeight="38.0" prefWidth="433.0" promptText="Retapez votre nouveau numéro de téléphone" />
+                        <HBox alignment="CENTER">
+                            <children>
+                                <Button fx:id="btnEditNumTel" disable="true" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="addCommandeButton" text="Modifier" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
+            </children>
+        </VBox>
     </children>
 </StackPane>

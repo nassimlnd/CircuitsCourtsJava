@@ -41,6 +41,23 @@ public class XMLLoader {
             ConnectionMySQL.password = password;
         } else {
             createConfigFile();
+
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(configFile);
+
+            document.getDocumentElement().normalize();
+
+            String host = document.getDocumentElement().getElementsByTagName("host").item(0).getTextContent();
+            String dbname = document.getDocumentElement().getElementsByTagName("dbname").item(0).getTextContent();
+            String login = document.getDocumentElement().getElementsByTagName("login").item(0).getTextContent();
+            String password = document.getDocumentElement().getElementsByTagName("password").item(0).getTextContent();
+
+            System.out.println("[DEBUG]DatabaseConfig parsed.");
+
+            ConnectionMySQL.url = "jdbc:mysql://"+ host + "/" + dbname +"?serverTimezone=Europe/Paris";
+            ConnectionMySQL.login = login;
+            ConnectionMySQL.password = password;
         }
 
     }
