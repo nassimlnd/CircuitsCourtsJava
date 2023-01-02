@@ -17,19 +17,15 @@ import java.util.ArrayList;
 public class VehiculeController {
 
     @FXML
-    VBox contentTable;
+    VBox contentTable, confirmationDialog, successPopup;
     @FXML
-    VBox confirmationDialog;
-    @FXML
-    Button okButton;
-    @FXML
-    Button cancelButton;
+    Button okButton, cancelButton;
     @FXML
     Label descDialog;
 
-    public void onAddButton() {
-        ViewFactory.getInstance().showAdminAddVehiculeInterface();
-    }
+    static VBox popup;
+    static Label popupId;
+
 
     public void initialize() throws SQLException {
         ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
@@ -90,10 +86,6 @@ public class VehiculeController {
         contentTable.getChildren().add(line);
     }
 
-
-    public void onClosePopup() {
-    }
-
     public void onEdit(String numImmat) {
         ViewFactory.getInstance().showAdminEditVehiculeInterface(numImmat);
     }
@@ -122,6 +114,19 @@ public class VehiculeController {
         cancelButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);
         });
+    }
+
+    public static void showSuccessPopUp(String id) {
+        popup.setVisible(true);
+        popupId.setText("Le véhicule immatriculé : " + id +" a bien été ajoutée !");
+    }
+
+    public void onClosePopup() {
+        popup.setVisible(false);
+    }
+
+    public void onAddButton() {
+        ViewFactory.getInstance().showAdminAddVehiculeInterface();
     }
 }
 

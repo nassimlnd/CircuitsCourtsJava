@@ -18,28 +18,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class VehiculesController {
-
-
     @FXML
-    VBox successPopup,contentTable;
-
+    VBox successPopup, contentTable;
     @FXML
     Label popupSubtitle;
     static VBox popup;
     static Label popupId;
 
 
-
     public void initialize() throws SQLException {
         ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
-        for (Vehicule v: vehicules) {createLine(v);}
-        popup=successPopup;
-        popupId=popupSubtitle;
+        for (Vehicule v : vehicules) {
+            createLine(v);
+        }
+        popup = successPopup;
+        popupId = popupSubtitle;
     }
 
     public static void showSuccessPopUp(String id) {
         popup.setVisible(true);
-        popupId.setText("Le véhicule immatriculé : " + id +" a bien été ajoutée !");
+        popupId.setText("Le véhicule immatriculé : " + id + " a bien été ajoutée !");
     }
 
     public void createLine(Vehicule v) {
@@ -71,7 +69,7 @@ public class VehiculesController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0,0,0, 320));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 320));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(v.getNumImmat());
         });
@@ -104,9 +102,10 @@ public class VehiculesController {
         popup.setVisible(false);
     }
 
-    public void onEdit(String numImmat){
+    public void onEdit(String numImmat) {
         ViewFactory.getInstance().showProdEditVehiculeInterface(numImmat);
     }
+
     public void onDelete(String numImmat) throws SQLException {
         Vehicule.vehiculeDAO.remove(numImmat);
         System.out.println("[DEBUG]Commande deleted");

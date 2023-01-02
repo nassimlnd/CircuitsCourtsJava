@@ -290,11 +290,11 @@ public class ViewFactory {
         createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);
     }
 
-    public void showAdminEditClientInterface(int accountId) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditCLient.fxml"));
-        System.out.println("[DEBUG]EditCLient loaded.");
-        EditClientController.accountId = accountId;
-        createScene(loader, "CircuitsCourts - Modification du client n°"+ accountId);
+    public void showAdminEditClientInterface(int clientId) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditClient.fxml"));
+        System.out.println("[DEBUG]EditClient loaded.");
+        EditClientController.clientId = clientId;
+        createScene(loader, "CircuitsCourts - Modification du client n°"+ clientId);
 
 
     }

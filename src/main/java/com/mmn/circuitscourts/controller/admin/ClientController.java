@@ -16,29 +16,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ClientController {
-
     static VBox popup;
+    static Label popupId;
     @FXML
-    VBox contentTable;
+    VBox successPopup, confirmationDialog, contentTable;
     @FXML
-    Button addButton;
+    Button okButton, cancelButton, addButton;
     @FXML
-    VBox successPopup;
-    @FXML
-    VBox confirmationDialog;
-    @FXML
-    Button okButton;
-    @FXML
-    Button cancelButton;
-    @FXML
-    Label descDialog;
-
-    public void onClosePopup() {
-    }
-
-    public void onAddButton() {
-        ViewFactory.getInstance().showAdminAddCLientInterface();
-    }
+    Label descDialog, popupSubtitle;
 
 
     /**
@@ -48,27 +33,29 @@ public class ClientController {
      * @throws SQLException
      */
     public void initialize() throws SQLException {
-        ArrayList<User> clients = Client.getClientsInitialize();
-        for (User u : clients) {
-            createLine(u);
+        ArrayList<Client> clients = Client.client.getAll();
+        for (Client client : clients) {
+            createLine(client);
         }
 
+        popup = successPopup;
+        popupId = popupSubtitle;
     }
 
     /**
      * Supprime un client de la base de donnée via la méthode remove de la classe accountDAO, puis actualise le tableau avec un nouvelle initialisation des clients dans le tableau.
      *
-     * @param accountId l'id du compte que l'Administrateur veut supprimer.
+     * @param clientId l'id du compte que l'Administrateur veut supprimer.
      * @throws SQLException
      */
-    public void onDelete(int accountId) throws SQLException {
-        User.accountDAO.remove(accountId);
-        System.out.println("[DEBUG]Account deleted");
+    public void onDelete(int clientId) throws SQLException {
+        Client.client.remove(clientId);
+        System.out.println("[DEBUG]Client deleted");
         contentTable.getChildren().clear();
-        ArrayList<User> users = User.accountDAO.getAllClient();
-        users.forEach(user -> {
+        ArrayList<Client> clients = Client.client.getAll();
+        clients.forEach(client -> {
             try {
-                createLine(user);
+                createLine(client);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -79,10 +66,10 @@ public class ClientController {
      * Crée une ligne dans le tableau avec tous les champs d'un compte client de la base de donnée.
      * pour chaque ligne création des bouttons de modification et de suppression du compte.
      *
-     * @param user le compte fournit les données à mettre dans la ligne.
+     * @param client le client fournit les données à mettre dans la ligne.
      * @throws SQLException
      */
-    public void createLine(User user) throws SQLException {
+    public void createLine(Client client) throws SQLException {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
         line.setPrefHeight(64);
@@ -90,22 +77,22 @@ public class ClientController {
         line.setPadding(new Insets(0, 0, 0, 40));
         line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
-        Label id = new Label(String.valueOf(user.getId()));
-        Label identifiant = new Label(user.getIdentifiant());
-        Label mdp = new Label(user.getGradeName());
-        Label grade = new Label(String.valueOf(user.getPassword()));
+        Label id = new Label(String.valueOf(client.getId()));
+        Label nom = new Label(client.getNom());
+        Label email = new Label(client.getEmail());
+        Label numTel = new Label(client.getNumTel());
         labels.add(id);
-        labels.add(identifiant);
-        labels.add(grade);
-        labels.add(mdp);
+        labels.add(nom);
+        labels.add(email);
+        labels.add(numTel);
 
         labels.forEach(label -> {
             label.getStyleClass().add("commande-tableview-line-cell");
             label.setMaxHeight(1.7976931348623157E308);
             label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(141);
-            label.setMinWidth(141);
-            label.setMaxWidth(141);
+            label.setPrefWidth(151);
+            label.setMinWidth(151);
+            label.setMaxWidth(151);
             line.getChildren().add(label);
         });
 
@@ -115,9 +102,9 @@ public class ClientController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 30));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 150));
         edit.setOnMouseClicked(mouseEvent -> {
-            onEdit(user.getId());
+            onEdit(client.getId());
         });
 
         Button delete = new Button();
@@ -127,7 +114,7 @@ public class ClientController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            showConfirmationDialog(user.getId());
+            showConfirmationDialog(client.getId());
         });
 
         line.getChildren().add(edit);
@@ -138,15 +125,15 @@ public class ClientController {
     /**
      * lors de la suppression d'un compte permet de faire apparaitre une popUp de validation de la suppression du compte.
      *
-     * @param accountId est l'id du compte à supprimer.
+     * @param clientId est l'id du compte à supprimer.
      */
-    public void showConfirmationDialog(int accountId) {
-        descDialog.setText("Voulez vous vraiment supprimer le compte n°" + accountId);
+    public void showConfirmationDialog(int clientId) {
+        descDialog.setText("Voulez vous vraiment supprimer le client n°" + clientId);
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);
             try {
-                onDelete(accountId);
+                onDelete(clientId);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -156,14 +143,26 @@ public class ClientController {
         });
     }
 
-
     /**
-     * Renvoi vers la page de modification d'un compte.
+     * Renvoi vers la page de modification d'un client.
      *
-     * @param numSiret
+     * @param clientId
      */
-    private void onEdit(int numSiret) {
-        ViewFactory.getInstance().showAdminEditClientInterface(numSiret);
+    private void onEdit(int clientId) {
+        ViewFactory.getInstance().showAdminEditClientInterface(clientId);
+    }
+
+    public void onClosePopup() {
+        popup.setVisible(false);
+    }
+
+    public void onAddButton() {
+        ViewFactory.getInstance().showAdminAddCLientInterface();
+    }
+
+    public static void showSuccessPopUp(int id) {
+        popup.setVisible(true);
+        popupId.setText("Le client n°" + id +" a bien été ajouté !");
     }
 
 }

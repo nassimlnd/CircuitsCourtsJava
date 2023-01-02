@@ -1,6 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.controller.producteur.VehiculesController;
+import com.mmn.circuitscourts.controller.admin.VehiculeController;
 import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.models.Vehicule;
@@ -76,8 +76,8 @@ public class AddVehiculeController {
                 int numSiret = Integer.parseInt(namesProd.getValue().split("-")[1]);
                 Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()),
                         numSiret);
-                ViewFactory.getInstance().showProdVehiculesInterface();
-                VehiculesController.showSuccessPopUp(vehicule.getNumImmat());
+                ViewFactory.getInstance().showAdminVehiculeInterface();
+                VehiculeController.showSuccessPopUp(vehicule.getNumImmat());
             }
         }
     }

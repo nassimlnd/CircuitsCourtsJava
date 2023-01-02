@@ -16,6 +16,12 @@ public class Client extends Personne{
     public Client(String nom, String adresse, String numTel, String email) {
         super(nom, adresse, numTel);
         this.email = email;
+
+        try {
+            this.id = client.add(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Client(int id, String nom, String adresse, String numTel, String email, int accountId) {
@@ -25,11 +31,10 @@ public class Client extends Personne{
         this.email = email;
     }
 
-    public static ArrayList<User> getClientsInitialize() throws SQLException {
-        AccountDAO account = new AccountDAO();
-        ArrayList<User> clients = account.getAllClient();
-        System.out.println(clients);
-        return clients;
+    public Client(int id, String nom, String adresse, String numTel, String email) {
+        super(nom, adresse, numTel);
+        this.id = id;
+        this.email = email;
     }
 
     @Override

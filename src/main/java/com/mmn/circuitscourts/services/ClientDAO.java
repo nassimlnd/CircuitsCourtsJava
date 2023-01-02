@@ -40,7 +40,7 @@ public class ClientDAO implements DAO<Client, Integer> {
 
     @Override
     public int add(Client client) throws SQLException {
-        String query = "INSERT INTO clients(nom, adresse, numTel, email) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO client(nom, adresse, numTel, email) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, client.getNom());
         preparedStatement.setString(2, client.getAdresse());
@@ -54,6 +54,8 @@ public class ClientDAO implements DAO<Client, Integer> {
         preparedStatement1.setString(2, "newclient");
         preparedStatement1.setDate(3, Date.valueOf(LocalDate.now()));
         preparedStatement1.setTime(4, Time.valueOf(LocalTime.now()));
+
+        preparedStatement.executeUpdate();
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
         if (resultSet.next()) {
@@ -79,7 +81,11 @@ public class ClientDAO implements DAO<Client, Integer> {
 
     @Override
     public boolean remove(Integer id) throws SQLException {
-        return false;
+        String query = "DELETE FROM client WHERE idC=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        preparedStatement.executeUpdate();
+        return true;
     }
 
     public Client getByAccountId(int accountId) throws SQLException {

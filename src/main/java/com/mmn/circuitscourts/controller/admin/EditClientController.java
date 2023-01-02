@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.models.Client;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -13,11 +14,12 @@ public class EditClientController {
     /**
      * id du compte à modifier.
      */
-    public static int accountId = 0;
-    @FXML
-    TextField identifiant, mdp;
+    public static int clientId = 0;
+
     @FXML
     Label title;
+    @FXML
+    TextField nom, email, numTel, adresse, codePostal, city;
 
     /**
      * Récupère le compte à modifier.
@@ -25,9 +27,13 @@ public class EditClientController {
      * @return
      * @throws SQLException
      */
-    public User getThisClient() throws SQLException {
-        User u = User.accountDAO.getById(accountId);
-        return u;
+    public Client getThisClient() {
+        try {
+            return Client.client.getById(clientId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void onBackButton() {
@@ -40,9 +46,22 @@ public class EditClientController {
      * @throws SQLException
      */
     public void initialize() throws SQLException {
-        title.setText("Modification du client n°" + accountId);
-        identifiant.setText(getThisClient().getIdentifiant());
-        mdp.setText(getThisClient().getPassword());
+        title.setText("Modification du client n°" + clientId);
+
+        textFieldInit();
+    }
+
+    /**
+     * Initialise tous les textFields avec les valeurs actuelles du client
+     */
+    public void textFieldInit() {
+        nom.setText(getThisClient().getNom());
+        email.setText(getThisClient().getEmail());
+        numTel.setText(getThisClient().getNumTel());
+
+        adresse.setText(getThisClient().getAdresse().split(":")[0]);
+        codePostal.setText(getThisClient().getAdresse().split(":")[1]);
+        city.setText(getThisClient().getAdresse().split(":")[2]);
     }
 
     /**
@@ -52,9 +71,10 @@ public class EditClientController {
      * @throws SQLException
      */
     public void onEditButton() throws SQLException {
-        User u = new User(accountId, identifiant.getText(), mdp.getText(), 1);
-        User.accountDAO.update(accountId, u);
-        System.out.println("[DEBUG]account n°" + accountId + " updated.");
+        String adresseFormated = adresse.getText() + ":" + codePostal.getText() + ":" + city.getText();
+        Client client = new Client(clientId, nom.getText(),  adresseFormated, numTel.getText(), email.getText());
+        Client.client.update(clientId, client);
+        System.out.println("[DEBUG]account n°" + clientId + " updated.");
         ViewFactory.getInstance().showAdminClientInterface();
     }
 }
