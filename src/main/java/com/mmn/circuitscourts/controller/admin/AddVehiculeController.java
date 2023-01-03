@@ -1,15 +1,11 @@
 package com.mmn.circuitscourts.controller.admin;
 
-import com.mmn.circuitscourts.controller.admin.VehiculeController;
-import com.mmn.circuitscourts.models.Producteur;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.models.Vehicule;
-import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,14 +23,14 @@ public class AddVehiculeController {
     }
 
     /**
-     * Récupère une liste de string contenant les nom des producteurs et leurs
+     * Récupère une liste de string contenant les nom des entreprises et leurs
      * numéro de Siret.
      * Initialise dans la ComboBox tous les noms récupérés.
      * 
      * @throws SQLException
      */
     public void getNomProdInitialize() throws SQLException {
-        ArrayList<String> namesAndSiret = User.accountDAO.getAllproducteursNameAndSiret();
+        ArrayList<String> namesAndSiret = User.accountDAO.getAllEntreprisesNameAndSiret();
         ArrayList<String> numSirets = new ArrayList<>();
         for (String names : namesAndSiret) {
             numSirets.add(names);

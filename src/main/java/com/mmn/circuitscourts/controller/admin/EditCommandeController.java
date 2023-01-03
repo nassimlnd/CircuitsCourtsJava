@@ -3,11 +3,9 @@ package com.mmn.circuitscourts.controller.admin;
 import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.models.Client;
 import com.mmn.circuitscourts.models.Commande;
-import com.mmn.circuitscourts.models.Producteur;
-import com.mmn.circuitscourts.services.ClientDAO;
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
-import com.mmn.circuitscourts.services.ProducteurDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -59,10 +57,10 @@ public class EditCommandeController {
     }
 
     public void getNumSiretInitialize() throws SQLException {
-        ArrayList<Producteur> producteurs = Producteur.producteurDAO.getAll();
+        ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
         ArrayList<String> numSirets = new ArrayList<>();
-        for (Producteur prd : producteurs) {
-            numSirets.add(String.valueOf(prd.getNumSiret()));
+        for (Entreprise entreprise : entreprises) {
+            numSirets.add(String.valueOf(entreprise.getNumSiret()));
         }
         numSiret.getItems().addAll(numSirets);
     }

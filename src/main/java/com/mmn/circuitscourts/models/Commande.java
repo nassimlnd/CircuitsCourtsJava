@@ -181,13 +181,13 @@ public class Commande {
     }
 
     /**
-     * Récupère les commandes du producteur depuis la base de données
+     * Récupère les commandes de l'entreprise depuis la base de données
      * @return arrayList de commandes, retourne toutes les commandes dans la base de données d'un certain producteur
      * @throws SQLException
      */
     public static ArrayList<Commande> getCommandesInitializeByAccountId() throws SQLException {
         int idUser = App.userConnected.getId();
-        ArrayList<Commande> commandes = cmd.getAllByProducteur(idUser);
+        ArrayList<Commande> commandes = cmd.getAllByEntreprise(idUser);
         System.out.println("[DATABASE]CommandesByAccountID done.");
         return commandes;
     }

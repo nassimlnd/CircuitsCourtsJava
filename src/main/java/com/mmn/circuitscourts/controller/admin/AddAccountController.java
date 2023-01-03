@@ -57,7 +57,7 @@ public class AddAccountController {
     public void getGradesInitialize() {
         ArrayList<String> gradesNames = new ArrayList<>();
         gradesNames.add("Client");
-        gradesNames.add("Producteur");
+        gradesNames.add("Entreprise");
         gradesNames.add("Administrateur");
         grade.setValue(gradesNames.get(0));
         grade.getItems().addAll(gradesNames);
@@ -73,7 +73,7 @@ public class AddAccountController {
         switch (grade) {
             case "Client":
                 return 1;
-            case "Producteur":
+            case "Entreprise":
                 return 2;
             case "Administrateur":
                 return 3;

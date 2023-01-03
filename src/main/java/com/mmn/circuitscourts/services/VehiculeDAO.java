@@ -104,8 +104,8 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      * @return une ArrayList qui est constituée de l'entierté de la table.
      */
 
-    public ArrayList<Vehicule> getAllByProducteur(int accountId) throws SQLException {
-        String query = "SELECT * FROM  vehicule INNER JOIN Producteur ON Vehicule.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + accountId;
+    public ArrayList<Vehicule> getAllByEntreprise(int accountId) throws SQLException {
+        String query = "SELECT * FROM  vehicule INNER JOIN entreprise ON Vehicule.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + accountId;
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         ArrayList<Vehicule> vehicules = new ArrayList<>();
@@ -120,7 +120,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
     }
 
     public int getNumSiretConnected(int idUser) throws SQLException {
-        String query = "SELECT DISTINCT Vehicule.numSiret FROM Vehicule INNER JOIN Producteur ON Vehicule.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + idUser;
+        String query = "SELECT DISTINCT Vehicule.numSiret FROM Vehicule INNER JOIN entreprise ON Vehicule.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + idUser;
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         if(rs.next()){

@@ -21,7 +21,7 @@ public interface DAO<T,T1>{
         public ArrayList<T> getAll() throws SQLException;
 
         /**
-         * Permet de trouver une client, producteur, tournée..., objet <T> dans la BD via à son id.
+         * Permet de trouver une client, entreprise, tournée..., objet <T> dans la BD via à son id.
          * @param id
          * @return retourne l'objet <T> en queston.
          */

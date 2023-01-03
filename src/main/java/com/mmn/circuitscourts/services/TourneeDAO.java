@@ -129,7 +129,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
     }
 
     public int countById() throws Exception {
-        String query = "SELECT COUNT(*) FROM tournee INNER JOIN producteur ON tournee.numSiret = producteur.numSiret INNER JOIN accounts ON producteur.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
+        String query = "SELECT COUNT(*) FROM tournee INNER JOIN entreprise ON tournee.numSiret = entreprise.numSiret INNER JOIN accounts ON entreprise.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
         Statement statement = conn.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         if (resultSet.next()) {
@@ -137,8 +137,8 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
         } else return 0;
     }
 
-    public ArrayList<Tournee> getAllByProducteur(int accountId) throws SQLException {
-        String query = "SELECT * FROM tournee INNER JOIN Producteur ON tournee.numSiret=producteur.numSiret WHERE Producteur.accountId=" + accountId;
+    public ArrayList<Tournee> getAllByEntreprise(int accountId) throws SQLException {
+        String query = "SELECT * FROM tournee INNER JOIN entreprise ON tournee.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + accountId;
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
         ArrayList<Tournee> tournees = new ArrayList<>();

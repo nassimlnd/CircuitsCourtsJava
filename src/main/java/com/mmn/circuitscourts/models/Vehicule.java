@@ -71,10 +71,10 @@ public class Vehicule {
         return vehicules;
     }
 
-    public ArrayList<Vehicule> getVehiculesInitilizeByProducteur() throws SQLException {
+    public ArrayList<Vehicule> getVehiculesInitilizeByEntreprise() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
         int idUser = App.userConnected.getId();
-        ArrayList<Vehicule> vehicules = v.getAllByProducteur(idUser);
+        ArrayList<Vehicule> vehicules = v.getAllByEntreprise(idUser);
         return vehicules;
     }
 
@@ -86,7 +86,7 @@ public class Vehicule {
 
     public static ArrayList<Vehicule>getVehiculesInitilizeByid() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
-        ArrayList<Vehicule> vehicules = v.getAllByProducteur(App.userConnected.getId());
+        ArrayList<Vehicule> vehicules = v.getAllByEntreprise(App.userConnected.getId());
         return vehicules;
     }
 }

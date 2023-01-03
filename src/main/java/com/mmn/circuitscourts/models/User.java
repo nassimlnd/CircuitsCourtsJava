@@ -67,7 +67,7 @@ public class User {
             case 1:
                 return "Client";
             case 2:
-                return "Producteur";
+                return "Entreprise";
             case 3:
                 return "Administrateur";
             default:
@@ -83,7 +83,7 @@ public class User {
         switch (grade){
             case "Client" :
                 return 1;
-            case "Producteur" :
+            case "Entreprise" :
                 return 2;
             case "Administrateur":
                 return 3;

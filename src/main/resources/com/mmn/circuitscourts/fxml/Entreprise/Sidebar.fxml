@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane styleClass="sidebar" BorderPane.alignment="CENTER" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.entreprise.SidebarController">
+    <top>
+        <VBox alignment="CENTER" maxHeight="64.0" minWidth="248" prefHeight="64.0" prefWidth="248.0"
+              styleClass="sidebar-title-container" BorderPane.alignment="CENTER">
+            <children>
+                <Label styleClass="sidebar-title" text="CircuitsCourts"/>
+            </children>
+        </VBox>
+    </top>
+    <bottom>
+        <HBox maxHeight="68.0" maxWidth="248.0" styleClass="sidebar-profil-container"
+              BorderPane.alignment="CENTER">
+            <children>
+                <VBox prefHeight="64.0" prefWidth="248">
+                    <children>
+                        <Label maxHeight="19.0" maxWidth="160.0" prefHeight="19.0" prefWidth="160.0"
+                               fx:id="userName"
+                               styleClass="sidebar-profil-name"/>
+                        <Label styleClass="sidebar-profil-email" fx:id="userGrade"/>
+                    </children>
+                    <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0"/>
+                    </padding>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <VBox fx:id="disconnectContainer" alignment="CENTER" maxHeight="24.0"
+                              maxWidth="24.0" minHeight="24.0" minWidth="24.0"
+                              onMouseClicked="#onDisconnect"
+                              styleClass="sidebar-profil-disconnect-button-container">
+                            <Button fx:id="disconnectButton" mnemonicParsing="false"
+                                    onMouseClicked="#onDisconnect" pickOnBounds="true"
+                                    styleClass="sidebar-profil-disconnect-button">
+                                <graphic>
+                                    <Region styleClass="icon"/>
+                                </graphic>
+                            </Button>
+                        </VBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </bottom>
+    <center>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_CENTER">
+            <children>
+                <Button fx:id="dashboardTab" alignment="TOP_LEFT" maxHeight="40" maxWidth="216.0"
+                        prefHeight="40" prefWidth="216.0" styleClass="sidebar-tab"
+                        text=" Tableau de bord" pickOnBounds="true" onMouseClicked="#onDashboardButton">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <Region styleClass="sidebar-tab-img-dashboard" />
+                    </graphic>
+                </Button>
+                <Label maxWidth="216.0" prefWidth="216.0" styleClass="sidebar-tab-subtitle"
+                       text="Gestion">
+                    <padding>
+                        <Insets bottom="7.0" left="10.0" right="10.0" top="7.0"/>
+                    </padding>
+                    <VBox.margin>
+                        <Insets bottom="5" top="5"/>
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="commandesTab" maxWidth="216" prefWidth="216" styleClass="sidebar-tab" alignment="TOP_LEFT" text=" Commandes" onMouseClicked="#onCommandesButton" pickOnBounds="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <Region styleClass="sidebar-tab-img-commande" />
+                    </graphic>
+                </Button>
+                <Button fx:id="tourneeTab" maxWidth="216" prefWidth="216" styleClass="sidebar-tab" alignment="TOP_LEFT" text=" Tournées" onMouseClicked="#onTourneeButton" pickOnBounds="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <Region styleClass="sidebar-tab-img-tournee"/>
+                    </graphic>
+                </Button>
+                <Button fx:id="vehiculesTab" maxWidth="216" prefWidth="216" styleClass="sidebar-tab" alignment="TOP_LEFT" text=" Véhicules" onMouseClicked="#onVehiculesButton" pickOnBounds="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <Region styleClass="sidebar-tab-img-vehicules" />
+                    </graphic>
+                </Button>
+                <Label maxWidth="216.0" prefWidth="216.0" styleClass="sidebar-tab-subtitle"
+                       text="Gestion des ventes">
+                    <padding>
+                        <Insets bottom="7.0" left="10.0" right="10.0" top="7.0"/>
+                    </padding>
+                    <VBox.margin>
+                        <Insets bottom="5" top="5"/>
+                    </VBox.margin>
+                </Label>
+                <Button fx:id="articlesTab" maxWidth="216" prefWidth="216" styleClass="sidebar-tab" alignment="TOP_LEFT" text=" Articles" onMouseClicked="#onArticleButton" pickOnBounds="true">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <graphic>
+                        <Region styleClass="sidebar-tab-img-marketplace" />
+                    </graphic>
+                </Button>
+            </children>
+            <padding>
+                <Insets left="15.0" top="40.0"/>
+            </padding>
+        </VBox>
+    </center>
+</BorderPane>

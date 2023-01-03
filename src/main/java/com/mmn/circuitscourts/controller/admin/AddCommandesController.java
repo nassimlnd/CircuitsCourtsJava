@@ -1,15 +1,12 @@
 package com.mmn.circuitscourts.controller.admin;
+
 import com.mmn.circuitscourts.models.*;
-import com.mmn.circuitscourts.services.AccountDAO;
 import com.mmn.circuitscourts.services.ClientDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,19 +16,24 @@ import java.util.ArrayList;
 public class AddCommandesController {
 
     @FXML
-    DatePicker datePicker;
+    Button plusHourDebut, plusMinutesDebut, minusHourDebut, minusMinutesDebut, plusHourFin, plusMinutesFin, minusMinutesFin, minusHourFin;
     @FXML
-    ComboBox<String> article;
+    DatePicker date;
     @FXML
     TextField quantite;
     @FXML
-    ComboBox<String> client;
-    @FXML
-    TextField horaire;
-    @FXML
     ComboBox<Integer> tournee;
     @FXML
-    ComboBox<String> numSiret;
+    ComboBox<String> entreprises, client, article;
+    @FXML
+    Label hourDebut, minutesDebut, hourFin, minutesFin;
+
+
+    public void initialize() throws SQLException {
+        articleInitialize();
+        clientInitialize();
+        siretInitialize();
+    }
 
     /**
      * Récupère toutes les informations entrées dans les inputs, et créer une commande avec.
@@ -40,18 +42,19 @@ public class AddCommandesController {
     public void onCreateButton() throws SQLException {
         int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
 
-        MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
-        Article a = marketplaceDAO.getById(idArticle);
-        int poids = (int) (a.getWeight()* Integer.parseInt(quantite.getText()));
+        Article a = Article.article.getById(idArticle);
+        double poids = a.getWeight() * Integer.parseInt(quantite.getText());
 
-        String[] horaires = horaire.getText().split("-");
-        String horaireDebut = horaires[0];
-        String horaireFin = horaires[1];
-        int idC = Integer.parseInt(client.getValue().split("-")[0]);
+        int idClient = Integer.parseInt(client.getValue().split("-")[0]);
         int quantity = Integer.parseInt(quantite.getText());
-        int finalNumSiret = Integer.parseInt(numSiret.getValue().split("-")[1]);
-        new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idC, finalNumSiret, datePicker.getValue());
-        System.out.println("Commande added.");
+
+        String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
+        String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
+
+        int finalNumSiret = Integer.parseInt(entreprises.getValue().split("-")[0]);
+        new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
+        System.out.println("[DEBUG]Commande added.");
+
         ViewFactory.getInstance().showAdminCommandeInterface();
         CommandesController.showSuccessPopUp();
     }
@@ -90,27 +93,126 @@ public class AddCommandesController {
         article.getItems().addAll(namesArticles);
     }
 
-    public void initialize() throws SQLException {
-       articleInitialize();
-       siretInitialize();
-       tourneesInitialize();
-       horaire.setText("-");
-    }
-
     public void siretInitialize() throws SQLException {
-        ArrayList<String> users = User.accountDAO.getAllproducteursNameAndSiret();
-        numSiret.getItems().addAll(users);
+        ArrayList<Entreprise> entreprise = Entreprise.entrepriseDAO.getAll();
+        ArrayList<String> list = new ArrayList<>();
+        entreprise.forEach(p -> {
+            list.add(p.getNumSiret() + "-" + p.getProprietaire().getNom());
+        });
+        entreprises.getItems().addAll(list);
     }
 
-    public void tourneesInitialize() throws SQLException {
-        ArrayList<Tournee> tournees = Tournee.tourneeDAO.getAll();
-        ArrayList<Integer> idT = new ArrayList<>();
-        for (Tournee t: tournees) {
-            idT.add(t.getId());
+    /**
+     * Ajoute une heure au compteur
+     */
+    public void onPlusHourDebut() {
+        int hour = Integer.parseInt(hourDebut.getText());
+        if (hour < 23) {
+            hour++;
+            hourDebut.setText(String.valueOf(hour));
+        } else if (hour == 23) {
+            hour = 00;
+            hourDebut.setText(String.valueOf(hour));
         }
-        tournee.getItems().addAll(idT);
     }
 
+    /**
+     * Ajoute une minute au compteur
+     */
+    public void onPlusMinutesDebut() {
+        int minutes = Integer.parseInt(minutesDebut.getText());
+        if (minutes < 59) {
+            minutes++;
+            minutesDebut.setText(String.valueOf(minutes));
+        } else if (minutes == 59) {
+            minutes = 0;
+            minutesDebut.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Retire une heure au compteur
+     */
+    public void onMinusHourDebut() {
+        int hour = Integer.parseInt(hourDebut.getText());
+        if (hour > 0) {
+            hour--;
+            hourDebut.setText(String.valueOf(hour));
+        } else if (hour == 0) {
+            hour = 23;
+            hourDebut.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Retire une minute au compteur
+     */
+    public void onMinusMinutesDebut() {
+        int minutes = Integer.parseInt(minutesDebut.getText());
+        if (minutes > 0) {
+            minutes--;
+            minutesDebut.setText(String.valueOf(minutes));
+        } else if (minutes == 0) {
+            minutes = 59;
+            minutesDebut.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Ajoute une heure au compteur
+     */
+    public void onPlusHourFin() {
+        int hour = Integer.parseInt(hourFin.getText());
+        if (hour < 23) {
+            hour++;
+            hourFin.setText(String.valueOf(hour));
+        } else if (hour == 23) {
+            hour = 00;
+            hourFin.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Ajoute une minute au compteur
+     */
+    public void onPlusMinutesFin() {
+        int minutes = Integer.parseInt(minutesFin.getText());
+        if (minutes < 59) {
+            minutes++;
+            minutesFin.setText(String.valueOf(minutes));
+        } else if (minutes == 59) {
+            minutes = 0;
+            minutesFin.setText(String.valueOf(minutes));
+        }
+    }
+
+    /**
+     * Retire une heure au compteur
+     */
+    public void onMinusHourFin() {
+        int hour = Integer.parseInt(hourFin.getText());
+        if (hour > 0) {
+            hour--;
+            hourFin.setText(String.valueOf(hour));
+        } else if (hour == 0) {
+            hour = 23;
+            hourFin.setText(String.valueOf(hour));
+        }
+    }
+
+    /**
+     * Retire une minute au compteur
+     */
+    public void onMinusMinutesFin() {
+        int minutes = Integer.parseInt(minutesFin.getText());
+        if (minutes > 0) {
+            minutes--;
+            minutesFin.setText(String.valueOf(minutes));
+        } else if (minutes == 0) {
+            minutes = 59;
+            minutesFin.setText(String.valueOf(minutes));
+        }
+    }
 }
 
 

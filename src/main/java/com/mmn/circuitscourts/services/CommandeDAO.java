@@ -172,12 +172,12 @@ public class CommandeDAO implements DAO<Commande, Integer> {
     }
 
     /**
-     * Compte le nombre de commandes d'un compte producteur.
+     * Compte le nombre de commandes d'un compte entreprise.
      * @return le nombre de commande appartenant au compte.
      * @throws Exception
      */
     public int countById() throws Exception {
-        String query = "SELECT COUNT(*) FROM commande INNER JOIN producteur ON commande.numSiret = producteur.numSiret INNER JOIN accounts ON producteur.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
+        String query = "SELECT COUNT(*) FROM commande INNER JOIN entreprise ON commande.numSiret = entreprise.numSiret INNER JOIN accounts ON entreprise.accountId = accounts.accountId WHERE accounts.accountId = " + App.userConnected.getId();
         Statement statement = con.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         if (resultSet.next()) {
@@ -188,12 +188,12 @@ public class CommandeDAO implements DAO<Commande, Integer> {
 
     /**
      * Permet de recuperer toutes les commandes appartenant à un prducteur.
-     * @param accountId est l'id du compte du producteur.
-     * @return ArrayLis contenant toutes les commandes appartenant au producteur voulu.
+     * @param accountId est l'id du compte de l'entreprise.
+     * @return ArrayLis contenant toutes les commandes appartenant au entreprise voulu.
      * @throws SQLException
      */
-    public ArrayList<Commande> getAllByProducteur(int accountId) throws SQLException {
-        String query = "SELECT * FROM  commande INNER JOIN Producteur ON Commande.numSiret=Producteur.numSiret WHERE Producteur.accountId=" + accountId;
+    public ArrayList<Commande> getAllByEntreprise(int accountId) throws SQLException {
+        String query = "SELECT * FROM  commande INNER JOIN entreprise ON Commande.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + accountId;
         Statement st = con.createStatement();
         ResultSet resultSet = st.executeQuery(query);
         ArrayList<Commande> result = new ArrayList<>();

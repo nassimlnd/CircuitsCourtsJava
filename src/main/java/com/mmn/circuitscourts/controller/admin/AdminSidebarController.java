@@ -23,7 +23,7 @@ public class AdminSidebarController {
     @FXML
     Button vehiculesTab;
     @FXML
-    Button producteurTab;
+    Button entrepriseTab;
     @FXML
     Button clientTab;
     @FXML
@@ -57,11 +57,11 @@ public class AdminSidebarController {
             case "[ADMIN]CircuitsCourts - Ajout d'un véhicule":
                 vehiculesTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Producteurs":
-                producteurTab.getStyleClass().add("sidebar-tab-active");
+            case "[ADMIN]CircuitsCourts - Entreprises":
+                entrepriseTab.getStyleClass().add("sidebar-tab-active");
                 break;
-            case "[ADMIN]CircuitsCourts - Ajout d'un producteur":
-                producteurTab.getStyleClass().add("sidebar-tab-active");
+            case "[ADMIN]CircuitsCourts - Ajout d'une entreprise":
+                entrepriseTab.getStyleClass().add("sidebar-tab-active");
                 break;
             case "[ADMIN]CircuitsCourts - Clients":
                 clientTab.getStyleClass().add("sidebar-tab-active");
@@ -115,10 +115,10 @@ public class AdminSidebarController {
         }
     }
 
-    public void onProducteurButton() {
+    public void onEntrepriseButton() {
         String title = ViewFactory.getInstance().getMainStage().getTitle();
-        if (title != "[ADMIN]CircuitsCourts - Producteurs") {
-            ViewFactory.getInstance().showAdminProducteurInterface();
+        if (title != "[ADMIN]CircuitsCourts - Entreprises") {
+            ViewFactory.getInstance().showAdminEntrepriseInterface();
         }
     }
 

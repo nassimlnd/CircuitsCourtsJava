@@ -57,7 +57,7 @@ public class EditAccountController {
     public void getGradesInitialize() throws SQLException {
         ArrayList<String> gradesNames = new ArrayList<>();
         gradesNames.add("Client");
-        gradesNames.add("Producteur");
+        gradesNames.add("Entreprise");
         gradesNames.add("Administrateur");
         grade.setValue(getThisAccount().getGradeName());
         grade.getItems().addAll(gradesNames);
@@ -71,7 +71,7 @@ public class EditAccountController {
         switch (grade) {
             case "Client":
                 return 1;
-            case "Producteur":
+            case "Entreprise":
                 return 2;
             case "Administrateur":
                 return 3;

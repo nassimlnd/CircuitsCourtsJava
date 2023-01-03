@@ -120,13 +120,13 @@ public class Tournee {
     }
 
     /**
-     * méthode qui apelle  via TourneeDAO la méthode getAllByProducteur().
-     * @return l'ArrayList des tournées appartenant au producteur connecté à l'application.
+     * méthode qui apelle  via TourneeDAO la méthode getAllByEntreprise().
+     * @return l'ArrayList des tournées appartenant au entreprise connecté à l'application.
      * @throws SQLException
      */
-    public static ArrayList<Tournee> getCommandesInitializeByProducteur() throws SQLException {
+    public static ArrayList<Tournee> getCommandesInitializeByEntreprise() throws SQLException {
         TourneeDAO t = new TourneeDAO();
-        ArrayList<Tournee> tournees = t.getAllByProducteur(App.userConnected.getId());
+        ArrayList<Tournee> tournees = t.getAllByEntreprise(App.userConnected.getId());
         return tournees;
     }
 }

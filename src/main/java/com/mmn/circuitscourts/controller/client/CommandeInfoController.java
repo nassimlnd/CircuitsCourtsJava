@@ -2,16 +2,15 @@ package com.mmn.circuitscourts.controller.client;
 
 import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.models.Commande;
-import com.mmn.circuitscourts.models.Producteur;
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.services.MarketplaceDAO;
-import com.mmn.circuitscourts.services.ProducteurDAO;
+import com.mmn.circuitscourts.services.EntrepriseDAO;
 import com.mmn.circuitscourts.services.TourneeDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 
 import java.sql.SQLException;
@@ -25,7 +24,7 @@ public class CommandeInfoController {
     @FXML
     Label totalWeight;
     @FXML
-    Label producteurName;
+    Label entrepriseName;
     @FXML
     Label dateCommande;
     @FXML
@@ -57,9 +56,9 @@ public class CommandeInfoController {
         Article article = marketplaceDAO.getById(commande.getArticleId());
         articleName.setText(article.getName());
 
-        ProducteurDAO producteurDAO = new ProducteurDAO();
-        Producteur producteur = producteurDAO.getById(commande.getNumSiret());
-        producteurName.setText(producteur.getProprietaire().getNom());
+        EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
+        Entreprise entreprise = entrepriseDAO.getById(commande.getNumSiret());
+        entrepriseName.setText(entreprise.getProprietaire().getNom());
 
         totalWeight.setText(commande.getPoids() + " kg");
     }

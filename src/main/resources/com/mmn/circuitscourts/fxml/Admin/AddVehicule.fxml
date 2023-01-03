@@ -54,7 +54,7 @@
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
                                 <ComboBox fx:id="namesProd" minHeight="40.0" minWidth="250.0" prefWidth="150.0"
-                                          promptText="producteurs"/>
+                                          promptText="entreprises"/>
                             </children>
                             <VBox.margin>
                                 <Insets top="75.0"/>

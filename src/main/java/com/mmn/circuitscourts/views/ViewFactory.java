@@ -2,10 +2,11 @@ package com.mmn.circuitscourts.views;
 
 import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.controller.admin.EditClientController;
+import com.mmn.circuitscourts.controller.admin.EditEntrepriseController;
 import com.mmn.circuitscourts.controller.client.CommandeInfoController;
 import com.mmn.circuitscourts.controller.client.NewCommandeController;
-import com.mmn.circuitscourts.controller.producteur.EditCommandeController;
-import com.mmn.circuitscourts.controller.producteur.EditTourneeController;
+import com.mmn.circuitscourts.controller.entreprise.EditCommandeController;
+import com.mmn.circuitscourts.controller.entreprise.EditTourneeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -43,8 +44,8 @@ public class ViewFactory {
     }
 
     public void showProdDashboardInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Dashboard.fxml"));
-        System.out.println("[DEBUG]ProducteurDashboard loaded.");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Dashboard.fxml"));
+        System.out.println("[DEBUG]EntrepriseDashboard loaded.");
         createScene(loader, "CircuitsCourts - Tableau de bord");
     }
 
@@ -66,20 +67,20 @@ public class ViewFactory {
     }
 
     public void showProdCommandesInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Commandes.fxml"));
-        System.out.println("[DEBUG]ProducteurCommandes loaded.");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Commandes.fxml"));
+        System.out.println("[DEBUG]EntrepriseCommandes loaded.");
         createScene(loader, "CircuitsCourts - Commandes");
     }
 
     public void showProdVehiculesInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Vehicules.fxml"));
-        System.out.println("[DEBUG]ProducteurVehicules loaded.");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Vehicules.fxml"));
+        System.out.println("[DEBUG]EntrepriseVehicules loaded.");
         createScene(loader, "CircuitsCourts - Véhicules");
     }
 
     public void showProdTourneeInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Tournees.fxml"));
-        System.out.println("[DEBUG]ProducteurTournee loaded.");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Tournees.fxml"));
+        System.out.println("[DEBUG]EntrepriseTournee loaded.");
         createScene(loader, "CircuitsCourts - Tournées");
     }
 
@@ -137,21 +138,21 @@ public class ViewFactory {
         createScene(loader, "[ADMIN]CircuitsCourts - Ajout d'un véhicule");
     }
 
-    public void showProducteurAddVehiculeInterface(){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddVehicule.fxml"));
+    public void showEntrepriseAddVehiculeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/AddVehicule.fxml"));
         System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");
         createScene(loader, "[ADMIN]CircuitsCourts - Ajout d'une tournée");
     }
 
-    public void showProducteurAddTourneeInterface(){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddTournees.fxml"));
-        System.out.println("[DEBUG]ProducteurAddTournee loaded.");
+    public void showEntrepriseAddTourneeInterface(){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/AddTournees.fxml"));
+        System.out.println("[DEBUG]EntrepriseAddTournee loaded.");
         createScene(loader, "CircuitsCourts - Ajout d'une tournée");
     }
 
     public void showProdAddCommandeInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddCommande.fxml"));
-        System.out.println("[DEBUG]ProducteurAddCommande loaded.");
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/AddCommande.fxml"));
+        System.out.println("[DEBUG]EntrepriseAddCommande loaded.");
         createScene(loader, "CircuitsCourts - Ajout de commande");
     }
 
@@ -162,13 +163,13 @@ public class ViewFactory {
     }
 
     public void showProdArticlesInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/Articles.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Articles.fxml"));
         System.out.println("[DEBUG]ProdArticles loaded.");
         createScene(loader, "CircuitsCourts - Articles");
     }
 
     public void showProdAddArticlesInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/AddArticles.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/AddArticles.fxml"));
         System.out.println("[DEBUG]ProdAddArticles loaded.");
         createScene(loader, "CircuitsCourts - Ajout d'un article");
     }
@@ -180,10 +181,10 @@ public class ViewFactory {
 
     }
 
-    public void showAdminProducteurInterface() {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Producteur.fxml"));
-        System.out.println("[DEBUG]AdminProducteur loaded.");
-        createScene(loader, "[ADMIN]CircuitsCourts - Producteurs");
+    public void showAdminEntrepriseInterface() {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/Entreprise.fxml"));
+        System.out.println("[DEBUG]AdminEntreprise loaded.");
+        createScene(loader, "[ADMIN]CircuitsCourts - Entreprises");
     }
 
     public void showClientProfilInterface() {
@@ -213,7 +214,7 @@ public class ViewFactory {
     }
 
     public void showProdEditCommandeInterface(int id) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditCommande.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/EditCommande.fxml"));
         System.out.println("[DEBUG]ProdEditCommande loaded.");
         EditCommandeController.commandeId = id;
         createScene(loader, "CircuitsCourts - Modification de la commande n°" + id);
@@ -234,30 +235,30 @@ public class ViewFactory {
 
     }
 
-    public void showAdminEditProducteurInterface(int numSiret){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditProducteur.fxml"));
-        System.out.println("[ADMIN]EditProducteur loaded.");
-        com.mmn.circuitscourts.controller.admin.EditProducteurController.numSiret = numSiret;
-        createScene(loader, "CircuitsCourts - Modification du producteur n°"+ numSiret);
+    public void showAdminEditEntrepriseInterface(int numSiret){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditEntreprise.fxml"));
+        System.out.println("[ADMIN]EditEntreprise loaded.");
+        EditEntrepriseController.numSiret = numSiret;
+        createScene(loader, "CircuitsCourts - Modification de l'entreprise n°"+ numSiret);
 
     }
 
-    public void showAdminAddProducteurInterface(){
-        FXMLLoader loader = new FXMLLoader((App.class.getResource("fxml/Admin/AddProducteur.fxml")));
-        System.out.println("[ADMIN]AddProducteur loaded.");
-        createScene(loader, "CircuitsCourts - Ajout d'un producteur");
+    public void showAdminAddEntrepriseInterface(){
+        FXMLLoader loader = new FXMLLoader((App.class.getResource("fxml/Admin/AddEntreprise.fxml")));
+        System.out.println("[DEBUG]AdminAddEntreprise loaded.");
+        createScene(loader, "CircuitsCourts - Ajout d'une entreprise");
     }
     public void showProdEditVehiculeInterface(String numImmat){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditVehicule.fxml"));
-        System.out.println("[PRODUCTEUR]EditVehicule loaded.");
-        com.mmn.circuitscourts.controller.producteur.EditVehiculeController.numImmat = numImmat;
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/EditVehicule.fxml"));
+        System.out.println("[DEBUG]EntrepriseEditVehicule loaded.");
+        com.mmn.circuitscourts.controller.entreprise.EditVehiculeController.numImmat = numImmat;
         createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ numImmat);
 
     }
     public void showProdEditArticleInterface(int id){
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditArticle.fxml"));
-        System.out.println("[PRODUCTEUR]EditArticle loaded.");
-        com.mmn.circuitscourts.controller.producteur.EditArticleController.id = id;
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/EditArticle.fxml"));
+        System.out.println("[DEBUG]EntrepriseEditArticle loaded.");
+        com.mmn.circuitscourts.controller.entreprise.EditArticleController.id = id;
         createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ id);
 
     }
@@ -284,7 +285,7 @@ public class ViewFactory {
     }
 
     public void showProdEditTourneeInterface(int id) {
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Producteur/EditTournee.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/EditTournee.fxml"));
         System.out.println("[DEBUG]EditTournee loaded.");
         EditTourneeController.tourneeId = id;
         createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);

@@ -87,8 +87,8 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" maxHeight="43.0" prefHeight="100.0" prefWidth="200.0" spacing="196.0" styleClass="client-commande-details-line">
                                  <children>
-                                    <Label styleClass="client-commande-details-line-title" text="Producteur" />
-                                    <Label fx:id="producteurName" text="Label" />
+                                    <Label styleClass="client-commande-details-line-title" text="Entreprise" />
+                                    <Label fx:id="entrepriseName" text="Label" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" />

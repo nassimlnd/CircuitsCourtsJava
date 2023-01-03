@@ -1,6 +1,5 @@
 package com.mmn.circuitscourts.services;
 
-import com.mmn.circuitscourts.models.Administrateur;
 import com.mmn.circuitscourts.models.Commande;
 
 import java.sql.SQLException;
@@ -88,8 +87,8 @@ public class TempTestFunctionsDAO {
                     System.out.println(c4.toString());
                 }
 */
-                System.out.println("================test get all by producteur ===================== ");
-                ArrayList<Commande> commandes1 = testC.getAllByProducteur(1);
+                System.out.println("================test get all by entreprise ===================== ");
+                ArrayList<Commande> commandes1 = testC.getAllByEntreprise(1);
                 for (Commande cmd : commandes1) {
                     System.out.println(cmd.toString());
                 }
