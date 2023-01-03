@@ -57,24 +57,29 @@ public class AddVehiculeController {
      * @throws SQLException
      */
     public void onCreateButton() throws SQLException {
-        String[] immat = numImmat.getText().split("-");
-        boolean identique = false;
-        if (immat[0].matches("([A-Z][A-Z])") && immat[1].matches("([0-9][0-9][0-9])")
-                && immat[2].matches("([A-Z][A-Z])") && parseInt(poids.getText()) > 0) {
-            ArrayList<Vehicule> v = Vehicule.vehiculeDAO.getAll();
-            for (int i = 0; i < v.size(); i++) {
-                if (v.get(i).getNumImmat().equals(numImmat.getText())) {
-                    identique = true;
-                    break;
+        if(!numImmat.getText().equals("") && !poids.getText().equals("") && !namesProd.getValue().equals("")){
+            if(numImmat.getText().matches("^[A-Z]{2}-\\d{3}-[A-Z]{2}$")){
+                ArrayList<Vehicule> v = Vehicule.vehiculeDAO.getAll();
+                ArrayList<String> numImmats = new ArrayList<>();
+                for (Vehicule vehicule: v) {
+                    numImmats.add(vehicule.getNumImmat());
                 }
-            }
-            if (identique == false) {
-                int numSiret = Integer.parseInt(namesProd.getValue().split("-")[1]);
-                Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()),
-                        numSiret);
-                ViewFactory.getInstance().showAdminVehiculeInterface();
-                VehiculeController.showSuccessPopUp(vehicule.getNumImmat());
-            }
-        }
+                if(!numImmats.contains(numImmat.getText())){
+                    try{
+                        int numSiret = Integer.parseInt(namesProd.getValue().split("-")[1]);
+                        Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
+                        ViewFactory.getInstance().showAdminVehiculeInterface();
+                        VehiculeController.showSuccessPopUp(vehicule.getNumImmat());
+                    }catch(NumberFormatException e){
+                        System.out.println(e);
+                    }
+                } else System.out.println("[DEBUG]Error : plaque déjà existante.");
+            }else System.out.println("[DEBUG]Error : format de la plaque d'immatriculation AA-000-AA.");
+        }else System.out.println("[DEBUG]Tous les champs doivent être saisis.");
     }
+
 }
+
+
+
+

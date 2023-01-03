@@ -15,7 +15,6 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
 
     @Override
     public Proprietaire getById(Integer id) throws SQLException {
-        System.out.println(id);
         String query = "SELECT * FROM proprietaire WHERE id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setInt(1, id);

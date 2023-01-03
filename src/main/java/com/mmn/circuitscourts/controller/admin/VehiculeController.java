@@ -92,7 +92,7 @@ public class VehiculeController {
 
     public void onDelete(String numImmat) throws SQLException {
         Vehicule.vehiculeDAO.remove(numImmat);
-        System.out.println("[DEBUG]Commande deleted");
+        System.out.println("[DEBUG]Véhicule deleted");
         contentTable.getChildren().clear();
         ArrayList<Vehicule> vehicules = Vehicule.getCommandesInitialize();
         vehicules.forEach(vehicule -> {

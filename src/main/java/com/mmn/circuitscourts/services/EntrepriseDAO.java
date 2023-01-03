@@ -16,7 +16,6 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         ArrayList<Entreprise> entreprises = new ArrayList<>();
         ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
         while (resultSet.next()){
-            System.out.println(resultSet.getInt(3));
             entreprises.add(new Entreprise(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
         }
         return entreprises;

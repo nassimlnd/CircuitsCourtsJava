@@ -66,7 +66,6 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
     public int add(Vehicule vehicule) throws SQLException {
         String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmat()+"', "+vehicule.getPoidsMax()+", "+vehicule.getnumSiret()+")";
         PreparedStatement pst = conn.prepareStatement(query);
-        System.out.println(vehicule);
         return pst.executeUpdate();
     }
 

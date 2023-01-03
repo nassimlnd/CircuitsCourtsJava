@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class EditCommandeController {
@@ -103,22 +104,36 @@ public class EditCommandeController {
     }
 
     public void onEditButton() throws SQLException {
-        int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
+        if (!(entreprise.getValue() == null) && !(client.getValue() == null) && !(article.getValue() == null)){
+            if(!quantite.getText().isEmpty()){
+                if(!date.getValue().equals("")){
+                    try {
+                        String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
+                        String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
+                        if (!Time.valueOf(horaireDebut).toLocalTime().isAfter(Time.valueOf(horaireFin).toLocalTime())){
+                            int quantity = Integer.parseInt(quantite.getText());
 
-        String horaireDebut = hourDebut + ":" + minutesDebut + ":00";
-        String horaireFin = hourFin + ":" + minutesFin + ":00";
+                            int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
 
-        String[] idClient = client.getValue().split("-");
-        int quantity = Integer.parseInt(quantite.getText());
-        int idC = Integer.parseInt(idClient[0]);
-        int finalNumSiret = Integer.parseInt(entreprise.getValue());
-        Commande c = new Commande(commandeId, idArticle, getCommande().getPoids(), quantity, horaireDebut, horaireFin, idC, finalNumSiret, getCommande().getDateCommande());
-        CommandeDAO cmd = new CommandeDAO();
-        if (cmd.update(commandeId, c)) {
-            System.out.println("[DEBUG]Commande uptate");
-        }
-        ViewFactory.getInstance().showAdminCommandeInterface();
+                            Article a = Article.article.getById(idArticle);
+                            double poids = a.getWeight() * Integer.parseInt(quantite.getText());
 
+                            int idClient = Integer.parseInt(client.getValue().split("-")[0]);
+
+                            int finalNumSiret = Integer.parseInt(entreprise.getValue().split("-")[0]);
+                            Commande c = new Commande(commandeId,idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
+                            Commande.cmd.update(commandeId, c);
+                            System.out.println("[DEBUG]Commande n°"+ commandeId +" updated.");
+
+                            ViewFactory.getInstance().showAdminCommandeInterface();
+                            //CommandesController.showSuccessPopUp();
+                        }else System.out.println("[DEBUG]Error : horaire début après l'horaire de fin.");
+                    }catch (NumberFormatException e){
+                        System.out.println("error NumberFormatException");
+                    }
+                }else System.out.println("[DEBUG]Error : choisir une date.");
+            }else System.out.println("[DEBUG]Error : la quantié doit être un entier.");
+        }else System.out.println("[DEBUG]Error : tous les champs sont vides");
     }
 
     /**

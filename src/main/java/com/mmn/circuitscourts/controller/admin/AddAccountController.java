@@ -42,13 +42,17 @@ public class AddAccountController {
      * @throws SQLException
      */
     public void onCreateButton() throws SQLException {
-        if (Objects.equals(mdp.getText(), confirmMdp.getText())) {
-            new User(identifiant.getText(), String.valueOf(confirmMdp.getText()), getGradeNumber(grade.getValue()));
-            System.out.println("[DEBUG]Account succesfully created.");
-            ViewFactory.getInstance().showAdminAccountInterface();
-        }
-        else System.out.println("mot de passe non identiques réessayez");
-
+      if(!grade.getValue().equals("") && !identifiant.getText().equals("") && !mdp.getText().equals("") && !confirmMdp.getText().equals("")){
+          if (identifiant.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")){
+              if (mdp.getText().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")){
+                  if (mdp.getText().equals(confirmMdp.getText())){
+                      new User(identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
+                      System.out.println("[DEBUG]Account created.");
+                      ViewFactory.getInstance().showAdminAccountInterface();
+                  }else System.out.println("[DEBUG]Error : les mots de passe sont différents.");
+              }else System.out.println("[DEBUG]Eror : au moins 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial.");
+          }else System.out.println("[DEBUG]Error : nom invalide.");
+      }else System.out.println("[DEBUG]Error : Tous les champs sont obligatoires.");
     }
 
     /**

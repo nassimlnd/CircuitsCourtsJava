@@ -78,7 +78,7 @@ public class AddTourneesController {
      * Retourne à la page précédente
      */
     public void onBackButton() {
-        ViewFactory.getInstance().showProdTourneeInterface();
+        ViewFactory.getInstance().showAdminTourneeInterface();
     }
 
     /**
