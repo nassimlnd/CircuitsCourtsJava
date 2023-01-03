@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /**
@@ -40,23 +41,35 @@ public class AddCommandesController {
      * Renvoie sur la page des Commandes et affiche la popup correspondantes à la réussite de l'opération
      */
     public void onCreateButton() throws SQLException {
-        int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
+        if (!(entreprises.getValue() == null) && !(client.getValue() == null) && !(article.getValue() == null)){
+            if(!quantite.getText().isEmpty()){
+                if(!date.getValue().equals("")){
+                    try {
+                        String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
+                        String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
+                        if (!Time.valueOf(horaireDebut).toLocalTime().isAfter(Time.valueOf(horaireFin).toLocalTime())){
+                            int quantity = Integer.parseInt(quantite.getText());
 
-        Article a = Article.article.getById(idArticle);
-        double poids = a.getWeight() * Integer.parseInt(quantite.getText());
+                            int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
 
-        int idClient = Integer.parseInt(client.getValue().split("-")[0]);
-        int quantity = Integer.parseInt(quantite.getText());
+                            Article a = Article.article.getById(idArticle);
+                            double poids = a.getWeight() * Integer.parseInt(quantite.getText());
 
-        String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
-        String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
+                            int idClient = Integer.parseInt(client.getValue().split("-")[0]);
 
-        int finalNumSiret = Integer.parseInt(entreprises.getValue().split("-")[0]);
-        new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
-        System.out.println("[DEBUG]Commande added.");
+                            int finalNumSiret = Integer.parseInt(entreprises.getValue().split("-")[0]);
+                            new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
+                            System.out.println("[DEBUG]Commande added.");
 
-        ViewFactory.getInstance().showAdminCommandeInterface();
-        CommandesController.showSuccessPopUp();
+                            ViewFactory.getInstance().showAdminCommandeInterface();
+                            CommandesController.showSuccessPopUp();
+                        }else System.out.println("[DEBUG]Error : horaire début après l'horaire de fin.");
+                    }catch (NumberFormatException e){
+                        System.out.println("error NumberFormatException");
+                    }
+                }else System.out.println("[DEBUG]Error : choisir une date.");
+            }else System.out.println("[DEBUG]Error : la quantié doit être un entier.");
+        }else System.out.println("[DEBUG]Error : tous les champs sont vides");
     }
 
     /**

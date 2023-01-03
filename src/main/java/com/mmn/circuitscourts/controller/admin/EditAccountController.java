@@ -86,9 +86,13 @@ public class EditAccountController {
      * @throws SQLException
      */
     public void onEditButton() throws SQLException {
-        User u = new User(accountId, identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
-        User.accountDAO.update(accountId, u);
-        System.out.println("[DEBUG]User n°" + accountId + " updated.");
-        ViewFactory.getInstance().showAdminAccountInterface();
+        if(identifiant.getText().matches("^[a-zA-Z'-]+$")){
+            if(mdp.getText().matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")){
+                User u = new User(accountId, identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
+                User.accountDAO.update(accountId, u);
+                System.out.println("[DEBUG]User n°" + accountId + " updated.");
+                ViewFactory.getInstance().showAdminAccountInterface();
+            }else System.out.println("[DEBUG]Eror : au moins 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial. ");
+        }else System.out.println("[DEBUG]error : nom incorrect");
     }
 }

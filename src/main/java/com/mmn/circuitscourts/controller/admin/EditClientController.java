@@ -71,10 +71,23 @@ public class EditClientController {
      * @throws SQLException
      */
     public void onEditButton() throws SQLException {
-        String adresseFormated = adresse.getText() + ":" + codePostal.getText() + ":" + city.getText();
-        Client client = new Client(clientId, nom.getText(),  adresseFormated, numTel.getText(), email.getText());
-        Client.client.update(clientId, client);
-        System.out.println("[DEBUG]account n°" + clientId + " updated.");
-        ViewFactory.getInstance().showAdminClientInterface();
+        if(nom.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")){
+            if(email.getText().matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")){
+                if (numTel.getText().matches("^\\+?[0-9]{2,3} ?[0-9]{6,}$")){
+                    if(city.getText().matches("^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$")) {
+                        if(codePostal.getText().matches("^(F-)?((2[A|B])|[0-9]{2})[0-9]{3}$")){
+                            if(adresse.getText().matches("^[0-9]{1,5}[A-Za-z .,'-]*$")){
+                                String adresseFormated = adresse.getText() + ":" + codePostal.getText() + ":" + city.getText();
+                                Client client = new Client(clientId, nom.getText(),  adresseFormated, numTel.getText(), email.getText());
+                                Client.client.update(clientId, client);
+                                System.out.println("[DEBUG]account n°" + clientId + " updated.");
+                                ViewFactory.getInstance().showAdminClientInterface();
+                            }else System.out.println("[DEBUG]Error : adresse");
+                        }else System.out.println("[DEBUG]Error : code postal, de la forme F-75000 ou 75000");
+                    }else System.out.println("[DEBUG]Error : city name");
+                }else System.out.println("[DEBUG]Eror : numéro de tel format 0601020304");
+            }else System.out.println("[DEBUG]Eror : email incorrect, de la forme nom.utilisateur@domaine.com");
+        }else System.out.println("[DEBUG]Error : nom incorrect");
     }
 }
+
