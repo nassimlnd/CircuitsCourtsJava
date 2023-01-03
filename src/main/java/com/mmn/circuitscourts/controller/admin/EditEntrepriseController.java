@@ -20,7 +20,7 @@ public class EditEntrepriseController {
     Label title;
 
     public Entreprise getThisEntreprise() throws SQLException {
-        Entreprise p = Entreprise.entrepriseDAO.getBynumSiret(numSiret);
+        Entreprise p = Entreprise.entrepriseDAO.getById(numSiret);
         return p;
     }
 

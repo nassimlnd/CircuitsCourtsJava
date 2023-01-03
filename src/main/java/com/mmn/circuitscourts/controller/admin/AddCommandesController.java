@@ -22,8 +22,6 @@ public class AddCommandesController {
     @FXML
     TextField quantite;
     @FXML
-    ComboBox<Integer> tournee;
-    @FXML
     ComboBox<String> entreprises, client, article;
     @FXML
     Label hourDebut, minutesDebut, hourFin, minutesFin;
