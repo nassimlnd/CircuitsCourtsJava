@@ -12,11 +12,13 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.AddCommandesController">
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;"
+           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.mmn.circuitscourts.controller.admin.AddCommandesController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;">
             <left>
-                <fx:include source="Sidebar.fxml" />
+                <fx:include source="Sidebar.fxml"/>
             </left>
             <center>
 
@@ -24,130 +26,191 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onBackButton" pickOnBounds="true" styleClass="back-button" text="Retour">
+                        <Button mnemonicParsing="false" onMouseClicked="#onBackButton" pickOnBounds="true"
+                                styleClass="back-button" text="Retour">
                             <graphic>
-                                <Region styleClass="back-button-img" />
+                                <Region styleClass="back-button-img"/>
                             </graphic>
                         </Button>
                         <Label prefHeight="35.0" prefWidth="268.0" styleClass="main-title" text="Ajout d'une commande">
                             <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin></Label>
-                  <HBox alignment="CENTER_LEFT" prefHeight="531.0" prefWidth="871.0" spacing="100.0">
-                     <children>
-                        <VBox alignment="TOP_CENTER" maxHeight="420.0" prefHeight="354.0" prefWidth="375.0" styleClass="profil-container">
-                           <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="100.0" styleClass="profil-container-header">
-                                 <children>
-                                    <Label styleClass="profil-container-header-title" text="Détails de la commande" />
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="362.0" prefWidth="373.0" spacing="30.0">
-                                 <children>
-                                    <ComboBox fx:id="article" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionnez l'article" />
-                                    <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Quantité" />
-                                    <ComboBox fx:id="client" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionnez le client" />
-                                    <DatePicker fx:id="date" minHeight="40.0" prefWidth="250.0" promptText="Selectionner la date" />
-                                    <ComboBox fx:id="entreprises" minHeight="40.0" prefWidth="250.0" promptText="Selectionnez l'entreprise" />
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <padding>
-                                    <Insets left="30.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </VBox>
-                        <VBox maxHeight="335.0" minWidth="396.0" prefHeight="335.0" prefWidth="396.0" styleClass="profil-container">
-                           <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="100.0" styleClass="profil-container-header">
-                                 <padding>
-                                    <Insets left="20.0" />
-                                 </padding>
-                                 <children>
-                                    <Label styleClass="profil-container-header-title" text="Horaires de livraison" />
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="275.0" prefWidth="418.0">
-                                 <children>
-                                    <VBox styleClass="clock-container">
-                                       <children>
-                                          <Label styleClass="clock-title" text="Horaire de début :" />
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="112.0">
-                                                   <children>
-                                                      <Button fx:id="plusHourDebut" mnemonicParsing="false" onMouseClicked="#onPlusHourDebut" styleClass="clock-plus-button" text="+" />
-                                                      <Label fx:id="hourDebut" alignment="CENTER" minHeight="30.0" minWidth="30.0" prefHeight="10.0" prefWidth="10.0" styleClass="clock-digits" text="00" />
-                                                      <Button fx:id="minusHourDebut" mnemonicParsing="false" onMouseClicked="#onMinusHourDebut" styleClass="clock-minus-button" text="-" />
-                                                   </children>
+                                <Insets top="20.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER_LEFT" prefHeight="531.0" prefWidth="871.0" spacing="100.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER" maxHeight="420.0" prefHeight="354.0" prefWidth="375.0"
+                                      styleClass="profil-container">
+                                    <children>
+                                        <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="100.0"
+                                              styleClass="profil-container-header">
+                                            <children>
+                                                <Label styleClass="profil-container-header-title"
+                                                       text="Détails de la commande"/>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0"/>
+                                            </padding>
+                                        </VBox>
+                                        <VBox alignment="CENTER_LEFT" prefHeight="362.0" prefWidth="373.0"
+                                              spacing="30.0">
+                                            <children>
+                                                <ComboBox fx:id="article" minHeight="40.0" minWidth="250.0"
+                                                          prefWidth="150.0" promptText="Selectionnez l'article"/>
+                                                <TextField fx:id="quantite" maxWidth="250.0" prefHeight="40.0"
+                                                           prefWidth="250.0" promptText="Quantité"/>
+                                                <ComboBox fx:id="client" minHeight="40.0" minWidth="250.0"
+                                                          prefWidth="150.0" promptText="Selectionnez le client"/>
+                                                <DatePicker fx:id="date" minHeight="40.0" prefWidth="250.0"
+                                                            promptText="Selectionner la date"/>
+                                                <ComboBox fx:id="entreprises" minHeight="40.0" prefWidth="250.0"
+                                                          promptText="Selectionnez l'entreprise"/>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets/>
+                                            </VBox.margin>
+                                            <padding>
+                                                <Insets left="30.0"/>
+                                            </padding>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                                <VBox maxHeight="335.0" minWidth="396.0" prefHeight="335.0" prefWidth="396.0"
+                                      styleClass="profil-container">
+                                    <children>
+                                        <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="100.0"
+                                              styleClass="profil-container-header">
+                                            <padding>
+                                                <Insets left="20.0"/>
+                                            </padding>
+                                            <children>
+                                                <Label styleClass="profil-container-header-title"
+                                                       text="Horaires de livraison"/>
+                                            </children>
+                                        </VBox>
+                                        <VBox alignment="CENTER_LEFT" prefHeight="275.0" prefWidth="418.0">
+                                            <children>
+                                                <VBox styleClass="clock-container">
+                                                    <children>
+                                                        <Label styleClass="clock-title" text="Horaire de début :"/>
+                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                            <children>
+                                                                <VBox alignment="CENTER" prefHeight="100.0"
+                                                                      prefWidth="112.0">
+                                                                    <children>
+                                                                        <Button fx:id="plusHourDebut"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onPlusHourDebut"
+                                                                                styleClass="clock-plus-button"
+                                                                                text="+"/>
+                                                                        <Label fx:id="hourDebut" alignment="CENTER"
+                                                                               minHeight="30.0" minWidth="30.0"
+                                                                               prefHeight="10.0" prefWidth="10.0"
+                                                                               styleClass="clock-digits" text="00"/>
+                                                                        <Button fx:id="minusHourDebut"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onMinusHourDebut"
+                                                                                styleClass="clock-minus-button"
+                                                                                text="-"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <Label text=":"/>
+                                                                <VBox alignment="CENTER" prefHeight="100.0"
+                                                                      prefWidth="112.0">
+                                                                    <children>
+                                                                        <Button fx:id="plusMinutesDebut"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onPlusMinutesDebut"
+                                                                                styleClass="clock-plus-button"
+                                                                                text="+"/>
+                                                                        <Label fx:id="minutesDebut" alignment="CENTER"
+                                                                               minHeight="30.0" minWidth="30.0"
+                                                                               styleClass="clock-digits" text="00"/>
+                                                                        <Button fx:id="minusMinutesDebut"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onMinusMinutesDebut"
+                                                                                styleClass="clock-minus-button"
+                                                                                text="-"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                    <padding>
+                                                        <Insets bottom="5.0"/>
+                                                    </padding>
+                                                    <VBox.margin>
+                                                        <Insets bottom="15.0"/>
+                                                    </VBox.margin>
                                                 </VBox>
-                                                <Label text=":" />
-                                                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="112.0">
-                                                   <children>
-                                                      <Button fx:id="plusMinutesDebut" mnemonicParsing="false" onMouseClicked="#onPlusMinutesDebut" styleClass="clock-plus-button" text="+" />
-                                                      <Label fx:id="minutesDebut" alignment="CENTER" minHeight="30.0" minWidth="30.0" styleClass="clock-digits" text="00" />
-                                                      <Button fx:id="minusMinutesDebut" mnemonicParsing="false" onMouseClicked="#onMinusMinutesDebut" styleClass="clock-minus-button" text="-" />
-                                                   </children>
+                                                <VBox>
+                                                    <children>
+                                                        <Label styleClass="clock-title" text="Horaire de fin :"/>
+                                                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                                            <children>
+                                                                <VBox alignment="CENTER" prefHeight="100.0"
+                                                                      prefWidth="112.0">
+                                                                    <children>
+                                                                        <Button fx:id="plusHourFin"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onPlusHourFin"
+                                                                                styleClass="clock-plus-button"
+                                                                                text="+"/>
+                                                                        <Label fx:id="hourFin" alignment="CENTER"
+                                                                               minHeight="30.0" minWidth="30.0"
+                                                                               styleClass="clock-digits" text="00"/>
+                                                                        <Button fx:id="minusHourFin"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onMinusHourFin"
+                                                                                styleClass="clock-minus-button"
+                                                                                text="-"/>
+                                                                    </children>
+                                                                </VBox>
+                                                                <Label text=":"/>
+                                                                <VBox alignment="CENTER" prefHeight="100.0"
+                                                                      prefWidth="112.0">
+                                                                    <children>
+                                                                        <Button fx:id="plusMinutesFin"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onPlusMinutesFin"
+                                                                                styleClass="clock-plus-button"
+                                                                                text="+"/>
+                                                                        <Label fx:id="minutesFin" alignment="CENTER"
+                                                                               minHeight="30.0" minWidth="30.0"
+                                                                               styleClass="clock-digits" text="00"/>
+                                                                        <Button fx:id="minusMinutesFin"
+                                                                                mnemonicParsing="false"
+                                                                                onMouseClicked="#onMinusMinutesFin"
+                                                                                styleClass="clock-minus-button"
+                                                                                text="-"/>
+                                                                    </children>
+                                                                </VBox>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
                                                 </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="5.0" />
-                                       </padding>
-                                       <VBox.margin>
-                                          <Insets bottom="15.0" />
-                                       </VBox.margin>
-                                    </VBox>
-                                    <VBox>
-                                       <children>
-                                          <Label styleClass="clock-title" text="Horaire de fin :" />
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="112.0">
-                                                   <children>
-                                                      <Button fx:id="plusHourFin" mnemonicParsing="false" onMouseClicked="#onPlusHourFin" styleClass="clock-plus-button" text="+" />
-                                                      <Label fx:id="hourFin" alignment="CENTER" minHeight="30.0" minWidth="30.0" styleClass="clock-digits" text="00" />
-                                                      <Button fx:id="minusHourFin" mnemonicParsing="false" onMouseClicked="#onMinusHourFin" styleClass="clock-minus-button" text="-" />
-                                                   </children>
-                                                </VBox>
-                                                <Label text=":" />
-                                                <VBox alignment="CENTER" prefHeight="100.0" prefWidth="112.0">
-                                                   <children>
-                                                      <Button fx:id="plusMinutesFin" mnemonicParsing="false" onMouseClicked="#onPlusMinutesFin" styleClass="clock-plus-button" text="+" />
-                                                      <Label fx:id="minutesFin" alignment="CENTER" minHeight="30.0" minWidth="30.0" styleClass="clock-digits" text="00" />
-                                                      <Button fx:id="minusMinutesFin" mnemonicParsing="false" onMouseClicked="#onMinusMinutesFin" styleClass="clock-minus-button" text="-" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <padding>
-                                    <Insets left="20.0" right="20.0" />
-                                 </padding>
-                              </VBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
+                                            </children>
+                                            <padding>
+                                                <Insets left="20.0" right="20.0"/>
+                                            </padding>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false" onMouseClicked="#onCreateButton" styleClass="addCommandeButton" text="Ajouter la commande" />
+                                <Button id="cmdButton" minHeight="40.0" minWidth="192.0" mnemonicParsing="false"
+                                        onMouseClicked="#onCreateButton" styleClass="addCommandeButton"
+                                        text="Ajouter la commande"/>
                             </children>
                         </HBox>
                     </children>
                     <BorderPane.margin>
-                        <Insets />
+                        <Insets/>
                     </BorderPane.margin>
                     <padding>
-                        <Insets bottom="30.0" left="40.0" right="40.0" top="20.0" />
+                        <Insets bottom="30.0" left="40.0" right="40.0" top="20.0"/>
                     </padding>
                 </VBox>
             </center>
