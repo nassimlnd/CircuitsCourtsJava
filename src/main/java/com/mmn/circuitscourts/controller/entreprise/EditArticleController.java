@@ -128,11 +128,11 @@ public class EditArticleController {
         double price = Double.parseDouble(tfPrice.getText());
         String categorie = (String) cbTag.getValue();
         double weight = Double.parseDouble(tfWeight.getText());
-        ImageDAO imageDAO = new ImageDAO();
-        imageDAO.update(getThisArticle().getImageId(), file);
-
+        if (file != null) {
+            ImageDAO imageDAO = new ImageDAO();
+            imageDAO.update(getThisArticle().getImageId(), file);
+        }
         int imageId = getThisArticle().getImageId();
-
         EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
         Article a = new Article(id,name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
         System.out.println(a.getWeight());
