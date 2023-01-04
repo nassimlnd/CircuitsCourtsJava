@@ -79,21 +79,30 @@ public class AddArticlesController {
     }
 
     public void onCreate() throws SQLException, FileNotFoundException {
-        String name = tfName.getText();
-        String description = tfDescription.getText();
-        double price = Double.parseDouble(tfPrice.getText());
-        String categorie = (String) cbTag.getValue();
-        double weight = Double.parseDouble(tfWeight.getText());
-        ImageDAO imageDAO = new ImageDAO();
-        int imageId = imageDAO.add(file);
+        if(!tfName.getText().equals("")&& !tfPrice.getText().equals("") && !tfWeight.getText().equals("") && !(cbTag.getValue() == null) && !tfDescription.getText().equals("")){
+            if (tfName.getText().matches("^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,20}[\\s-]?){1,2}$")){
+                if(tfDescription.getText().matches("^.{1,100}$")){
+                    try {
+                        String name = tfName.getText();
+                        String description = tfDescription.getText();
+                        double price = Double.parseDouble(tfPrice.getText());
+                        String categorie = (String) cbTag.getValue();
+                        double weight = Double.parseDouble(tfWeight.getText());
+                        ImageDAO imageDAO = new ImageDAO();
+                        int imageId = imageDAO.add(file);
 
-        EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
-        Article a = new Article(name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
+                        EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
+                        Article a = new Article(name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
 
+                        ViewFactory.getInstance().showProdArticlesInterface();
+                        ArticlesController.showSuccessPopUp(a.getId());
+                    }catch (NumberFormatException e){
+                        System.out.println("[DEBUG]Error : "+e);
+                    }
+                }else System.out.println("[DEBUG]Error : pas plus de 100 caractères.");
+            }else System.out.println("[DEBUG]Error : le nom est incorrect,pas de chiffres, pas de caractères spéciaux.");
+        }else System.out.println("[DEBUG]Error : tous les champs sont ogligatoires.");
 
-
-        ViewFactory.getInstance().showProdArticlesInterface();
-        ArticlesController.showSuccessPopUp(a.getId());
 
     }
 

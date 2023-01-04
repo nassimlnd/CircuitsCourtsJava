@@ -1,5 +1,9 @@
 package com.mmn.circuitscourts.controller.entreprise;
 
+import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.controller.admin.VehiculeController;
+import com.mmn.circuitscourts.models.Entreprise;
+import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -19,31 +23,31 @@ public class AddVehiculeController {
 
     @FXML
     Button onCreateButton;
-    public void onBackButton(MouseEvent mouseEvent) {
+    public void onBackButton() {
         ViewFactory.getInstance().showProdVehiculesInterface();
     }
 
     public void onCreateButton() throws SQLException {
-        String[] immat = numImmat.getText().split("-");
-        boolean identique=false;
-        if(immat[0].matches("([A-Z][A-Z])")&&immat[1].matches("([0-9][0-9][0-9])")&&immat[2].matches("([A-Z][A-Z])")&&parseInt(poids.getText())>0){
-            ArrayList<Vehicule> v = new ArrayList<>();
-            v=Vehicule.vehiculeDAO.getAll();
-            for(int i=0;i<v.size();i++){
-                if(v.get(i).getNumImmat().equals(numImmat.getText())){
-                    identique=true;
-                    break;
+        if(!numImmat.getText().equals("") && !poids.getText().equals("")){
+            if(numImmat.getText().matches("^[A-Z]{2}-\\d{3}-[A-Z]{2}$")){
+                ArrayList<Vehicule> v = Vehicule.vehiculeDAO.getAll();
+                ArrayList<String> numImmats = new ArrayList<>();
+                for (Vehicule vehicule: v) {
+                    numImmats.add(vehicule.getNumImmat());
                 }
-            }
-            if(identique==false) {
-                int numSiret = Vehicule.getNumSiretConnected();
-                Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
-                ViewFactory.getInstance().showProdVehiculesInterface();
-                VehiculesController.showSuccessPopUp(vehicule.getNumImmat());
-            }
-        }
-
-
-
+                if(!numImmats.contains(numImmat.getText())){
+                    try{
+                        Entreprise entreprise = Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId());
+                        int numSiret = entreprise.getNumSiret();
+                        Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
+                        ViewFactory.getInstance().showAdminVehiculeInterface();
+                        VehiculesController.showSuccessPopUp(vehicule.getNumImmat());
+                    }catch(NumberFormatException e){
+                        System.out.println(e);
+                    }
+                } else System.out.println("[DEBUG]Error : plaque déjà existante.");
+            }else System.out.println("[DEBUG]Error : format de la plaque d'immatriculation AA-000-AA.");
+        }else System.out.println("[DEBUG]Tous les champs doivent être saisis.");
     }
+
 }

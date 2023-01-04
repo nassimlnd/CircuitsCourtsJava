@@ -50,7 +50,6 @@ public class EditArticleController {
 
     File file;
 
-
     public void onBackButton() {
         ViewFactory.getInstance().showProdArticlesInterface();
     }
@@ -65,7 +64,8 @@ public class EditArticleController {
         ImageDAO imageDAO = new ImageDAO();
         Image image = null;
         try {
-            image = imageDAO.getImage(getThisArticle().getImageId(), imageDAO.getExtById(getThisArticle().getImageId()));
+            image = imageDAO.getImage(getThisArticle().getImageId(),
+                    imageDAO.getExtById(getThisArticle().getImageId()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -108,7 +108,8 @@ public class EditArticleController {
 
     public void onBrowse() throws MalformedURLException {
         FileChooser fC = new FileChooser();
-        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Images files (*.png, *.jpg)", "*.png", "*.jpg");
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Images files (*.png, *.jpg)",
+                "*.png", "*.jpg");
         fC.getExtensionFilters().add(extensionFilter);
         file = fC.showOpenDialog(ViewFactory.getInstance().getMainStage());
 
@@ -123,23 +124,40 @@ public class EditArticleController {
     }
 
     public void onEdit() throws SQLException, FileNotFoundException {
-        String name = tfName.getText();
-        String description = tfDescription.getText();
-        double price = Double.parseDouble(tfPrice.getText());
-        String categorie = (String) cbTag.getValue();
-        double weight = Double.parseDouble(tfWeight.getText());
-        if (file != null) {
-            ImageDAO imageDAO = new ImageDAO();
-            imageDAO.update(getThisArticle().getImageId(), file);
-        }
-        int imageId = getThisArticle().getImageId();
-        EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
-        Article a = new Article(id,name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
-        System.out.println(a.getWeight());
-        Article.article.update(id,a);
+        if (!tfName.getText().equals("") && !tfPrice.getText().equals("") && !tfWeight.getText().equals("")
+                && !(cbTag.getValue() == null) && !tfDescription.getText().equals("")) {
+            if (tfName.getText().matches("^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,20}[\\s-]?){1,2}$")) {
+                if (tfDescription.getText().matches("^.{1,100}$")) {
+                    try {
+                        String name = tfName.getText();
+                        String description = tfDescription.getText();
+                        double price = Double.parseDouble(tfPrice.getText());
+                        String categorie = (String) cbTag.getValue();
+                        double weight = Double.parseDouble(tfWeight.getText());
+                        if (file != null) {
+                            ImageDAO imageDAO = new ImageDAO();
+                            imageDAO.update(getThisArticle().getImageId(), file);
+                        }
 
-        ViewFactory.getInstance().showProdArticlesInterface();
-        //ArticlesController.showSuccessPopUp(a.getId());
+                        int imageId = getThisArticle().getImageId();
+
+                        EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
+                        Article a = new Article(id, name, categorie, description, price, weight, imageId,
+                                entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
+                        System.out.println(a.getWeight());
+                        Article.article.update(id, a);
+
+                        ViewFactory.getInstance().showProdArticlesInterface();
+                        // ArticlesController.showSuccessPopUp(a.getId());
+                    } catch (NumberFormatException e) {
+                        System.out.println("[DEBUG]Error : " + e);
+                    }
+                } else
+                    System.out.println("[DEBUG]Error : pas plus de 100 caractères.");
+            } else
+                System.out.println("[DEBUG]Error : le nom est incorrect,pas de chiffres, pas de caractères spéciaux.");
+        } else
+            System.out.println("[DEBUG]Error : tous les champs sont ogligatoires.");
 
     }
 }

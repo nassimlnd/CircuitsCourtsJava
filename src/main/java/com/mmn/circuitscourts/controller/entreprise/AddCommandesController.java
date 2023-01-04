@@ -30,15 +30,23 @@ public class AddCommandesController {
     }
 
     public void onCreateButton() throws SQLException {
-        int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
-        String horaireDebut = hourDebut.getText()+":"+minutesDebut.getText()+":00";
-        String horaireFin = hourFin.getText()+":"+minutesFin.getText()+":00";
-        int idClient = Integer.parseInt(client.getValue().split("-")[0]);
-        int quantity = Integer.parseInt(quantite.getText());
-        Article article = Article.article.getById(idArticle);
-        Commande c = new Commande(idArticle,(article.getWeight()*quantity), quantity, horaireDebut, horaireFin, idClient, Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret(),date.getValue());
-        CommandesController.showSuccessPopUp();
-        ViewFactory.getInstance().showProdCommandesInterface();
+        if (!(article.getValue() == null) && !(client.getValue() == null) && !quantite.getText().equals("") && !date.getValue().equals("") && !hourDebut.getText().equals("") && !hourFin.getText().equals("")) {
+            if (Integer.parseInt(hourFin.getText()) > Integer.parseInt(hourDebut.getText())) {
+                try {
+                    int idArticle = Integer.parseInt(article.getValue().split("-")[0]);
+                    String horaireDebut = hourDebut.getText() + ":" + minutesDebut.getText() + ":00";
+                    String horaireFin = hourFin.getText() + ":" + minutesFin.getText() + ":00";
+                    int idClient = Integer.parseInt(client.getValue().split("-")[0]);
+                    int quantity = Integer.parseInt(quantite.getText());
+                    Article article = Article.article.getById(idArticle);
+                    new Commande(idArticle, (article.getWeight() * quantity), quantity, horaireDebut, horaireFin, idClient, Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret(), date.getValue());
+                    CommandesController.showSuccessPopUp();
+                    ViewFactory.getInstance().showProdCommandesInterface();
+                } catch (NumberFormatException e) {
+                    System.out.println("[DEBUG]Error : "+e);
+                }
+            } else System.out.println("[DEBUG]Error : l'horaire de fin est avant celle du début.");
+        } else System.out.println("[GEBUG]Error : tous les champs sont obligatoires.");
     }
 
     /**
@@ -49,9 +57,8 @@ public class AddCommandesController {
         ArrayList<Client> lesClients = clientDAO.getAll();
         ArrayList<String> names = new ArrayList<>();
         for (Client client : lesClients) {
-            names.add(client.getId()+"-"+client.getNom());
+            names.add(client.getId() + "-" + client.getNom());
         }
-        System.out.println(names);
         client.getItems().addAll(names);
         client.setValue(names.get(0));
     }
@@ -62,10 +69,11 @@ public class AddCommandesController {
         ArrayList<Article> articles = comDAO.getAll();
         ArrayList<String> names = new ArrayList<>();
         for (Article article1 : articles) {
-            names.add(article1.getId()+"-"+article1.getName());
+            names.add(article1.getId() + "-" + article1.getName());
         }
         article.getItems().addAll(names);
     }
+
     public void onBackButton() {
         ViewFactory.getInstance().showProdCommandesInterface();
     }
