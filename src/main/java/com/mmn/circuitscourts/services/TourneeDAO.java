@@ -104,13 +104,14 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
      */
     @Override
     public boolean update(Integer id, Tournee tournee) throws SQLException {
-        String query = "UPDATE tournee SET date=?, horaireDebut=?, horaireFin=?, numSiret=?, numImmat=?";
+        String query = "UPDATE tournee SET date=?, horaireDebut=?, horaireFin=?, numSiret=?, numImmat=? WHERE idT=?";
         PreparedStatement pst = conn.prepareStatement(query);
         pst.setDate(1, Date.valueOf(tournee.getDate()));
         pst.setTime(2, Time.valueOf(tournee.getHoraireDebut()));
         pst.setTime(3, Time.valueOf(tournee.getHoraireFin()));
         pst.setInt(4, tournee.getNumSiret());
         pst.setString(5, tournee.getNumImmat());
+        pst.setInt(6, tournee.getId());
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
 
@@ -122,7 +123,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
      */
     @Override
     public boolean remove(Integer id) throws SQLException {
-        String query = "DELETE  FROM tournee WHERE id=" + id;
+        String query = "DELETE FROM tournee WHERE idT=" + id;
         Statement st = conn.createStatement();
         st.executeUpdate(query);
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.AddTourneesController">
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: #EAECF0;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.admin.EditTourneeController">
     <children>
         <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: white;">
             <left>
@@ -25,72 +25,76 @@
             <center>
                 <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button mnemonicParsing="false" onMouseClicked="#onBackButton" pickOnBounds="true" styleClass="back-button" text="Retour">
-                            <graphic>
-                                <Region styleClass="back-button-img" />
-                            </graphic>
-                        </Button>
-                        <HBox>
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
+                        <VBox>
                             <children>
-                                <Label minWidth="679.0" prefHeight="35.0" prefWidth="679.0" styleClass="main-title" text="Création d'une tournée" />
-                                <Pane prefHeight="35.0" prefWidth="192.0">
+                                <Button mnemonicParsing="false" onMouseClicked="#onBackButton" pickOnBounds="true" styleClass="back-button" text="Retour">
+                                    <graphic>
+                                        <Region styleClass="back-button-img" />
+                                    </graphic>
+                                </Button>
+                                <HBox>
                                     <children>
-                                        <VBox fx:id="errorPopup" layoutX="-201.0" layoutY="-52.0" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
-                                            <HBox.margin>
-                                                <Insets left="325.0" />
-                                            </HBox.margin>
+                                        <Label fx:id="mainTitle" minWidth="679.0" prefHeight="35.0" prefWidth="679.0" styleClass="main-title" text="Création d'une tournée" />
+                                        <Pane prefHeight="35.0" prefWidth="192.0">
                                             <children>
-                                                <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0" styleClass="errorPopup-indicator" />
-                                                <HBox prefHeight="120.0" prefWidth="340.0" styleClass="errorPopup-container">
+                                                <VBox fx:id="errorPopup" layoutX="-201.0" layoutY="-52.0" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
+                                                    <HBox.margin>
+                                                        <Insets left="325.0" />
+                                                    </HBox.margin>
                                                     <children>
-                                                        <Label prefHeight="17.0" prefWidth="33.0">
-                                                            <padding>
-                                                                <Insets left="10.0" top="17.0" />
-                                                            </padding>
-                                                            <graphic>
-                                                                <Region styleClass="errorPopup-img" />
-                                                            </graphic>
-                                                        </Label>
-                                                        <VBox prefHeight="110.0" prefWidth="312.0">
+                                                        <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0" styleClass="errorPopup-indicator" />
+                                                        <HBox prefHeight="120.0" prefWidth="340.0" styleClass="errorPopup-container">
                                                             <children>
-                                                                <Label styleClass="errorPopup-title" text="Erreur !" />
-                                                                <Label fx:id="popupMessage" styleClass="errorPopup-subtitle" />
-                                                            </children>
-                                                            <padding>
-                                                                <Insets left="15.0" top="15.0" />
-                                                            </padding>
-                                                        </VBox>
-                                                        <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
-                                                            <children>
-                                                                <Button mnemonicParsing="false" onMouseClicked="#onClosePopup" prefHeight="28.0" prefWidth="28.0" styleClass="successPopup-close">
+                                                                <Label prefHeight="17.0" prefWidth="33.0">
+                                                                    <padding>
+                                                                        <Insets left="10.0" top="17.0" />
+                                                                    </padding>
                                                                     <graphic>
-                                                                        <Region styleClass="successPopup-close-img" />
+                                                                        <Region styleClass="errorPopup-img" />
                                                                     </graphic>
-                                                                    <VBox.margin>
-                                                                        <Insets right="15.0" top="20.0" />
-                                                                    </VBox.margin>
-                                                                </Button>
+                                                                </Label>
+                                                                <VBox prefHeight="110.0" prefWidth="312.0">
+                                                                    <children>
+                                                                        <Label styleClass="errorPopup-title" text="Erreur !" />
+                                                                        <Label fx:id="popupMessage" styleClass="errorPopup-subtitle" />
+                                                                    </children>
+                                                                    <padding>
+                                                                        <Insets left="15.0" top="15.0" />
+                                                                    </padding>
+                                                                </VBox>
+                                                                <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
+                                                                    <children>
+                                                                        <Button mnemonicParsing="false" onMouseClicked="#onClosePopup" prefHeight="28.0" prefWidth="28.0" styleClass="successPopup-close">
+                                                                            <graphic>
+                                                                                <Region styleClass="successPopup-close-img" />
+                                                                            </graphic>
+                                                                            <VBox.margin>
+                                                                                <Insets right="15.0" top="20.0" />
+                                                                            </VBox.margin>
+                                                                        </Button>
+                                                                    </children>
+                                                                </VBox>
                                                             </children>
-                                                        </VBox>
+                                                        </HBox>
                                                     </children>
-                                                </HBox>
+                                                </VBox>
                                             </children>
-                                        </VBox>
+                                        </Pane>
                                     </children>
-                                </Pane>
+                                    <VBox.margin>
+                                        <Insets top="20.0" />
+                                    </VBox.margin>
+                                </HBox>
                             </children>
-                        </HBox>
-                        <HBox prefHeight="634.0" prefWidth="871.0" spacing="50.0">
+                        </VBox>
+                        <HBox prefHeight="651.0" prefWidth="871.0" spacing="50.0">
                             <VBox.margin>
                                 <Insets top="20.0" />
                             </VBox.margin>
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="420.0" spacing="30.0">
                                     <children>
-                                        <VBox prefHeight="282.0" prefWidth="420.0" styleClass="profil-container">
+                                        <VBox prefHeight="284.0" prefWidth="420.0" styleClass="profil-container">
                                             <children>
                                                 <VBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="100.0" styleClass="profil-container-header">
                                                     <children>
@@ -100,7 +104,7 @@
                                                         <Insets left="20.0" />
                                                     </padding>
                                                 </VBox>
-                                                <VBox prefHeight="219.0" prefWidth="418.0" spacing="20.0">
+                                                <VBox prefHeight="222.0" prefWidth="418.0" spacing="20.0">
                                                     <children>
                                                         <ComboBox fx:id="vehiculeCb" prefHeight="40.0" prefWidth="250.0" promptText="Selectionner le véhicule" />
                                           <ComboBox fx:id="entrepriseCb" prefHeight="40.0" prefWidth="250.0" promptText="Selectionner l'entreprise" />
@@ -195,7 +199,7 @@
                                 </VBox>
                                 <VBox alignment="TOP_CENTER">
                                     <children>
-                                        <VBox maxHeight="500.0" prefHeight="500.0" prefWidth="400.0" styleClass="commande-tableview">
+                                        <VBox maxHeight="540.0" prefHeight="540.0" prefWidth="400.0" styleClass="commande-tableview">
                                             <children>
                                                 <VBox alignment="CENTER_LEFT" minHeight="56.0" prefHeight="56.0" prefWidth="398.0" styleClass="commande-tableview-header">
                                                     <children>
@@ -207,7 +211,7 @@
                                                 </VBox>
                                                 <ScrollPane maxHeight="444.0" prefHeight="444.0" prefWidth="398.0">
                                                     <content>
-                                                        <VBox fx:id="contentTable" prefHeight="436.0" prefWidth="394.0" />
+                                                        <VBox fx:id="contentTable" prefHeight="439.0" prefWidth="394.0" />
                                                     </content>
                                                 </ScrollPane>
                                             </children>
@@ -221,7 +225,7 @@
                                                 </Button>
                                             </children>
                                         </Pane>
-                                        <Button mnemonicParsing="false" onMouseClicked="#onCreate" prefHeight="40.0" prefWidth="158.0" styleClass="addCommandeButton" text="Créer la tournée">
+                                        <Button mnemonicParsing="false" onMouseClicked="#onEdit" prefHeight="40.0" prefWidth="158.0" styleClass="addCommandeButton" text="Modifier la tournée">
                                             <VBox.margin>
                                                 <Insets top="20.0" />
                                             </VBox.margin>

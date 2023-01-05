@@ -95,14 +95,13 @@ public class AddArticlesController {
                         Article a = new Article(name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
 
                         ViewFactory.getInstance().showProdArticlesInterface();
-                        ArticlesController.showSuccessPopUp(a.getId());
+                        ArticlesController.showSuccessPopUp(a.getId(), "L'article n°" + a.getId() + " a bien été ajouté !");
                     }catch (NumberFormatException e){
                         System.out.println("[DEBUG]Error : "+e);
                     }
                 }else System.out.println("[DEBUG]Error : pas plus de 100 caractères.");
             }else System.out.println("[DEBUG]Error : le nom est incorrect,pas de chiffres, pas de caractères spéciaux.");
         }else System.out.println("[DEBUG]Error : tous les champs sont ogligatoires.");
-
 
     }
 

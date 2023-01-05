@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -21,53 +22,47 @@
                     <children>
                         <HBox prefHeight="120.0" prefWidth="871.0">
                             <VBox.margin>
-                                <Insets bottom="20.0"/>
+                                <Insets bottom="20.0" />
                             </VBox.margin>
                             <children>
                                 <Label prefHeight="35.0" prefWidth="142.0" styleClass="main-title" text="Tournées">
                                     <HBox.margin>
-                                        <Insets top="30.0"/>
+                                        <Insets top="30.0" />
                                     </HBox.margin>
                                 </Label>
-                                <VBox maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0"
-                                      fx:id="successPopup" styleClass="successPopup" visible="false">
+                                <VBox fx:id="successPopup" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="successPopup" visible="false">
                                     <HBox.margin>
-                                        <Insets left="325.0"/>
+                                        <Insets left="325.0" />
                                     </HBox.margin>
                                     <children>
-                                        <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0"
-                                              styleClass="successPopup-indicator"/>
+                                        <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0" styleClass="successPopup-indicator" />
                                         <HBox prefHeight="120.0" prefWidth="340.0" styleClass="successPopup-container">
                                             <children>
                                                 <Label prefHeight="17.0" prefWidth="33.0">
                                                     <padding>
-                                                        <Insets left="10.0" top="17.0"/>
+                                                        <Insets left="10.0" top="17.0" />
                                                     </padding>
                                                     <graphic>
-                                                        <Region styleClass="successPopup-img"/>
+                                                        <Region styleClass="successPopup-img" />
                                                     </graphic>
                                                 </Label>
                                                 <VBox prefHeight="110.0" prefWidth="312.0">
                                                     <children>
-                                                        <Label styleClass="successPopup-title"
-                                                               text="Tournée ajoutée !"/>
-                                                        <Label styleClass="successPopup-subtitle"
-                                                               text="La tournée n°X a bien été ajoutée !"/>
+                                                        <Label fx:id="popupTitle" styleClass="successPopup-title" text="Tournée ajoutée !" />
+                                                        <Label fx:id="popupSubtitle" styleClass="successPopup-subtitle" text="La tournée n°X a bien été ajoutée !" />
                                                     </children>
                                                     <padding>
-                                                        <Insets left="15.0" top="15.0"/>
+                                                        <Insets left="15.0" top="15.0" />
                                                     </padding>
                                                 </VBox>
                                                 <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
                                                     <children>
-                                                        <Button mnemonicParsing="false" prefHeight="28.0"
-                                                                prefWidth="28.0" styleClass="successPopup-close"
-                                                                onMouseClicked="#onClosePopup">
+                                                        <Button mnemonicParsing="false" onMouseClicked="#onClosePopup" prefHeight="28.0" prefWidth="28.0" styleClass="successPopup-close">
                                                             <graphic>
-                                                                <Region styleClass="successPopup-close-img"/>
+                                                                <Region styleClass="successPopup-close-img" />
                                                             </graphic>
                                                             <VBox.margin>
-                                                                <Insets right="15.0" top="20.0"/>
+                                                                <Insets right="15.0" top="20.0" />
                                                             </VBox.margin>
                                                         </Button>
                                                     </children>
@@ -80,26 +75,36 @@
                         </HBox>
                         <VBox fx:id="commandeTable" prefHeight="500" prefWidth="950" styleClass="commande-tableview">
                             <children>
-                                <HBox alignment="CENTER_LEFT" prefHeight="56" prefWidth="950" styleClass="commande-tableview-header">
+                                <HBox alignment="CENTER_LEFT" minHeight="56" prefHeight="56" prefWidth="950" styleClass="commande-tableview-header">
                                     <children>
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Id">
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="91.0" styleClass="commande-tableview-header-title" text="Id">
                                             <HBox.margin>
                                                 <Insets left="40.0" />
                                             </HBox.margin>
                                         </Label>
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="121.0" styleClass="commande-tableview-header-title" text="Date" />
                                         <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Horaire" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numSiret" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numéro d'immatriculation" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="201.0" styleClass="commande-tableview-header-title" text="Numéro d'immatriculation" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="171.0" styleClass="commande-tableview-header-title" text="Entreprise (Numéro SIRET)" />
                                     </children>
                                     <padding>
                                         <Insets right="40.0" />
                                     </padding>
                                 </HBox>
+                                <ScrollPane prefHeight="444.0" prefWidth="869.0">
+                                    <content>
+                                        <VBox fx:id="contentTable" style="-fx-background-color: white;">
+                                            <children>
+
+                                            </children>
+                                        </VBox>
+                                    </content>
+                                </ScrollPane>
                             </children>
                         </VBox>
                         <Pane>
                             <children>
-                                <Button fx:id="addButton" layoutX="847.0" layoutY="-24.0" mnemonicParsing="false" prefHeight="48.0" onMouseClicked="#onAddButton" prefWidth="48.0" styleClass="addButton" textAlignment="CENTER">
+                                <Button fx:id="addButton" layoutX="847.0" layoutY="-24.0" mnemonicParsing="false" onMouseClicked="#onAddButton" prefHeight="48.0" prefWidth="48.0" styleClass="addButton" textAlignment="CENTER">
                                     <graphic>
                                         <Region styleClass="addButton-img" />
                                     </graphic>
@@ -113,5 +118,44 @@
                 </VBox>
             </center>
         </BorderPane>
+        <VBox fx:id="confirmationDialog" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0,0,0,0.25);" visible="false">
+            <children>
+                <VBox maxHeight="230.0" maxWidth="500.0" prefHeight="230.0" prefWidth="100.0" styleClass="confirm-dialog">
+                    <children>
+                        <VBox maxHeight="8.0" prefHeight="200.0" prefWidth="100.0" styleClass="confirm-dialog-topbar-red" />
+                        <HBox VBox.vgrow="ALWAYS">
+                            <VBox.margin>
+                                <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
+                            </VBox.margin>
+                            <children>
+                                <Label prefHeight="100.0" prefWidth="200.0">
+                                    <graphic>
+                                        <Region styleClass="warning-img" />
+                                    </graphic>
+                                </Label>
+                                <VBox prefWidth="500.0">
+                                    <children>
+                                        <Label prefWidth="460.0" styleClass="confirm-dialog-title" text="Supprimer la commande ?" />
+                                        <Label fx:id="descDialog" />
+                                        <HBox alignment="CENTER" prefHeight="68.0" prefWidth="356.0" spacing="40.0">
+                                            <children>
+                                                <Button fx:id="okButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="confirm-dialog-button-ok" text="Oui" />
+                                                <Button fx:id="cancelButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" styleClass="confirm-dialog-button-cancel" text="Annuler" />
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets top="65.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets left="30.0" />
+                                    </HBox.margin>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
     </children>
 </StackPane>

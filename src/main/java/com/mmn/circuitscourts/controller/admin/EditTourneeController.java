@@ -24,29 +24,57 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class AddTourneesController {
+public class EditTourneeController {
 
-    @FXML
-    Label hourDebut, minutesDebut, hourFin, minutesFin, totalWeight, popupMessage;
-    @FXML
-    Button plusHourDebut, plusMinutesDebut, minusHourDebut, minusMinutesDebut, plusHourFin, plusMinutesFin, minusMinutesFin, minusHourFin;
+    public static int tourneeId = 0;
     @FXML
     VBox chooserContentTable, chooser, contentTable, errorPopup, loadingContainer;
+    @FXML
+    Label hourDebut, hourFin, minutesDebut, minutesFin, totalWeight, popupMessage, mainTitle;
     @FXML
     ComboBox<String> vehiculeCb, entrepriseCb;
     @FXML
     DatePicker datePicker;
 
-    private ArrayList<Commande> commandes = new ArrayList<>();
+    private ArrayList<Commande> commandes = Commande.cmd.getAllByTournee(tourneeId);
+
+    public EditTourneeController() throws SQLException {
+    }
 
     public void initialize() {
-        initCommandesTable();
+        mainTitle.setText("Modification de la tournée n°"+tourneeId);
         initVehicules();
         initEntreprises();
+        initCommandesTable();
+        initClockModule();
+        datePicker.setValue(getTournee().getDate());
+    }
+
+    private void initClockModule() {
+        hourDebut.setText(getTournee().getHoraireDebut().split(":")[0]);
+        minutesDebut.setText(getTournee().getHoraireDebut().split(":")[1]);
+        hourFin.setText(getTournee().getHoraireFin().split(":")[0]);
+        minutesFin.setText(getTournee().getHoraireFin().split(":")[1]);
+    }
+
+    public Tournee getTournee() {
+        try {
+            return Tournee.tourneeDAO.getById(tourneeId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void onBackButton() {
+        ViewFactory.getInstance().showAdminTourneeInterface();
+    }
+
+    public void onClosePopup(MouseEvent mouseEvent) {
+        errorPopup.setVisible(false);
     }
 
     /**
-     * Initiliase les véhicules dans la comboBox
+     * Initialise les véhicules dans la comboBox
      */
     private void initVehicules() {
         try {
@@ -54,13 +82,16 @@ public class AddTourneesController {
             ArrayList<String> values = new ArrayList<>();
             vehicules.forEach(vehicule -> values.add(vehicule.getNumImmat() + " - PoidsMax: " + vehicule.getPoidsMax() + " kg"));
             vehiculeCb.getItems().addAll(values);
+            if (getTournee().getNumImmat() != null) {
+                vehiculeCb.setValue(getTournee().getNumImmat() + " - PoidsMax: " + Vehicule.vehiculeDAO.getById(getTournee().getNumImmat()).getPoidsMax() + " kg");
+            }
         } catch (SQLException e) {
             System.out.println("Erreur lors du chargement des véhicules");
         }
     }
 
     /**
-     * Initialise toutes les entreprises dans la combobox
+     * Initialise les entreprises dans la combobox
      */
     public void initEntreprises() {
         try {
@@ -68,8 +99,11 @@ public class AddTourneesController {
             ArrayList<String> values = new ArrayList<>();
             entreprises.forEach(entreprise -> values.add(entreprise.getNumSiret() + "-" + entreprise.getProprietaire().getNom()));
             entrepriseCb.getItems().addAll(values);
+            if (getTournee().getNumImmat() != null) {
+                entrepriseCb.setValue(getTournee().getNumSiret() + "-" + Entreprise.entrepriseDAO.getById(getTournee().getNumSiret()).getProprietaire().getNom());
+            }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erreur lors du chargement des entreprises");
         }
     }
 
@@ -87,49 +121,6 @@ public class AddTourneesController {
         totalWeight.setText(weight + " kg");
     }
 
-    /**
-     * Retourne à la page précédente
-     */
-    public void onBackButton() {
-        ViewFactory.getInstance().showAdminTourneeInterface();
-    }
-
-    /**
-     * Charge et affiche la fenetre de choix de commande
-     */
-    public void onAddButton() {
-        loadingContainer.setVisible(true);
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                initChooserTable();
-                loadingContainer.setVisible(false);
-                chooser.setVisible(true);
-            }
-        });
-    }
-
-    /**
-     * Initialise la liste de commande de la fenetre de choix de commande
-     */
-    public void initChooserTable() {
-        try {
-            ArrayList<Commande> commandes = Commande.getCommandesInitialize();
-            chooserContentTable.getChildren().clear();
-            commandes.forEach(commande -> {
-                if (!(commande.getIdTournee() > 0)) {
-                    createChooserLine(commande);
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Créer une ligne correspondant à la commande en paramètre dans la liste de commandes de la tournée
-     * @param commande
-     */
     public void createCommandeLine(Commande commande) {
         HBox line = new HBox();
         line.setAlignment(Pos.CENTER_LEFT);
@@ -156,48 +147,9 @@ public class AddTourneesController {
         contentTable.getChildren().add(line);
     }
 
-    /**
-     * Créer une ligne correspondant à la commande en paramètre dans la fenetre de choix de commandes
-     * @param commande
-     */
-    public void createChooserLine(Commande commande) {
-        HBox line = new HBox();
-        line.setAlignment(Pos.CENTER_LEFT);
-        line.setMinHeight(64);
-        line.setPrefHeight(64);
-        line.setMaxWidth(818);
-        line.setPadding(new Insets(0, 0, 0, 40));
-        line.getStyleClass().add("commande-tableview-line");
-        line.setStyle("-fx-cursor: hand");
-        ArrayList<Label> labels = new ArrayList<>();
-        Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
-        Label libelle = new Label(String.valueOf(commande.getArticleId()));
-        Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
-        Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
-        Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
-        labels.add(numCommande);
-        labels.add(libelle);
-        labels.add(poids);
-        labels.add(horaire);
-        labels.add(dateCommande);
-
-        labels.forEach(label -> {
-            label.getStyleClass().add("commande-tableview-line-cell");
-            label.setMaxHeight(1.7976931348623157E308);
-            label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(141);
-            label.setMinWidth(141);
-            label.setMaxWidth(141);
-            line.getChildren().add(label);
-        });
-
-        line.setOnMouseClicked(mouseEvent -> {
-            onAdd(commande);
-            initCommandesTable();
-            chooser.setVisible(false);
-        });
-
-        chooserContentTable.getChildren().add(line);
+    private void onDelete(Commande commande) {
+        commandes.remove(commande);
+        initCommandesTable();
     }
 
     /**
@@ -312,17 +264,72 @@ public class AddTourneesController {
         }
     }
 
-    /**
-     * Ferme le choix de commande lorsque l'on clique sur le button correspondant
-     */
-    public void onClose() {
-        chooser.setVisible(false);
+    public void onAddButton(MouseEvent mouseEvent) {
+        loadingContainer.setVisible(true);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                initChooserTable();
+                loadingContainer.setVisible(false);
+                chooser.setVisible(true);
+            }
+        });
     }
 
-    /**
-     * Ajoute à la liste de commandes de la tournée, la commande en paramètre.
-     * @param commande La commande à ajouter.
-     */
+    private void initChooserTable() {
+        try {
+            ArrayList<Commande> commandes = Commande.getCommandesInitialize();
+            chooserContentTable.getChildren().clear();
+            commandes.forEach(commande -> {
+                if (!(commande.getIdTournee() > 0)) {
+                    createChooserLine(commande);
+                }
+            });
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createChooserLine(Commande commande) {
+        HBox line = new HBox();
+        line.setAlignment(Pos.CENTER_LEFT);
+        line.setMinHeight(64);
+        line.setPrefHeight(64);
+        line.setMaxWidth(818);
+        line.setPadding(new Insets(0, 0, 0, 40));
+        line.getStyleClass().add("commande-tableview-line");
+        line.setStyle("-fx-cursor: hand");
+        ArrayList<Label> labels = new ArrayList<>();
+        Label numCommande = new Label(String.valueOf(commande.getNumCommande()));
+        Label libelle = new Label(String.valueOf(commande.getArticleId()));
+        Label poids = new Label(String.valueOf(commande.getPoids()) + " kg");
+        Label horaire = new Label(commande.getHoraireDebut() + "h à " + commande.getHoraireFin() + "h");
+        Label dateCommande = new Label(String.valueOf(commande.getDateCommande()));
+        labels.add(numCommande);
+        labels.add(libelle);
+        labels.add(poids);
+        labels.add(horaire);
+        labels.add(dateCommande);
+
+        labels.forEach(label -> {
+            label.getStyleClass().add("commande-tableview-line-cell");
+            label.setMaxHeight(1.7976931348623157E308);
+            label.setPrefHeight(1.7976931348623157E308);
+            label.setPrefWidth(141);
+            label.setMinWidth(141);
+            label.setMaxWidth(141);
+            line.getChildren().add(label);
+        });
+
+        line.setOnMouseClicked(mouseEvent -> {
+            onAdd(commande);
+            initCommandesTable();
+            chooser.setVisible(false);
+        });
+
+        chooserContentTable.getChildren().add(line);
+    }
+
     public void onAdd(Commande commande) {
         Boolean contains = false;
         for (Commande c : commandes) {
@@ -337,36 +344,12 @@ public class AddTourneesController {
         }
     }
 
-    /**
-     * Rend visible la popup d'erreur et defini le message d'erreur par le message entré en paramètre
-     * @param message Message qui sera affiché dans la popup
-     */
     private void showErrorPopup(String message) {
         popupMessage.setText(message);
         errorPopup.setVisible(true);
     }
 
-    /**
-     * Ferme la popup d'erreur lorsqu'on clique sur le button
-     */
-    public void onClosePopup() {
-        errorPopup.setVisible(false);
-    }
-
-    /**
-     * Supprime de la liste de commandes de la tournée, la commande en paramètre.
-     * @param commande La commande à supprimer.
-     */
-    private void onDelete(Commande commande) {
-        commandes.remove(commande);
-        initCommandesTable();
-    }
-
-    /**
-     * Créer la tournée depuis le véhicule selectionné et les commandes ajoutées à la liste de commande
-     * Vérifie toutes les conditions avant la création
-     */
-    public void onCreate() {
+    public void onEdit(MouseEvent mouseEvent) {
         String horaireDebut = hourDebut.getText()+":"+minutesDebut.getText()+":00";
         String horaireFin = hourFin.getText()+":"+minutesFin.getText()+":00";
 
@@ -386,7 +369,7 @@ public class AddTourneesController {
         }
 
         if (isBefore) {
-            showErrorPopup("La date de la tournée est avant celle de \ncommande.");
+            showErrorPopup("La date de la tournée est avant celle d'une \ncommande.");
             return;
         }
 
@@ -397,17 +380,27 @@ public class AddTourneesController {
                     showErrorPopup("Le poids total est supérieur à ce que peut \nsupporter le véhicule");
                     return;
                 }
-                Entreprise entreprise = Entreprise.entrepriseDAO.getById(Integer.valueOf(entrepriseCb.getValue().split("-")[0]));
-                Tournee tournee = new Tournee(datePicker.getValue(), horaireDebut, horaireFin, entreprise.getNumSiret(), vehicule.getNumImmat());
+                Entreprise entreprise = Entreprise.entrepriseDAO.getById(Integer.parseInt(entrepriseCb.getValue().split("-")[0]));
+                Tournee tournee = new Tournee(tourneeId, datePicker.getValue(), horaireDebut, horaireFin, entreprise.getNumSiret(), vehicule.getNumImmat());
+                Commande.cmd.getAll().forEach(commande -> {
+                    if (commande.getIdTournee() == tourneeId) {
+                        commande.setIdTournee(0);
+                    }
+                });
                 commandes.forEach(commande -> commande.setIdTournee(tournee.getId()));
-                TourneeController.showPopupSuccess("Tournée ajoutée !", "La tournée n°" + tournee.getId() + " a bien été ajoutée !");
+                Tournee.tourneeDAO.update(tourneeId, tournee);
+                System.out.println("ok");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
             ViewFactory.getInstance().showAdminTourneeInterface();
+            TourneeController.showPopupSuccess("Tournée modifiée !", "La tournée n°" + tourneeId + " a bien été modifiée.");
         } else {
             showErrorPopup("L'horaire de fin est avant celui de début.");
         }
+    }
+
+    public void onClose(MouseEvent mouseEvent) {
+        chooser.setVisible(false);
     }
 }

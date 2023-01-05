@@ -40,7 +40,7 @@ public class VehiculeController {
         line.setPrefHeight(64);
         line.setPrefWidth(850);
         line.setPadding(new Insets(0, 0, 0, 40));
-        line.getStyleClass().add("vehicule-tableview-line");
+        line.getStyleClass().add("commande-tableview-line");
         ArrayList<Label> labels = new ArrayList<>();
         Label numImmatriculation = new Label(String.valueOf(vehicule.getNumImmat()));
         Label poids = new Label(String.valueOf(vehicule.getPoidsMax()));

@@ -25,13 +25,7 @@ import java.util.ArrayList;
 public class EntrepriseController {
 
     @FXML
-    Button disconnectButton;
-    @FXML
     VBox contentFeed;
-
-    @FXML
-    StackPane stackPane;
-
     @FXML
     BorderPane container;
     @FXML

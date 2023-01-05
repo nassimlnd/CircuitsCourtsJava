@@ -305,5 +305,12 @@ public class ViewFactory {
         System.out.println("[DEBUG]AddClientInterface loaded.");
         createScene(loader, "CircuitsCourts - Ajout d'un client");
     }
+
+    public void showAdminEditTourneeInterface(int id) {
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditTournee.fxml"));
+        System.out.println("[DEBUG]EditTournee loaded.");
+        com.mmn.circuitscourts.controller.admin.EditTourneeController.tourneeId = id;
+        createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);
+    }
 }
 

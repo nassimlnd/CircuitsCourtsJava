@@ -45,7 +45,7 @@
                               <VBox prefHeight="238.0" prefWidth="398.0" spacing="20.0">
                                  <children>
                                             <TextField fx:id="identifiant" maxWidth="250.0" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Identifiant" />
-                                            <TextField fx:id="mdp" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Mot de passe" />
+                                            <TextField fx:id="mdp" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Nouveau mot de passe" />
                                             <ComboBox fx:id="grade" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le grade" />
                                  </children>
                                  <padding>

@@ -39,8 +39,8 @@ public class ArticlesController {
         popupid = successPopupId;
     }
 
-    public static void showSuccessPopUp(int id) {
-        popupid.setText("L'article n°"+id+" a bien été ajoutée !");
+    public static void showSuccessPopUp(int id, String message) {
+        popupid.setText(message);
         popup.setVisible(true);
     }
 

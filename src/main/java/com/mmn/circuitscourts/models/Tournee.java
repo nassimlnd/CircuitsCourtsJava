@@ -113,7 +113,7 @@ public class Tournee {
      * @return l'ArrayListe de toutes les tournées
      * @throws SQLException
      */
-    public  static ArrayList<Tournee> getCommandesInitialize() throws SQLException {
+    public static ArrayList<Tournee> getTourneeList() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAll();
         return tournees;

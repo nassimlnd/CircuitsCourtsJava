@@ -48,7 +48,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         pst.setString(1, entreprise.getAdresse());
         pst.setInt(2, entreprise.getProprietaire().getId());
         pst.setString(3, entreprise.getNumTel());
-        pst.setString(4, entreprise.getNumTel());
+        pst.setString(4, entreprise.getCoordonneesGps());
         pst.executeUpdate();
         ResultSet resultSet = pst.getGeneratedKeys();
         if (resultSet.next()) {

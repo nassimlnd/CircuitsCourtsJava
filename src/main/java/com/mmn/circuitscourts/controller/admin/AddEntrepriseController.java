@@ -11,15 +11,17 @@ import java.sql.SQLException;
 public class AddEntrepriseController {
 
     @FXML
-    TextField adresse, numTel, gps, nom, numTelProprio, adresseProprio;
+    TextField adresse, codePostal, ville, numTel, gps, nom, numTelProprio, adresseProprio, codePostalProprio, villeProprio;
 
     public void onBackButton() {
         ViewFactory.getInstance().showAdminEntrepriseInterface();
     }
 
     public void onCreateButton() throws SQLException {
-        Proprietaire proprietaire = new Proprietaire(nom.getText(), numTelProprio.getText(), adresseProprio.getText());
-        new Entreprise(adresse.getText(), proprietaire, numTel.getText(), gps.getText());
+        String adresseProprioFormated = adresseProprio.getText() + ":" + codePostalProprio.getText() + ":" + villeProprio.getText();
+        String adresseEntrepriseFormated = adresse.getText() + ":" + codePostal.getText() + ":" + ville.getText();
+        Proprietaire proprietaire = new Proprietaire(nom.getText(), numTelProprio.getText(), adresseProprioFormated);
+        new Entreprise(adresseEntrepriseFormated, proprietaire, numTel.getText(), gps.getText());
         System.out.println("[DEBUG]Entreprise added, make connection");
         ViewFactory.getInstance().showAdminEntrepriseInterface();
     }
