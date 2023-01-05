@@ -20,28 +20,15 @@ import java.util.ArrayList;
  * Controller qui gère la vue Commandes.fxml
  */
 public class CommandesController {
+    @FXML
+    Button addButton, okButton, cancelButton;
+    @FXML
+    VBox successPopup, confirmationDialog, contentTable;
+    @FXML
+    Label descDialog, popupTitle, popupMessage;
     static VBox popup;
-    @FXML
-    VBox contentTable;
-    @FXML
-    Button addButton;
-    @FXML
-    VBox successPopup;
-    @FXML
-    VBox confirmationDialog;
-    @FXML
-    Button okButton;
-    @FXML
-    Button cancelButton;
-    @FXML
-    Label descDialog;
+    static Label title, message;
 
-    /**
-     * Affichage de la popup de réussite de l'action.
-     */
-    public static void showSuccessPopUp() {
-        popup.setVisible(true);
-    }
 
     /**
      * Appel de la méthode du modèle pour récuperer toutes les commande présentes dans la base de données.
@@ -59,6 +46,19 @@ public class CommandesController {
             }
         });
         popup = successPopup;
+        title = popupTitle;
+        message = popupMessage;
+    }
+
+    /**
+     * Affichage de la popup de réussite de l'action.
+     * @param message Message de la popup
+     * @param title Titre de la popup
+     */
+    public static void showSuccessPopUp(String popupTitle, String popupMessage) {
+        title.setText(popupTitle);
+        message.setText(popupMessage);
+        popup.setVisible(true);
     }
 
     /**

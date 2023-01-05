@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Vehicule {
     private String numImmat;
-    private int poidsMax;
+    private float poidsMax;
 
     private int numSiret;
 
@@ -24,11 +24,7 @@ public class Vehicule {
         }
     }
 
-    public Vehicule(String numImmat, int poidsmax) {
-        this.numImmat = numImmat;
-        this.poidsMax = poidsmax;
-    }
-    public Vehicule(String numImmat, int poidsmax, int numSiret) throws SQLException {
+    public Vehicule(String numImmat, float poidsmax, int numSiret) throws SQLException {
         this.numImmat = numImmat;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
@@ -36,11 +32,6 @@ public class Vehicule {
         if (!vehiculeDAO.exists(this)) {
             vehiculeDAO.add(this);
         }
-    }
-
-    public static ArrayList<Vehicule> getCommandesInitialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = vehiculeDAO.getAll();
-        return vehicules;
     }
 
     public String getNumImmat() {
@@ -51,11 +42,11 @@ public class Vehicule {
         this.numImmat = numImmat;
     }
 
-    public int getPoidsMax() {
+    public float getPoidsMax() {
         return poidsMax;
     }
 
-    public void setPoidsMax(int poidsMax) {
+    public void setPoidsMax(float poidsMax) {
         this.poidsMax = poidsMax;
     }
 
@@ -63,30 +54,9 @@ public class Vehicule {
         return numSiret;
     }
 
-
-
-    public static ArrayList<Vehicule>getVehiculesInitilize() throws SQLException {
+    public static ArrayList<Vehicule>getVehiculesInitialize() throws SQLException {
         VehiculeDAO v = new VehiculeDAO();
         ArrayList<Vehicule> vehicules = v.getAll();
-        return vehicules;
-    }
-
-    public ArrayList<Vehicule> getVehiculesInitilizeByEntreprise() throws SQLException {
-        VehiculeDAO v = new VehiculeDAO();
-        int idUser = App.userConnected.getId();
-        ArrayList<Vehicule> vehicules = v.getAllByEntreprise(idUser);
-        return vehicules;
-    }
-
-
-    public static int getNumSiretConnected() throws SQLException {
-       int numSiretConnected = vehiculeDAO.getNumSiretConnected(App.userConnected.getId());
-       return numSiretConnected;
-    }
-
-    public static ArrayList<Vehicule>getVehiculesInitilizeByid() throws SQLException {
-        VehiculeDAO v = new VehiculeDAO();
-        ArrayList<Vehicule> vehicules = v.getAllByEntreprise(App.userConnected.getId());
         return vehicules;
     }
 }

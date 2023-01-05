@@ -1,11 +1,14 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,6 +20,20 @@ public class AddVehiculeController {
     TextField numImmat, poids;
     @FXML
     ComboBox<String> namesProd;
+    @FXML
+    VBox errorPopup;
+    @FXML
+    Label popupMessage;
+
+
+    /**
+     * Appel de la méthode getNomProdInitialize() lors du chargement de la page.
+     *
+     * @throws SQLException
+     */
+    public void initialize() throws SQLException {
+        getEntreprises();
+    }
 
     public void onBackButton() {
         ViewFactory.getInstance().showAdminVehiculeInterface();
@@ -29,22 +46,13 @@ public class AddVehiculeController {
      * 
      * @throws SQLException
      */
-    public void getNomProdInitialize() throws SQLException {
-        ArrayList<String> namesAndSiret = User.accountDAO.getAllEntreprisesNameAndSiret();
-        ArrayList<String> numSirets = new ArrayList<>();
-        for (String names : namesAndSiret) {
-            numSirets.add(names);
-        }
-        namesProd.getItems().addAll(numSirets);
-    }
+    public void getEntreprises() throws SQLException {
+        ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
+        ArrayList<String> values = new ArrayList<>();
 
-    /**
-     * Appel de la méthode getNomProdInitialize() lors du chargement de la page.
-     * 
-     * @throws SQLException
-     */
-    public void initialize() throws SQLException {
-        getNomProdInitialize();
+        entreprises.forEach(entreprise -> values.add(entreprise.getNumSiret() + "-" + entreprise.getProprietaire().getNom()));
+
+        namesProd.getItems().addAll(values);
     }
 
     /**
@@ -57,7 +65,7 @@ public class AddVehiculeController {
      * @throws SQLException
      */
     public void onCreateButton() throws SQLException {
-        if(!numImmat.getText().equals("") && !poids.getText().equals("") && !namesProd.getValue().equals("")){
+        if(!numImmat.getText().equals("") && !poids.getText().equals("") && !(namesProd.getValue() == null)){
             if(numImmat.getText().matches("^[A-Z]{2}-\\d{3}-[A-Z]{2}$")){
                 ArrayList<Vehicule> v = Vehicule.vehiculeDAO.getAll();
                 ArrayList<String> numImmats = new ArrayList<>();
@@ -73,9 +81,18 @@ public class AddVehiculeController {
                     }catch(NumberFormatException e){
                         System.out.println(e);
                     }
-                } else System.out.println("[DEBUG]Error : plaque déjà existante.");
-            }else System.out.println("[DEBUG]Error : format de la plaque d'immatriculation AA-000-AA.");
-        }else System.out.println("[DEBUG]Tous les champs doivent être saisis.");
+                } else showErrorPopup("Un véhicule avec la même immatriculation \nexiste déjà.");
+            }else showErrorPopup("Le format de la plaque est invalide.\nIl doit être sous la forme : AA-123-BB");
+        }else showErrorPopup("Vous devez remplir tous les champs !");
+    }
+
+    public void showErrorPopup(String message) {
+        popupMessage.setText(message);
+        errorPopup.setVisible(true);
+    }
+
+    public void onClosePopup() {
+        errorPopup.setVisible(false);
     }
 
 }

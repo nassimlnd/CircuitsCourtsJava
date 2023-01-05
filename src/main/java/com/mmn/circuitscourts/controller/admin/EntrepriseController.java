@@ -61,9 +61,9 @@ public class EntrepriseController {
             label.getStyleClass().add("commande-tableview-line-cell");
             label.setMaxHeight(1.7976931348623157E308);
             label.setPrefHeight(1.7976931348623157E308);
-            label.setPrefWidth(141);
-            label.setMinWidth(141);
-            label.setMaxWidth(141);
+            label.setPrefWidth(151);
+            label.setMinWidth(151);
+            label.setMaxWidth(151);
             line.getChildren().add(label);
         });
 
@@ -73,7 +73,7 @@ public class EntrepriseController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 30));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 80));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(entreprise.getNumSiret());
         });

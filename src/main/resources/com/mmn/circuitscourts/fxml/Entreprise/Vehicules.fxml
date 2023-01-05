@@ -51,7 +51,7 @@
                                                 </Label>
                                                 <VBox prefHeight="110.0" prefWidth="312.0">
                                                     <children>
-                                                        <Label styleClass="successPopup-title"
+                                                        <Label fx:id="popupTitle" styleClass="successPopup-title"
                                                                text="Véhicule ajoutée !"/>
                                                         <Label fx:id="popupSubtitle" styleClass="successPopup-subtitle"
                                                                text="Le véhicule immatriculé : X a bien été ajoutée !"/>

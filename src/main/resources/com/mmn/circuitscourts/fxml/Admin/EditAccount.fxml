@@ -25,12 +25,12 @@
                                 <Region styleClass="back-button-img" />
                             </graphic>
                         </Button>
-                        <Label fx:id="title" styleClass="main-title" text="Modification de la commande n°">
+                        <Label fx:id="title" styleClass="main-title" text="Modification du compte n°">
                             <VBox.margin>
                                 <Insets top="20.0" />
                             </VBox.margin>
                         </Label>
-                  <HBox alignment="CENTER" prefHeight="427.0" prefWidth="871.0">
+                  <HBox alignment="CENTER" prefHeight="427.0" prefWidth="871.0" spacing="30.0">
                      <children>
                         <VBox maxHeight="300.0" prefWidth="400.0" styleClass="profil-container">
                            <children>
@@ -47,6 +47,26 @@
                                             <TextField fx:id="identifiant" maxWidth="250.0" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Identifiant" />
                                             <TextField fx:id="mdp" maxWidth="250.0" prefHeight="40.0" prefWidth="250.0" promptText="Nouveau mot de passe" />
                                             <ComboBox fx:id="grade" minHeight="40.0" minWidth="250.0" prefWidth="150.0" promptText="Selectionner le grade" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="30.0" top="40.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="entityContainer" maxHeight="250.0" prefHeight="272.0" prefWidth="400.0" styleClass="profil-container">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" maxHeight="56.0" prefHeight="200.0" prefWidth="100.0" styleClass="profil-container-header">
+                                 <padding>
+                                    <Insets left="20.0" />
+                                 </padding>
+                                 <children>
+                                    <Label styleClass="profil-container-header-title" text="Liaison de l'entité" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="178.0" prefWidth="398.0" spacing="20.0">
+                                 <children>
+                                    <ComboBox fx:id="entityCb" minHeight="40.0" minWidth="250.0" prefWidth="150.0" />
                                  </children>
                                  <padding>
                                     <Insets left="30.0" top="40.0" />

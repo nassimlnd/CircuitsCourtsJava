@@ -38,7 +38,7 @@
                                 <Label minWidth="679.0" prefHeight="35.0" prefWidth="679.0" styleClass="main-title" text="Création d'une tournée" />
                                 <Pane prefHeight="35.0" prefWidth="192.0">
                                     <children>
-                                        <VBox fx:id="errorPopup" layoutX="-201.0" layoutY="-52.0" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
+                                        <VBox fx:id="errorPopup" layoutX="-201.0" layoutY="-60.0" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
                                             <HBox.margin>
                                                 <Insets left="325.0" />
                                             </HBox.margin>
@@ -83,9 +83,9 @@
                                 </Pane>
                             </children>
                         </HBox>
-                        <HBox prefHeight="634.0" prefWidth="871.0" spacing="50.0">
+                        <HBox prefHeight="643.0" prefWidth="871.0" spacing="50.0">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="25.0" />
                             </VBox.margin>
                             <children>
                                 <VBox prefHeight="200.0" prefWidth="420.0" spacing="30.0">

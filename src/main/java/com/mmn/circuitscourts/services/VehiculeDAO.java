@@ -103,30 +103,15 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      * @return une ArrayList qui est constituée de l'entierté de la table.
      */
 
-    public ArrayList<Vehicule> getAllByEntreprise(int accountId) throws SQLException {
-        String query = "SELECT * FROM  vehicule INNER JOIN entreprise ON Vehicule.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + accountId;
+    public ArrayList<Vehicule> getAllByEntreprise(int numSiret) throws SQLException {
+        String query = "SELECT * FROM vehicule WHERE numSiret=" + numSiret;
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);
         ArrayList<Vehicule> vehicules = new ArrayList<>();
-        String numImmat = null;
-        int poidsMax = 0;
         while(rs.next()){
-            numImmat=rs.getString(1);
-            poidsMax=rs.getInt(2);
-            vehicules.add(new Vehicule(numImmat,poidsMax));
+            vehicules.add(new Vehicule(rs.getString(1), rs.getFloat(2), numSiret));
         }
         return vehicules;
-    }
-
-    public int getNumSiretConnected(int idUser) throws SQLException {
-        String query = "SELECT DISTINCT Vehicule.numSiret FROM Vehicule INNER JOIN entreprise ON Vehicule.numSiret=entreprise.numSiret WHERE entreprise.accountId=" + idUser;
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(query);
-        if(rs.next()){
-            int numSiret = rs.getInt(1);
-            return numSiret;
-        }
-        throw new SQLException("numSiret introuvable");
     }
 
     public boolean exists(Vehicule vehicule) throws SQLException {

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -28,11 +29,59 @@
                                 <Region styleClass="back-button-img" />
                             </graphic>
                         </Button>
-                        <Label styleClass="main-title" text="Ajout d'un véhicule">
-                            <VBox.margin>
-                                <Insets top="20.0" />
-                            </VBox.margin>
-                        </Label>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                              <Label prefHeight="35.0" prefWidth="642.0" styleClass="main-title" text="Ajout d'un véhicule" />
+                        <Pane prefHeight="35.0" prefWidth="192.0">
+                           <children>
+                              <VBox fx:id="errorPopup" layoutX="-175.0" layoutY="-30.0" maxHeight="139.0" minWidth="400.0" prefHeight="139.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
+                                 <HBox.margin>
+                                    <Insets left="325.0" />
+                                 </HBox.margin>
+                                 <children>
+                                    <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0" styleClass="errorPopup-indicator" />
+                                    <HBox prefHeight="120.0" prefWidth="400.0" styleClass="errorPopup-container">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="33.0">
+                                             <padding>
+                                                <Insets left="10.0" top="17.0" />
+                                             </padding>
+                                             <graphic>
+                                                <Region styleClass="errorPopup-img" />
+                                             </graphic>
+                                          </Label>
+                                          <VBox prefHeight="110.0" prefWidth="312.0">
+                                             <children>
+                                                <Label styleClass="errorPopup-title" text="Erreur !" />
+                                                <Label fx:id="popupMessage" styleClass="errorPopup-subtitle" />
+                                             </children>
+                                             <padding>
+                                                <Insets left="15.0" top="15.0" />
+                                             </padding>
+                                          </VBox>
+                                          <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
+                                             <children>
+                                                <Button mnemonicParsing="false" onMouseClicked="#onClosePopup" prefHeight="28.0" prefWidth="28.0" styleClass="successPopup-close">
+                                                   <graphic>
+                                                      <Region styleClass="successPopup-close-img" />
+                                                   </graphic>
+                                                   <VBox.margin>
+                                                      <Insets right="15.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="496.0" prefWidth="871.0" spacing="30.0">
                      <children>
                         <VBox maxHeight="300.0" prefHeight="394.0" prefWidth="379.0" styleClass="profil-container">

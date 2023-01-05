@@ -56,11 +56,11 @@ public class AddCommandesController {
                             int idClient = Integer.parseInt(client.getValue().split("-")[0]);
 
                             int finalNumSiret = Integer.parseInt(entreprises.getValue().split("-")[0]);
-                            new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
+                            Commande commande = new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
                             System.out.println("[DEBUG]Commande added.");
 
                             ViewFactory.getInstance().showAdminCommandeInterface();
-                            CommandesController.showSuccessPopUp();
+                            CommandesController.showSuccessPopUp("Commande ajoutée !", "La commande n°" + commande.getNumCommande() + " a bien été ajoutée !");
                         }else System.out.println("[DEBUG]Error : horaire début après l'horaire de fin.");
                     }catch (NumberFormatException e){
                         System.out.println("error NumberFormatException");

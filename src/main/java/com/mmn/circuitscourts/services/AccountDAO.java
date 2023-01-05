@@ -191,4 +191,15 @@ public class AccountDAO implements DAO<User,Integer> {
         }
         return namesAndSiret;
     }
+
+    public boolean exists(String identifiant) throws SQLException {
+        String query = "SELECT * FROM accounts WHERE identifiant=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, identifiant);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return true;
+        } else return false;
+    }
 }

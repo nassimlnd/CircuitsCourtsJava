@@ -121,12 +121,12 @@ public class EditCommandeController {
                             int idClient = Integer.parseInt(client.getValue().split("-")[0]);
 
                             int finalNumSiret = Integer.parseInt(entreprise.getValue().split("-")[0]);
-                            Commande c = new Commande(commandeId,idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
+                            Commande c = new Commande(commandeId, idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
                             Commande.cmd.update(commandeId, c);
                             System.out.println("[DEBUG]Commande n°"+ commandeId +" updated.");
 
                             ViewFactory.getInstance().showAdminCommandeInterface();
-                            //CommandesController.showSuccessPopUp();
+                            CommandesController.showSuccessPopUp("Commande modifiée !", "La commande n°" + c.getNumCommande() + " a bien été modifiée !");
                         }else System.out.println("[DEBUG]Error : horaire début après l'horaire de fin.");
                     }catch (NumberFormatException e){
                         System.out.println("error NumberFormatException");

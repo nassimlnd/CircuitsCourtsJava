@@ -52,9 +52,9 @@
                                                 </Label>
                                                 <VBox prefHeight="110.0" prefWidth="312.0">
                                                     <children>
-                                                        <Label styleClass="successPopup-title"
+                                                        <Label fx:id="popupTitle" styleClass="successPopup-title"
                                                                text="Commande ajoutée !"/>
-                                                        <Label styleClass="successPopup-subtitle"
+                                                        <Label fx:id="popupMessage" styleClass="successPopup-subtitle"
                                                                text="La commande n°X a bien été ajoutée !"/>
                                                     </children>
                                                     <padding>

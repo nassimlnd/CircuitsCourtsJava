@@ -6,23 +6,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class EditAccountController {
-
     /**
      * L'id du compte que l'on veut modifier.
      */
     public static int accountId = 0;
     @FXML
-    Label title;
+    Label title, popupMessage;
+    @FXML
+    VBox errorPopup, entityContainer;
     @FXML
     TextField identifiant, mdp;
     @FXML
-    ComboBox<String> grade;
+    ComboBox<String> grade, entityCb;
 
     /**
      * Récupère le compte et ses informations que l'utilisateur veut modifier.

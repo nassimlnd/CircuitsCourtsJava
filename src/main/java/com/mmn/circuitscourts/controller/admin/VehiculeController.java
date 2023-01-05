@@ -28,7 +28,7 @@ public class VehiculeController {
 
 
     public void initialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAll();
         for (Vehicule v : vehicules) {
             createLine(v);
         }
@@ -94,7 +94,7 @@ public class VehiculeController {
         Vehicule.vehiculeDAO.remove(numImmat);
         System.out.println("[DEBUG]Véhicule deleted");
         contentTable.getChildren().clear();
-        ArrayList<Vehicule> vehicules = Vehicule.getCommandesInitialize();
+        ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAll();
         vehicules.forEach(vehicule -> {
             createLine(vehicule);
         });

@@ -18,23 +18,25 @@ public class VehiculesController {
     @FXML
     VBox successPopup, contentTable;
     @FXML
-    Label popupSubtitle;
+    Label popupSubtitle, popupTitle;
     static VBox popup;
-    static Label popupId;
+    static Label message, title;
 
 
     public void initialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitialize();
         for (Vehicule v : vehicules) {
             createLine(v);
         }
         popup = successPopup;
-        popupId = popupSubtitle;
+        title = popupTitle;
+        message = popupSubtitle;
     }
 
-    public static void showSuccessPopUp(String id) {
+    public static void showSuccessPopUp(String popupTitle, String popupMessage) {
+        title.setText(popupTitle);
+        message.setText(popupMessage);
         popup.setVisible(true);
-        popupId.setText("Le véhicule immatriculé : " + id + " a bien été ajoutée !");
     }
 
     public void createLine(Vehicule v) {
@@ -107,7 +109,7 @@ public class VehiculesController {
         Vehicule.vehiculeDAO.remove(numImmat);
         System.out.println("[DEBUG]Commande deleted");
         contentTable.getChildren().clear();
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitilize();
+        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitialize();
         vehicules.forEach(vehicule -> {
             createLine(vehicule);
         });

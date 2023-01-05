@@ -48,7 +48,7 @@ public class AddTourneesController {
      */
     private void initVehicules() {
         try {
-            ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAllByEntreprise(App.userConnected.getId());
+            ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAllByEntreprise(Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
             ArrayList<String> values = new ArrayList<>();
             vehicules.forEach(vehicule -> values.add(vehicule.getNumImmat() + " - PoidsMax: " + vehicule.getPoidsMax() + " kg"));
             vehiculeCb.getItems().addAll(values);
