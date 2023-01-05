@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class EditEntrepriseController {
     public static int numSiret = 0;
     @FXML
-    TextField adresse, numTel, gps;
+    TextField adresse, numTel, gps, nom, numTelProprio, adresseProprio;
     @FXML
     ComboBox<String> prodNonProprietaire;
     @FXML
@@ -24,13 +24,19 @@ public class EditEntrepriseController {
         return p;
     }
 
-
     public void initialize() throws SQLException {
+        initTextField();
+    }
+
+    public void initTextField() throws SQLException {
         title.setText("Modification de l'entreprise n°" + numSiret);
         adresse.setText(getThisEntreprise().getAdresse());
         numTel.setText(getThisEntreprise().getNumTel());
         gps.setText(getThisEntreprise().getCoordonneesGps());
-
+        Proprietaire p = getThisEntreprise().getProprietaire();
+        nom.setText(p.getNom());
+        numTelProprio.setText(p.getNumTel());
+        adresseProprio.setText(p.getAdresse());
     }
 
     public void onBackButton() {
@@ -38,11 +44,19 @@ public class EditEntrepriseController {
     }
 
     public void onEditButton() throws SQLException {
-        Proprietaire proprio = getThisEntreprise().getProprietaire();
-        int numProprietaire = proprio.getId();
-        Entreprise p = new Entreprise(getThisEntreprise().getNumSiret(), adresse.getText(), Proprietaire.proprietaireDAO.getById(numProprietaire), numTel.getText(), gps.getText(), getThisEntreprise().getAccountId());
-        Entreprise.entrepriseDAO.update(getThisEntreprise().getNumSiret(), p);
-        System.out.println("[DEBUG]Entreprise n°" + numSiret + " updated.");
-        ViewFactory.getInstance().showAdminEntrepriseInterface();
+        if ((numTel.getText()).matches("^\\+?[0-9]{2,3} ?[0-9]{6,}$") && (numTelProprio.getText().matches("^\\+?[0-9]{2,3} ?[0-9]{6,}$"))) {
+            if (adresse.getText().matches("^[0-9]{1,5}[a-zA-ZÀ-ÖØ-öø-ÿ \\-.']*$") && adresseProprio.getText().matches("^[0-9]{1,5}[a-zA-ZÀ-ÖØ-öø-ÿ \\-.']*$")) {
+                if (nom.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")) {
+                    if (gps.getText().matches("^(\\-?\\d+(\\.\\d+)?),\\s*(\\-?\\d+(\\.\\d+)?)$")) {
+                        Proprietaire proprio = getThisEntreprise().getProprietaire();
+                        int numProprietaire = proprio.getId();
+                        Entreprise p = new Entreprise(getThisEntreprise().getNumSiret(), adresse.getText(), Proprietaire.proprietaireDAO.getById(numProprietaire), numTel.getText(), gps.getText(), getThisEntreprise().getAccountId());
+                        Entreprise.entrepriseDAO.update(getThisEntreprise().getNumSiret(), p);
+                        System.out.println("[DEBUG]Entreprise n°" + numSiret + " updated.");
+                        ViewFactory.getInstance().showAdminEntrepriseInterface();
+                    } else System.out.println("[DEBUG]Error : coordonnées gps de la forme de deux nombres séparés par une virgule, chacun pouvant être précédé d'un signe \"-\" ");
+                } else System.out.println("[DEBUG]Error : nom incorrect");
+            } else System.out.println("[DEBUG]Error : adresse");
+        } else System.out.println("[DEBUG]Eror : numéro de tel format 0601020304");
     }
 }
