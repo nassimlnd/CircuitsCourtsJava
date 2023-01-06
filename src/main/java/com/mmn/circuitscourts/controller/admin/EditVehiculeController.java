@@ -1,5 +1,6 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
@@ -24,6 +26,10 @@ public class EditVehiculeController {
     @FXML
     VBox errorPopup;
 
+    public void initialize() {
+        initFields();
+    }
+
     public void onBackButton() {
         ViewFactory.getInstance().showAdminVehiculeInterface();
     }
@@ -38,10 +44,21 @@ public class EditVehiculeController {
         return v;
     }
 
-    public void initialize() {
+    public void initFields() {
         title.setText("Modification du véhicule n°" + numImmat);
         vehicule.setText(getThisVehicule().getNumImmat());
         poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
+
+        ArrayList<Entreprise> entreprises = null;
+        try {
+            entreprises = Entreprise.entrepriseDAO.getAll();
+            ArrayList<String> values = new ArrayList<>();
+            entreprises.forEach(entreprise -> values.add(entreprise.getNumSiret() + "-" + entreprise.getProprietaire().getNom()));
+            entreprisesCb.getItems().addAll(values);
+            entreprisesCb.setValue(getThisVehicule().getNumSiret() + "-" + Entreprise.entrepriseDAO.getById(getThisVehicule().getNumSiret()).getProprietaire().getNom());
+        } catch (SQLException e) {
+            showErrorPopup("Une erreur est survenue lors du chargement du véhicule ! \n(SQL ERROR)");
+        }
     }
 
     public void onEditButton() {
@@ -61,6 +78,7 @@ public class EditVehiculeController {
             Vehicule.vehiculeDAO.update(numImmat, v);
             System.out.println("[DEBUG]Vehicule updated");
             ViewFactory.getInstance().showAdminVehiculeInterface();
+            VehiculeController.showSuccessPopUp("Véhicule modifié !", "Le véhicule immatriculé : " + v.getNumImmat() + " a bien \nété modifié !");
         } catch (SQLException e) {
             showErrorPopup("Une erreur a eu lieu lors de la modification du véhicule !\n(SQL ERROR)");
         }

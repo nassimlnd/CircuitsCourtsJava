@@ -1,6 +1,8 @@
 package com.mmn.circuitscourts.models;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.services.AccountDAO;
+import com.mmn.circuitscourts.views.ViewFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -116,6 +118,29 @@ public class User {
             hexString.append(hex);
         }
         return hexString.toString();
+    }
+
+    public static void login(String identifiant, String password) throws Exception {
+        AccountDAO accountDAO = new AccountDAO();
+        try {
+            App.userConnected = accountDAO.connect(identifiant, password);
+            System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ", " + App.userConnected.getGrade() +") connected.");
+            switch (App.userConnected.getGrade()) {
+                case 1:
+                    ViewFactory.getInstance().showClientDashboardInterface();
+                    break;
+                case 2:
+                    ViewFactory.getInstance().showProdDashboardInterface();
+                    break;
+                case 3:
+                    ViewFactory.getInstance().showAdminDashboardInterface();
+                    break;
+                default:
+                    throw new Exception("GRADE ERROR");
+            }
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 }
 

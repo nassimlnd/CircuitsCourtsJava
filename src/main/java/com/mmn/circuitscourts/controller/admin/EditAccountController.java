@@ -1,5 +1,7 @@
 package com.mmn.circuitscourts.controller.admin;
 
+import com.mmn.circuitscourts.models.Client;
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.User;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -26,6 +28,10 @@ public class EditAccountController {
     @FXML
     ComboBox<String> grade, entityCb;
 
+    public void initialize() throws SQLException {
+        initFields();
+    }
+
     /**
      * Récupère le compte et ses informations que l'utilisateur veut modifier.
      *
@@ -43,12 +49,63 @@ public class EditAccountController {
         ViewFactory.getInstance().showAdminAccountInterface();
     }
 
-    public void initialize() throws SQLException {
-        User u = getThisAccount();
+    public void initFields() {
         title.setText("Modification du compte n°" + accountId);
-        identifiant.setText(u.getIdentifiant());
-        mdp.setText(u.getPassword());
-        getGradesInitialize();
+        try {
+            identifiant.setText(getThisAccount().getIdentifiant());
+            mdp.setText(getThisAccount().getPassword());
+            getGradesInitialize();
+
+            grade.valueProperty().addListener((observableValue, s, t1) -> {
+                initEntity(t1);
+            });
+        } catch (SQLException e) {
+            showErrorPopup("Une erreur est survenue lors du chargement du compte ! \n(SQL ERROR)");
+        }
+
+    }
+
+    public void initEntity(String entity) {
+        entityCb.getItems().clear();
+        switch (entity) {
+            case "Client":
+                entityContainer.setVisible(false);
+                try {
+                    ArrayList<Client> clients = Client.client.getAll();
+                    ArrayList<String> values = new ArrayList<>();
+                    clients.forEach(client -> {
+                        if (client.getAccountId() <= 0) {
+                            values.add(client.getId() + "-" + client.getNom());
+                        }
+                    });
+                    entityCb.setPromptText("Choisissez le client");
+                    entityCb.getItems().addAll(values);
+                    entityContainer.setVisible(true);
+                } catch (SQLException e) {
+                    showErrorPopup("Une erreur s'est produite lors du chargement des clients");
+                }
+                break;
+            case "Entreprise":
+                entityContainer.setVisible(false);
+                try {
+                    ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
+                    ArrayList<String> values = new ArrayList<>();
+                    entreprises.forEach(entreprise -> {
+                        if (entreprise.getAccountId() <= 0) {
+                            values.add(entreprise.getNumSiret() + "-" + entreprise.getProprietaire().getNom());
+                        }
+                    });
+                    entityCb.setPromptText("Choisissez l'entreprise");
+                    entityCb.getItems().addAll(values);
+                    entityContainer.setVisible(true);
+                } catch (SQLException e) {
+                    showErrorPopup("Une erreur s'est produite lors du chargement des entreprises");
+                }
+                break;
+            case "Administrateur":
+                entityContainer.setVisible(false);
+                break;
+        }
     }
 
     /**
@@ -88,13 +145,28 @@ public class EditAccountController {
      * @throws SQLException
      */
     public void onEditButton() throws SQLException {
-        if(identifiant.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")){
-            if(mdp.getText().matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")){
-                User u = new User(accountId, identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
-                User.accountDAO.update(accountId, u);
-                System.out.println("[DEBUG]User n°" + accountId + " updated.");
-                ViewFactory.getInstance().showAdminAccountInterface();
-            }else System.out.println("[DEBUG]Eror : au moins 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial.");
-        }else System.out.println("[DEBUG]error : nom incorrect");
+        if(!identifiant.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")){
+            System.out.println("[DEBUG]error : nom incorrect");
+            return;
+        }
+
+        if(!mdp.getText().matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")){
+            System.out.println("[DEBUG]Eror : au moins 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial.");
+            return;
+        }
+
+        User u = new User(accountId, identifiant.getText(), mdp.getText(), getGradeNumber(grade.getValue()));
+        User.accountDAO.update(accountId, u);
+        System.out.println("[DEBUG]User n°" + accountId + " updated.");
+        ViewFactory.getInstance().showAdminAccountInterface();
+    }
+
+    public void showErrorPopup(String message) {
+        popupMessage.setText(message);
+        errorPopup.setVisible(true);
+    }
+
+    public void onClosePopup() {
+        errorPopup.setVisible(false);
     }
 }

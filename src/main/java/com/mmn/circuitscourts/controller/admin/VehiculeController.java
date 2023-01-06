@@ -21,10 +21,10 @@ public class VehiculeController {
     @FXML
     Button okButton, cancelButton;
     @FXML
-    Label descDialog;
+    Label descDialog, popupSubtitle, popupTitle;
 
     static VBox popup;
-    static Label popupId;
+    static Label message, title;
 
 
     public void initialize() throws SQLException {
@@ -32,6 +32,9 @@ public class VehiculeController {
         for (Vehicule v : vehicules) {
             createLine(v);
         }
+        popup = successPopup;
+        message = popupSubtitle;
+        title = popupTitle;
     }
 
     public void createLine(Vehicule vehicule) {
@@ -44,7 +47,7 @@ public class VehiculeController {
         ArrayList<Label> labels = new ArrayList<>();
         Label numImmatriculation = new Label(String.valueOf(vehicule.getNumImmat()));
         Label poids = new Label(String.valueOf(vehicule.getPoidsMax()));
-        Label numSiret = new Label(String.valueOf(vehicule.getnumSiret()));
+        Label numSiret = new Label(String.valueOf(vehicule.getNumSiret()));
         labels.add(numImmatriculation);
         labels.add(poids);
         labels.add(numSiret);
@@ -101,7 +104,7 @@ public class VehiculeController {
     }
 
     public void showConfirmationDialog(String numImmat) {
-        descDialog.setText("Voulez vous vraiment supprimer le véhicule immatriculé : " + numImmat);
+        descDialog.setText("Voulez vous vraiment supprimer le véhicule \nimmatriculé : " + numImmat);
         confirmationDialog.setVisible(true);
         okButton.setOnMouseClicked(mouseEvent -> {
             confirmationDialog.setVisible(false);
@@ -116,9 +119,10 @@ public class VehiculeController {
         });
     }
 
-    public static void showSuccessPopUp(String id) {
+    public static void showSuccessPopUp(String popupTitle, String popupMessage) {
         popup.setVisible(true);
-        popupId.setText("Le véhicule immatriculé : " + id +" a bien été ajoutée !");
+        message.setText(popupMessage);
+        title.setText(popupTitle);
     }
 
     public void onClosePopup() {

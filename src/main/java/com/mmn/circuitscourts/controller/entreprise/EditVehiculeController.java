@@ -20,9 +20,13 @@ public class EditVehiculeController {
     @FXML
     TextField poids;
     @FXML
-    Label vehicule, popupMessage;
+    Label vehicule, popupMessage, title;
     @FXML
     VBox errorPopup;
+
+    public void initialize() throws SQLException {
+        initFields();
+    }
 
     public void onBackButton(){
         ViewFactory.getInstance().showProdVehiculesInterface();
@@ -32,12 +36,18 @@ public class EditVehiculeController {
         Vehicule v = Vehicule.vehiculeDAO.getById(numImmat);
         return v;
     }
-    public void initialize() throws SQLException {
-        vehicule.setText(getThisVehicule().getNumImmat());
-        poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
+
+    public void initFields() {
+        title.setText("Modification du véhicule n°" + numImmat);
+        try {
+            vehicule.setText(getThisVehicule().getNumImmat());
+            poids.setText(String.valueOf(getThisVehicule().getPoidsMax()));
+        } catch (SQLException e) {
+            showErrorPopup("Une erreur est survenue lors du chargement du véhicule ! \n(SQL ERROR)");
+        }
     }
     public void onEditButton() {
-        if(Float.parseFloat(poids.getText()) <= 0) {
+        if(poids.getText().equals("") || Float.parseFloat(poids.getText()) <= 0) {
             showErrorPopup("Le poids doit être supérieur à 0");
             return;
         }

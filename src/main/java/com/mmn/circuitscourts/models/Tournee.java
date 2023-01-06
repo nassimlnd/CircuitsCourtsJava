@@ -123,7 +123,7 @@ public class Tournee {
      * @return l'ArrayList des tournées appartenant au entreprise connecté à l'application.
      * @throws SQLException
      */
-    public static ArrayList<Tournee> getCommandesInitializeByEntreprise() throws SQLException {
+    public static ArrayList<Tournee> getTourneeByEntreprise() throws SQLException {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAllByEntreprise(App.userConnected.getId());
         return tournees;

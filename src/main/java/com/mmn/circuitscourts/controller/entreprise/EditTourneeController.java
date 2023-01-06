@@ -340,6 +340,11 @@ public class EditTourneeController {
             return;
         }
 
+        if (vehiculeCb.getValue() == null) {
+            showErrorPopup("Vous devez selectionner un véhicule !");
+            return;
+        }
+
         double totalWeight = 0;
         LocalDate localDate = datePicker.getValue();
         boolean isBefore = false;

@@ -259,7 +259,7 @@ public class ViewFactory {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/EditArticle.fxml"));
         System.out.println("[DEBUG]EntrepriseEditArticle loaded.");
         com.mmn.circuitscourts.controller.entreprise.EditArticleController.id = id;
-        createScene(loader, "CircuitsCourts - Modification du véhicule n°"+ id);
+        createScene(loader, "CircuitsCourts - Modification de l'article n°"+ id);
 
     }
 

@@ -27,7 +27,7 @@ public class TourneeController {
     static VBox popup;
 
     public void initialize() throws SQLException {
-        ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByEntreprise();
+        ArrayList<Tournee> tournees = Tournee.getTourneeByEntreprise();
         tournees.forEach(tournee -> createLine(tournee));
 
         titlePopup = popupTitle;
@@ -98,7 +98,7 @@ public class TourneeController {
             commande.setIdTournee(0);
         });
 
-        ArrayList<Tournee> tournees = Tournee.getCommandesInitializeByEntreprise();
+        ArrayList<Tournee> tournees = Tournee.getTourneeByEntreprise();
         tournees.forEach(tournee -> createLine(tournee));
     }
 

@@ -77,7 +77,7 @@ public class AddVehiculeController {
                         long numSiret = Long.parseLong(namesProd.getValue().split("-")[0]);
                         Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
                         ViewFactory.getInstance().showAdminVehiculeInterface();
-                        VehiculeController.showSuccessPopUp(vehicule.getNumImmat());
+                        VehiculeController.showSuccessPopUp("Véhicule ajouté !", "Le véhicule immatriculé : " + vehicule.getNumImmat() + " a bien \nété ajouté !");
                     }catch(NumberFormatException e){
                         System.out.println(e);
                     }

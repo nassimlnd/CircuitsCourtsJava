@@ -28,4 +28,23 @@ public class LogsDAO {
         return logs;
     }
 
+    public ArrayList<ArrayList<String>> getById() throws SQLException {
+        String query = "SELECT * FROM logs";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+        ArrayList<ArrayList<String>> logs = new ArrayList<>();
+        while (resultSet.next()) {
+            ArrayList<String> log = new ArrayList<>();
+            log.add(String.valueOf(resultSet.getInt(1)));
+            log.add(String.valueOf(resultSet.getInt(2)));
+            log.add(resultSet.getString(3));
+            log.add(String.valueOf(resultSet.getInt(4)));
+            log.add(String.valueOf(resultSet.getDate(5)));
+            log.add(String.valueOf(resultSet.getTime(6)));
+            logs.add(log);
+        }
+        return logs;
+    }
+
+
 }

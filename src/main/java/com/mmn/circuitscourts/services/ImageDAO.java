@@ -24,10 +24,10 @@ public class ImageDAO {
 
     public int add(File file) throws SQLException, FileNotFoundException {
         FileInputStream input = new FileInputStream(file);
-        String query = "INSERT INTO image(image, ext) VALUES (?,?, ?)";
+        String query = "INSERT INTO image(image, ext) VALUES (?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setBinaryStream(2, (InputStream) input, (int) file.length());
-        preparedStatement.setString(3, FilenameUtils.getExtension(file.getName()));
+        preparedStatement.setBinaryStream(1, (InputStream) input, (int) file.length());
+        preparedStatement.setString(2, FilenameUtils.getExtension(file.getName()));
 
         preparedStatement.executeUpdate();
 

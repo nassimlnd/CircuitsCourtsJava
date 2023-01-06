@@ -34,6 +34,7 @@ public class AddArticlesController {
     @FXML
     VBox imageContainer, addCategorieContainer;
     File file;
+    File image;
 
     public void onBackButton() {
         ViewFactory.getInstance().showProdArticlesInterface();
@@ -69,6 +70,7 @@ public class AddArticlesController {
         file = fC.showOpenDialog(ViewFactory.getInstance().getMainStage());
 
         if (file != null) {
+            image = file;
             Image image1 = new Image(file.toURI().toURL().toString());
             ImageView imageView = new ImageView(image1);
             imageView.setFitHeight(200);
@@ -78,7 +80,7 @@ public class AddArticlesController {
         }
     }
 
-    public void onCreate() throws SQLException, FileNotFoundException {
+    public void onCreate() {
         if(!tfName.getText().equals("")&& !tfPrice.getText().equals("") && !tfWeight.getText().equals("") && !(cbTag.getValue() == null) && !tfDescription.getText().equals("")){
             if (tfName.getText().matches("^([a-zA-ZÀ-ÖØ-öø-ÿ]{1,20}[\\s-]?){1,2}$")){
                 if(tfDescription.getText().matches("^.{1,100}$")){
@@ -86,10 +88,15 @@ public class AddArticlesController {
                         String name = tfName.getText();
                         String description = tfDescription.getText();
                         double price = Double.parseDouble(tfPrice.getText());
-                        String categorie = (String) cbTag.getValue();
+                        String categorie = cbTag.getValue();
                         double weight = Double.parseDouble(tfWeight.getText());
-                        ImageDAO imageDAO = new ImageDAO();
-                        int imageId = imageDAO.add(file);
+                        int imageId;
+                        if (image != null) {
+                            ImageDAO imageDAO = new ImageDAO();
+                            imageId = imageDAO.add(image);
+                        } else {
+                            imageId = 0;
+                        }
 
                         EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
                         Article a = new Article(name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
@@ -98,6 +105,10 @@ public class AddArticlesController {
                         ArticlesController.showSuccessPopUp(a.getId(), "L'article n°" + a.getId() + " a bien été ajouté !");
                     }catch (NumberFormatException e){
                         System.out.println("[DEBUG]Error : "+e);
+                    } catch (SQLException sqlException) {
+                        sqlException.printStackTrace();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
                     }
                 }else System.out.println("[DEBUG]Error : pas plus de 100 caractères.");
             }else System.out.println("[DEBUG]Error : le nom est incorrect,pas de chiffres, pas de caractères spéciaux.");

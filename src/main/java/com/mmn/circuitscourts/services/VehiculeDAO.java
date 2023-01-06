@@ -63,7 +63,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public int add(Vehicule vehicule) throws SQLException {
-        String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmat()+"', "+vehicule.getPoidsMax()+", "+vehicule.getnumSiret()+")";
+        String query = "INSERT INTO vehicule (numImmat, poids, numSiret) VALUES ('"+vehicule.getNumImmat()+"', "+vehicule.getPoidsMax()+", "+vehicule.getNumSiret()+")";
         PreparedStatement pst = conn.prepareStatement(query);
         return pst.executeUpdate();
     }

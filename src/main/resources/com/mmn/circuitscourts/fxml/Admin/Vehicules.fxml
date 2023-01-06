@@ -50,9 +50,9 @@
                                                 </Label>
                                                 <VBox prefHeight="110.0" prefWidth="312.0">
                                                     <children>
-                                                        <Label fx:id="title" styleClass="successPopup-title"
+                                                        <Label fx:id="popupTitle" styleClass="successPopup-title"
                                                                text="Véhicule ajoutée !"/>
-                                                        <Label fx:id="message" styleClass="successPopup-subtitle"
+                                                        <Label fx:id="popupSubtitle" styleClass="successPopup-subtitle"
                                                                text="Le véhicule immatriculé : X a bien été ajoutée !"/>
                                                     </children>
                                                     <padding>
@@ -89,7 +89,7 @@
                                             </HBox.margin>
                                         </Label>
                                         <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Poids" />
-                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="numSiret" />
+                                        <Label alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="151.0" prefWidth="151.0" styleClass="commande-tableview-header-title" text="Numéro SIRET" />
                                     </children>
                                     <padding>
                                         <Insets right="40.0" />
@@ -155,7 +155,7 @@
                                                         fx:id="cancelButton"/>
                                             </children>
                                             <VBox.margin>
-                                                <Insets top="65.0"/>
+                                                <Insets top="50.0"/>
                                             </VBox.margin>
                                         </HBox>
                                     </children>

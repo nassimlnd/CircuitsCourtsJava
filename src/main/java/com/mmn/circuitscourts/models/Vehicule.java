@@ -50,10 +50,4 @@ public class Vehicule {
     public long getnumSiret() {
         return numSiret;
     }
-
-    public static ArrayList<Vehicule>getVehiculesInitialize() throws SQLException {
-        VehiculeDAO v = new VehiculeDAO();
-        ArrayList<Vehicule> vehicules = v.getAll();
-        return vehicules;
-    }
 }

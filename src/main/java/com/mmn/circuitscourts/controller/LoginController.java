@@ -31,9 +31,9 @@ import java.io.IOException;
 
 public class LoginController {
     @FXML
-    TextField textField;
+    public TextField textField;
     @FXML
-    PasswordField passwordField;
+    public PasswordField passwordField;
     @FXML
     private Button button;
     @FXML
@@ -103,27 +103,10 @@ public class LoginController {
         String identifiant = textField.getText();
         String password = User.getPasswordHashed(passwordField.getText());
 
-        AccountDAO accountDAO = new AccountDAO();
         try {
-            App.userConnected = accountDAO.connect(identifiant, password);
-            System.out.println("[DEBUG]User (" + App.userConnected.getIdentifiant() + ", " + App.userConnected.getGrade() +") connected.");
-            switch (App.userConnected.getGrade()) {
-                case 1:
-                    ViewFactory.getInstance().showClientDashboardInterface();
-                    break;
-                case 2:
-                    ViewFactory.getInstance().showProdDashboardInterface();
-                    break;
-                case 3:
-                    ViewFactory.getInstance().showAdminDashboardInterface();
-                    break;
-                default:
-                    errorLabel.setText("GRADE ERROR.");
-                    break;
-            }
+            User.login(identifiant, password);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            errorLabel.setText(e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 

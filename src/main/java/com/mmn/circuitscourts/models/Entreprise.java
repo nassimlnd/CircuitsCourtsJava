@@ -76,6 +76,12 @@ public class Entreprise {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
+
+        try {
+            entrepriseDAO.update(this.getNumSiret(), this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Proprietaire getProprietaire() {

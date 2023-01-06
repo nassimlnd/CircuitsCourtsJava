@@ -1,5 +1,7 @@
 package com.mmn.circuitscourts.controller.entreprise;
 
+import com.mmn.circuitscourts.App;
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.Vehicule;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
@@ -16,15 +18,17 @@ import java.util.ArrayList;
 
 public class VehiculesController {
     @FXML
-    VBox successPopup, contentTable;
+    VBox successPopup, contentTable, confirmationDialog;
     @FXML
-    Label popupSubtitle, popupTitle;
+    Label popupSubtitle, popupTitle, descDialog;
+    @FXML
+    Button okButton, cancelButton;
     static VBox popup;
     static Label message, title;
 
 
     public void initialize() throws SQLException {
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitialize();
+        ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAllByEntreprise(Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
         for (Vehicule v : vehicules) {
             createLine(v);
         }
@@ -80,17 +84,39 @@ public class VehiculesController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            try {
-                onDelete(v.getNumImmat());
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            showConfirmationDialog(v.getNumImmat());
         });
 
         line.getChildren().add(edit);
         line.getChildren().add(delete);
 
         contentTable.getChildren().add(line);
+    }
+
+    public void onDelete(String numImmat) throws SQLException {
+        Vehicule.vehiculeDAO.remove(numImmat);
+        System.out.println("[DEBUG]Véhicule deleted");
+        contentTable.getChildren().clear();
+        ArrayList<Vehicule> vehicules = Vehicule.vehiculeDAO.getAll();
+        vehicules.forEach(vehicule -> {
+            createLine(vehicule);
+        });
+    }
+
+    public void showConfirmationDialog(String numImmat) {
+        descDialog.setText("Voulez vous vraiment supprimer le véhicule \nimmatriculé : " + numImmat);
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            try {
+                onDelete(numImmat);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+        });
     }
 
     public void onAddButton() {
@@ -103,15 +129,5 @@ public class VehiculesController {
 
     public void onEdit(String numImmat) {
         ViewFactory.getInstance().showProdEditVehiculeInterface(numImmat);
-    }
-
-    public void onDelete(String numImmat) throws SQLException {
-        Vehicule.vehiculeDAO.remove(numImmat);
-        System.out.println("[DEBUG]Commande deleted");
-        contentTable.getChildren().clear();
-        ArrayList<Vehicule> vehicules = Vehicule.getVehiculesInitialize();
-        vehicules.forEach(vehicule -> {
-            createLine(vehicule);
-        });
     }
 }
