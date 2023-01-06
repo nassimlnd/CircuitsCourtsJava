@@ -80,7 +80,7 @@ public class AddAccountController {
                         Client.client.getById(Integer.valueOf(entityCb.getValue().split("-")[0])).setAccountId(user.getId());
                         break;
                     case "Entreprise":
-                        Entreprise.entrepriseDAO.getById(Integer.valueOf(entityCb.getValue().split("-")[0])).setAccountId(user.getId());
+                        Entreprise.entrepriseDAO.getById(Long.valueOf(Integer.valueOf(entityCb.getValue().split("-")[0]))).setAccountId(user.getId());
                         break;
                     case "Administrateur":
                         break;

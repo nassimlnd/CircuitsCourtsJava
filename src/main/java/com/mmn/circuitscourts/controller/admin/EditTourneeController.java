@@ -380,7 +380,7 @@ public class EditTourneeController {
                     showErrorPopup("Le poids total est supérieur à ce que peut \nsupporter le véhicule");
                     return;
                 }
-                Entreprise entreprise = Entreprise.entrepriseDAO.getById(Integer.parseInt(entrepriseCb.getValue().split("-")[0]));
+                Entreprise entreprise = Entreprise.entrepriseDAO.getById(Long.parseLong(entrepriseCb.getValue().split("-")[0]));
                 Tournee tournee = new Tournee(tourneeId, datePicker.getValue(), horaireDebut, horaireFin, entreprise.getNumSiret(), vehicule.getNumImmat());
                 Commande.cmd.getAll().forEach(commande -> {
                     if (commande.getIdTournee() == tourneeId) {

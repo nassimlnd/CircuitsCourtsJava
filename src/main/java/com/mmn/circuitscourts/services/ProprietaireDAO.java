@@ -54,7 +54,7 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
 
     }
 
-    public boolean removeFromPropSiret(int numSiret) throws SQLException {
+    public boolean removeFromPropSiret(long numSiret) throws SQLException {
         String query = "DELETE p FROM proprietaire p INNER JOIN entreprise entre  ON p.id=entre.proprietaire WHERE entre.numSiret = "+ numSiret;
         Statement st = connection.createStatement();
         st.executeUpdate(query);

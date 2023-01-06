@@ -11,9 +11,9 @@ public class Article {
     private double price;
     private double weight;
     private int imageId;
-    private int numSiret;
+    private long numSiret;
 
-    public Article(String name, String categorie, String description, double price, double weight, int imageId, int numSiret) {
+    public Article(String name, String categorie, String description, double price, double weight, int imageId, long numSiret) {
         this.name = name;
         this.categorie = categorie;
         this.description = description;
@@ -31,7 +31,7 @@ public class Article {
     }
 
     public static MarketplaceDAO article = new MarketplaceDAO();
-    public Article(int id, String name, String categorie, String description, double price, double weight, int imageId, int numSiret) {
+    public Article(int id, String name, String categorie, String description, double price, double weight, int imageId, long numSiret) {
         this.id = id;
         this.name = name;
         this.categorie = categorie;
@@ -98,7 +98,7 @@ public class Article {
         this.imageId = imageId;
     }
 
-    public int getNumSiret() {
+    public long getNumSiret() {
         return numSiret;
     }
 

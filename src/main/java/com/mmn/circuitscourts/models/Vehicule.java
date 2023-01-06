@@ -1,8 +1,5 @@
 package com.mmn.circuitscourts.models;
 
-import com.mmn.circuitscourts.App;
-import com.mmn.circuitscourts.services.AccountDAO;
-import com.mmn.circuitscourts.services.CommandeDAO;
 import com.mmn.circuitscourts.services.VehiculeDAO;
 
 import java.sql.SQLException;
@@ -12,7 +9,7 @@ public class Vehicule {
     private String numImmat;
     private float poidsMax;
 
-    private int numSiret;
+    private long numSiret;
 
     public static VehiculeDAO vehiculeDAO;
 
@@ -24,7 +21,7 @@ public class Vehicule {
         }
     }
 
-    public Vehicule(String numImmat, float poidsmax, int numSiret) throws SQLException {
+    public Vehicule(String numImmat, float poidsmax, long numSiret) throws SQLException {
         this.numImmat = numImmat;
         this.poidsMax = poidsmax;
         this.numSiret = numSiret;
@@ -50,7 +47,7 @@ public class Vehicule {
         this.poidsMax = poidsMax;
     }
 
-    public int getnumSiret() {
+    public long getnumSiret() {
         return numSiret;
     }
 

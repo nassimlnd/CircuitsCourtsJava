@@ -20,7 +20,7 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         ArrayList<Article> articles = new ArrayList<>();
 
         while (resultSet.next()) {
-            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getInt(7)));
+            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getLong(7)));
         }
 
         return articles;
@@ -46,7 +46,7 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);
         if (resultSet.next()) {
-            return new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getInt(7));
+            return new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getLong(7));
         } else throw new SQLException("ID INTROUVABLE");
     }
 
@@ -59,7 +59,7 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         preparedStatement.setString(3, article.getDescription());
         preparedStatement.setDouble(4, article.getPrice());
         preparedStatement.setDouble(5, article.getWeight());
-        preparedStatement.setInt(6, article.getNumSiret());
+        preparedStatement.setLong(6, article.getNumSiret());
         preparedStatement.setInt(7, article.getImageId());
 
         preparedStatement.executeUpdate();
@@ -99,7 +99,7 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         ResultSet resultSet = preparedStatement.executeQuery();
         ArrayList<Article> articles = new ArrayList<>();
         while (resultSet.next()) {
-            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getInt(7)));
+            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getLong(7)));
         }
         return articles;
     }

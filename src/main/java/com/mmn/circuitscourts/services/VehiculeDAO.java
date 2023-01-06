@@ -1,6 +1,5 @@
 package com.mmn.circuitscourts.services;
 
-import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.models.Vehicule;
 
 import java.sql.*;
@@ -25,11 +24,11 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         ArrayList<Vehicule> vehicules = new ArrayList<>();
         String numImmat = null;
         int poidsMax = 0;
-        int numSiret = -1;
+        long numSiret = 0;
         while(rs.next()){
             numImmat=rs.getString(1);
             poidsMax=rs.getInt(2);
-            numSiret = rs.getInt(3);
+            numSiret = rs.getLong(3);
 
             vehicules.add(new Vehicule(numImmat,poidsMax, numSiret));
         }
@@ -48,10 +47,10 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
         PreparedStatement pst = conn.prepareStatement(query);
         ResultSet rs = pst.executeQuery();
         int poidsMax = 0;
-        int numSiret = -1;
+        long numSiret = -1;
         if(rs.next()){
             poidsMax=rs.getInt(2);
-            numSiret = rs.getInt(3);
+            numSiret = rs.getLong(3);
         }
         return new Vehicule(numImmat,poidsMax, numSiret);
     }
@@ -103,7 +102,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      * @return une ArrayList qui est constituée de l'entierté de la table.
      */
 
-    public ArrayList<Vehicule> getAllByEntreprise(int numSiret) throws SQLException {
+    public ArrayList<Vehicule> getAllByEntreprise(long numSiret) throws SQLException {
         String query = "SELECT * FROM vehicule WHERE numSiret=" + numSiret;
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(query);

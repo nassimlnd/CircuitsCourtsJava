@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 
 public class EditEntrepriseController {
-    public static int numSiret = 0;
+    public static long numSiret = 0;
     @FXML
     TextField adresse, numTel, gps, nom, numTelProprio, adresseProprio;
     @FXML

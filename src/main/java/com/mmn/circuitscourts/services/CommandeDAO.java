@@ -45,7 +45,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             String horaireFin = String.valueOf(resultSet.getTime(6));
             int idClient = resultSet.getInt(7);
             int idTournee = resultSet.getInt(8);
-            int numSiret = resultSet.getInt(9);
+            Long numSiret = resultSet.getLong(9);
             LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
             Commande commande = null;
             if (idTournee > 0) {
@@ -80,7 +80,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             String horaireFin = String.valueOf(resultSet.getTime(6));
             int idClient = resultSet.getInt(7);
             int idTournee = resultSet.getInt(8);
-            int numSiret = resultSet.getInt(9);
+            long numSiret = resultSet.getLong(9);
             LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
             Commande commande = null;
             if (idTournee > 0) {
@@ -111,7 +111,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         pst.setTime(4, Time.valueOf(commande.getHoraireDebut()));
         pst.setTime(5, Time.valueOf(commande.getHoraireFin()));
         pst.setInt(6, commande.getIdClient());
-        pst.setInt(7, commande.getNumSiret());
+        pst.setLong(7, commande.getNumSiret());
         pst.setDate(8, Date.valueOf(commande.getDateCommande()));
         pst.executeUpdate();
 
@@ -152,7 +152,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         pst.setTime(5, Time.valueOf(commande.getHoraireFin()));
         pst.setInt(6, commande.getIdClient());
         pst.setInt(7, commande.getIdTournee());
-        pst.setInt(8, commande.getNumSiret());
+        pst.setLong(8, commande.getNumSiret());
         pst.setDate(9, Date.valueOf(commande.getDateCommande()));
         pst.setInt(10, commande.getNumCommande());
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
@@ -206,7 +206,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
             String horaireFin = String.valueOf(resultSet.getTime(6));
             int idClient = resultSet.getInt(7);
             int idTournee = resultSet.getInt(8);
-            int numSiret = resultSet.getInt(9);
+            long numSiret = resultSet.getLong(9);
             LocalDate dateCommande = resultSet.getDate(10).toLocalDate();
             Commande commande = null;
             if (idTournee > 0) {
@@ -229,7 +229,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         while (resultSet.next()) {
             Commande commande = null;
             if (resultSet.getInt(7) > 0) {
-                commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getDate(10).toLocalDate());
+                commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(8), resultSet.getLong(9), resultSet.getDate(10).toLocalDate());
             } else {
                 commande = new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(9), resultSet.getDate(10).toLocalDate());
             }
@@ -252,7 +252,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
         ArrayList<Commande> commandes = new ArrayList<>();
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            commandes.add(new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(8), resultSet.getInt(9), resultSet.getDate(10).toLocalDate()));
+            commandes.add(new Commande(resultSet.getInt(1), resultSet.getInt(2), resultSet.getDouble(3), resultSet.getInt(4), String.valueOf(resultSet.getTime(5)), String.valueOf(resultSet.getTime(6)), resultSet.getInt(7), resultSet.getInt(8), resultSet.getLong(9), resultSet.getDate(10).toLocalDate()));
         }
         return commandes;
     }

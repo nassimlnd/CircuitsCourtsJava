@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class TourneeDAO implements DAO<Tournee, Integer> {
     private static Connection conn = ConnectionMySQL.getInstance();
+    private int numSiret;
 
     public TourneeDAO() {
     }
@@ -32,7 +33,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
             LocalDate date = rs.getDate(2).toLocalDate();
             String horaireDebut = String.valueOf(rs.getTime(3));
             String horaireFin = String.valueOf(rs.getTime(4));
-            int numSiret = rs.getInt(5);
+            long numSiret = rs.getLong(5);
             String numImmat = rs.getString(6);
             tournees.add(new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat));
         }
@@ -56,7 +57,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
             LocalDate date = rs.getDate(2).toLocalDate();
             String horaireDebut = String.valueOf(rs.getTime(3));
             String horaireFin = String.valueOf(rs.getTime(4));
-            int numSiret = rs.getInt(5);
+            long numSiret = rs.getLong(5);
             String numImmat = rs.getString(6);
             return new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat);
         } else throw new SQLException("Id introuvable.");
@@ -75,7 +76,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
         pst.setDate(1, Date.valueOf(tournee.getDate()));
         pst.setTime(2, Time.valueOf(tournee.getHoraireDebut()));
         pst.setTime(3, Time.valueOf(tournee.getHoraireFin()));
-        pst.setInt(4, tournee.getNumSiret());
+        pst.setLong(4, tournee.getNumSiret());
         pst.setString(5, tournee.getNumImmat());
         pst.executeUpdate();
 
@@ -109,7 +110,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
         pst.setDate(1, Date.valueOf(tournee.getDate()));
         pst.setTime(2, Time.valueOf(tournee.getHoraireDebut()));
         pst.setTime(3, Time.valueOf(tournee.getHoraireFin()));
-        pst.setInt(4, tournee.getNumSiret());
+        pst.setLong(4, tournee.getNumSiret());
         pst.setString(5, tournee.getNumImmat());
         pst.setInt(6, tournee.getId());
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
@@ -149,7 +150,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
             LocalDate date = rs.getDate(2).toLocalDate();
             String horaireDebut = String.valueOf(rs.getTime(3));
             String horaireFin = String.valueOf(rs.getTime(4));
-            int numSiret = rs.getInt(5);
+            long numSiret = rs.getLong(5);
             String numImmat = rs.getString(6);
             tournees.add(new Tournee(id, date, horaireDebut, horaireFin, numSiret, numImmat));
         }

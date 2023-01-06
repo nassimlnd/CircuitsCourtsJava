@@ -6,7 +6,6 @@ import com.mmn.circuitscourts.services.TourneeDAO;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Classe Tournée sert à créer l'objet Tournée.
@@ -16,7 +15,7 @@ public class Tournee {
     private LocalDate date;
     private String horaireDebut;
     private String horaireFin;
-    private int numSiret;
+    private long numSiret;
 
     private String numImmat;
 
@@ -30,7 +29,7 @@ public class Tournee {
      * @param numSiret
      * @param numImmat
      */
-    public Tournee(int id, LocalDate date, String horaireDebut, String horaireFin, int numSiret, String numImmat) {
+    public Tournee(int id, LocalDate date, String horaireDebut, String horaireFin, long numSiret, String numImmat) {
         this.id = id;
         this.date = date;
         this.horaireDebut = horaireDebut;
@@ -46,7 +45,7 @@ public class Tournee {
      * @param numSiret
      * @param numImmat
      */
-    public Tournee(LocalDate date, String horaireDebut, String horaireFin, int numSiret, String numImmat) {
+    public Tournee(LocalDate date, String horaireDebut, String horaireFin, long numSiret, String numImmat) {
         this.date = date;
         this.horaireDebut = horaireDebut;
         this.horaireFin = horaireFin;
@@ -92,7 +91,7 @@ public class Tournee {
         this.horaireFin = horaireFin;
     }
 
-    public int getNumSiret() {
+    public long getNumSiret() {
         return numSiret;
     }
 

@@ -74,7 +74,7 @@ public class AddVehiculeController {
                 }
                 if(!numImmats.contains(numImmat.getText())){
                     try{
-                        int numSiret = Integer.parseInt(namesProd.getValue().split("-")[1]);
+                        long numSiret = Long.parseLong(namesProd.getValue().split("-")[0]);
                         Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
                         ViewFactory.getInstance().showAdminVehiculeInterface();
                         VehiculeController.showSuccessPopUp(vehicule.getNumImmat());

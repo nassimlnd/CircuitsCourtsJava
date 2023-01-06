@@ -140,8 +140,8 @@ public class ViewFactory {
 
     public void showEntrepriseAddVehiculeInterface(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/AddVehicule.fxml"));
-        System.out.println("[DEBUG]AdminAddVehiculeInterface loaded.");
-        createScene(loader, "[ADMIN]CircuitsCourts - Ajout d'une tournée");
+        System.out.println("[DEBUG]AddVehiculeInterface loaded.");
+        createScene(loader, "CircuitsCourts - Ajout d'une tournée");
     }
 
     public void showEntrepriseAddTourneeInterface(){
@@ -235,7 +235,7 @@ public class ViewFactory {
 
     }
 
-    public void showAdminEditEntrepriseInterface(int numSiret){
+    public void showAdminEditEntrepriseInterface(long numSiret){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Admin/EditEntreprise.fxml"));
         System.out.println("[ADMIN]EditEntreprise loaded.");
         EditEntrepriseController.numSiret = numSiret;

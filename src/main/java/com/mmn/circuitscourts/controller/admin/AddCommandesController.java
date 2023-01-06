@@ -55,7 +55,7 @@ public class AddCommandesController {
 
                             int idClient = Integer.parseInt(client.getValue().split("-")[0]);
 
-                            int finalNumSiret = Integer.parseInt(entreprises.getValue().split("-")[0]);
+                            long finalNumSiret = Long.parseLong(entreprises.getValue().split("-")[0]);
                             Commande commande = new Commande(idArticle, poids, quantity, horaireDebut, horaireFin, idClient, finalNumSiret, date.getValue());
                             System.out.println("[DEBUG]Commande added.");
 

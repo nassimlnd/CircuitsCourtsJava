@@ -5,7 +5,7 @@ import com.mmn.circuitscourts.models.Entreprise;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class EntrepriseDAO implements DAO<Entreprise, Integer>{
+public class EntrepriseDAO implements DAO<Entreprise, Long>{
 
     static Connection connection = ConnectionMySQL.getInstance();
     @Override
@@ -16,22 +16,22 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         ArrayList<Entreprise> entreprises = new ArrayList<>();
         ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
         while (resultSet.next()){
-            entreprises.add(new Entreprise(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
+            entreprises.add(new Entreprise(resultSet.getLong(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
         }
         return entreprises;
     }
 
     @Override
-    public Entreprise getById(Integer id) throws SQLException {
+    public Entreprise getById(Long id) throws SQLException {
         String query = "SELECT * FROM entreprise WHERE numSiret=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1, id);
+        preparedStatement.setLong(1, id);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
 
         if (resultSet.next()) {
-            return new Entreprise(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+            return new Entreprise(resultSet.getLong(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
         } else throw new SQLException("NUMSIRET INTROUVABLE");
     }
 
@@ -58,7 +58,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
 
 
     @Override
-    public boolean update(Integer numSiret, Entreprise entreprise) throws SQLException {
+    public boolean update(Long numSiret, Entreprise entreprise) throws SQLException {
         String query = "UPDATE entreprise SET adresse=?, proprietaire=?, numTel=?, coordoneesGPS=?, accountId=? WHERE numSiret=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
         preparedStatement.setString(1, entreprise.getAdresse());
@@ -66,12 +66,12 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         preparedStatement.setString(3, entreprise.getNumTel());
         preparedStatement.setString(4,entreprise.getCoordonneesGps());
         preparedStatement.setInt(5,entreprise.getAccountId());
-        preparedStatement.setInt(6,entreprise.getNumSiret());
+        preparedStatement.setLong(6,entreprise.getNumSiret());
         return Boolean.valueOf(String.valueOf(preparedStatement.executeUpdate()));
     }
 
     @Override
-    public boolean remove(Integer numSiret) throws SQLException {
+    public boolean remove(Long numSiret) throws SQLException {
         String query  ="DELETE  FROM entreprise WHERE numSiret="+ numSiret;
         Statement st = connection.createStatement();
         st.executeUpdate(query);
@@ -86,7 +86,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         ResultSet resultSet = preparedStatement.executeQuery();
         ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
         if (resultSet.next()) {
-            return new Entreprise(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
+            return new Entreprise(resultSet.getLong(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6));
         } else throw new SQLException("ID INTROUVABLE");
     }
 
@@ -97,7 +97,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Integer>{
         ArrayList<Entreprise> entreprises = new ArrayList<>();
         ProprietaireDAO proprietaireDAO = new ProprietaireDAO();
         while (resultSet.next()){
-            entreprises.add(new Entreprise(resultSet.getInt(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
+            entreprises.add(new Entreprise(resultSet.getLong(1), resultSet.getString(2), proprietaireDAO.getById(resultSet.getInt(3)), resultSet.getString(4), resultSet.getString(5), resultSet.getInt(6)));
         }
         return entreprises;
     }

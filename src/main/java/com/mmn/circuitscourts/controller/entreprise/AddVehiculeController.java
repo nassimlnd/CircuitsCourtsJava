@@ -38,9 +38,9 @@ public class AddVehiculeController {
                 if(!numImmats.contains(numImmat.getText())){
                     try{
                         Entreprise entreprise = Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId());
-                        int numSiret = entreprise.getNumSiret();
+                        long numSiret = entreprise.getNumSiret();
                         Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
-                        ViewFactory.getInstance().showAdminVehiculeInterface();
+                        ViewFactory.getInstance().showEntrepriseAddVehiculeInterface();
                         VehiculesController.showSuccessPopUp("Véhicule ajouté !", "Le véhicule immatriculé : " + vehicule.getNumImmat() + " a bien été ajouté !");
                     }catch(NumberFormatException e){
                         System.out.println(e);

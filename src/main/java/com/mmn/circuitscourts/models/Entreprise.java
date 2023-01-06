@@ -5,7 +5,7 @@ import com.mmn.circuitscourts.services.EntrepriseDAO;
 import java.sql.SQLException;
 
 public class Entreprise {
-    private int numSiret;
+    private long numSiret;
     private Proprietaire proprietaire;
     private String adresse;
     private String numTel;
@@ -13,7 +13,7 @@ public class Entreprise {
     private int accountId;
     public static EntrepriseDAO entrepriseDAO = new EntrepriseDAO();
 
-    public Entreprise(int numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps, int accountId) {
+    public Entreprise(long numSiret, String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps, int accountId) {
         this.numSiret = numSiret;
         this.proprietaire = proprietaire;
         this.adresse = adresse;
@@ -38,11 +38,11 @@ public class Entreprise {
         entrepriseDAO.add(this);
     }
 
-    public int getNumSiret() {
+    public long getNumSiret() {
         return numSiret;
     }
 
-    public void setNumSiret(int numSiret) {
+    public void setNumSiret(long numSiret) {
         this.numSiret = numSiret;
     }
 

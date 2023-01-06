@@ -22,7 +22,7 @@ public class Commande {
     private String horaireFin;
     private int idClient;
     private int idTournee;
-    private int numSiret;
+    private long numSiret;
     private LocalDate dateCommande;
     /**
      * instanciation statique de CommandeDAO pour avoir acces au méthodes de la classe CommandeDAO.
@@ -41,7 +41,7 @@ public class Commande {
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int numSiret, LocalDate dateCommande) throws SQLException {
+    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, long numSiret, LocalDate dateCommande) throws SQLException {
         this.numCommande = numCommande;
         this.articleId = articleId;
         this.poids = poids;
@@ -53,7 +53,7 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int idTournee, int numSiret, LocalDate dateCommande) throws SQLException {
+    public Commande(int numCommande, int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int idTournee, Long numSiret, LocalDate dateCommande) throws SQLException {
         this.numCommande = numCommande;
         this.articleId = articleId;
         this.poids = poids;
@@ -77,7 +77,7 @@ public class Commande {
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, int numSiret,LocalDate datePicker) throws SQLException {
+    public Commande(int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, long numSiret, LocalDate datePicker) throws SQLException {
         this.articleId = articleId;
         this.poids = poids;
         this.quantity = quantity;
@@ -151,7 +151,7 @@ public class Commande {
         }
     }
 
-    public int getNumSiret() {
+    public long getNumSiret() {
         return numSiret;
     }
 

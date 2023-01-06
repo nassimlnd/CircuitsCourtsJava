@@ -108,12 +108,12 @@ public class EntrepriseController {
     }
 
 
-    private void onEdit(int numSiret) {
+    private void onEdit(long numSiret) {
         ViewFactory.getInstance().showAdminEditEntrepriseInterface(numSiret);
     }
 
 
-    private void onDelete(int numSiret) throws SQLException {
+    private void onDelete(long numSiret) throws SQLException {
         Proprietaire.proprietaireDAO.removeFromPropSiret(numSiret);
         Entreprise.entrepriseDAO.remove(numSiret);
         System.out.println("[DEBUG]Entreprise deleted");
