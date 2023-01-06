@@ -39,7 +39,7 @@ public class ClientDAO implements DAO<Client, Integer> {
     }
 
     @Override
-    public int add(Client client) throws SQLException {
+    public Integer add(Client client) throws SQLException {
         String query = "INSERT INTO client(nom, adresse, numTel, email) VALUES (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, client.getNom());

@@ -17,13 +17,13 @@ import java.util.ArrayList;
 
 public class ClientController {
     static VBox popup;
-    static Label popupId;
+    static Label message, title;
     @FXML
     VBox successPopup, confirmationDialog, contentTable;
     @FXML
     Button okButton, cancelButton, addButton;
     @FXML
-    Label descDialog, popupSubtitle;
+    Label descDialog, popupSubtitle, popupTitle;
 
 
     /**
@@ -39,7 +39,8 @@ public class ClientController {
         }
 
         popup = successPopup;
-        popupId = popupSubtitle;
+        message = popupSubtitle;
+        title = popupTitle;
     }
 
     /**
@@ -160,9 +161,10 @@ public class ClientController {
         ViewFactory.getInstance().showAdminAddCLientInterface();
     }
 
-    public static void showSuccessPopUp(int id) {
+    public static void showSuccessPopUp(String popupTitle, String popupMessage) {
         popup.setVisible(true);
-        popupId.setText("Le client n°" + id +" a bien été ajouté !");
+        title.setText(popupTitle);
+        message.setText(popupMessage);
     }
 
 }

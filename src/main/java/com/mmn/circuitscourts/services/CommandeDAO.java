@@ -102,7 +102,7 @@ public class CommandeDAO implements DAO<Commande, Integer> {
      * @throws SQLException
      */
     @Override
-    public int add(Commande commande) throws SQLException {
+    public Integer add(Commande commande) throws SQLException {
         String query = "INSERT INTO Commande(articleId, poids, quantity, horaireDebut, horaireFin, idClient, numSiret, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pst = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         pst.setInt(1, commande.getArticleId());

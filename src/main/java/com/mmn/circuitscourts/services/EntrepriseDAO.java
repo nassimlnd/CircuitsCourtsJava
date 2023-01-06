@@ -1,6 +1,7 @@
 package com.mmn.circuitscourts.services;
 
 import com.mmn.circuitscourts.models.Entreprise;
+import com.mmn.circuitscourts.models.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Long>{
      * @throws SQLException
      */
     @Override
-    public int add(Entreprise entreprise) throws SQLException {
+    public Long add(Entreprise entreprise) throws SQLException {
         String query2 = "INSERT INTO entreprise (adresse, proprietaire, numTel, coordoneesGPS) VALUES ( ?, ?, ?, ?)";
         PreparedStatement pst = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
         pst.setString(1, entreprise.getAdresse());
@@ -52,7 +53,7 @@ public class EntrepriseDAO implements DAO<Entreprise, Long>{
         pst.executeUpdate();
         ResultSet resultSet = pst.getGeneratedKeys();
         if (resultSet.next()) {
-            return resultSet.getInt(1);
+            return resultSet.getLong(1);
         } else throw new SQLException("ERREUR ADD Entreprise");
     }
 
@@ -72,9 +73,12 @@ public class EntrepriseDAO implements DAO<Entreprise, Long>{
 
     @Override
     public boolean remove(Long numSiret) throws SQLException {
+        User.accountDAO.remove(Entreprise.entrepriseDAO.getById(numSiret).getAccountId());
+
         String query  ="DELETE  FROM entreprise WHERE numSiret="+ numSiret;
         Statement st = connection.createStatement();
         st.executeUpdate(query);
+
         return Boolean.valueOf(String.valueOf(st.executeUpdate(query)));
     }
 

@@ -70,7 +70,7 @@ public class TourneeDAO implements DAO<Tournee, Integer> {
      * @return retoure un boolean qui atteste de la reussite ou non de l'ajout.
      */
     @Override
-    public int add(Tournee tournee) throws SQLException {
+    public Integer add(Tournee tournee) throws SQLException {
         String query = "INSERT INTO tournee(date, horaireDebut, horaireFin, numSiret, numImmat) VALUES (?, ?, ?, ?, ?)";
         PreparedStatement pst = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         pst.setDate(1, Date.valueOf(tournee.getDate()));

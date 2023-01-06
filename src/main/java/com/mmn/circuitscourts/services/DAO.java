@@ -32,11 +32,11 @@ public interface DAO<T,T1>{
          * @param t, l'objet à ajouter en quesion.
          * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
          */
-        public int add(T t) throws SQLException;
+        public T1 add(T t) throws SQLException;
         /**
          * Permet de modifier dans la BD un objet t particulier.
          * @param id permet de retrouver l'objet à modifier
-         * @return boolean qui nous indique si l'executeUpdate s'est bien effectuée.
+         * @return T1 qui nous indique si l'executeUpdate s'est bien effectuée.
          */
         public boolean update(T1 id, T t) throws SQLException;
 

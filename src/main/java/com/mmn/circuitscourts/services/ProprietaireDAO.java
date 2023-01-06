@@ -26,7 +26,7 @@ public class ProprietaireDAO implements DAO<Proprietaire, Integer> {
     }
 
     @Override
-    public int add(Proprietaire proprietaire) throws SQLException {
+    public Integer add(Proprietaire proprietaire) throws SQLException {
         String query2 = "INSERT INTO Proprietaire (nom, adresse, numTel) VALUES ( ?, ?, ?)";
         PreparedStatement pst = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
         pst.setString(1, proprietaire.getNom());
