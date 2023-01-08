@@ -67,14 +67,23 @@ public class TourneeController {
             line.getChildren().add(label);
         });
 
+        Button map = new Button();
+        map.getStyleClass().add("edit-button");
+        Region mapImg = new Region();
+        mapImg.getStyleClass().add("edit-button-img");
+        map.setGraphic(mapImg);
+        HBox.setMargin(map, new Insets(0, 0, 0, 100));
+        map.setOnMouseClicked(mouseEvent -> {
+            ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
+        });
+
         Button edit = new Button();
         edit.getStyleClass().add("edit-button");
         Region editImg = new Region();
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 100));
         edit.setOnMouseClicked(mouseEvent -> {
-            ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
+            ViewFactory.getInstance().showEntrepriseMapViewInterface(trn.getId());
         });
 
         Button delete = new Button();
@@ -86,6 +95,7 @@ public class TourneeController {
             showConfirmationDialog(trn);
         });
 
+        line.getChildren().add(map);
         line.getChildren().add(edit);
         line.getChildren().add(delete);
         contentTable.getChildren().add(line);

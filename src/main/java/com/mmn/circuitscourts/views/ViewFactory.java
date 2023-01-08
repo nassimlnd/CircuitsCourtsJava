@@ -312,5 +312,11 @@ public class ViewFactory {
         com.mmn.circuitscourts.controller.admin.EditTourneeController.tourneeId = id;
         createScene(loader, "CircuitsCourts - Modification de la tournée n°" + id);
     }
+    public void showEntrepriseMapViewInterface(int idT){
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("fxml/Entreprise/Map.fxml"));
+        System.out.println("[DEBUG]MapView loaded.");
+        com.mmn.circuitscourts.controller.entreprise.MapController.idT = idT;
+        createScene(loader, "CircuitsCourts - Map");
+    }
 }
 
