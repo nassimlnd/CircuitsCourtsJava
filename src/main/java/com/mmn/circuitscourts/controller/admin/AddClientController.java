@@ -29,7 +29,7 @@ public class AddClientController {
         Client client = new Client(nom.getText(), adresseFormated, numTel.getText(), email.getText());
         System.out.println("[DEBUG]Client added");
         ViewFactory.getInstance().showAdminClientInterface();
-        ClientController.showSuccessPopUp(client.getId());
+        ClientController.showSuccessPopUp("Client ajouté !", "Le client n°" + client.getId() + " a bien été ajouté !\nVeuillez lier un compte à ce client !");
     }
 
     /**

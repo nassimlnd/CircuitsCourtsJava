@@ -54,6 +54,7 @@ public class EditEntrepriseController {
                         Entreprise.entrepriseDAO.update(getThisEntreprise().getNumSiret(), p);
                         System.out.println("[DEBUG]Entreprise n°" + numSiret + " updated.");
                         ViewFactory.getInstance().showAdminEntrepriseInterface();
+                        EntrepriseController.showSuccessPopUp("Entreprise modifiée !", "L'entreprise n°" + p.getNumSiret() + " a bien été modifiée !");
                     } else System.out.println("[DEBUG]Error : coordonnées gps de la forme de deux nombres séparés par une virgule, chacun pouvant être précédé d'un signe \"-\" ");
                 } else System.out.println("[DEBUG]Error : nom incorrect");
             } else System.out.println("[DEBUG]Error : adresse");

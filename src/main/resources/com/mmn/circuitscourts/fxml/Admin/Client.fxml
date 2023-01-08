@@ -48,7 +48,7 @@
                                                 </Label>
                                                 <VBox prefHeight="110.0" prefWidth="312.0">
                                                     <children>
-                                                        <Label styleClass="successPopup-title" text="Client ajouté !" />
+                                                        <Label fx:id="popupTitle" styleClass="successPopup-title" text="Client ajouté !" />
                                                         <Label fx:id="popupSubtitle" styleClass="successPopup-subtitle" text="Le client n°X a bien été ajouté !" />
                                                     </children>
                                                     <padding>

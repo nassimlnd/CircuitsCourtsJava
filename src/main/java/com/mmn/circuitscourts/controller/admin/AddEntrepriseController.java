@@ -26,9 +26,10 @@ public class AddEntrepriseController {
                         if(nom.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")) {
                             if (gps.getText().matches("^(\\-?\\d+(\\.\\d+)?),\\s*(\\-?\\d+(\\.\\d+)?)$")){
                                 Proprietaire p = new Proprietaire(nom.getText(), adresseProprio.getText(), numTelProprio.getText());
-                                new Entreprise(adresse.getText(), p, numTel.getText(), gps.getText());
+                                Entreprise entreprise = new Entreprise(adresse.getText(), p, numTel.getText(), gps.getText());
                                 System.out.println("[DEBUG]Entreprise created.");
                                 ViewFactory.getInstance().showAdminEntrepriseInterface();
+                                EntrepriseController.showSuccessPopUp("Entreprise ajoutée !", "L'entreprise n°" + entreprise.getNumSiret() + " a bien été ajoutée !\nVeuillez lier un compte à cette entreprise !");
                             }else System.out.println("[DEBUG]Error : gps de la forme de deux nombres séparés par une virgule, chacun pouvant être précédé d'un signe \"-\" ");
                         }else System.out.println("[DEBUG]Error : nom incorrect");
                     }else System.out.println("[DEBUG]Error : adresse de la forme '20 rue des platanes'.");

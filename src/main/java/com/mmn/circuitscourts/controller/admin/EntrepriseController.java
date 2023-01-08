@@ -2,6 +2,7 @@ package com.mmn.circuitscourts.controller.admin;
 
 import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.Proprietaire;
+import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -19,15 +20,13 @@ import java.util.ArrayList;
 public class EntrepriseController {
     static VBox popup;
     @FXML
-    VBox contentTable;
+    VBox contentTable, successPopup, confirmationDialog;
     @FXML
-    Button addButton;
+    Button addButton, okButton, cancelButton;
     @FXML
-    VBox successPopup;
+    Label popupMessage, popupTitle, descDialog;
 
-    public static void showSuccessPopUp() {
-        popup.setVisible(true);
-    }
+    static Label message, title;
 
     public void initialize() throws SQLException {
         ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
@@ -39,6 +38,14 @@ public class EntrepriseController {
             }
         });
         popup = successPopup;
+        message = popupMessage;
+        title = popupTitle;
+    }
+
+    public static void showSuccessPopUp(String popupTitle, String popupMessage) {
+        popup.setVisible(true);
+        title.setText(popupTitle);
+        message.setText(popupMessage);
     }
 
     public void createLine(Entreprise entreprise) throws SQLException {
@@ -113,18 +120,30 @@ public class EntrepriseController {
     }
 
 
-    private void onDelete(long numSiret) throws SQLException {
-        Proprietaire.proprietaireDAO.removeFromPropSiret(numSiret);
-        Entreprise.entrepriseDAO.remove(numSiret);
+    private void onDelete(Entreprise entreprise) throws SQLException {
+        Proprietaire.proprietaireDAO.removeFromPropSiret(entreprise.getNumSiret());
+        Entreprise.entrepriseDAO.remove(entreprise.getNumSiret());
         System.out.println("[DEBUG]Entreprise deleted");
         contentTable.getChildren().clear();
         ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
-        entreprises.forEach(entreprise -> {
+        entreprises.forEach(e -> {
             try {
-                createLine(entreprise);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                createLine(e);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
             }
+        });
+    }
+
+    private void showConfirmationDialog(Entreprise entreprise) {
+        descDialog.setText("Voulez vous vraiment supprimer la tournée n°"+ entreprise.getNumSiret());
+        confirmationDialog.setVisible(true);
+        okButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
+            onDelete(entreprise);
+        });
+        cancelButton.setOnMouseClicked(mouseEvent -> {
+            confirmationDialog.setVisible(false);
         });
     }
 

@@ -68,7 +68,7 @@ public class AccountDAO implements DAO<User,Integer> {
      * @throws SQLException
      */
     @Override
-    public int add(User user) throws SQLException {
+    public Integer add(User user) throws SQLException {
         String query = "INSERT INTO accounts(identifiant, password, grade) VALUES (?, ?, ?);";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, user.getIdentifiant());

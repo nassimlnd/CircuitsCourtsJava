@@ -51,7 +51,7 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
     }
 
     @Override
-    public int add(Article article) throws SQLException {
+    public Integer add(Article article) throws SQLException {
         String query = "INSERT INTO articles(name, categorie, description, price, weight, numSiret, imageId) VALUES (?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, article.getName());

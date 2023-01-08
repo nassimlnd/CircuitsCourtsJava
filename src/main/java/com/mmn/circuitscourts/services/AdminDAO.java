@@ -71,7 +71,7 @@ public class AdminDAO implements DAO<Administrateur, Integer> {
         return new Administrateur(idAdmin, nom, adresse, numTel);
     }
 
-    public int add(Administrateur admin) throws SQLException {
+    public Integer add(Administrateur admin) throws SQLException {
         PreparedStatement pst = null;
         String nom = admin.getNom();
         String adresse = admin.getAdresse();

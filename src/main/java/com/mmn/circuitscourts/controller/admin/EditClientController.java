@@ -82,6 +82,7 @@ public class EditClientController {
                                 Client.client.update(clientId, client);
                                 System.out.println("[DEBUG]account n°" + clientId + " updated.");
                                 ViewFactory.getInstance().showAdminClientInterface();
+                                ClientController.showSuccessPopUp("Client modifié !", "Le client n°" + client.getId() + " a bien été modifié !");
                             }else System.out.println("[DEBUG]Error : adresse");
                         }else System.out.println("[DEBUG]Error : code postal, de la forme F-75000 ou 75000");
                     }else System.out.println("[DEBUG]Error : city name");
