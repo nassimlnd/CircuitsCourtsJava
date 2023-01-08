@@ -18,7 +18,7 @@ public class User {
     private int id;
     private String identifiant;
     private String password;
-    int grade;
+    private int grade;
 
     public static AccountDAO accountDAO = new AccountDAO();
 
@@ -142,6 +142,11 @@ public class User {
             throw new Exception(e);
         }
     }
+
+    public void setGrade(int grade) {
+        this.grade=grade;
+    }
+
 }
 
 

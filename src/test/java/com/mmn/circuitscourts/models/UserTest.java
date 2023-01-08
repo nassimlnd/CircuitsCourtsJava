@@ -23,23 +23,23 @@ class UserTest {
 
     @Test
     public void getPasswordHashed() throws SQLException {
-        User user = new User(1,"magomed","123456",2);
+        User user = new User(1, "magomed", "123456", 2);
         String hashedPassword = User.getPasswordHashed(user.getPassword());
         assertNotEquals(user.getPassword(), hashedPassword);
-        assertEquals("8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",hashedPassword);
+        assertEquals("8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92", hashedPassword);
     }
 
     @Test
-    public void testSetPassword() {
-        User user = new User(1,"magomed","123456",2);
+    public void setPassword() {
+        User user = new User(1, "magomed", "123456", 2);
         String newPassword = "newTestPassword";
         user.setPassword(newPassword);
         assertEquals(newPassword, user.getPassword());
     }
 
     @Test
-    public void testGetGradeNumber() {
-        User user = new User(1,"magomed","123456",2);
+    public void getGradeNumber() {
+        User user = new User(1, "magomed", "123456", 2);
         assertEquals(1, user.getGradeNumber("Client"));
         assertEquals(2, user.getGradeNumber("Entreprise"));
         assertEquals(3, user.getGradeNumber("Administrateur"));
@@ -47,16 +47,55 @@ class UserTest {
     }
 
     @Test
-    public void testGetGradeName() {
-        User user = new User(1,"magomed","123456",2);
+    public void getGradeName() {
+        User user = new User(1, "magomed", "123456", 2);
         assertEquals("Entreprise", user.getGradeName());
-        user.grade = 2;
+        user.setGrade(2);
         assertEquals("Entreprise", user.getGradeName());
-        user.grade = 3;
+        user.setGrade(3);
         assertEquals("Administrateur", user.getGradeName());
-        user.grade = 1;
+        user.setGrade(1);
         assertEquals("Client", user.getGradeName()); // pour un grade inconnu, la méthode retourne une chaîne vide
     }
+
+    @Test
+    public void getId() {
+        User user = new User(1, "identifiant", "password", 1);
+        assertEquals(1, user.getId());
+    }
+
+    @Test
+    public void setId() {
+        User user = new User(1, "identifiant", "password", 1);
+        user.setId(2);
+        assertEquals(2, user.getId());
+    }
+
+    @Test
+    public void getIdentifiant() {
+        User user = new User(1, "identifiant", "password", 1);
+        assertEquals("identifiant", user.getIdentifiant());
+    }
+
+    @Test
+    public void getPassword() {
+        User user = new User(1, "identifiant", "password", 1);
+        assertEquals("password", user.getPassword());
+    }
+
+
+    @Test
+    public void getGrade() {
+        User user = new User(1, "identifiant", "password", 1);
+        assertEquals(1, user.getGrade());
+    }
+    @Test
+    public void setGrade() {
+        User user = new User(1, "identifiant", "password", 1);
+        user.setGrade(2);
+        assertEquals(2, user.getGrade());
+    }
+
 
    /* @Test
     public void Login() throws Exception {
@@ -73,4 +112,4 @@ class UserTest {
 
 
 
-    }
+}
