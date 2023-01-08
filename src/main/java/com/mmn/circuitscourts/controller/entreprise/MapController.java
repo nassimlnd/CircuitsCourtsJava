@@ -29,7 +29,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class MapController {
@@ -63,23 +63,28 @@ public class MapController {
         mapView.setZoom(5);
         mapView.flyTo(0, mapPoint, 0.1);
 
-
-
         ArrayList<MapPoint> points = initPoints();
 
-        initItinerary(points, mapView);
+        System.out.println(getDistance(mapPoint, endPoint));
 
-        for (MapPoint pt: points) {
-           MapLayer point = new CustomPin(pt);
-           mapView.addLayer(point);
-        }
+        ArrayList<MapPoint> sortedPoints = getSortedPoints(mapPoint, points);
+        sortedPoints.forEach(System.out::println);
 
-        //récupère les coordonnées gps de l'entreprise pour créer son MapPoint.
         long numSiret = Tournee.tourneeDAO.getById(idT).getNumSiret();
         String coords = Entreprise.entrepriseDAO.getById(numSiret).getCoordonneesGps();
         double latitudeEntreprise = Double.parseDouble(coords.split(",")[0]);
         double longitudeEntreprise = Double.parseDouble(coords.split(",")[1]);
         MapPoint entreprise  = new MapPoint(latitudeEntreprise, longitudeEntreprise);
+
+        initItinerary(sortedPoints, mapView, entreprise);
+
+        for (MapPoint pt: sortedPoints) {
+           MapLayer point = new CustomPin(pt);
+           mapView.addLayer(point);
+        }
+
+        //récupère les coordonnées gps de l'entreprise pour créer son MapPoint.
+
         MapLayer mapLayerEntreprise = new CustomPinEntreprise(entreprise);
         mapView.addLayer(mapLayerEntreprise);
 
@@ -98,7 +103,6 @@ public class MapController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(commandes);
 
         for (Commande commande : commandes) {
             Client temp = null;
@@ -109,7 +113,6 @@ public class MapController {
             }
             // les adresses dans la bd sont séparés avec des autres info par ':'
             String splitAdresse = temp.getAdresse().split(":")[0];
-            System.out.println(splitAdresse);
             finalCodePostal = Integer.parseInt(temp.getAdresse().split(":")[1]);
             // on re split avec ' ' pour supprimer les espaces.
             // le finalstring est la version concaténé dans l'url
@@ -136,9 +139,7 @@ public class MapController {
                 JSONObject coordinates = (JSONObject) object.get("geometry");
                 JSONArray test = (JSONArray) coordinates.get("coordinates");
                 MapPoint pt = new MapPoint((Double) test.get(1), (Double) test.get(0));
-                System.out.println(pt);
                 MapLayer mp = new CustomPin(pt);
-                System.out.println(mp);
                 points.add(pt);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -147,8 +148,93 @@ public class MapController {
         return points;
     }
 
-    public void initItinerary(ArrayList<MapPoint> mapPoints, MapView mapView) {
+    public double getDistance(MapPoint point1, MapPoint point2) {
+        double latitude1 = point1.getLatitude();
+        double latitude2 = point2.getLatitude();
+        double longitude1 = point1.getLongitude();
+        double longitude2 = point2.getLongitude();
+
+        latitude1 = Math.toRadians(latitude1);
+        latitude2 = Math.toRadians(latitude2);
+        longitude1 = Math.toRadians(longitude1);
+        longitude2 = Math.toRadians(longitude2);
+
+        double earthRadius = 6371.01; // Rayon de la Terre en kilomètres
+        double diffLat = latitude2 - latitude1;
+        double diffLon = longitude2 - longitude1;
+        double a = Math.pow(Math.sin(diffLat / 2), 2)
+                + Math.cos(latitude1) * Math.cos(latitude2) * Math.pow(Math.sin(diffLon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = earthRadius * c;
+
+        return distance;
+    }
+
+    public ArrayList<MapPoint> getSortedPoints(MapPoint entreprise, ArrayList<MapPoint> points) {
+        ArrayList<MapPoint> sortedPoints = new ArrayList<>();
+        MapPoint firstPoint = null;
+        for (int i = 0; i < points.size(); i++) {
+            if (firstPoint == null) {
+                firstPoint = points.get(0);
+            }
+
+            if (getDistance(entreprise, points.get(i)) < getDistance(entreprise, firstPoint)) {
+                firstPoint = points.get(i);
+            }
+        }
+        points.remove(firstPoint);
+        sortedPoints.add(firstPoint);
+
+        for (int i = 0; i < sortedPoints.size(); i++) {
+            MapPoint point2 = null;
+            for (int j = 0; j < points.size(); j++) {
+                MapPoint point1 = sortedPoints.get(i);
+                if (point2 == null) {
+                    point2 = points.get(0);
+                }
+                if (getDistance(point1, points.get(j)) < getDistance(point1, point2)) {
+                    point2 = points.get(j);
+                }
+            }
+
+            if (point2 != null) {
+                points.remove(point2);
+                sortedPoints.add(point2);
+            }
+        }
+
+        return sortedPoints;
+    }
+
+    public void initItinerary(ArrayList<MapPoint> mapPoints, MapView mapView, MapPoint entreprise) {
         try {
+            URL url = new URL("https://wxs.ign.fr/calcul/geoportail/itineraire/rest/1.0.0/route?resource=bdtopo-osrm&start=" + entreprise.getLongitude() + "," + entreprise.getLatitude() + "&end=" + mapPoints.get(0).getLongitude() + "," + mapPoints.get(0).getLatitude() +"&profile=car&optimization=fastest&constraints=%7B%22constraintType%22%3A%22banned%22%2C%22key%22%3A%22wayType%22%2C%22operator%22%3A%22%3D%22%2C%22value%22%3A%22autoroute%22%7D&getSteps=true&getBbox=true&distanceUnit=kilometer&timeUnit=hour&crs=EPSG%3A4326");
+            URLConnection connection = url.openConnection();
+
+            InputStream inputStream = connection.getInputStream();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line = reader.readLine();
+
+            JSONParser jsonParser = new JSONParser();
+            JSONObject data = (JSONObject) jsonParser.parse(line);
+            JSONObject geometry = (JSONObject) data.get("geometry");
+            JSONArray coordinates = (JSONArray) geometry.get("coordinates");
+
+            ArrayList<MapPoint> points = new ArrayList<>();
+
+            for (int j = 0; j < coordinates.toArray().length; j++) {
+                JSONArray jsonArray = (JSONArray) coordinates.get(j);
+                points.add(new MapPoint((Double) jsonArray.get(1), (Double) jsonArray.get(0)));
+            }
+
+            for (int k = 0; k < points.size(); k++) {
+                if (k != points.size() - 1) {
+                    MapLayer mapLayer1 = new LineLayer(points.get(k), points.get(k+1));
+                    mapView.addLayer(mapLayer1);
+                }
+            }
+
 
             for (int i = 0; i < mapPoints.size(); i++) {
                 if (i != mapPoints.size() - 1) {

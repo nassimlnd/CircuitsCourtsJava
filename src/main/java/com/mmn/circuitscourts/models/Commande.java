@@ -200,6 +200,7 @@ public class Commande {
 
     @Override
     public String toString() {
+
         return "Commande{" +
                 "numCommande=" + numCommande +
                 ", articleId=" + articleId +
@@ -212,5 +213,8 @@ public class Commande {
                 ", numSiret=" + numSiret +
                 ", dateCommande=" + dateCommande +
                 '}';
+
+
+
     }
 }
