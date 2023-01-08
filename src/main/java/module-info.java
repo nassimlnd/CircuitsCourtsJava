@@ -4,10 +4,8 @@ module com.mmn.circuitscourts {
     requires javafx.fxml;
     requires java.sql;
     requires org.apache.commons.io;
-    //requires java.sql;
-    requires com.gluonhq.maps;
     requires json.simple;
-
+    requires com.gluonhq.maps;
 
 
     opens com.mmn.circuitscourts to javafx.fxml;

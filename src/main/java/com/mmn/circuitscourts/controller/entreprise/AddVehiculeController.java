@@ -40,7 +40,7 @@ public class AddVehiculeController {
                         Entreprise entreprise = Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId());
                         long numSiret = entreprise.getNumSiret();
                         Vehicule vehicule = new Vehicule(String.valueOf(numImmat.getText()), parseInt(poids.getText()), numSiret);
-                        ViewFactory.getInstance().showEntrepriseAddVehiculeInterface();
+                        ViewFactory.getInstance().showProdVehiculesInterface();
                         VehiculesController.showSuccessPopUp("Véhicule ajouté !", "Le véhicule immatriculé : " + vehicule.getNumImmat() + " a bien été ajouté !");
                     }catch(NumberFormatException e){
                         System.out.println(e);

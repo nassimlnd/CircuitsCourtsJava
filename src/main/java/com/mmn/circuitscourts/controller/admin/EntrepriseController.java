@@ -92,11 +92,7 @@ public class EntrepriseController {
         delete.setGraphic(deleteImg);
         delete.setPickOnBounds(true);
         delete.setOnMouseClicked(event -> {
-            try {
-                onDelete((entreprise.getNumSiret()));
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            showConfirmationDialog(entreprise);
         });
 
         line.getChildren().add(edit);
@@ -120,19 +116,23 @@ public class EntrepriseController {
     }
 
 
-    private void onDelete(Entreprise entreprise) throws SQLException {
-        Proprietaire.proprietaireDAO.removeFromPropSiret(entreprise.getNumSiret());
-        Entreprise.entrepriseDAO.remove(entreprise.getNumSiret());
-        System.out.println("[DEBUG]Entreprise deleted");
-        contentTable.getChildren().clear();
-        ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
-        entreprises.forEach(e -> {
-            try {
-                createLine(e);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+    private void onDelete(Entreprise entreprise) {
+        try {
+            Proprietaire.proprietaireDAO.removeFromPropSiret(entreprise.getNumSiret());
+            Entreprise.entrepriseDAO.remove(entreprise.getNumSiret());
+            System.out.println("[DEBUG]Entreprise deleted");
+            contentTable.getChildren().clear();
+            ArrayList<Entreprise> entreprises = Entreprise.entrepriseDAO.getAll();
+            entreprises.forEach(e -> {
+                try {
+                    createLine(e);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showConfirmationDialog(Entreprise entreprise) {
