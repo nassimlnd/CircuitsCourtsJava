@@ -78,7 +78,7 @@ public class VehiculeDAO implements DAO<Vehicule,String>{
      */
     @Override
     public boolean update(String numImmat, Vehicule vehicule) throws SQLException {
-        String query = "UPDATE vehicule SET poids= "+vehicule.getPoidsMax()+" WHERE numImmat='"+ numImmat+"'";
+        String query = "UPDATE vehicule SET poids= "+vehicule.getPoidsMax()+",numSiret ="+vehicule.getNumSiret()+" WHERE numImmat='"+ numImmat+"'";
         PreparedStatement pst = conn.prepareStatement(query);
         return Boolean.valueOf(String.valueOf(pst.executeUpdate()));
     }
