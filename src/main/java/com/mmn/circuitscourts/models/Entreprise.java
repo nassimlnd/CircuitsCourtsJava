@@ -91,5 +91,17 @@ public class Entreprise {
     public void setProprietaire(Proprietaire proprietaire) {
         this.proprietaire = proprietaire;
     }
+
+    @Override
+    public String toString() {
+        return "Entreprise{" +
+                "numSiret=" + numSiret +
+                ", proprietaire:" + proprietaire +
+                ", adresse='" + adresse + '\'' +
+                ", numTel='" + numTel + '\'' +
+                ", coordonneesGps='" + coordonneesGps + '\'' +
+                ", accountId=" + accountId +
+                '}';
+    }
 }
 

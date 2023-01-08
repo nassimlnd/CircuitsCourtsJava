@@ -95,7 +95,7 @@ public class Tournee {
         return numSiret;
     }
 
-    public void setNumSiret(int numSiret) {
+    public void setNumSiret(long numSiret) {
         this.numSiret = numSiret;
     }
 
@@ -127,5 +127,17 @@ public class Tournee {
         TourneeDAO t = new TourneeDAO();
         ArrayList<Tournee> tournees = t.getAllByEntreprise(App.userConnected.getId());
         return tournees;
+    }
+
+    @Override
+    public String toString() {
+        return "Tournee{" +
+                "id=" + id +
+                ", date=" + date +
+                ", horaireDebut='" + horaireDebut + '\'' +
+                ", horaireFin='" + horaireFin + '\'' +
+                ", numSiret=" + numSiret +
+                ", numImmat='" + numImmat + '\'' +
+                '}';
     }
 }

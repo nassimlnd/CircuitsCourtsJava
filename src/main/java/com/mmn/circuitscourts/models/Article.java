@@ -102,7 +102,7 @@ public class Article {
         return numSiret;
     }
 
-    public void setNumSiret(int numSiret) {
+    public void setNumSiret(long numSiret) {
         this.numSiret = numSiret;
     }
 

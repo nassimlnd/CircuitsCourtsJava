@@ -18,7 +18,7 @@ public class User {
     private int id;
     private String identifiant;
     private String password;
-    private int grade;
+    int grade;
 
     public static AccountDAO accountDAO = new AccountDAO();
 

@@ -30,4 +30,12 @@ public class Proprietaire extends Personne {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return  "nom="+this.getNom() +
+                ", adresse='"+this.getAdresse()+
+                "', numTel='"+ this.getNumTel() +
+                "'";
+    }
 }
