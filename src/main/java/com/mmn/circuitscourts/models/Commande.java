@@ -201,13 +201,4 @@ public class Commande {
     public String toString() {
         return "Commande{" + "numCommande=" + numCommande + ", articleId='" + articleId + '\'' + ", poids=" + poids + ", horaireDebut='" + horaireDebut + '\'' + ", horaireFin='" + horaireFin + '\'' + ", idClient=" + idClient + ", idTournee=" + idTournee + ", numSiret=" + numSiret + '}';
     }
-
-    /**
-     * fonction qui via CommandeDao apelle la méthode add().
-     * @param commande
-     * @throws SQLException
-     */
-    public static void addCommandeToDb(Commande commande) throws SQLException {
-        cmd.add(commande);
-    }
 }

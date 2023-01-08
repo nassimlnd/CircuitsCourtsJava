@@ -54,8 +54,7 @@ public class ClientDAO implements DAO<Client, Integer> {
         preparedStatement1.setString(2, "newclient");
         preparedStatement1.setDate(3, Date.valueOf(LocalDate.now()));
         preparedStatement1.setTime(4, Time.valueOf(LocalTime.now()));
-
-        preparedStatement.executeUpdate();
+        preparedStatement1.executeUpdate();
 
         ResultSet resultSet = preparedStatement.getGeneratedKeys();
         if (resultSet.next()) {
