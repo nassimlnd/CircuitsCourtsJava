@@ -17,7 +17,7 @@ class CommandeTest {
     @Test
     @Order(1)
     void testGetters() throws SQLException {
-        Commande cmd = new Commande(1, 2, 3.5, 1, "09:00", "17:00", 1,(long) (111222333.44455*100000) , LocalDate.now());
+        Commande cmd = new Commande(1, 2, 3.5, 1, "09:00", "17:00", 1,(long)11122233344456.0 , LocalDate.now());
         assertEquals(1, cmd.getNumCommande());
         assertEquals(2, cmd.getArticleId());
         assertEquals(3.5, cmd.getPoids());
@@ -25,13 +25,13 @@ class CommandeTest {
         assertEquals("09:00", cmd.getHoraireDebut());
         assertEquals("17:00", cmd.getHoraireFin());
         assertEquals(1, cmd.getIdClient());
-        assertEquals((long) (111222333.44455*100000), cmd.getNumSiret());
+        assertEquals((long) (long)11122233344456.0, cmd.getNumSiret());
         assertEquals(LocalDate.now(), cmd.getDateCommande());
     }
     @Test
     @Order(2)
     void testSetters() throws SQLException {
-        Commande cmd = new Commande(1, 2, 3.5, 1, "09:00", "17:00", 1, (long) (111222333.44455*100000), LocalDate.now());
+        Commande cmd = new Commande(1, 2, 3.5, 1, "09:00", "17:00", 1, (long)11122233344456.0, LocalDate.now());
         cmd.setArticleId(3);
         cmd.setPoids(4.5);
         cmd.setQuantity(2);
