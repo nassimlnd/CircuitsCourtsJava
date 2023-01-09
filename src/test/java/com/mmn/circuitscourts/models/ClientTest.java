@@ -6,49 +6,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ClientTest {
 
-    void testConstructor() {
-        Client client = new Client("John", "123 Main St", "555-555-1234", "john@example.com");
-        assertEquals("John", client.getNom());
-        assertEquals("123 Main St", client.getAdresse());
-        assertEquals("555-555-1234", client.getNumTel());
-        assertEquals("john@example.com", client.getEmail());
-    }
-
     @Test
-    void getId() {
+    void testGetId() {
         Client client = new Client(1, "John", "123 Main St", "555-555-1234", "john@example.com");
         assertEquals(1, client.getId());
     }
 
 
     @Test
-    void setId() {
+    void testSetId() {
         Client client = new Client(1,"John", "123 Main St", "555-555-1234", "john@example.com");
         client.setId(1);
         assertEquals(1, client.getId());
     }
 
     @Test
-    void getEmail() {
+    void testGetEmail() {
         Client client = new Client(1,"John", "123 Main St", "555-555-1234", "john@example.com");
         assertEquals("john@example.com", client.getEmail());
     }
 
     @Test
-    void setEmail() {
+    void testSetEmail() {
         Client client = new Client(1,"John", "123 Main St", "555-555-1234", "john@example.com");
         client.setEmail("john.doe@example.com");
         assertEquals("john.doe@example.com", client.getEmail());
     }
 
     @Test
-    void getAccountId() {
+    void testGetAccountId() {
         Client client = new Client(1,"John", "123 Main St", "555-555-1234", "john@example.com", 12345);
         assertEquals(12345, client.getAccountId());
     }
 
     @Test
-    void setAccountId() {
+    void testSetAccountId() {
         Client client = new Client(1,"John", "123 Main St", "555-555-1234", "john@example.com");
         client.setAccountId(12345);
         assertEquals(12345, client.getAccountId());

@@ -57,7 +57,7 @@ class TourneeTest {
 
     @Test
     @Order(3)
-    void getTourneeList() throws SQLException {
+    void TestGetTourneeList() throws SQLException {
         Application.launch(App.class);
         TourneeDAO tDao = new TourneeDAO();
         // Créez une liste de tournées à insérer dans la base de données avant le test
@@ -77,7 +77,7 @@ class TourneeTest {
 
     @Test
     @Order(4)
-    void getTourneeByEntreprise() throws SQLException {
+    void testGetTourneeByEntreprise() throws SQLException {
         Tournee tournee1 = new Tournee(LocalDate.now(), "08:00:00", "12:00:00", (long)11122233344455.0, "AA-123-AA");
         Tournee tournee2 = new Tournee(LocalDate.now(), "09:00:00", "13:00:00", (long)11122233344455.0, "AA-123-AA");
         Tournee tournee3 = new Tournee(LocalDate.now(), "10:00:00", "14:00:00", (long)11122233344455.0, "AA-123-AA");

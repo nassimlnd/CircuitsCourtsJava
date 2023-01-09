@@ -9,13 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProprietaireTest {
 
     @Test
-    void getId() throws SQLException {
+    void testGetId() throws SQLException {
         Proprietaire prop = new Proprietaire(1,"martin","9 square do","0600000000");
         assertEquals(1,prop.getId());
     }
 
     @Test
-    void setId() {
+    void testSetId() {
         Proprietaire prop = new Proprietaire(1,"martin","9 square do","0600000000");
         prop.setId(2);
         assertEquals(2,prop.getId());

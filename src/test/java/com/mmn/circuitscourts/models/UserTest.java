@@ -22,7 +22,7 @@ class UserTest {
 
 
     @Test
-    public void getPasswordHashed() throws SQLException {
+    public void testGetPasswordHashed() throws SQLException {
         User user = new User(1, "magomed", "123456", 2);
         String hashedPassword = User.getPasswordHashed(user.getPassword());
         assertNotEquals(user.getPassword(), hashedPassword);
@@ -30,7 +30,7 @@ class UserTest {
     }
 
     @Test
-    public void setPassword() {
+    public void testSetPassword() {
         User user = new User(1, "magomed", "123456", 2);
         String newPassword = "newTestPassword";
         user.setPassword(newPassword);
@@ -38,7 +38,7 @@ class UserTest {
     }
 
     @Test
-    public void getGradeNumber() {
+    public void testGetGradeNumber() {
         User user = new User(1, "magomed", "123456", 2);
         assertEquals(1, user.getGradeNumber("Client"));
         assertEquals(2, user.getGradeNumber("Entreprise"));
@@ -47,7 +47,7 @@ class UserTest {
     }
 
     @Test
-    public void getGradeName() {
+    public void testGetGradeName() {
         User user = new User(1, "magomed", "123456", 2);
         assertEquals("Entreprise", user.getGradeName());
         user.setGrade(2);
@@ -59,38 +59,38 @@ class UserTest {
     }
 
     @Test
-    public void getId() {
+    public void testGetId() {
         User user = new User(1, "identifiant", "password", 1);
         assertEquals(1, user.getId());
     }
 
     @Test
-    public void setId() {
+    public void testSetId() {
         User user = new User(1, "identifiant", "password", 1);
         user.setId(2);
         assertEquals(2, user.getId());
     }
 
     @Test
-    public void getIdentifiant() {
+    public void testGetIdentifiant() {
         User user = new User(1, "identifiant", "password", 1);
         assertEquals("identifiant", user.getIdentifiant());
     }
 
     @Test
-    public void getPassword() {
+    public void testGetPassword() {
         User user = new User(1, "identifiant", "password", 1);
         assertEquals("password", user.getPassword());
     }
 
 
     @Test
-    public void getGrade() {
+    public void testGetGrade() {
         User user = new User(1, "identifiant", "password", 1);
         assertEquals(1, user.getGrade());
     }
     @Test
-    public void setGrade() {
+    public void TestSetGrade() {
         User user = new User(1, "identifiant", "password", 1);
         user.setGrade(2);
         assertEquals(2, user.getGrade());

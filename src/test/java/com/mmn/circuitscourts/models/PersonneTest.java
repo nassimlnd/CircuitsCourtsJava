@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PersonneTest {
 
     @Test
-    public void GetId() {
+    public void testGetId() {
         // Créez un objet Personne à tester
         Personne personne = new Personne(1, "martino", "9 square do", "0600000000");
 
@@ -16,7 +16,7 @@ class PersonneTest {
     }
 
     @Test
-    public void SetId() {
+    public void testSetId() {
         // Créez un objet Personne à tester
         Personne personne = new Personne(1, "martino ", "9 square do", "0600000000");
 
@@ -28,7 +28,7 @@ class PersonneTest {
     }
 
     @Test
-    public void GetNom() {
+    public void testGetNom() {
         // Créez un objet Personne à tester
         Personne personne = new Personne(1, "martino", "9 square do", "0600000000");
 
@@ -37,7 +37,7 @@ class PersonneTest {
     }
 
     @Test
-    public void SetNom() {
+    public void testSetNom() {
         // Créez un objet Personne à tester
         Personne personne = new Personne(1, "martino", "9 square do", "0600000000");
 
@@ -49,7 +49,7 @@ class PersonneTest {
     }
 
     @Test
-    public void GetAdresse() {
+    public void testGetAdresse() {
         // Créez un objet Personne à tester
         Personne personne = new Personne(1, "martino", "9 square do", "0600000000");
 

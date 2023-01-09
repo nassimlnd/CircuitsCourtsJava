@@ -53,7 +53,7 @@ class CommandeTest {
 
     @Test
     @Order(3)
-    void getCommandesInitialize() throws SQLException {
+    void testGetCommandesInitialize() throws SQLException {
         Application.launch(App.class);
         //vider la table commande de la base de données avant lancement;
 
@@ -74,7 +74,7 @@ class CommandeTest {
 
     @Test
     @Order(4)
-    void getCommandesInitializeByAccountId() throws SQLException {
+    void testGetCommandesInitializeByAccountId() throws SQLException {
 
         //on utilise les commande ajouter a la BD par la fonction getCommandesInitialize pour tester celle la
         ArrayList<Commande> commandes = Commande.getCommandesInitializeByAccountId();
@@ -87,7 +87,7 @@ class CommandeTest {
 
     @Test
     @Order(5)
-    void getCommandeById() throws SQLException {
+    void testGetCommandeById() throws SQLException {
         Commande expectedCommande=new Commande(1, 2, 3, "09:00:00", "10:00:00", 2, (long)11122233344455.0, LocalDate.now());
         Commande actualCommande = Commande.getCommandeById(expectedCommande.getNumCommande());
         assertEquals(expectedCommande.toString(), actualCommande.toString());
