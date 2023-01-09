@@ -116,4 +116,16 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         }
         return articles;
     }
+
+    public ArrayList<Article> getAllByPage(int pageNumber) throws SQLException {
+        String query = "SELECT * FROM articles LIMIT 25 OFFSET " + pageNumber * 25;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        ArrayList<Article> articles = new ArrayList<>();
+        while (resultSet.next()) {
+            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getLong(7)));
+        }
+        return articles;
+    }
 }

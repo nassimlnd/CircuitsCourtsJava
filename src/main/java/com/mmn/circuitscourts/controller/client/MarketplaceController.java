@@ -24,15 +24,16 @@ import java.util.ArrayList;
 public class MarketplaceController {
 
     @FXML
-    VBox lineContainer;
-
-    @FXML
     HBox tagsContainer;
     @FXML
-    VBox loadingContainer;
+    VBox loadingContainer, successPopup, lineContainer;
     @FXML
-    VBox successPopup;
+    Button previousPage, nextPage;
+    @FXML
+    Label actualPage;
     static VBox popup;
+
+    int pageNumber;
 
 
     public void initialize() throws SQLException {
@@ -42,7 +43,9 @@ public class MarketplaceController {
             public void run() {
                 try {
                     showAllTags();
-                    showAllArticles();
+                    showArticlesPerPage(0);
+                    initButtons();
+                    actualPage.setText(String.valueOf(pageNumber + 1));
                     loadingContainer.setVisible(false);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
@@ -50,6 +53,75 @@ public class MarketplaceController {
             }
         });
 
+    }
+
+    public void initButtons() {
+        previousPage.setOnMouseClicked(mouseEvent -> {
+            if (pageNumber > 0) {
+                pageNumber--;
+                try {
+                    showArticlesPerPage(pageNumber);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                actualPage.setText(String.valueOf(pageNumber + 1));
+            }
+        });
+
+        nextPage.setOnMouseClicked(mouseEvent -> {
+            int totalPages = 0;
+            try {
+                totalPages = Article.article.getAll().size() / 25;
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            if (pageNumber < totalPages) {
+                pageNumber++;
+                try {
+                    showArticlesPerPage(pageNumber);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                actualPage.setText(String.valueOf(pageNumber + 1));
+            }
+        });
+    }
+
+    private void showArticlesPerPage(int pageNumber) throws SQLException {
+        lineContainer.getChildren().clear();
+        ArrayList<Article> articles = Article.article.getAllByPage(pageNumber);;
+        ArrayList<HBox> lines = new ArrayList<>();
+
+        int numberLines = 0;
+        if (articles.size() < 3) {
+            numberLines = 1;
+        } else if (articles.size() % 3 == 0) {
+            numberLines = articles.size() / 3;
+        } else {
+            numberLines = (articles.size() / 3) + 1;
+        }
+
+        for (int i = 0; i < numberLines; i++) {
+            lines.add(createLine());
+        }
+
+        articles.forEach(article -> {
+            int index = articles.indexOf(article);
+            int indexLine = (index / 3);
+            try {
+                lines.get(indexLine).getChildren().add(createArticle(article));
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        lines.forEach(hBox -> {
+            lineContainer.getChildren().add(hBox);
+        });
     }
 
     /**
@@ -183,6 +255,7 @@ public class MarketplaceController {
     }
 
     public void showAllArticles() throws SQLException {
+        lineContainer.getChildren().clear();
         MarketplaceDAO marketplaceDAO = new MarketplaceDAO();
         ArrayList<Article> articles = marketplaceDAO.getAll();
         ArrayList<HBox> lines = new ArrayList<>();
@@ -243,7 +316,7 @@ public class MarketplaceController {
                     });
                     tagAll.getStyleClass().add("marketplace-tag-active");
                     lineContainer.getChildren().clear();
-                    showAllArticles();
+                    showArticlesPerPage(0);
                     loadingContainer.setVisible(false);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);

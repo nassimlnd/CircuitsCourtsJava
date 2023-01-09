@@ -11,122 +11,89 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;"
-           stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.mmn.circuitscourts.controller.client.MarketplaceController">
-    <children>
-        <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
-            <left>
-                <fx:include source="Sidebar.fxml"/>
-            </left>
-            <center>
-                <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <VBox maxHeight="130.0" prefHeight="130.0" prefWidth="100.0"
-                              styleClass="marketplace-topcontainer">
-                            <children>
-                                <HBox>
-                                    <children>
-                                        <Label prefHeight="35.0" prefWidth="539.0" styleClass="main-title"
-                                               text="Marketplace"/>
-                                        <Pane prefHeight="35.0" prefWidth="362.0">
-                                            <children>
-                                                <VBox fx:id="successPopup" layoutX="-52.0" layoutY="-39.0"
-                                                      maxHeight="114.0" minWidth="400.0" prefHeight="114.0"
-                                                      prefWidth="400.0" styleClass="successPopup" visible="false">
-                                                    <HBox.margin>
-                                                        <Insets left="325.0"/>
-                                                    </HBox.margin>
-                                                    <children>
-                                                        <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0"
-                                                              prefWidth="339.0" styleClass="successPopup-indicator"/>
-                                                        <HBox prefHeight="120.0" prefWidth="340.0"
-                                                              styleClass="successPopup-container">
-                                                            <children>
-                                                                <Label prefHeight="17.0" prefWidth="33.0">
-                                                                    <padding>
-                                                                        <Insets left="10.0" top="17.0"/>
-                                                                    </padding>
-                                                                    <graphic>
-                                                                        <Region styleClass="successPopup-img"/>
-                                                                    </graphic>
-                                                                </Label>
-                                                                <VBox prefHeight="110.0" prefWidth="312.0">
-                                                                    <children>
-                                                                        <Label styleClass="successPopup-title"
-                                                                               text="Commande validée !"/>
-                                                                        <Label styleClass="successPopup-subtitle"
-                                                                               text="La commande n°X a bien été validée !"/>
-                                                                    </children>
-                                                                    <padding>
-                                                                        <Insets left="15.0" top="15.0"/>
-                                                                    </padding>
-                                                                </VBox>
-                                                                <VBox alignment="TOP_RIGHT" prefHeight="120.0"
-                                                                      prefWidth="57.0">
-                                                                    <children>
-                                                                        <Button mnemonicParsing="false"
-                                                                                onMouseClicked="#onClosePopup"
-                                                                                prefHeight="28.0" prefWidth="28.0"
-                                                                                styleClass="successPopup-close">
-                                                                            <graphic>
-                                                                                <Region styleClass="successPopup-close-img"/>
-                                                                            </graphic>
-                                                                            <VBox.margin>
-                                                                                <Insets right="15.0" top="20.0"/>
-                                                                            </VBox.margin>
-                                                                        </Button>
-                                                                    </children>
-                                                                </VBox>
-                                                            </children>
-                                                        </HBox>
-                                                    </children>
-                                                </VBox>
-                                            </children>
-                                        </Pane>
-                                    </children>
+<StackPane fx:id="stackPane" minHeight="800.0" minWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mmn.circuitscourts.controller.client.MarketplaceController">
+    <BorderPane fx:id="container" prefHeight="700.0" prefWidth="1000.0">
+        <left>
+            <fx:include source="Sidebar.fxml" />
+        </left>
+        <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <VBox maxHeight="130.0" prefHeight="130.0" prefWidth="100.0" styleClass="marketplace-topcontainer">
+                    <padding>
+                        <Insets bottom="15.0" left="50.0" top="49.0" />
+                    </padding>
+                    <HBox>
+                        <Label prefHeight="35.0" prefWidth="539.0" styleClass="main-title" text="Marketplace" />
+                        <Pane prefHeight="35.0" prefWidth="362.0">
+                            <VBox fx:id="successPopup" layoutX="-52.0" layoutY="-39.0" maxHeight="114.0" minWidth="400.0" prefHeight="114.0" prefWidth="400.0" styleClass="successPopup" visible="false">
+                                <HBox.margin>
+                                    <Insets left="325.0" />
+                                </HBox.margin>
+                                <VBox maxHeight="4.0" minHeight="4.0" prefHeight="4.0" prefWidth="339.0" styleClass="successPopup-indicator" />
+                                <HBox prefHeight="120.0" prefWidth="340.0" styleClass="successPopup-container">
+                                    <Label prefHeight="17.0" prefWidth="33.0">
+                                        <padding>
+                                            <Insets left="10.0" top="17.0" />
+                                        </padding>
+                                        <graphic>
+                                            <Region styleClass="successPopup-img" />
+                                        </graphic>
+                                    </Label>
+                                    <VBox prefHeight="110.0" prefWidth="312.0">
+                                        <padding>
+                                            <Insets left="15.0" top="15.0" />
+                                        </padding>
+                                        <Label styleClass="successPopup-title" text="Commande validée !" />
+                                        <Label styleClass="successPopup-subtitle" text="La commande n°X a bien été validée !" />
+                                    </VBox>
+                                    <VBox alignment="TOP_RIGHT" prefHeight="120.0" prefWidth="57.0">
+                                        <Button mnemonicParsing="false" onMouseClicked="#onClosePopup" prefHeight="28.0" prefWidth="28.0" styleClass="successPopup-close">
+                                            <graphic>
+                                                <Region styleClass="successPopup-close-img" />
+                                            </graphic>
+                                            <VBox.margin>
+                                                <Insets right="15.0" top="20.0" />
+                                            </VBox.margin>
+                                        </Button>
+                                    </VBox>
                                 </HBox>
-                                <HBox fx:id="tagsContainer" prefHeight="100.0" prefWidth="200.0">
-                                    <children>
-                                    </children>
-                                    <VBox.margin>
-                                        <Insets top="5.0"/>
-                                    </VBox.margin>
-                                </HBox>
-                            </children>
-                            <padding>
-                                <Insets bottom="15.0" left="50.0" top="49.0"/>
-                            </padding>
-                        </VBox>
-                        <ScrollPane maxHeight="668.0" maxWidth="950.0" prefHeight="670.0" prefWidth="200.0">
-                            <content>
-                                <VBox fx:id="lineContainer" prefHeight="664.0" prefWidth="932.0">
-                                    <children>
-
-                                    </children>
-                                    <padding>
-                                        <Insets bottom="10"/>
-                                    </padding>
-                                </VBox>
-                            </content>
-                            <VBox.margin>
-                                <Insets left="2.0" top="1.0"/>
-                            </VBox.margin>
-                        </ScrollPane>
-                    </children>
+                            </VBox>
+                        </Pane>
+                    </HBox>
+                    <HBox fx:id="tagsContainer" prefHeight="100.0" prefWidth="200.0">
+                        <VBox.margin>
+                            <Insets top="5.0" />
+                        </VBox.margin>
+                    </HBox>
                 </VBox>
-            </center>
-        </BorderPane>
-        <VBox fx:id="loadingContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
-              style="-fx-background-color: rgba(0, 0, 0, .25);">
-            <children>
-                <HBox alignment="CENTER" maxWidth="400.0" prefHeight="100.0" prefWidth="200.0" style="-fx-opacity: 1"
-                      styleClass="loading-container">
-                    <children>
-                        <Label style="-fx-text-fill: black;" styleClass="loading-title" text="Loading..."/>
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </children>
+                <ScrollPane maxHeight="668.0" maxWidth="950.0" prefHeight="670.0" prefWidth="200.0">
+                    <VBox.margin>
+                        <Insets left="2.0" top="1.0" />
+                    </VBox.margin>
+               <VBox prefHeight="661.0" prefWidth="932.0">
+                  <children>
+                          <VBox fx:id="lineContainer" prefHeight="570.0" prefWidth="932.0">
+                              <padding>
+                                  <Insets bottom="10" />
+                              </padding>
+      
+                                      </VBox>
+                     <HBox alignment="CENTER" minHeight="100.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" styleClass="pagination-container">
+                        <children>
+                           <Button fx:id="previousPage" mnemonicParsing="false" styleClass="pagination-button" text="Précédent" />
+                           <Label fx:id="actualPage" text="Label" />
+                           <Button fx:id="nextPage" mnemonicParsing="false" styleClass="pagination-button" text="Suivant" />
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+                </ScrollPane>
+            </VBox>
+        </center>
+    </BorderPane>
+    <VBox fx:id="loadingContainer" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: rgba(0, 0, 0, .25);">
+        <HBox alignment="CENTER" maxWidth="400.0" prefHeight="100.0" prefWidth="200.0" style="-fx-opacity: 1" styleClass="loading-container">
+            <Label style="-fx-text-fill: black;" styleClass="loading-title" text="Loading..." />
+        </HBox>
+    </VBox>
 </StackPane>
