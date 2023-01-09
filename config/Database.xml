@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
     <host>127.0.0.1</host>
-    <dbname>testdb</dbname>
+    <dbname>circuitscourts</dbname>
     <port>3306</port>
     <login>root</login>
     <password></password>

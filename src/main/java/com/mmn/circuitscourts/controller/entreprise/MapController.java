@@ -11,10 +11,12 @@ import com.mmn.circuitscourts.models.Commande;
 import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.models.Tournee;
 import com.mmn.circuitscourts.services.CommandeDAO;
+import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.geometry.Point2D;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Line;
@@ -278,6 +280,10 @@ public class MapController {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void onBackButton() {
+        ViewFactory.getInstance().showProdTourneeInterface();
     }
 
     /**
