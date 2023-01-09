@@ -1,7 +1,9 @@
 package com.mmn.circuitscourts.controller.entreprise;
 
+import com.mmn.circuitscourts.App;
 import com.mmn.circuitscourts.models.Article;
 import com.mmn.circuitscourts.models.Commande;
+import com.mmn.circuitscourts.models.Entreprise;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ArticlesController {
 
@@ -29,19 +32,26 @@ public class ArticlesController {
     @FXML
     VBox successPopup;
     static VBox popup;
-    static Label popupid;
+    static Label popupMessage, popupTitle;
     @FXML
-    Label successPopupId;
+    Label successPopupId, title;
 
     public void initialize() {
-        Article.getAll().forEach(article -> createLine(article));
+        ArrayList<Article> articles = null;
+        try {
+            articles = Article.article.getByEntreprise(Entreprise.entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        for (int i = 0; i < articles.size(); i++) {
+            if (i > 100) {
+                break;
+            }
+            createLine(articles.get(i));
+        }
         popup = successPopup;
-        popupid = successPopupId;
-    }
-
-    public static void showSuccessPopUp(int id, String message) {
-        popupid.setText(message);
-        popup.setVisible(true);
+        popupMessage = successPopupId;
+        popupTitle = title;
     }
 
     public void onClosePopup() {
@@ -130,9 +140,12 @@ public class ArticlesController {
         System.out.println("[DEBUG]Article deleted");
         contentTable.getChildren().clear();
         Article.getAll().forEach(article -> createLine(article));
+    }
 
-
-
+    public static void showSuccessPopup(String title, String message) {
+        popup.setVisible(true);
+        popupTitle.setText(title);
+        popupMessage.setText(message);
     }
 
 }

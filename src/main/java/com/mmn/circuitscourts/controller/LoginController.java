@@ -106,7 +106,7 @@ public class LoginController {
         try {
             User.login(identifiant, password);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            errorLabel.setText(e.getMessage().split(":")[1]);
         }
     }
 

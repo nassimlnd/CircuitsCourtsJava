@@ -28,6 +28,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.sql.SQLException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,8 +61,6 @@ public class MapController {
         MapPoint thirdPoint = new MapPoint(47.38065472693533, 0.6925432738020421);
 
         //coordonnées du points dans le map layer.
-        mapView.setZoom(5);
-        mapView.flyTo(0, mapPoint, 0.1);
 
         ArrayList<MapPoint> points = initPoints();
 
@@ -75,6 +74,9 @@ public class MapController {
         double latitudeEntreprise = Double.parseDouble(coords.split(",")[0]);
         double longitudeEntreprise = Double.parseDouble(coords.split(",")[1]);
         MapPoint entreprise  = new MapPoint(latitudeEntreprise, longitudeEntreprise);
+
+        mapView.setZoom(15);
+        mapView.flyTo(0, entreprise, 0.1);
 
         initItinerary(sortedPoints, mapView, entreprise);
 
@@ -112,7 +114,7 @@ public class MapController {
                 throw new RuntimeException(e);
             }
             // les adresses dans la bd sont séparés avec des autres info par ':'
-            String splitAdresse = temp.getAdresse().split(":")[0];
+            String splitAdresse = Normalizer.normalize(temp.getAdresse().split(":")[0], Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
             finalCodePostal = Integer.parseInt(temp.getAdresse().split(":")[1]);
             // on re split avec ' ' pour supprimer les espaces.
             // le finalstring est la version concaténé dans l'url

@@ -102,7 +102,7 @@ public class AddArticlesController {
                         Article a = new Article(name, categorie, description, price, weight, imageId, entrepriseDAO.getByAccountId(App.userConnected.getId()).getNumSiret());
 
                         ViewFactory.getInstance().showProdArticlesInterface();
-                        ArticlesController.showSuccessPopUp(a.getId(), "L'article n°" + a.getId() + " a bien été ajouté !");
+                        ArticlesController.showSuccessPopup("Article ajouté !", "L'article n°" + a.getId() + " a bien été ajouté !");
                     }catch (NumberFormatException e){
                         System.out.println("[DEBUG]Error : "+e);
                     } catch (SQLException sqlException) {

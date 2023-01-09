@@ -31,7 +31,7 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                      <children>
-                              <Label fx:id="title" prefHeight="35.0" prefWidth="655.0" styleClass="main-title" text="Modification de la tournée n°X" />
+                              <Label fx:id="title" prefHeight="35.0" prefWidth="655.0" styleClass="main-title" text="Modification du véhicule n°X" />
                         <Pane prefHeight="35.0" prefWidth="192.0">
                            <children>
                               <VBox fx:id="errorPopup" layoutX="-175.0" layoutY="-43.0" maxHeight="139.0" minWidth="400.0" prefHeight="139.0" prefWidth="400.0" styleClass="errorPopup" visible="false">
@@ -95,7 +95,7 @@
                                             <children>
                                                 <HBox maxWidth="438.0" prefHeight="38.0" prefWidth="438.0">
                                                     <children>
-                                                        <VBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="240.0">
+                                                        <VBox alignment="CENTER_LEFT" prefHeight="38.0" prefWidth="177.0">
                                                             <children>
                                                                 <Label text="Plaque d'immatriculation" />
                                                             </children>
@@ -103,7 +103,7 @@
                                                                 <Insets left="10.0" />
                                                             </padding>
                                                         </VBox>
-                                                        <VBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="198.0">
+                                                        <VBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="165.0">
                                                             <children>
                                                                 <Label fx:id="vehicule" />
                                                             </children>

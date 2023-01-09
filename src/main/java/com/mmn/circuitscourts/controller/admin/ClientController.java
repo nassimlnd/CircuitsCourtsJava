@@ -103,7 +103,7 @@ public class ClientController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setPickOnBounds(true);
-        HBox.setMargin(edit, new Insets(0, 0, 0, 150));
+        HBox.setMargin(edit, new Insets(0, 0, 0, 120));
         edit.setOnMouseClicked(mouseEvent -> {
             onEdit(client.getId());
         });

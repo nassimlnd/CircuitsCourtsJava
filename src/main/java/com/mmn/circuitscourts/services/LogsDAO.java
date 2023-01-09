@@ -28,7 +28,7 @@ public class LogsDAO {
         return logs;
     }
 
-    public ArrayList<ArrayList<String>> getById() throws SQLException {
+    public ArrayList<ArrayList<String>> getByAccountId() throws SQLException {
         String query = "SELECT * FROM logs";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(query);

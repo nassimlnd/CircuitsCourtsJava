@@ -11,7 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import org.w3c.dom.ls.LSOutput;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,11 +22,15 @@ public class EditCommandeController {
     @FXML
     Button plusHourDebut, plusMinutesDebut, minusHourDebut, minusMinutesDebut, plusHourFin, plusMinutesFin, minusMinutesFin, minusHourFin;
     @FXML
-    Label hourDebut, minutesDebut, hourFin, minutesFin;
+    Label hourDebut, minutesDebut, hourFin, minutesFin, popupMessage;
     @FXML
     TextField quantite;
     @FXML
-    ComboBox<String> article;
+    ComboBox<String>  article;
+    @FXML
+    VBox errorPopup;
+
+
 
     public void initialize() throws SQLException {
         getArticlesInitialize();
@@ -89,8 +93,8 @@ public class EditCommandeController {
                     System.out.println("[DEBUG]Commande uptate");
                 }
                 ViewFactory.getInstance().showProdCommandesInterface();
-            }else System.out.println("[DEBUG]Error : horaire de fin avant l'horaire du début");return;
-        }else System.out.println("[DEBUG]Error : quantité != à un entier > 0");return;
+            }else showErrorPopup("L'horaire de fin est avant l'horaire de début");
+        }else showErrorPopup("La quantité doit être supérieur à 0");
     }
 
 
@@ -204,6 +208,15 @@ public class EditCommandeController {
             minutes = 59;
             minutesFin.setText(String.valueOf(minutes));
         }
+    }
+
+    public void onClosePopup() {
+        errorPopup.setVisible(false);
+    }
+
+    public void showErrorPopup(String message) {
+        errorPopup.setVisible(true);
+        popupMessage.setText(message);
     }
 
 }

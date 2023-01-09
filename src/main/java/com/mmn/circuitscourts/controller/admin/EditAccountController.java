@@ -53,9 +53,7 @@ public class EditAccountController {
         title.setText("Modification du compte n°" + accountId);
         try {
             identifiant.setText(getThisAccount().getIdentifiant());
-            mdp.setText(getThisAccount().getPassword());
             getGradesInitialize();
-
             grade.valueProperty().addListener((observableValue, s, t1) -> {
                 initEntity(t1);
             });
@@ -146,12 +144,12 @@ public class EditAccountController {
      */
     public void onEditButton() throws SQLException {
         if(!identifiant.getText().matches("^[a-zA-ZÀ-ÖØ-öø-ÿ]+(([',. -][a-zA-ZÀ-ÖØ-öø-ÿ])?[a-zA-ZÀ-ÖØ-öø-ÿ]*)*$")){
-            System.out.println("[DEBUG]error : nom incorrect");
+            showErrorPopup("Le nom est invalide !");
             return;
         }
 
         if(!mdp.getText().matches("/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/")){
-            System.out.println("[DEBUG]Eror : au moins 8 caractères, au moins une lettre majuscule, au moins une lettre minuscule, au moins un chiffre, au moins un caractère spécial.");
+            showErrorPopup("Le mot de passe doit contenir au moins\n8 caractères, une lettre majuscule, \nune lettre minuscule, un chiffre, et un caractère spécial.");
             return;
         }
 

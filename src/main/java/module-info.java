@@ -6,6 +6,7 @@ module com.mmn.circuitscourts {
     requires org.apache.commons.io;
     requires json.simple;
     requires com.gluonhq.maps;
+    requires javafaker;
 
 
     opens com.mmn.circuitscourts to javafx.fxml;

@@ -78,7 +78,7 @@ public class Commande {
      * @param numSiret
      * @throws SQLException
      */
-    public Commande(int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, long numSiret, LocalDate datePicker) throws SQLException {
+    public Commande(int articleId, double poids, int quantity, String horaireDebut, String horaireFin, int idClient, long numSiret, LocalDate datePicker) {
         this.articleId = articleId;
         this.poids = poids;
         this.quantity = quantity;
@@ -89,7 +89,11 @@ public class Commande {
         this.dateCommande = datePicker;
 
         CommandeDAO commandeDAO = new CommandeDAO();
-        this.numCommande = commandeDAO.add(this);
+        try {
+            this.numCommande = commandeDAO.add(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int getNumCommande() {

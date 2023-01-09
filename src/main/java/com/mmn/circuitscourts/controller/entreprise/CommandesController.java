@@ -26,12 +26,11 @@ public class CommandesController {
     Button okButton;
     @FXML
     Button cancelButton;
-    @FXML Label descDialog;
+    @FXML Label descDialog, popupTitle, popupMessage;
     @FXML
     VBox successPopup;
-
     static VBox popup;
-
+    static Label title, message;
 
     public void initialize() throws SQLException {
         ArrayList<Commande> commandes = Commande.getCommandesInitializeByAccountId();
@@ -43,10 +42,14 @@ public class CommandesController {
             }
         });
         popup = successPopup;
+        title = popupTitle;
+        message = popupMessage;
     }
 
-    public static void showSuccessPopUp() {
+    public static void showSuccessPopUp(String popupMessage, String popupTitle) {
         popup.setVisible(true);
+        title.setText(popupTitle);
+        message.setText(popupMessage);
     }
 
     public void onAddButton() {

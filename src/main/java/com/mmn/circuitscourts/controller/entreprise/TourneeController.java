@@ -70,11 +70,11 @@ public class TourneeController {
         Button map = new Button();
         map.getStyleClass().add("edit-button");
         Region mapImg = new Region();
-        mapImg.getStyleClass().add("edit-button-img");
+        mapImg.getStyleClass().add("map-button-img");
         map.setGraphic(mapImg);
-        HBox.setMargin(map, new Insets(0, 0, 0, 100));
+        HBox.setMargin(map, new Insets(0, 0, 0, 50));
         map.setOnMouseClicked(mouseEvent -> {
-            ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
+            ViewFactory.getInstance().showEntrepriseMapViewInterface(trn.getId());
         });
 
         Button edit = new Button();
@@ -83,7 +83,7 @@ public class TourneeController {
         editImg.getStyleClass().add("edit-button-img");
         edit.setGraphic(editImg);
         edit.setOnMouseClicked(mouseEvent -> {
-            ViewFactory.getInstance().showEntrepriseMapViewInterface(trn.getId());
+            ViewFactory.getInstance().showProdEditTourneeInterface(trn.getId());
         });
 
         Button delete = new Button();

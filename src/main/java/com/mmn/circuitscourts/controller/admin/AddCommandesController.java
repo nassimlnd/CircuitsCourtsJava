@@ -6,6 +6,7 @@ import com.mmn.circuitscourts.services.MarketplaceDAO;
 import com.mmn.circuitscourts.views.ViewFactory;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 import java.sql.Time;
@@ -25,7 +26,9 @@ public class AddCommandesController {
     @FXML
     ComboBox<String> entreprises, client, article;
     @FXML
-    Label hourDebut, minutesDebut, hourFin, minutesFin;
+    Label hourDebut, minutesDebut, hourFin, minutesFin, popupMessage;
+    @FXML
+    VBox errorPopup;
 
 
     public void initialize() throws SQLException {
@@ -61,13 +64,13 @@ public class AddCommandesController {
 
                             ViewFactory.getInstance().showAdminCommandeInterface();
                             CommandesController.showSuccessPopUp("Commande ajoutée !", "La commande n°" + commande.getNumCommande() + " a bien été ajoutée !");
-                        }else System.out.println("[DEBUG]Error : horaire début après l'horaire de fin.");
+                        }else showErrorPopup("L'horaire de début est avant celle de fin.");
                     }catch (NumberFormatException e){
-                        System.out.println("error NumberFormatException");
+                        showErrorPopup("Veuillez saisir uniquement des chiffres dans quantité");
                     }
-                }else System.out.println("[DEBUG]Error : choisir une date.");
-            }else System.out.println("[DEBUG]Error : la quantié doit être un entier.");
-        }else System.out.println("[DEBUG]Error : tous les champs sont vides");
+                }else showErrorPopup("Veuillez selectionner une date.");
+            }else showErrorPopup("La quantité doit être un entier supérieur à 0");
+        }else showErrorPopup("Vous devez remplir tous les champs !");
     }
 
     /**
@@ -223,6 +226,15 @@ public class AddCommandesController {
             minutes = 59;
             minutesFin.setText(String.valueOf(minutes));
         }
+    }
+
+    public void onClosePopup() {
+        errorPopup.setVisible(false);
+    }
+
+    public void showErrorPopup(String message) {
+        errorPopup.setVisible(true);
+        popupMessage.setText(message);
     }
 }
 

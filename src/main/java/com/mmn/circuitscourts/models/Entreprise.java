@@ -30,12 +30,16 @@ public class Entreprise {
         this.accountId = accountId;
     }
 
-    public Entreprise(String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps) throws SQLException {
+    public Entreprise(String adresse, Proprietaire proprietaire, String numTel, String coordonneesGps) {
         this.proprietaire = proprietaire;
         this.adresse = adresse;
         this.numTel = numTel;
         this.coordonneesGps = coordonneesGps;
-        entrepriseDAO.add(this);
+        try {
+            this.numSiret = entrepriseDAO.add(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public long getNumSiret() {

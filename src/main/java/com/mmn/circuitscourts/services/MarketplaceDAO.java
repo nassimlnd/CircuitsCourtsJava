@@ -103,4 +103,17 @@ public class MarketplaceDAO implements DAO<Article, Integer> {
         }
         return articles;
     }
+
+    public ArrayList<Article> getByEntreprise(long numSiret) throws SQLException {
+        String query = "SELECT * FROM articles WHERE numSiret=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setLong(1, numSiret);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        ArrayList<Article> articles = new ArrayList<>();
+        while (resultSet.next()) {
+            articles.add(new Article(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getDouble(5), resultSet.getDouble(6), resultSet.getInt(8), resultSet.getLong(7)));
+        }
+        return articles;
+    }
 }

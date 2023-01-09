@@ -148,7 +148,7 @@ public class EditArticleController {
                         Article.article.update(id, a);
 
                         ViewFactory.getInstance().showProdArticlesInterface();
-                        ArticlesController.showSuccessPopUp(a.getId(), "L'article n°" + a.getId() + " a bien été modifié !");
+                        ArticlesController.showSuccessPopup("Article modifié !", "L'article n°" + a.getId() + " a bien été modifié !");
                     } catch (NumberFormatException e) {
                         System.out.println("[DEBUG]Error : " + e);
                     }
