@@ -64,8 +64,7 @@ public class EditArticleController {
         ImageDAO imageDAO = new ImageDAO();
         Image image = null;
         try {
-            image = imageDAO.getImage(getThisArticle().getImageId(),
-                    imageDAO.getExtById(getThisArticle().getImageId()));
+            image = imageDAO.getImage(getThisArticle().getImageId(), imageDAO.getExtById(getThisArticle().getImageId()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

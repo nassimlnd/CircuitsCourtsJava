@@ -31,12 +31,13 @@ public class XMLLoader {
 
             String host = document.getDocumentElement().getElementsByTagName("host").item(0).getTextContent();
             String dbname = document.getDocumentElement().getElementsByTagName("dbname").item(0).getTextContent();
+            String port = document.getDocumentElement().getElementsByTagName("port").item(0).getTextContent();
             String login = document.getDocumentElement().getElementsByTagName("login").item(0).getTextContent();
             String password = document.getDocumentElement().getElementsByTagName("password").item(0).getTextContent();
 
             System.out.println("[DEBUG]DatabaseConfig parsed.");
 
-            ConnectionMySQL.url = "jdbc:mysql://"+ host + "/" + dbname +"?serverTimezone=Europe/Paris";
+            ConnectionMySQL.url = "jdbc:mysql://"+ host + ":" + port + "/" + dbname +"?serverTimezone=Europe/Paris";
             ConnectionMySQL.login = login;
             ConnectionMySQL.password = password;
         } else {
@@ -50,12 +51,13 @@ public class XMLLoader {
 
             String host = document.getDocumentElement().getElementsByTagName("host").item(0).getTextContent();
             String dbname = document.getDocumentElement().getElementsByTagName("dbname").item(0).getTextContent();
+            String port = document.getDocumentElement().getElementsByTagName("port").item(0).getTextContent();
             String login = document.getDocumentElement().getElementsByTagName("login").item(0).getTextContent();
             String password = document.getDocumentElement().getElementsByTagName("password").item(0).getTextContent();
 
             System.out.println("[DEBUG]DatabaseConfig parsed.");
 
-            ConnectionMySQL.url = "jdbc:mysql://"+ host + "/" + dbname +"?serverTimezone=Europe/Paris";
+            ConnectionMySQL.url = "jdbc:mysql://"+ host + ":" + port + "/" + dbname +"?serverTimezone=Europe/Paris";
             ConnectionMySQL.login = login;
             ConnectionMySQL.password = password;
         }
@@ -74,6 +76,7 @@ public class XMLLoader {
             writer.println("<config>");
             writer.println("    <host>127.0.0.1</host>");
             writer.println("    <dbname>circuitscourts</dbname>");
+            writer.println("    <port>3306</port>");
             writer.println("    <login>root</login>");
             writer.println("    <password></password>");
             writer.println("</config>");
